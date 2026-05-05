@@ -1,0 +1,121 @@
+import { motion } from "motion/react"
+import { Mail, ArrowUpRight } from "lucide-react"
+import { BlurText } from "@/components/BlurText"
+
+type Article = {
+  title: string
+  date: string
+  category: string
+  gradient: string
+}
+
+const ARTICLES: Article[] = [
+  {
+    title: "Prevenzione cadute in casa: 7 consigli pratici",
+    date: "In arrivo · 2026",
+    category: "Prevenzione",
+    gradient: "linear-gradient(135deg, #15A89A 0%, #0B5FA5 100%)",
+  },
+  {
+    title: "Quando serve un'infermiera a domicilio?",
+    date: "In arrivo · 2026",
+    category: "Assistenza",
+    gradient: "linear-gradient(135deg, #0B5FA5 0%, #161D2E 100%)",
+  },
+  {
+    title: "Caregiver familiari: gestire lo stress",
+    date: "In arrivo · 2026",
+    category: "Famiglia",
+    gradient: "linear-gradient(135deg, #161D2E 0%, #15A89A 100%)",
+  },
+]
+
+export function Blog() {
+  return (
+    <section id="blog" className="relative py-28 md:py-40 border-t border-border/40">
+      <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
+        {/* Header */}
+        <div className="mb-16">
+          <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
+            Blog & news
+          </span>
+          <BlurText
+            text="Salute & Prevenzione"
+            as="h2"
+            className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight"
+            delay={0.07}
+          />
+          <motion.p
+            initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
+            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+            className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
+          >
+            Approfondimenti pratici per famiglie e caregiver. Stiamo preparando i primi articoli.
+          </motion.p>
+        </div>
+
+        {/* Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {ARTICLES.map((a, i) => (
+            <motion.article
+              key={a.title}
+              className="liquid-glass rounded-2xl overflow-hidden flex flex-col group"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
+            >
+              {/* Cover gradiente */}
+              <div
+                className="relative h-44 w-full overflow-hidden"
+                style={{ background: a.gradient }}
+              >
+                <div className="absolute inset-0 noise opacity-40 pointer-events-none" />
+                <span
+                  className="absolute top-4 right-4 rounded-full px-3 py-1 font-body text-[11px] tracking-wide uppercase text-white"
+                  style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(8px)" }}
+                >
+                  In arrivo
+                </span>
+                <span className="absolute bottom-4 left-5 font-display uppercase text-xs tracking-wider text-white/80">
+                  {a.category}
+                </span>
+              </div>
+
+              {/* Body */}
+              <div className="p-6 flex flex-col gap-3 flex-1">
+                <span className="font-body text-xs text-foreground/55 tracking-wide uppercase">
+                  {a.date}
+                </span>
+                <h3 className="font-display uppercase text-xl leading-tight tracking-tight">
+                  {a.title}
+                </h3>
+                <div className="mt-auto pt-4 h-px w-10 bg-gradient-to-r from-primary to-transparent" />
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        {/* CTA */}
+        <motion.div
+          className="mt-12 flex justify-center"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <a
+            href="mailto:info@dedicaresolutions.it?subject=Iscrizione%20blog%20Dedicare%20Solutions&body=Vorrei%20essere%20avvisato%20alla%20pubblicazione%20dei%20nuovi%20articoli."
+            className="group liquid-glass inline-flex items-center gap-3 rounded-full px-7 py-4 font-body text-sm tracking-wide transition-all hover:scale-[1.02]"
+          >
+            <Mail className="size-4" />
+            Iscriviti per essere avvisato
+            <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        </motion.div>
+      </div>
+    </section>
+  )
+}

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { ArrowUpRight, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { OptimizedImage } from "@/components/OptimizedImage"
+import { ThemeToggle } from "@/components/ThemeToggle"
 import { NAV_ITEMS } from "@/lib/constants"
 
 export function Navbar() {
@@ -49,18 +51,29 @@ export function Navbar() {
             boxShadow: "0 4px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
         >
-          {/* Logo */}
-          <a href="#" className="flex items-center gap-2 pl-3 shrink-0">
-            <img
-              src={`${import.meta.env.BASE_URL}images/logo/nobg_logo-chiaro.png`}
+          {/* Logo + wordmark */}
+          <a href="#" className="flex items-center gap-3 pl-3 shrink-0" aria-label="Dedicare Solutions — home">
+            <OptimizedImage
+              src="images/logo/nobg_logo-chiaro"
               alt="Dedicare Solutions"
+              width={160}
+              height={32}
               className="h-8 w-auto object-contain hidden sm:block"
             />
-            <img
-              src={`${import.meta.env.BASE_URL}images/logo/nobg_pitto-chiaro.png`}
+            <OptimizedImage
+              src="images/logo/nobg_pitto-chiaro"
               alt="Dedicare Solutions"
+              width={32}
+              height={32}
               className="h-8 w-auto object-contain sm:hidden"
             />
+            <span
+              aria-hidden="true"
+              className="hidden lg:inline-block font-display uppercase text-sm tracking-wider text-white/85 leading-none pl-1 border-l border-white/15 ml-1"
+              style={{ paddingLeft: "0.75rem" }}
+            >
+              Dedicare Solutions
+            </span>
           </a>
 
           {/* Desktop nav */}
@@ -88,6 +101,7 @@ export function Navbar() {
 
           {/* CTA + hamburger */}
           <div className="flex items-center gap-2 pr-1">
+            <ThemeToggle />
             <Button
               variant="heroSolid"
               size="sm"

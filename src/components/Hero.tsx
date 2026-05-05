@@ -25,6 +25,7 @@ export function Hero({ scrollRef }: Props) {
         {/* Video hero — scroll-scrubbed */}
         <VideoScrub
           src={`${import.meta.env.BASE_URL}hero-dedicare.mp4`}
+          poster={`${import.meta.env.BASE_URL}hero-poster.jpg`}
           className="absolute inset-0 w-full h-full z-0 object-cover"
           containerRef={scrollRef}
         />

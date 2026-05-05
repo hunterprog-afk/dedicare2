@@ -5,6 +5,7 @@ import { BlurText } from "@/components/BlurText"
 import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/ContactForm"
 import { LegalModal } from "@/components/LegalModal"
+import { OptimizedImage } from "@/components/OptimizedImage"
 import { lazy, Suspense } from "react"
 const MilanCity3D = lazy(() => import("@/components/MilanCity3D").then(m => ({ default: m.MilanCity3D })))
 import { privacyPolicy, cookiePolicy, noteLegali } from "@/content/legal"
@@ -159,9 +160,12 @@ export function CtaFooter() {
       <div className="relative z-10 w-full border-t border-border/30 mt-auto">
         <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <img
-              src={`${import.meta.env.BASE_URL}images/logo/nobg_logo-chiaro.png`}
+            <OptimizedImage
+              src="images/logo/nobg_logo-chiaro"
               alt="Dedicare Solutions"
+              width={120}
+              height={24}
+              loading="lazy"
               className="h-6 w-auto object-contain opacity-60"
             />
             <span className="font-body text-xs text-foreground/40">

@@ -3,13 +3,18 @@ import { Navbar }       from "@/components/Navbar"
 import { Hero }         from "@/components/Hero"
 import { WhatsAppFab }  from "@/components/WhatsAppFab"
 
-const ServicesBento = lazy(() => import("@/components/ServicesBento").then(m => ({ default: m.ServicesBento })))
-const Pourquoi      = lazy(() => import("@/components/Pourquoi").then(m => ({ default: m.Pourquoi })))
-const Process       = lazy(() => import("@/components/Process").then(m => ({ default: m.Process })))
-const Stats         = lazy(() => import("@/components/Stats").then(m => ({ default: m.Stats })))
-const Testimonials  = lazy(() => import("@/components/Testimonials").then(m => ({ default: m.Testimonials })))
-const Faq           = lazy(() => import("@/components/Faq").then(m => ({ default: m.Faq })))
-const CtaFooter     = lazy(() => import("@/components/CtaFooter").then(m => ({ default: m.CtaFooter })))
+const ServicesBento  = lazy(() => import("@/components/ServicesBento").then(m => ({ default: m.ServicesBento })))
+const Pourquoi       = lazy(() => import("@/components/Pourquoi").then(m => ({ default: m.Pourquoi })))
+const Team           = lazy(() => import("@/components/Team").then(m => ({ default: m.Team })))
+const Process        = lazy(() => import("@/components/Process").then(m => ({ default: m.Process })))
+const AreeServite    = lazy(() => import("@/components/AreeServite").then(m => ({ default: m.AreeServite })))
+const Stats          = lazy(() => import("@/components/Stats").then(m => ({ default: m.Stats })))
+const Certificazioni = lazy(() => import("@/components/Certificazioni").then(m => ({ default: m.Certificazioni })))
+const Tariffario     = lazy(() => import("@/components/Tariffario").then(m => ({ default: m.Tariffario })))
+const Testimonials   = lazy(() => import("@/components/Testimonials").then(m => ({ default: m.Testimonials })))
+const Faq            = lazy(() => import("@/components/Faq").then(m => ({ default: m.Faq })))
+const Blog           = lazy(() => import("@/components/Blog").then(m => ({ default: m.Blog })))
+const CtaFooter      = lazy(() => import("@/components/CtaFooter").then(m => ({ default: m.CtaFooter })))
 
 const LazyFallback = <div style={{ minHeight: '400px' }} />
 
@@ -24,10 +29,15 @@ export default function App() {
         <Suspense fallback={LazyFallback}>
           <ServicesBento />
           <Pourquoi />
+          <Team />
           <Process />
+          <AreeServite />
           <Stats />
+          <Certificazioni />
+          <Tariffario />
           <Testimonials />
           <Faq />
+          <Blog />
           <CtaFooter />
         </Suspense>
       </main>
