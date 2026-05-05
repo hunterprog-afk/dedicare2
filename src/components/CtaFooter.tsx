@@ -1,16 +1,36 @@
+import { useState } from "react"
 import { motion } from "motion/react"
 import { ArrowUpRight, Phone, Mail, MapPin } from "lucide-react"
 import { BlurText } from "@/components/BlurText"
 import { Button } from "@/components/ui/button"
+import { ContactForm } from "@/components/ContactForm"
+import { LegalModal } from "@/components/LegalModal"
+import { privacyPolicy, cookiePolicy, noteLegali } from "@/content/legal"
 
-const FOOTER_LINKS = [
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Cookie Policy", href: "/cookie" },
-  { label: "Note Legali", href: "/legal" },
-  { label: "info@dedicaresolutions.it", href: "mailto:info@dedicaresolutions.it" },
-]
+type LegalKey = "privacy" | "cookie" | "legal" | null
+
+function LegalContent({ sections }: { sections: { heading: string; content: string }[] }) {
+  return (
+    <>
+      {sections.map((s) => (
+        <div key={s.heading}>
+          <h3 className="font-semibold text-white mb-2">{s.heading}</h3>
+          <p className="whitespace-pre-line text-white/70">{s.content}</p>
+        </div>
+      ))}
+    </>
+  )
+}
+
+const legalDocs = {
+  privacy: privacyPolicy,
+  cookie: cookiePolicy,
+  legal: noteLegali,
+}
 
 export function CtaFooter() {
+  const [openModal, setOpenModal] = useState<LegalKey>(null)
+
   return (
     <section id="contatti" className="relative min-h-[100vh] flex flex-col items-center justify-center overflow-hidden border-t border-border/40">
       {/* Cinematic background */}
@@ -86,6 +106,17 @@ export function CtaFooter() {
           </Button>
         </motion.div>
 
+        {/* Contact form */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
+          className="mt-16 w-full max-w-xl"
+        >
+          <ContactForm />
+        </motion.div>
+
         {/* Contact info strip */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -125,15 +156,30 @@ export function CtaFooter() {
             </span>
           </div>
           <nav className="flex items-center gap-6 flex-wrap justify-center">
-            {FOOTER_LINKS.map((l) => (
-              <a
-                key={l.href}
-                href={l.href}
-                className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                {l.label}
-              </a>
-            ))}
+            <button
+              onClick={() => setOpenModal("privacy")}
+              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+            >
+              Privacy Policy
+            </button>
+            <button
+              onClick={() => setOpenModal("cookie")}
+              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+            >
+              Cookie Policy
+            </button>
+            <button
+              onClick={() => setOpenModal("legal")}
+              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+            >
+              Note Legali
+            </button>
+            <a
+              href="mailto:info@dedicaresolutions.it"
+              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+            >
+              info@dedicaresolutions.it
+            </a>
           </nav>
           <a
             href="https://hunterprog-afk.github.io/SD/"
@@ -145,6 +191,16 @@ export function CtaFooter() {
           </a>
         </div>
       </div>
+      {/* Modal legali */}
+      {openModal && (
+        <LegalModal
+          open={true}
+          onClose={() => setOpenModal(null)}
+          title={legalDocs[openModal].title}
+        >
+          <LegalContent sections={legalDocs[openModal].sections} />
+        </LegalModal>
+      )}
     </section>
   )
 }
