@@ -3,8 +3,8 @@ import { motion } from "motion/react"
 import { ArrowUpRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BlurText } from "@/components/BlurText"
-import { ScrubSequence } from "@/components/ScrubSequence"
-import { FRAMES_PATH, FRAME_COUNT, FRAME_EXT, PARTNERS } from "@/lib/constants"
+import { VideoScrub } from "@/components/VideoScrub"
+import { PARTNERS } from "@/lib/constants"
 
 type Props = {
   scrollRef: React.RefObject<HTMLElement | null>
@@ -20,17 +20,15 @@ export function Hero({ scrollRef }: Props) {
       style={{ height: "250vh" }}
     >
       <div ref={innerRef} className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Frames canvas */}
-        <ScrubSequence
-          framesPath={FRAMES_PATH}
-          frameCount={FRAME_COUNT}
-          ext={FRAME_EXT}
+        {/* Video scrub — currentTime driven by scroll progress */}
+        <VideoScrub
+          src="/hero-dedicare.mp4"
           scrollTargetRef={scrollRef}
           className="absolute inset-0 w-full h-full z-0"
         />
 
-        {/* Fallback gradient when no frames */}
-        <div className="absolute inset-0 z-[0] bg-gradient-to-br from-[hsl(220,30%,12%)] via-[hsl(200,25%,8%)] to-[hsl(175,40%,6%)]" />
+        {/* Dark overlay so text stays legible over any video frame */}
+        <div className="absolute inset-0 z-[0] bg-black/45" />
 
         {/* Vignette */}
         <div className="absolute inset-0 z-[1] bg-[radial-gradient(120%_80%_at_50%_60%,transparent_40%,rgba(0,0,0,0.60)_100%)]" />
