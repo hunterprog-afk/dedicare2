@@ -5,6 +5,8 @@ import { BlurText } from "@/components/BlurText"
 import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/ContactForm"
 import { LegalModal } from "@/components/LegalModal"
+import { lazy, Suspense } from "react"
+const MilanCity3D = lazy(() => import("@/components/MilanCity3D").then(m => ({ default: m.MilanCity3D })))
 import { privacyPolicy, cookiePolicy, noteLegali } from "@/content/legal"
 
 type LegalKey = "privacy" | "cookie" | "legal" | null
@@ -106,15 +108,26 @@ export function CtaFooter() {
           </Button>
         </motion.div>
 
-        {/* Contact form */}
+        {/* Form + Città 3D */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
-          className="mt-16 w-full max-w-xl"
+          className="mt-16 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
         >
           <ContactForm />
+          <div className="relative rounded-2xl overflow-hidden border border-white/5 min-h-[480px]">
+            <div className="absolute inset-0 bg-gradient-to-br from-[#0d1422] to-[#112240]" />
+            <div className="absolute inset-0">
+              <Suspense fallback={null}>
+                <MilanCity3D />
+              </Suspense>
+            </div>
+            <div className="absolute bottom-5 left-0 right-0 flex justify-center pointer-events-none">
+              <span className="text-[10px] font-body tracking-[0.25em] uppercase text-white/20">Milano</span>
+            </div>
+          </div>
         </motion.div>
 
         {/* Contact info strip */}
