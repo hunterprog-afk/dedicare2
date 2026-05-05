@@ -36,7 +36,19 @@ export function Navbar() {
       <header
         className={`fixed z-50 w-[min(1200px,calc(100vw-32px))] left-1/2 -translate-x-1/2 transition-all duration-300 ${scrolled ? "top-2" : "top-4"}`}
       >
-        <div className="liquid-glass rounded-full px-2 py-2 flex items-center justify-between gap-4">
+        {/* Dark frosted glass pill — always readable over any section */}
+        <div
+          className="rounded-full px-2 py-2 flex items-center justify-between gap-4"
+          style={{
+            background: scrolled
+              ? "rgba(8, 16, 40, 0.92)"
+              : "rgba(8, 16, 40, 0.78)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            boxShadow: "0 4px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.08)",
+          }}
+        >
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 pl-3 shrink-0">
             <img
@@ -59,13 +71,15 @@ export function Navbar() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className={`relative px-3.5 py-2 text-sm font-body transition-colors ${
-                    isActive ? "text-foreground" : "text-foreground/70 hover:text-foreground"
+                  className={`relative px-3.5 py-2 text-sm font-body transition-colors rounded-full ${
+                    isActive
+                      ? "text-white bg-white/10"
+                      : "text-white/70 hover:text-white hover:bg-white/8"
                   }`}
                 >
                   {item.label}
                   {isActive && (
-                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 h-1 w-1 rounded-full bg-primary" />
+                    <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 h-0.5 w-3 rounded-full bg-primary" />
                   )}
                 </a>
               )
@@ -77,7 +91,7 @@ export function Navbar() {
             <Button
               variant="heroSolid"
               size="sm"
-              className="rounded-full px-4 py-1.5 text-sm hidden sm:inline-flex focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="rounded-full px-4 py-1.5 text-sm hidden sm:inline-flex focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
               asChild
             >
               <a href="#contatti">
@@ -85,7 +99,7 @@ export function Navbar() {
               </a>
             </Button>
             <button
-              className="md:hidden liquid-glass rounded-full w-9 h-9 flex items-center justify-center text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+              className="md:hidden rounded-full w-9 h-9 flex items-center justify-center text-white bg-white/10 hover:bg-white/18 transition-colors focus-visible:ring-2 focus-visible:ring-ring"
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Menu"
             >
@@ -103,14 +117,19 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 liquid-glass-strong flex flex-col items-center justify-center gap-6 px-8"
+            className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 px-8"
+            style={{
+              background: "rgba(8, 16, 40, 0.97)",
+              backdropFilter: "blur(24px)",
+              WebkitBackdropFilter: "blur(24px)",
+            }}
           >
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className="font-display uppercase text-3xl tracking-tight text-foreground/90 hover:text-foreground transition-colors"
+                className="font-display uppercase text-3xl tracking-tight text-white/90 hover:text-white transition-colors"
               >
                 {item.label}
               </a>

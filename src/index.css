@@ -13,34 +13,31 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
-  /* Warm dark navy — meno freddo del precedente, più avvolgente */
-  --ink:    220 20% 11%;   /* #161D2E */
-  /* Crema calda — tono base delle sezioni chiare (target 40+) */
-  --cream:  36 55% 97%;    /* #FBF7F1 */
-  --sand:   36 28% 88%;    /* bordi su sfondo chiaro */
-  /* Brand colors */
-  --ochre:  211 72% 40%;   /* #1870BC — blu fiducia (più leggibile) */
-  --terra:  174 62% 38%;   /* #24B2A3 — teal caldo */
-  --warm:   36 90% 54%;    /* #F5A61A — ambra/oro — accento caldo CTA */
+  --ink:    220 20% 11%;    /* navy caldo scuro */
+  --cream:  38 45% 94%;     /* crema calda — leggermente più scura di pure white */
+  --sand:   36 28% 86%;     /* bordi su sfondo chiaro */
+  --ochre:  211 72% 40%;    /* blu fiducia */
+  --terra:  174 62% 38%;    /* teal caldo */
+  --warm:   36 90% 54%;     /* ambra/oro CTA */
 
   --background:             var(--ink);
-  --foreground:             var(--cream);
+  --foreground:             0 0% 97%;          /* bianco quasi puro sulle sezioni scure */
   --card:                   var(--ink);
-  --card-foreground:        var(--cream);
+  --card-foreground:        0 0% 97%;
   --popover:                var(--ink);
-  --popover-foreground:     var(--cream);
+  --popover-foreground:     0 0% 97%;
   --primary:                var(--ochre);
-  --primary-foreground:     var(--cream);
+  --primary-foreground:     0 0% 100%;
   --secondary:              var(--terra);
-  --secondary-foreground:   var(--cream);
+  --secondary-foreground:   0 0% 100%;
   --muted:                  220 14% 18%;
-  --muted-foreground:       36 12% 70%;
+  --muted-foreground:       220 8% 65%;
   --accent:                 var(--warm);
   --accent-foreground:      var(--ink);
   --destructive:            0 72% 51%;
-  --destructive-foreground: var(--cream);
-  --border:                 220 18% 88% / 0.16;
-  --input:                  220 18% 88% / 0.16;
+  --destructive-foreground: 0 0% 97%;
+  --border:                 220 18% 88% / 0.15;
+  --input:                  220 18% 88% / 0.15;
   --ring:                   var(--ochre);
   --radius:                 0.75rem;
 
@@ -103,7 +100,7 @@ html, body, #root {
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
-  font-size: 17px;          /* 40+ readability */
+  font-size: 17px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -115,60 +112,55 @@ body {
 .font-display { font-family: var(--font-display); }
 .font-body    { font-family: var(--font-body); }
 
-/* ─── Sezioni chiare (target 40+) ───────────────────────────────────────── */
+/* ─── Sezioni chiare (target 40+) ──────────────────────────────────────── */
+/* Il CSS variable cascade funziona: var(--foreground) si risolve nello scope locale */
 [data-section="light"] {
-  --foreground:       220 22% 12%;
-  --card-foreground:  220 22% 12%;
-  --muted-foreground: 220 12% 42%;
-  --border:           36 22% 74% / 1;
-  background: hsl(36, 55%, 97%);
-  color: hsl(220, 22%, 12%);
+  --foreground:       220 25% 13%;      /* navy quasi nero — massimo contrasto */
+  --card-foreground:  220 25% 13%;
+  --muted-foreground: 220 15% 40%;
+  --border:           220 15% 82% / 1;
+  background: hsl(38, 45%, 94%);
+  color: hsl(220, 25%, 13%);
 }
 
+/* Card bianche solide — mai glass su sfondo chiaro */
 [data-section="light"] .liquid-glass {
-  background: rgba(255, 255, 255, 0.60);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: none;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.90);
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
 }
-[data-section="light"] .liquid-glass::before {
-  background: linear-gradient(180deg,
-    rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.04) 20%,
-    rgba(0,0,0,0)    40%, rgba(0,0,0,0)    60%,
-    rgba(0,0,0,0.04) 80%, rgba(0,0,0,0.10) 100%);
-}
+[data-section="light"] .liquid-glass::before { display: none; }
 
+/* Icon containers: cerchio colorato primario chiaro */
 [data-section="light"] .liquid-glass-strong {
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,1);
+  background: hsl(211, 72%, 40%, 0.12);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border: 1px solid hsl(211, 72%, 40%, 0.22);
 }
-[data-section="light"] .liquid-glass-strong::before {
-  background: linear-gradient(180deg,
-    rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.05) 20%,
-    rgba(0,0,0,0)    40%, rgba(0,0,0,0)    60%,
-    rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.12) 100%);
+[data-section="light"] .liquid-glass-strong::before { display: none; }
+
+/* Icone e testi dentro le card chiare */
+[data-section="light"] .liquid-glass-strong svg { color: hsl(var(--primary)); }
+
+/* Tag pill label nelle sezioni chiare */
+[data-section="light"] .section-tag {
+  background: rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.09);
+  color: hsl(220, 25%, 13%);
 }
 
-[data-section="light"] .gradient-fade-t {
-  background: linear-gradient(to top, transparent 0%, hsl(36, 55%, 97%) 100%);
-}
-[data-section="light"] .gradient-fade-b {
-  background: linear-gradient(to bottom, transparent 0%, hsl(36, 55%, 97%) 100%);
-}
-
-/* ─── Liquid-glass utilities (dark sections default) ─────────────────────── */
+/* ─── Liquid-glass utilities (sezioni scure) ─────────────────────────────── */
 @layer components {
   .liquid-glass {
-    background: rgba(255, 255, 255, 0.02);
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.10);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
     position: relative;
     overflow: hidden;
   }
@@ -177,11 +169,11 @@ body {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 1.4px;
+    padding: 1px;
     background: linear-gradient(180deg,
-      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
+      rgba(255,255,255,0.40) 0%, rgba(255,255,255,0.12) 20%,
       rgba(255,255,255,0)    40%, rgba(255,255,255,0)    60%,
-      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
+      rgba(255,255,255,0.12) 80%, rgba(255,255,255,0.40) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;
@@ -189,13 +181,11 @@ body {
   }
 
   .liquid-glass-strong {
-    background: rgba(255, 255, 255, 0.04);
-    background-blend-mode: luminosity;
+    background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(50px);
     -webkit-backdrop-filter: blur(50px);
     border: none;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.05),
-                inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.18);
     position: relative;
     overflow: hidden;
   }
@@ -204,11 +194,11 @@ body {
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 1.4px;
+    padding: 1px;
     background: linear-gradient(180deg,
-      rgba(255,255,255,0.50) 0%, rgba(255,255,255,0.20) 20%,
+      rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.15) 20%,
       rgba(255,255,255,0)    40%, rgba(255,255,255,0)    60%,
-      rgba(255,255,255,0.20) 80%, rgba(255,255,255,0.50) 100%);
+      rgba(255,255,255,0.15) 80%, rgba(255,255,255,0.45) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;
