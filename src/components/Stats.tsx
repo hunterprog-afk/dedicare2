@@ -4,7 +4,7 @@ import { STATS } from "@/lib/constants"
 
 function CountUp({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null)
-  const inView = useInView(ref as React.RefObject<Element>, { once: true, amount: 0.5 })
+  const inView = useInView(ref as React.RefObject<Element>, { once: true, amount: 0.15, margin: "0px 0px -10% 0px" })
   const [display, setDisplay] = useState("0")
 
   useEffect(() => {

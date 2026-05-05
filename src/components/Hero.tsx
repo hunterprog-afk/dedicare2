@@ -61,7 +61,8 @@ export function Hero({ scrollRef }: Props) {
         <BlurText
           text="La cura che meriti."
           as="h1"
-          className="mt-6 font-display uppercase text-[clamp(44px,7vw,120px)] leading-[0.92] tracking-[-0.02em] text-white max-w-[14ch] drop-shadow-lg"
+          immediate
+          className="mt-6 font-display uppercase text-[clamp(44px,7vw,120px)] leading-[0.92] tracking-[-0.02em] text-white max-w-[14ch] drop-shadow-2xl"
           delay={0.09}
           startDelay={0.15}
         />

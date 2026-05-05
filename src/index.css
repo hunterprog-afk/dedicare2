@@ -13,15 +13,17 @@
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
-  --ink:    220 20% 11%;    /* navy caldo scuro */
-  --cream:  38 45% 94%;     /* crema calda — leggermente più scura di pure white */
-  --sand:   36 28% 86%;     /* bordi su sfondo chiaro */
-  --ochre:  211 72% 40%;    /* blu fiducia */
+  --ink:    220 22% 9%;     /* navy caldo scuro */
+  --ink-2:  220 20% 12%;    /* navy leggermente più chiaro per varietà */
+  --cream:  38 45% 94%;     /* crema calda — non bianco puro */
+  --cream-2:36 35% 90%;     /* crema più satura per accenti */
+  --sand:   36 28% 84%;
+  --ochre:  211 72% 42%;    /* blu fiducia (leggermente più brillante) */
   --terra:  174 62% 38%;    /* teal caldo */
   --warm:   36 90% 54%;     /* ambra/oro CTA */
 
   --background:             var(--ink);
-  --foreground:             0 0% 97%;          /* bianco quasi puro sulle sezioni scure */
+  --foreground:             0 0% 97%;
   --card:                   var(--ink);
   --card-foreground:        0 0% 97%;
   --popover:                var(--ink);
@@ -31,7 +33,7 @@
   --secondary:              var(--terra);
   --secondary-foreground:   0 0% 100%;
   --muted:                  220 14% 18%;
-  --muted-foreground:       220 8% 65%;
+  --muted-foreground:       220 8% 68%;
   --accent:                 var(--warm);
   --accent-foreground:      var(--ink);
   --destructive:            0 72% 51%;
@@ -113,54 +115,93 @@ body {
 .font-body    { font-family: var(--font-body); }
 
 /* ─── Sezioni chiare (target 40+) ──────────────────────────────────────── */
-/* Il CSS variable cascade funziona: var(--foreground) si risolve nello scope locale */
 [data-section="light"] {
-  --foreground:       220 25% 13%;      /* navy quasi nero — massimo contrasto */
-  --card-foreground:  220 25% 13%;
-  --muted-foreground: 220 15% 40%;
-  --border:           220 15% 82% / 1;
+  --foreground:       220 30% 14%;
+  --card-foreground:  220 30% 14%;
+  --muted-foreground: 220 12% 38%;
+  --border:           220 12% 80% / 1;
   background: hsl(38, 45%, 94%);
-  color: hsl(220, 25%, 13%);
+  color: hsl(220, 30%, 14%);
 }
 
-/* Card bianche solide — mai glass su sfondo chiaro */
+/* Card bianche solide su sezioni chiare */
 [data-section="light"] .liquid-glass {
   background: #ffffff;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.07), 0 1px 4px rgba(0, 0, 0, 0.04);
+  border: 1px solid hsl(220, 12%, 88%);
+  box-shadow: 0 2px 24px rgba(20, 30, 60, 0.06), 0 1px 4px rgba(20, 30, 60, 0.04);
 }
 [data-section="light"] .liquid-glass::before { display: none; }
 
-/* Icon containers: cerchio colorato primario chiaro */
+/* PILL tag inline (es. "I nostri servizi") — distingui dalle card grandi */
+[data-section="light"] .liquid-glass.rounded-full {
+  background: hsl(211, 72%, 42%);
+  color: #ffffff !important;
+  border: 1px solid hsl(211, 72%, 42%);
+  box-shadow: 0 2px 8px rgba(24, 112, 188, 0.20);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+[data-section="light"] .liquid-glass.rounded-full * {
+  color: #ffffff !important;
+}
+
+/* Icon container nelle card chiare: tint blu primario */
 [data-section="light"] .liquid-glass-strong {
-  background: hsl(211, 72%, 40%, 0.12);
+  background: hsl(211, 72%, 42%, 0.10);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
-  border: 1px solid hsl(211, 72%, 40%, 0.22);
+  border: 1px solid hsl(211, 72%, 42%, 0.22);
 }
 [data-section="light"] .liquid-glass-strong::before { display: none; }
-
-/* Icone e testi dentro le card chiare */
 [data-section="light"] .liquid-glass-strong svg { color: hsl(var(--primary)); }
 
-/* Tag pill label nelle sezioni chiare */
-[data-section="light"] .section-tag {
-  background: rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.09);
-  color: hsl(220, 25%, 13%);
+/* Body text leggibilità 40+ — bypass Tailwind opacity on light sections */
+[data-section="light"] .text-foreground\/85,
+[data-section="light"] .text-foreground\/80,
+[data-section="light"] .text-foreground\/75,
+[data-section="light"] .text-foreground\/70,
+[data-section="light"] .text-foreground\/65,
+[data-section="light"] .text-foreground\/60,
+[data-section="light"] .text-foreground\/55,
+[data-section="light"] .text-foreground\/50 {
+  color: hsl(220, 15%, 30%);
+}
+
+/* Process step numbers — invisibili a /20 su crema, alza a /55 */
+[data-section="light"] .text-primary\/20 {
+  color: hsl(var(--primary) / 0.55);
+}
+
+/* Transition border tra sezioni light */
+[data-section="light"].border-t {
+  border-top-color: hsl(220, 12%, 86%) !important;
+}
+
+/* Gradient fade su sezioni light: dissolve verso crema, non verso dark */
+[data-section="light"] .gradient-fade-t {
+  background: linear-gradient(to top, transparent 0%, hsl(38, 45%, 94%) 100%);
+}
+[data-section="light"] .gradient-fade-b {
+  background: linear-gradient(to bottom, transparent 0%, hsl(38, 45%, 94%) 100%);
+}
+
+/* Accordion FAQ in light section — separatori più visibili */
+[data-section="light"] [data-slot="accordion-item"],
+[data-section="light"] .border-border\/40 {
+  border-color: hsl(220, 12%, 82%) !important;
 }
 
 /* ─── Liquid-glass utilities (sezioni scure) ─────────────────────────────── */
 @layer components {
   .liquid-glass {
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.13);
     position: relative;
     overflow: hidden;
   }
@@ -171,9 +212,9 @@ body {
     border-radius: inherit;
     padding: 1px;
     background: linear-gradient(180deg,
-      rgba(255,255,255,0.40) 0%, rgba(255,255,255,0.12) 20%,
+      rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.14) 20%,
       rgba(255,255,255,0)    40%, rgba(255,255,255,0)    60%,
-      rgba(255,255,255,0.12) 80%, rgba(255,255,255,0.40) 100%);
+      rgba(255,255,255,0.14) 80%, rgba(255,255,255,0.42) 100%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude;
