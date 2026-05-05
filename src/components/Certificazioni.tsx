@@ -1,52 +1,26 @@
 import { motion } from "motion/react"
 import { ShieldCheck, BadgeCheck, Lock, FileCheck2, Handshake } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 
-type Cert = {
-  icon: React.ComponentType<{ className?: string }>
-  title: string
-  detail: string
-}
+const CERT_ICONS = [BadgeCheck, ShieldCheck, Lock, FileCheck2, Handshake]
 
-const CERTS: Cert[] = [
-  {
-    icon: BadgeCheck,
-    title: "Accreditamento ASL Milano",
-    detail: "Operatore riconosciuto",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Albo Operatori Sanitari",
-    detail: "Iscrizione regolare",
-  },
-  {
-    icon: Lock,
-    title: "Conformità GDPR",
-    detail: "Reg. UE 2016/679",
-  },
-  {
-    icon: FileCheck2,
-    title: "Polizza RC Professionale",
-    detail: "Copertura completa",
-  },
-  {
-    icon: Handshake,
-    title: "Convenzioni INPS",
-    detail: "Ente convenzionato",
-  },
-]
+type TranslatedCert = { title: string; detail: string }
 
 export function Certificazioni() {
+  const { t, i18n } = useTranslation()
+  const items = t("certificazioni.items", { returnObjects: true }) as TranslatedCert[]
   return (
     <section id="certificazioni" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="text-center mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            Garanzie
+            {t("certificazioni.eyebrow")}
           </span>
           <BlurText
-            text="Certificazioni & Conformità"
+            key={i18n.language + "-cert-title"}
+            text={t("certificazioni.title")}
             as="h2"
             className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[20ch] mx-auto"
             delay={0.07}
@@ -58,15 +32,15 @@ export function Certificazioni() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             className="mt-4 font-body text-foreground/60 text-base max-w-xl mx-auto leading-relaxed"
           >
-            Operiamo nel pieno rispetto delle normative sanitarie e di tutela del cittadino.
+            {t("certificazioni.intro")}
           </motion.p>
         </div>
 
         {/* Grid badges — 5 cols desktop, scroll mobile */}
         <div className="-mx-[var(--gutter)] px-[var(--gutter)] overflow-x-auto md:overflow-visible md:mx-0 md:px-0">
           <div className="flex md:grid md:grid-cols-5 gap-4 min-w-max md:min-w-0">
-            {CERTS.map((c, i) => {
-              const Icon = c.icon
+            {items.map((c, i) => {
+              const Icon = CERT_ICONS[i] ?? BadgeCheck
               return (
                 <motion.div
                   key={c.title}

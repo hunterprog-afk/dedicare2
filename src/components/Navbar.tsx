@@ -4,9 +4,12 @@ import { ArrowUpRight, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { OptimizedImage } from "@/components/OptimizedImage"
 import { ThemeToggle } from "@/components/ThemeToggle"
+import { LanguageToggle } from "@/components/LanguageToggle"
 import { NAV_ITEMS } from "@/lib/constants"
+import { useTranslation } from "react-i18next"
 
 export function Navbar() {
+  const { t } = useTranslation()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("")
@@ -90,7 +93,7 @@ export function Navbar() {
                       : "text-white/70 hover:text-white hover:bg-white/8"
                   }`}
                 >
-                  {item.label}
+                  {t(`nav.${item.key}`)}
                   {isActive && (
                     <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 h-0.5 w-3 rounded-full bg-primary" />
                   )}
@@ -101,6 +104,7 @@ export function Navbar() {
 
           {/* CTA + hamburger */}
           <div className="flex items-center gap-2 pr-1">
+            <LanguageToggle />
             <ThemeToggle />
             <Button
               variant="heroSolid"
@@ -109,13 +113,13 @@ export function Navbar() {
               asChild
             >
               <a href="#contatti">
-                Contattaci <ArrowUpRight className="ml-1 size-4" />
+                {t("nav.contattaci")} <ArrowUpRight className="ml-1 size-4" />
               </a>
             </Button>
             <button
               className="md:hidden rounded-full w-9 h-9 flex items-center justify-center text-white bg-white/10 hover:bg-white/18 transition-colors focus-visible:ring-2 focus-visible:ring-ring"
               onClick={() => setMobileOpen((v) => !v)}
-              aria-label="Menu"
+              aria-label={t("nav.menu")}
             >
               {mobileOpen ? <X className="size-4" /> : <Menu className="size-4" />}
             </button>
@@ -145,12 +149,12 @@ export function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="font-display uppercase text-3xl tracking-tight text-white/90 hover:text-white transition-colors"
               >
-                {item.label}
+                {t(`nav.${item.key}`)}
               </a>
             ))}
             <Button variant="hero" className="mt-4" asChild>
               <a href="#contatti" onClick={() => setMobileOpen(false)}>
-                Contattaci <ArrowUpRight className="ml-1 size-4" />
+                {t("nav.contattaci")} <ArrowUpRight className="ml-1 size-4" />
               </a>
             </Button>
           </motion.div>

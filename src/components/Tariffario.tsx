@@ -1,47 +1,26 @@
 import { motion } from "motion/react"
 import { Stethoscope, CalendarClock, Activity, Sparkles, ArrowUpRight } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 
-type Factor = {
-  icon: React.ComponentType<{ className?: string }>
-  title: string
-  body: string
-}
+const FACTOR_ICONS = [Stethoscope, CalendarClock, Activity, Sparkles]
 
-const FACTORS: Factor[] = [
-  {
-    icon: Stethoscope,
-    title: "Tipologia di assistenza",
-    body: "Infermieristica, OSS, supporto specialistico o multidisciplinare: ogni profilo ha tariffe e tempi diversi.",
-  },
-  {
-    icon: CalendarClock,
-    title: "Durata e frequenza",
-    body: "Visita singola, turni programmati, presenza continuativa o reperibilità 24/7 incidono sul piano economico.",
-  },
-  {
-    icon: Activity,
-    title: "Complessità clinica",
-    body: "Patologie, terapie attive, dispositivi medici e livelli di non autosufficienza definiscono il fabbisogno reale.",
-  },
-  {
-    icon: Sparkles,
-    title: "Servizi accessori",
-    body: "Trasporto protetto, prevenzione domiciliare, coordinamento con il medico curante e accompagnamento.",
-  },
-]
+type TranslatedFactor = { title: string; body: string }
 
 export function Tariffario() {
+  const { t, i18n } = useTranslation()
+  const factors = t("tariffario.factors", { returnObjects: true }) as TranslatedFactor[]
   return (
     <section id="tariffario" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="text-center mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            Preventivo
+            {t("tariffario.eyebrow")}
           </span>
           <BlurText
-            text="Trasparenza nei costi"
+            key={i18n.language + "-tariffario-title"}
+            text={t("tariffario.title")}
             as="h2"
             className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[18ch] mx-auto"
             delay={0.07}
@@ -53,14 +32,14 @@ export function Tariffario() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             className="mt-4 font-body text-foreground/60 text-base max-w-xl mx-auto leading-relaxed"
           >
-            Ogni piano è personalizzato. Non pubblichiamo listini fissi perché ogni famiglia merita una valutazione reale.
+            {t("tariffario.intro")}
           </motion.p>
         </div>
 
         {/* Grid fattori */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          {FACTORS.map((f, i) => {
-            const Icon = f.icon
+          {factors.map((f, i) => {
+            const Icon = FACTOR_ICONS[i] ?? Stethoscope
             return (
               <motion.div
                 key={f.title}
@@ -103,7 +82,7 @@ export function Tariffario() {
             className="group inline-flex items-center gap-3 rounded-full px-7 py-4 font-body text-sm tracking-wide text-white transition-all hover:scale-[1.02]"
             style={{ background: "linear-gradient(135deg, #15A89A 0%, #0B5FA5 100%)" }}
           >
-            Richiedi un preventivo gratuito
+            {t("tariffario.cta")}
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </motion.div>

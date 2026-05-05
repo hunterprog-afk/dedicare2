@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { motion } from "motion/react"
 import { ArrowUpRight, Phone, Mail, MapPin } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/ContactForm"
@@ -32,7 +33,9 @@ const legalDocs = {
 }
 
 export function CtaFooter() {
+  const { t, i18n } = useTranslation()
   const [openModal, setOpenModal] = useState<LegalKey>(null)
+  const isEn = (i18n.resolvedLanguage || i18n.language || "it").startsWith("en")
 
   return (
     <section id="contatti" className="relative min-h-[100vh] flex flex-col items-center justify-center overflow-hidden border-t border-border/40">
@@ -60,12 +63,13 @@ export function CtaFooter() {
           transition={{ duration: 0.6 }}
         >
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            Iniziamo insieme
+            {t("cta.eyebrow")}
           </span>
         </motion.div>
 
         <BlurText
-          text="Pronti a prendersi cura."
+          key={i18n.language + "-cta-title"}
+          text={t("cta.title")}
           as="h2"
           className="mt-8 font-display italic text-[clamp(40px,8vw,150px)] leading-[0.88] tracking-[-0.02em] text-center max-w-[16ch]"
           delay={0.09}
@@ -79,7 +83,7 @@ export function CtaFooter() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
           className="mt-8 font-body text-base md:text-lg text-foreground/70 max-w-xl text-center leading-relaxed"
         >
-          Una chiamata gratuita. Un piano su misura. L'assistenza che la vostra famiglia merita.
+          {t("cta.subline")}
         </motion.p>
 
         <motion.div
@@ -104,7 +108,7 @@ export function CtaFooter() {
             asChild
           >
             <a href="mailto:info@dedicaresolutions.it">
-              <Mail className="mr-1.5 size-4" /> Scrivici
+              <Mail className="mr-1.5 size-4" /> {t("cta.scrivici")}
             </a>
           </Button>
         </motion.div>
@@ -141,7 +145,7 @@ export function CtaFooter() {
         >
           <span className="flex items-center gap-2">
             <MapPin className="size-4 text-primary/60" />
-            Via Roma 80, Segrate (MI)
+            {t("cta.address")}
           </span>
           <span className="hidden sm:block h-4 w-px bg-border/40" />
           <span className="flex items-center gap-2">
@@ -165,12 +169,12 @@ export function CtaFooter() {
         >
           <div className="text-center mb-4">
             <span className="font-body text-[11px] uppercase tracking-[0.2em] text-foreground/55">
-              Vieni a trovarci
+              {t("cta.vieni_a_trovarci")}
             </span>
           </div>
           <div className="rounded-2xl overflow-hidden border border-white/5 max-w-2xl mx-auto">
             <iframe
-              title="Mappa sede Dedicare Solutions — Via Roma 80, Segrate (MI)"
+              title={t("cta.map_title")}
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.123!2d9.298!3d45.494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia%20Roma%2080%2C%2020054%20Segrate%20MI!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -195,7 +199,7 @@ export function CtaFooter() {
               className="h-6 w-auto object-contain opacity-60"
             />
             <span className="font-body text-xs text-foreground/40">
-              © 2025 Dedicare Solutions S.R.L.S. — P.IVA IT11600760968
+              {t("cta.copyright")}
             </span>
           </div>
           <nav className="flex items-center gap-6 flex-wrap justify-center">
@@ -203,19 +207,19 @@ export function CtaFooter() {
               onClick={() => setOpenModal("privacy")}
               className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
-              Privacy Policy
+              {t("cta.privacy")}
             </button>
             <button
               onClick={() => setOpenModal("cookie")}
               className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
-              Cookie Policy
+              {t("cta.cookie")}
             </button>
             <button
               onClick={() => setOpenModal("legal")}
               className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
-              Note Legali
+              {t("cta.legal")}
             </button>
             <a
               href="mailto:info@dedicaresolutions.it"
@@ -230,17 +234,22 @@ export function CtaFooter() {
             rel="noopener noreferrer"
             className="font-body text-xs text-foreground/30 hover:text-foreground/60 transition-colors flex items-center gap-1"
           >
-            Sito classico <ArrowUpRight className="size-3" />
+            {t("cta.sito_classico")} <ArrowUpRight className="size-3" />
           </a>
         </div>
       </div>
-      {/* Modal legali */}
+      {/* Modal legali — sempre in italiano per validità legale */}
       {openModal && (
         <LegalModal
           open={true}
           onClose={() => setOpenModal(null)}
           title={legalDocs[openModal].title}
         >
+          {isEn && (
+            <p className="text-xs italic text-white/55 border-l-2 border-primary/40 pl-3 mb-2">
+              {t("legal_modal.disclaimer")}
+            </p>
+          )}
           <LegalContent sections={legalDocs[openModal].sections} />
         </LegalModal>
       )}

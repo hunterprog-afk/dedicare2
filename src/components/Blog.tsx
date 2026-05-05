@@ -1,46 +1,34 @@
 import { motion } from "motion/react"
 import { Mail, ArrowUpRight } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 
 type Article = {
   title: string
   date: string
   category: string
-  gradient: string
 }
 
-const ARTICLES: Article[] = [
-  {
-    title: "Prevenzione cadute in casa: 7 consigli pratici",
-    date: "In arrivo · 2026",
-    category: "Prevenzione",
-    gradient: "linear-gradient(135deg, #15A89A 0%, #0B5FA5 100%)",
-  },
-  {
-    title: "Quando serve un'infermiera a domicilio?",
-    date: "In arrivo · 2026",
-    category: "Assistenza",
-    gradient: "linear-gradient(135deg, #0B5FA5 0%, #161D2E 100%)",
-  },
-  {
-    title: "Caregiver familiari: gestire lo stress",
-    date: "In arrivo · 2026",
-    category: "Famiglia",
-    gradient: "linear-gradient(135deg, #161D2E 0%, #15A89A 100%)",
-  },
+const GRADIENTS = [
+  "linear-gradient(135deg, #15A89A 0%, #0B5FA5 100%)",
+  "linear-gradient(135deg, #0B5FA5 0%, #161D2E 100%)",
+  "linear-gradient(135deg, #161D2E 0%, #15A89A 100%)",
 ]
 
 export function Blog() {
+  const { t, i18n } = useTranslation()
+  const articles = t("blog.articles", { returnObjects: true }) as Article[]
   return (
     <section id="blog" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            Blog & news
+            {t("blog.eyebrow")}
           </span>
           <BlurText
-            text="Salute & Prevenzione"
+            key={i18n.language + "-blog-title"}
+            text={t("blog.title")}
             as="h2"
             className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight"
             delay={0.07}
@@ -52,13 +40,13 @@ export function Blog() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
           >
-            Approfondimenti pratici per famiglie e caregiver. Stiamo preparando i primi articoli.
+            {t("blog.intro")}
           </motion.p>
         </div>
 
         {/* Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {ARTICLES.map((a, i) => (
+          {articles.map((a, i) => (
             <motion.article
               key={a.title}
               className="liquid-glass rounded-2xl overflow-hidden flex flex-col group"
@@ -70,14 +58,14 @@ export function Blog() {
               {/* Cover gradiente */}
               <div
                 className="relative h-44 w-full overflow-hidden"
-                style={{ background: a.gradient }}
+                style={{ background: GRADIENTS[i] ?? GRADIENTS[0] }}
               >
                 <div className="absolute inset-0 noise opacity-40 pointer-events-none" />
                 <span
                   className="absolute top-4 right-4 rounded-full px-3 py-1 font-body text-[11px] tracking-wide uppercase text-white"
                   style={{ background: "rgba(0,0,0,0.35)", backdropFilter: "blur(8px)" }}
                 >
-                  In arrivo
+                  {t("blog.in_arrivo")}
                 </span>
                 <span className="absolute bottom-4 left-5 font-display uppercase text-xs tracking-wider text-white/80">
                   {a.category}
@@ -111,7 +99,7 @@ export function Blog() {
             className="group liquid-glass inline-flex items-center gap-3 rounded-full px-7 py-4 font-body text-sm tracking-wide transition-all hover:scale-[1.02]"
           >
             <Mail className="size-4" />
-            Iscriviti per essere avvisato
+            {t("blog.cta")}
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </motion.div>

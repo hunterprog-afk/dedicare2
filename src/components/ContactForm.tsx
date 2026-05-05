@@ -1,4 +1,5 @@
 import { useState, type FormEvent, type ChangeEvent } from "react"
+import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkoybjyb"
@@ -22,6 +23,7 @@ const INITIAL_FIELDS: FormFields = {
 }
 
 export function ContactForm() {
+  const { t } = useTranslation()
   const [fields, setFields] = useState<FormFields>(INITIAL_FIELDS)
   const [status, setStatus] = useState<FormStatus>("idle")
   const [errorMsg, setErrorMsg] = useState<string>("")
@@ -63,13 +65,12 @@ export function ContactForm() {
       } else {
         const data = await res.json().catch(() => ({}))
         setErrorMsg(
-          (data as { error?: string }).error ??
-            "Invio fallito. Riprova o contattaci direttamente."
+          (data as { error?: string }).error ?? t("contactform.error_send")
         )
         setStatus("error")
       }
     } catch {
-      setErrorMsg("Errore di rete. Controlla la connessione e riprova.")
+      setErrorMsg(t("contactform.error_network"))
       setStatus("error")
     }
   }
@@ -87,15 +88,15 @@ export function ContactForm() {
             ✓
           </span>
         </div>
-        <p className="font-display italic text-2xl text-white mb-2">Messaggio inviato!</p>
+        <p className="font-display italic text-2xl text-white mb-2">{t("contactform.success_title")}</p>
         <p className="font-body text-sm text-white/60">
-          Ti risponderemo al più presto. Grazie per averci contattato.
+          {t("contactform.success_body")}
         </p>
         <button
           onClick={() => setStatus("idle")}
           className="mt-6 text-xs font-body text-primary/70 hover:text-primary transition-colors underline underline-offset-2"
         >
-          Invia un altro messaggio
+          {t("contactform.success_retry")}
         </button>
       </div>
     )
@@ -108,13 +109,13 @@ export function ContactForm() {
       className="rounded-2xl bg-[hsl(210,30%,8%)]/80 border border-white/10 p-6 md:p-8 flex flex-col gap-5"
     >
       <p className="font-display italic text-xl text-white/90 mb-1">
-        Oppure scrivici direttamente
+        {t("contactform.intro")}
       </p>
 
       {/* Nome */}
       <div>
         <label htmlFor="cf-nome" className={labelBase}>
-          Nome <span className="text-primary">*</span>
+          {t("contactform.nome")} <span className="text-primary">*</span>
         </label>
         <input
           id="cf-nome"
@@ -122,7 +123,7 @@ export function ContactForm() {
           type="text"
           required
           autoComplete="name"
-          placeholder="Mario Rossi"
+          placeholder={t("contactform.placeholder_nome")}
           value={fields.nome}
           onChange={handleChange}
           disabled={status === "loading"}
@@ -134,14 +135,14 @@ export function ContactForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="cf-telefono" className={labelBase}>
-            Telefono
+            {t("contactform.telefono")}
           </label>
           <input
             id="cf-telefono"
             name="telefono"
             type="tel"
             autoComplete="tel"
-            placeholder="+39 333 000 0000"
+            placeholder={t("contactform.placeholder_telefono")}
             value={fields.telefono}
             onChange={handleChange}
             disabled={status === "loading"}
@@ -150,7 +151,7 @@ export function ContactForm() {
         </div>
         <div>
           <label htmlFor="cf-email" className={labelBase}>
-            Email <span className="text-primary">*</span>
+            {t("contactform.email")} <span className="text-primary">*</span>
           </label>
           <input
             id="cf-email"
@@ -158,7 +159,7 @@ export function ContactForm() {
             type="email"
             required
             autoComplete="email"
-            placeholder="mario@esempio.it"
+            placeholder={t("contactform.placeholder_email")}
             value={fields.email}
             onChange={handleChange}
             disabled={status === "loading"}
@@ -170,14 +171,14 @@ export function ContactForm() {
       {/* Messaggio */}
       <div>
         <label htmlFor="cf-messaggio" className={labelBase}>
-          Messaggio <span className="text-primary">*</span>
+          {t("contactform.messaggio")} <span className="text-primary">*</span>
         </label>
         <textarea
           id="cf-messaggio"
           name="messaggio"
           required
           rows={4}
-          placeholder="Raccontaci di cosa avete bisogno…"
+          placeholder={t("contactform.placeholder_messaggio")}
           value={fields.messaggio}
           onChange={handleChange}
           disabled={status === "loading"}
@@ -197,7 +198,7 @@ export function ContactForm() {
           className="mt-0.5 h-4 w-4 shrink-0 rounded border border-white/20 bg-white/5 accent-primary cursor-pointer"
         />
         <span className="font-body text-xs text-white/50 group-hover:text-white/70 transition-colors leading-relaxed">
-          Acconsento al trattamento dei dati personali ai sensi del GDPR (Reg. UE 2016/679)
+          {t("contactform.gdpr")}
           <span className="text-primary"> *</span>
         </span>
       </label>
@@ -242,10 +243,10 @@ export function ContactForm() {
                 d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
               />
             </svg>
-            Invio in corso…
+            {t("contactform.submitting")}
           </span>
         ) : (
-          "Invia messaggio"
+          t("contactform.submit")
         )}
       </Button>
     </form>

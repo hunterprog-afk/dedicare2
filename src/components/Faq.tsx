@@ -1,5 +1,6 @@
 import { motion } from "motion/react"
 import { MessageCircle } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,19 +9,23 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { FAQ_ITEMS } from "@/lib/constants"
+
+type FaqItem = { q: string; a: string }
 
 export function Faq() {
+  const { t, i18n } = useTranslation()
+  const items = t("faq.items", { returnObjects: true }) as FaqItem[]
   return (
     <section id="faq" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-16">
         {/* Left column */}
         <div className="md:sticky md:top-24 md:self-start">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            FAQ
+            {t("faq.eyebrow")}
           </span>
           <BlurText
-            text="Domande frequenti."
+            key={i18n.language + "-faq-title"}
+            text={t("faq.title")}
             as="h2"
             className="mt-4 font-display uppercase text-5xl md:text-6xl leading-[0.9] tracking-tight"
             delay={0.07}
@@ -32,7 +37,7 @@ export function Faq() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
             className="mt-5 font-body text-foreground/60 text-base leading-relaxed max-w-[36ch]"
           >
-            Non trovate la risposta che cercate? Scriveteci direttamente — risponderemo entro poche ore.
+            {t("faq.intro")}
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -47,7 +52,7 @@ export function Faq() {
               asChild
             >
               <a href="mailto:info@dedicaresolutions.it">
-                <MessageCircle className="mr-2 size-4" /> Scrivici
+                <MessageCircle className="mr-2 size-4" /> {t("faq.cta")}
               </a>
             </Button>
           </motion.div>
@@ -61,7 +66,7 @@ export function Faq() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <Accordion type="single" collapsible>
-            {FAQ_ITEMS.map((item, i) => (
+            {items.map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-border/40">
                 <AccordionTrigger className="font-display uppercase text-lg md:text-xl tracking-tight py-6 hover:no-underline data-[state=open]:text-primary text-left">
                   {item.q}

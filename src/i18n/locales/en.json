@@ -1,0 +1,378 @@
+{
+  "nav": {
+    "servizi": "Services",
+    "filosofia": "Philosophy",
+    "processo": "Process",
+    "faq": "FAQ",
+    "contattaci": "Contact us",
+    "menu": "Menu"
+  },
+  "hero": {
+    "tag_city": "Milan",
+    "tag_label": "Professional Healthcare Assistance",
+    "title": "The care you deserve.",
+    "subline": "Dedicare Solutions supports seniors, adults, children and people with disabilities throughout their care journey — at home, in hospital and during every transfer.",
+    "cta_primary": "Free consultation",
+    "partners_label": "We partner with",
+    "video_alt": "Dedicare Solutions presentation video — professional healthcare assistance in the Milan metropolitan area."
+  },
+  "services": {
+    "eyebrow": "Our services",
+    "title": "Everything you need, under one trusted care.",
+    "intro": "Certified professionals at home, in hospital and during every transfer. Each service is tailored to the person, not the diagnosis.",
+    "scopri": "Discover more",
+    "items": [
+      {
+        "title": "Nursing Care",
+        "body": "Professional nursing care at home and in hospital, delivered by licensed staff with advanced clinical skills.",
+        "bullets": [
+          "Therapy and medication administration",
+          "Vital signs monitoring",
+          "Wound dressing and management",
+          "Patient therapeutic education",
+          "Post-operative support"
+        ]
+      },
+      {
+        "title": "Healthcare Assistants (OSS)",
+        "body": "Our healthcare assistants provide qualified, compassionate support for daily care, preserving dignity, autonomy and well-being.",
+        "bullets": [
+          "Personal hygiene and mobility",
+          "Mealtime assistance",
+          "Emotional support and companionship",
+          "Cognitive stimulation",
+          "Coordination with family members"
+        ]
+      },
+      {
+        "title": "24/7 On-call",
+        "body": "A real presence at any hour of day and night. Fast emergency response and management of critical situations.",
+        "bullets": [
+          "24h emergency response",
+          "On-site within 30 minutes",
+          "Home emergency management",
+          "Holidays included"
+        ]
+      },
+      {
+        "title": "Medical Transport",
+        "body": "Specialised escorting for medical visits, therapies and any transfer requiring dedicated healthcare assistance.",
+        "bullets": [
+          "Assisted medical transport",
+          "Escort to specialist visits",
+          "Hospital admission support",
+          "Nursing staff on board"
+        ]
+      },
+      {
+        "title": "Free Prevention Check",
+        "body": "Before every visit we measure the main vital parameters of the patient at no cost. Because prevention is care.",
+        "bullets": [
+          "Blood pressure with digital sphygmomanometer",
+          "SpO₂ saturation with pulse oximeter",
+          "Heart rate and rhythm",
+          "Anomaly reporting to the GP",
+          "Completely free at every visit"
+        ]
+      },
+      {
+        "title": "Multidisciplinary Approach",
+        "body": "An integrated team of healthcare and social-care professionals for a holistic care experience.",
+        "bullets": [
+          "Coordinated nurses, OSS, physiotherapists",
+          "Personalised care plan",
+          "Regular updates to the family",
+          "Guaranteed continuity of care"
+        ]
+      }
+    ]
+  },
+  "pourquoi": {
+    "eyebrow": "Why choose us",
+    "title": "Not just assistance. A presence.",
+    "intro": "Every detail of our service is designed to bring relief to the family and dignity to the person being cared for.",
+    "items": [
+      {
+        "title": "Certified Staff",
+        "body": "Rigorous selection and ongoing training. Every professional is qualified, insured and regularly updated."
+      },
+      {
+        "title": "Always Available",
+        "body": "On call 24 hours a day, 7 days a week. Because health needs don't follow office hours."
+      },
+      {
+        "title": "Free First Consultation",
+        "body": "A no-obligation phone or WhatsApp call to understand your needs and propose the best solution."
+      },
+      {
+        "title": "Metropolitan Coverage",
+        "body": "Comprehensive coverage across the Milan metropolitan area. We come where you are, when you need us."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "How we work",
+    "title": "Simple, transparent, human.",
+    "items": [
+      {
+        "title": "First Contact",
+        "body": "Free phone or WhatsApp consultation to understand the patient's and family's needs. No commitment."
+      },
+      {
+        "title": "Assessment",
+        "body": "Comprehensive clinical assessment to define a personalised care plan, shared with the whole family."
+      },
+      {
+        "title": "Activation",
+        "body": "Assignment of the most suitable professional and prompt service start with immediate vital signs monitoring."
+      },
+      {
+        "title": "Follow-up",
+        "body": "Regular family updates, plan reviews and 24/7 on-call availability for any clinical need."
+      }
+    ]
+  },
+  "stats": {
+    "items": [
+      { "value": "24/7", "label": "Availability" },
+      { "value": "100%", "label": "Personalised care" },
+      { "value": "3+", "label": "Free vital checks" },
+      { "value": "MI", "label": "Metropolitan coverage" }
+    ]
+  },
+  "testimonials": {
+    "eyebrow": "Testimonials",
+    "title": "Their words speak louder.",
+    "intro": "The families who chose us describe better than anyone what it means to be truly accompanied.",
+    "items": [
+      {
+        "quote": "We entrusted our mother's care to Dedicare Solutions after a long search. The care and professionalism we found exceeded every expectation.",
+        "name": "Famiglia Rossi",
+        "role": "Milan, elderly patient"
+      },
+      {
+        "quote": "The nurse they sent was punctual, competent and incredibly human. My father felt at ease immediately. We couldn't have asked for better.",
+        "name": "Marco B.",
+        "role": "Segrate, post-operative patient"
+      },
+      {
+        "quote": "Their night-time on-call service literally saved us in an emergency. In less than 30 minutes someone was at our home.",
+        "name": "Giulia T.",
+        "role": "Pioltello, elderly patient"
+      },
+      {
+        "quote": "The personalised care plan they built for our daughter was transformative. We finally feel accompanied, not alone.",
+        "name": "Famiglia Marino",
+        "role": "Cologno, paediatric patient"
+      },
+      {
+        "quote": "The free initial consultation convinced me right away. They understood the situation in minutes and proposed a concrete, sustainable solution.",
+        "name": "Antonella V.",
+        "role": "Sesto San Giovanni"
+      },
+      {
+        "quote": "Serious, punctual professionals, always available. The quality of home care is on a level I didn't think possible in private services.",
+        "name": "Roberto C.",
+        "role": "Milan, family caregiver"
+      },
+      {
+        "quote": "Since they've been caring for my grandfather, his quality of life has visibly improved. Cognitive stimulation and attention to the person, not just the illness.",
+        "name": "Chiara L.",
+        "role": "Vimodrone, dementia patient"
+      }
+    ]
+  },
+  "team": {
+    "eyebrow": "Our team",
+    "title": "The people behind the care",
+    "intro": "Professionals selected, trained and coordinated directly by those who built Dedicare Solutions.",
+    "members": [
+      {
+        "name": "Lisis Zuniga",
+        "role": "Founder & Clinical Coordinator",
+        "bio": "Over 15 years of experience in home care. Leads every care plan with clinical vision and human attention."
+      },
+      {
+        "name": "Dr. Marco Bianchi",
+        "role": "Lead Physician",
+        "bio": "Geriatrics specialist. Oversees clinical protocols and ongoing training of the medical team."
+      },
+      {
+        "name": "Sara Romano",
+        "role": "OSS Coordinator",
+        "bio": "10 years of field experience and internal trainer. Ensures quality and continuity of OSS service."
+      },
+      {
+        "name": "Lucia Ferrari",
+        "role": "24/7 On-call Manager",
+        "bio": "Operational point of contact for families and professionals. Coordinates urgencies and shifts around the clock."
+      }
+    ]
+  },
+  "aree": {
+    "eyebrow": "Service area",
+    "title": "Where we operate",
+    "intro": "Milan metropolitan area and surrounding municipalities.",
+    "comuni_title": "Municipalities served",
+    "comuni_note": "We also operate in areas not listed, subject to assessment. Contact us to check.",
+    "map_alt": "Stylised map of Milan and surrounding municipalities",
+    "comuni": [
+      "Milan (all districts)",
+      "Segrate",
+      "Sesto San Giovanni",
+      "Cinisello Balsamo",
+      "Cologno Monzese",
+      "Pioltello",
+      "Vimodrone",
+      "San Donato Milanese",
+      "Peschiera Borromeo",
+      "Rozzano",
+      "Corsico"
+    ]
+  },
+  "tariffario": {
+    "eyebrow": "Quote",
+    "title": "Transparency in costs",
+    "intro": "Every plan is personalised. We don't publish fixed price lists because every family deserves a real assessment.",
+    "cta": "Request a free quote",
+    "factors": [
+      {
+        "title": "Type of assistance",
+        "body": "Nursing, OSS, specialist or multidisciplinary support: each profile has different rates and timing."
+      },
+      {
+        "title": "Duration and frequency",
+        "body": "Single visit, scheduled shifts, continuous presence or 24/7 on-call all affect the financial plan."
+      },
+      {
+        "title": "Clinical complexity",
+        "body": "Conditions, active therapies, medical devices and dependency levels define the real need."
+      },
+      {
+        "title": "Additional services",
+        "body": "Medical transport, home prevention, coordination with the GP and escorting."
+      }
+    ]
+  },
+  "certificazioni": {
+    "eyebrow": "Guarantees",
+    "title": "Certifications & Compliance",
+    "intro": "We operate in full compliance with healthcare regulations and citizen protection standards.",
+    "items": [
+      { "title": "ASL Milan Accreditation", "detail": "Recognised provider" },
+      { "title": "Healthcare Workers Register", "detail": "Regular enrolment" },
+      { "title": "GDPR Compliance", "detail": "EU Reg. 2016/679" },
+      { "title": "Professional Liability Insurance", "detail": "Full coverage" },
+      { "title": "INPS Conventions", "detail": "Authorised entity" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Frequently asked questions.",
+    "intro": "Can't find the answer you're looking for? Write to us directly — we'll reply within a few hours.",
+    "cta": "Write to us",
+    "items": [
+      {
+        "q": "Who is Dedicare Solutions for?",
+        "a": "We assist seniors, adults after hospitalisation, children and people with physical or cognitive disabilities who need healthcare or social-care support at home, in hospital or during transfers across the Milan metropolitan area."
+      },
+      {
+        "q": "Is the first consultation really free?",
+        "a": "Yes, completely. A no-obligation phone or WhatsApp call to understand your needs, answer your questions and propose the best solution. Call or write to us at +39 882 536 992."
+      },
+      {
+        "q": "Are your staff qualified and insured?",
+        "a": "Absolutely. Every professional — nurses, OSS, assistants — is rigorously selected, holds the qualifications required by Italian law, is covered by professional insurance and undergoes ongoing training."
+      },
+      {
+        "q": "Do you operate only in Milan or also in nearby areas?",
+        "a": "We cover the entire Milan metropolitan area: Segrate, Pioltello, Sesto San Giovanni, Cologno Monzese, Vimodrone and surrounding municipalities. Contact us to verify coverage in your area."
+      },
+      {
+        "q": "How does night-time and weekend care work?",
+        "a": "We are available 24 hours a day, 7 days a week, holidays included. Continuous on-call is not an add-on: it's a core part of our service because clinical needs don't follow a schedule."
+      },
+      {
+        "q": "What does the free vital signs check include?",
+        "a": "At every visit, our staff measures blood pressure, oxygen saturation and heart rate at no cost. Values are recorded and communicated to the family, contributing to ongoing preventive monitoring."
+      },
+      {
+        "q": "How quickly can I activate the service?",
+        "a": "Contact us at +39 882 536 992 or email info@dedicaresolutions.it. After the free initial call, we can activate the service very quickly — often within 24-48 hours of the assessment."
+      }
+    ]
+  },
+  "blog": {
+    "eyebrow": "Blog & news",
+    "title": "Health & Prevention",
+    "intro": "Practical insights for families and caregivers. We are preparing the first articles.",
+    "in_arrivo": "Coming soon",
+    "cta": "Subscribe to be notified",
+    "articles": [
+      {
+        "title": "Preventing falls at home: 7 practical tips",
+        "date": "Coming soon · 2026",
+        "category": "Prevention"
+      },
+      {
+        "title": "When do you need a home nurse?",
+        "date": "Coming soon · 2026",
+        "category": "Assistance"
+      },
+      {
+        "title": "Family caregivers: managing stress",
+        "date": "Coming soon · 2026",
+        "category": "Family"
+      }
+    ]
+  },
+  "cta": {
+    "eyebrow": "Let's start together",
+    "title": "Ready to take care.",
+    "subline": "A free call. A tailored plan. The care your family deserves.",
+    "scrivici": "Write to us",
+    "vieni_a_trovarci": "Come visit us",
+    "address": "Via Roma 80, Segrate (MI)",
+    "copyright": "© 2025 Dedicare Solutions S.R.L.S. — VAT IT11600760968",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "legal": "Legal Notice",
+    "sito_classico": "Classic site",
+    "map_title": "Map of Dedicare Solutions office — Via Roma 80, Segrate (MI)"
+  },
+  "contactform": {
+    "intro": "Or write to us directly",
+    "nome": "Name",
+    "telefono": "Phone",
+    "email": "Email",
+    "messaggio": "Message",
+    "placeholder_nome": "John Smith",
+    "placeholder_telefono": "+39 333 000 0000",
+    "placeholder_email": "john@example.com",
+    "placeholder_messaggio": "Tell us what you need…",
+    "gdpr": "I consent to the processing of my personal data under GDPR (EU Reg. 2016/679)",
+    "submit": "Send message",
+    "submitting": "Sending…",
+    "success_title": "Message sent!",
+    "success_body": "We'll get back to you as soon as possible. Thanks for reaching out.",
+    "success_retry": "Send another message",
+    "error_send": "Sending failed. Please retry or contact us directly.",
+    "error_network": "Network error. Check your connection and retry."
+  },
+  "whatsapp": {
+    "tooltip": "Message us on WhatsApp",
+    "aria": "Message us on WhatsApp"
+  },
+  "theme": {
+    "to_light": "Switch to light theme",
+    "to_dark": "Switch to dark theme"
+  },
+  "language": {
+    "switch_to_en": "Switch to English",
+    "switch_to_it": "Passa all'italiano"
+  },
+  "legal_modal": {
+    "close": "Close",
+    "disclaimer": "Note: Legal documents are provided in Italian only for legal validity under Italian law and GDPR."
+  }
+}

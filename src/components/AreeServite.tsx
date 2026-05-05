@@ -1,19 +1,6 @@
 import { motion } from "motion/react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
-
-const COMUNI = [
-  "Milano (tutte le zone)",
-  "Segrate",
-  "Sesto San Giovanni",
-  "Cinisello Balsamo",
-  "Cologno Monzese",
-  "Pioltello",
-  "Vimodrone",
-  "San Donato Milanese",
-  "Peschiera Borromeo",
-  "Rozzano",
-  "Corsico",
-]
 
 // Punti relativi sulla mappa stilizzata (viewBox 400x300)
 const PINS: { x: number; y: number; label: string }[] = [
@@ -31,16 +18,19 @@ const PINS: { x: number; y: number; label: string }[] = [
 ]
 
 export function AreeServite() {
+  const { t, i18n } = useTranslation()
+  const comuni = t("aree.comuni", { returnObjects: true }) as string[]
   return (
     <section id="aree" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            Copertura territoriale
+            {t("aree.eyebrow")}
           </span>
           <BlurText
-            text="Dove operiamo"
+            key={i18n.language + "-aree-title"}
+            text={t("aree.title")}
             as="h2"
             className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight"
             delay={0.07}
@@ -52,7 +42,7 @@ export function AreeServite() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
           >
-            Area metropolitana di Milano e comuni limitrofi.
+            {t("aree.intro")}
           </motion.p>
         </div>
 
@@ -69,7 +59,7 @@ export function AreeServite() {
               viewBox="0 0 400 300"
               className="w-full h-auto"
               role="img"
-              aria-label="Mappa stilizzata di Milano e comuni limitrofi"
+              aria-label={t("aree.map_alt")}
             >
               <defs>
                 <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
@@ -159,7 +149,7 @@ export function AreeServite() {
                       fillOpacity="0.85"
                       style={{ textTransform: "uppercase", letterSpacing: "0.05em" }}
                     >
-                      Milano
+                      {t("hero.tag_city")}
                     </text>
                   )}
                 </g>
@@ -176,10 +166,10 @@ export function AreeServite() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           >
             <h3 className="font-display uppercase text-xl tracking-tight mb-5">
-              Comuni serviti
+              {t("aree.comuni_title")}
             </h3>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3">
-              {COMUNI.map((c) => (
+              {comuni.map((c) => (
                 <li key={c} className="flex items-center gap-2 font-body text-sm text-foreground/80">
                   <span
                     className="inline-block w-2 h-2 rounded-full shrink-0"
@@ -191,7 +181,7 @@ export function AreeServite() {
             </ul>
             <div className="mt-6 h-px w-10 bg-gradient-to-r from-primary to-transparent" />
             <p className="mt-4 font-body text-xs text-foreground/55 leading-relaxed">
-              Operiamo anche in zone non elencate previa valutazione. Contattaci per verificare.
+              {t("aree.comuni_note")}
             </p>
           </motion.div>
         </div>

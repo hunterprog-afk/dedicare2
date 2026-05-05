@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, useInView } from "motion/react"
 import { Award, Users, BadgeCheck, Clock } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { STATS } from "@/lib/constants"
+
+type TranslatedStat = { value: string; label: string }
 
 const STAT_ICONS = [Clock, BadgeCheck, Award, Users] as const
 
@@ -41,6 +44,8 @@ function CountUp({ value }: { value: string }) {
 }
 
 export function Stats() {
+  const { t } = useTranslation()
+  const items = t("stats.items", { returnObjects: true }) as TranslatedStat[]
   return (
     <section className="relative py-32 md:py-44 overflow-hidden">
       {/* Cinematic bg — gradient fallback (no external video dependency) */}
@@ -61,6 +66,7 @@ export function Stats() {
               const Icon = STAT_ICONS[i] ?? Award
               const behavior = ICON_BEHAVIOR[i] ?? "scale"
               const hover = HOVER_ANIM[behavior] ?? { scale: 1.1 }
+              const tr = items[i] ?? stat
               return (
                 <motion.div
                   key={stat.label}
@@ -99,10 +105,10 @@ export function Stats() {
                   </motion.div>
 
                   <span className="font-display italic text-5xl md:text-6xl lg:text-7xl leading-none text-foreground">
-                    <CountUp value={stat.value} />
+                    <CountUp value={tr.value} />
                   </span>
                   <span className="font-body text-xs text-foreground/55 mt-3 tracking-wide uppercase">
-                    {stat.label}
+                    {tr.label}
                   </span>
                 </motion.div>
               )

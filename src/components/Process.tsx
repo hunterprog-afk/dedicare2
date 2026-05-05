@@ -1,6 +1,9 @@
 import { motion } from "motion/react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { PROCESS_STEPS } from "@/lib/constants"
+
+type TranslatedStep = { title: string; body: string }
 
 const TEAL = "#15A89A"
 
@@ -82,16 +85,19 @@ function HeartHome() {
 const ILLUSTRATIONS = [PhoneWaves, ClipboardCheck, DocumentPerson, HeartHome]
 
 export function Process() {
+  const { t, i18n } = useTranslation()
+  const items = t("process.items", { returnObjects: true }) as TranslatedStep[]
   return (
     <section id="processo" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            Come lavoriamo
+            {t("process.eyebrow")}
           </span>
           <BlurText
-            text="Semplice, trasparente, umano."
+            key={i18n.language + "-process-title"}
+            text={t("process.title")}
             as="h2"
             className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[20ch]"
             delay={0.07}
@@ -102,6 +108,7 @@ export function Process() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-0 relative">
           {PROCESS_STEPS.map((step, i) => {
             const Illustration = ILLUSTRATIONS[i] ?? PhoneWaves
+            const item = items[i] ?? { title: step.title, body: step.body }
             return (
               <motion.div
                 key={step.n}
@@ -131,10 +138,10 @@ export function Process() {
                   {step.n.padStart(2, "0")}
                 </span>
                 <h3 className="font-display uppercase text-2xl md:text-3xl tracking-tight">
-                  {step.title}
+                  {item.title}
                 </h3>
                 <p className="font-body text-sm text-foreground/65 leading-relaxed max-w-[30ch]">
-                  {step.body}
+                  {item.body}
                 </p>
               </motion.div>
             )

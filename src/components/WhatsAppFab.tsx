@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next"
+
 export function WhatsAppFab() {
+  const { t } = useTranslation()
   return (
     <div className="fixed bottom-6 right-6 z-50 group">
       {/* Tooltip */}
@@ -12,7 +15,7 @@ export function WhatsAppFab() {
           transition-opacity duration-200
         "
       >
-        Scrivici su WhatsApp
+        {t("whatsapp.tooltip")}
         {/* Arrow */}
         <span className="absolute right-[-5px] top-1/2 -translate-y-1/2 border-4 border-transparent border-l-[#1a1a1a]" />
       </span>
@@ -22,7 +25,7 @@ export function WhatsAppFab() {
         href="https://wa.me/39882536992"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Scrivici su WhatsApp"
+        aria-label={t("whatsapp.aria")}
         className="
           flex items-center justify-center
           w-14 h-14 rounded-full

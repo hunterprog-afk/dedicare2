@@ -3,11 +3,11 @@ export const FRAME_COUNT  = 120
 export const FRAME_EXT    = "jpg" as const
 
 export const NAV_ITEMS = [
-  { label: "Servizi",    href: "#servizi" },
-  { label: "Filosofia",  href: "#filosofia" },
-  { label: "Processo",   href: "#processo" },
-  { label: "FAQ",        href: "#faq" },
-]
+  { key: "servizi",   href: "#servizi" },
+  { key: "filosofia", href: "#filosofia" },
+  { key: "processo",  href: "#processo" },
+  { key: "faq",       href: "#faq" },
+] as const
 
 export const PARTNERS = [
   "INPS",

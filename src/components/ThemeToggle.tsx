@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { Sun, Moon } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 type Theme = "dark" | "light"
 
@@ -23,6 +24,7 @@ function applyTheme(theme: Theme) {
 }
 
 export function ThemeToggle() {
+  const { t } = useTranslation()
   const [theme, setTheme] = useState<Theme>("dark")
 
   // Init from localStorage / prefers-color-scheme
@@ -44,7 +46,7 @@ export function ThemeToggle() {
   }
 
   const isDark = theme === "dark"
-  const label = isDark ? "Attiva tema chiaro" : "Attiva tema scuro"
+  const label = isDark ? t("theme.to_light") : t("theme.to_dark")
 
   return (
     <button

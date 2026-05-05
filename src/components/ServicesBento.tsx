@@ -1,5 +1,6 @@
 import { motion } from "motion/react"
 import { ArrowUpRight, Check, Stethoscope, Heart, Clock, Ambulance, Activity, Users } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { SERVICES } from "@/lib/constants"
 
@@ -21,17 +22,23 @@ const CARD_CLASSES = [
   "md:col-span-3 p-7 min-h-[220px]",
 ]
 
+type TranslatedService = { title: string; body: string; bullets?: string[] }
+
 export function ServicesBento() {
+  const { t, i18n } = useTranslation()
+  const translated = t("services.items", { returnObjects: true }) as TranslatedService[]
+
   return (
     <section id="servizi" data-section="light" className="relative py-28 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-12">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-            I nostri servizi
+            {t("services.eyebrow")}
           </span>
           <BlurText
-            text="Tutto ciò di cui hai bisogno, sotto un'unica cura."
+            key={i18n.language + "-services-title"}
+            text={t("services.title")}
             as="h2"
             className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[22ch]"
             delay={0.07}
@@ -43,7 +50,7 @@ export function ServicesBento() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
           >
-            Professionisti certificati a domicilio, in ospedale e in ogni spostamento. Ogni servizio è calibrato sulla persona, non sulla diagnosi.
+            {t("services.intro")}
           </motion.p>
         </div>
 
@@ -51,9 +58,10 @@ export function ServicesBento() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
           {SERVICES.map((service, idx) => {
             const Icon = ICON_MAP[service.icon] ?? Stethoscope
+            const item = translated[idx] ?? { title: service.title, body: service.body, bullets: service.bullets }
             return (
               <motion.div
-                key={service.title}
+                key={service.icon}
                 tabIndex={0}
                 className={`liquid-glass rounded-2xl relative overflow-hidden group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(174,62%,45%)] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${CARD_CLASSES[idx]}`}
                 whileHover={{ y: -4 }}
@@ -66,14 +74,14 @@ export function ServicesBento() {
                   <Icon className="size-5 text-foreground" />
                 </div>
                 <h3 className="font-display uppercase text-2xl md:text-3xl leading-[0.95] tracking-tight mb-3 max-w-[18ch] relative z-[2]">
-                  {service.title}
+                  {item.title}
                 </h3>
                 <p className="font-body text-sm text-foreground/75 max-w-[44ch] leading-relaxed mb-4 relative z-[2]">
-                  {service.body}
+                  {item.body}
                 </p>
-                {service.bullets && (
+                {item.bullets && (
                   <ul className="font-body text-sm text-foreground/80 space-y-2 mt-auto relative z-[2]">
-                    {service.bullets.slice(0, idx === 0 ? 5 : 4).map((b) => (
+                    {item.bullets.slice(0, idx === 0 ? 5 : 4).map((b) => (
                       <li key={b} className="flex items-start gap-2">
                         <Check className="size-4 text-primary shrink-0 mt-0.5" strokeWidth={2.5} />
                         <span>{b}</span>
@@ -100,7 +108,7 @@ export function ServicesBento() {
                     className="font-body text-xs uppercase tracking-wider"
                     style={{ color: "hsl(174, 62%, 38%)" }}
                   >
-                    Scopri di più
+                    {t("services.scopri")}
                   </span>
                   <span
                     className="rounded-full w-7 h-7 flex items-center justify-center"

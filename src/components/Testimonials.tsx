@@ -1,9 +1,9 @@
 import { Quote } from "lucide-react"
+import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { motion } from "motion/react"
-import { TESTIMONIALS } from "@/lib/constants"
 
-type TestimonialCard = (typeof TESTIMONIALS)[number]
+type TestimonialCard = { quote: string; name: string; role: string }
 
 function Card({ quote, name, role }: TestimonialCard) {
   return (
@@ -26,22 +26,25 @@ function Card({ quote, name, role }: TestimonialCard) {
 }
 
 export function Testimonials() {
-  const row1 = [...TESTIMONIALS, ...TESTIMONIALS]
+  const { t, i18n } = useTranslation()
+  const items = t("testimonials.items", { returnObjects: true }) as TestimonialCard[]
+  const row1 = [...items, ...items]
   const row2 = [
-    ...TESTIMONIALS.slice(3),
-    ...TESTIMONIALS.slice(0, 3),
-    ...TESTIMONIALS.slice(3),
-    ...TESTIMONIALS.slice(0, 3),
+    ...items.slice(3),
+    ...items.slice(0, 3),
+    ...items.slice(3),
+    ...items.slice(0, 3),
   ]
 
   return (
     <section id="testimonianze" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] mb-16">
         <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
-          Testimonianze
+          {t("testimonials.eyebrow")}
         </span>
         <BlurText
-          text="Parlano meglio di noi."
+          key={i18n.language + "-testi-title"}
+          text={t("testimonials.title")}
           as="h2"
           className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[16ch]"
           delay={0.07}
@@ -53,7 +56,7 @@ export function Testimonials() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           className="mt-4 font-body text-foreground/60 text-base max-w-[48ch] leading-relaxed"
         >
-          Le famiglie che ci hanno scelto descrivono meglio di chiunque cosa significa essere davvero accompagnati.
+          {t("testimonials.intro")}
         </motion.p>
       </div>
 
@@ -61,14 +64,14 @@ export function Testimonials() {
       <div className="group relative flex flex-col gap-5 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         {/* Row 1 — left */}
         <div className="flex gap-5 w-max [animation:marquee_28s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {row1.map((t, i) => (
-            <Card key={i} {...t} />
+          {row1.map((tt, i) => (
+            <Card key={i} {...tt} />
           ))}
         </div>
         {/* Row 2 — right */}
         <div className="flex gap-5 w-max [animation:marquee-rev_32s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {row2.map((t, i) => (
-            <Card key={i} {...t} />
+          {row2.map((tt, i) => (
+            <Card key={i} {...tt} />
           ))}
         </div>
       </div>
