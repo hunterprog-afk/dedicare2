@@ -40,13 +40,15 @@ export function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 pl-3 shrink-0">
             <img
-              src="/images/logo/pitto-chiaro.png"
+              src={`${import.meta.env.BASE_URL}images/logo/logo-chiaro.png`}
               alt="Dedicare Solutions"
-              className="h-8 w-auto object-contain"
+              className="h-8 w-auto object-contain hidden sm:block"
             />
-            <span className="font-display text-base tracking-tight text-foreground hidden sm:block">
-              Dedicare
-            </span>
+            <img
+              src={`${import.meta.env.BASE_URL}images/logo/pitto-chiaro.png`}
+              alt="Dedicare Solutions"
+              className="h-8 w-auto object-contain sm:hidden"
+            />
           </a>
 
           {/* Desktop nav */}

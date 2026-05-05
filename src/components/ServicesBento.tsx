@@ -23,7 +23,7 @@ const CARD_CLASSES = [
 
 export function ServicesBento() {
   return (
-    <section id="servizi" className="relative py-28 md:py-40">
+    <section id="servizi" data-section="light" className="relative py-28 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-12">

@@ -12,12 +12,16 @@
 @import "tailwindcss";
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
-/* Palette allineata al sito SD (hunterprog-afk/SD) */
 :root {
-  --ink:    211 70% 8%;    /* #0A1928 — navy scuro SD */
-  --cream:  210 40% 94%;  /* #eaf1fb — bianco-blu chiaro */
-  --ochre:  211 82% 36%;  /* #0B5FA5 — blu primario SD */
-  --terra:  174 78% 36%;  /* #15A89A — teal SD */
+  /* Warm dark navy — meno freddo del precedente, più avvolgente */
+  --ink:    220 20% 11%;   /* #161D2E */
+  /* Crema calda — tono base delle sezioni chiare (target 40+) */
+  --cream:  36 55% 97%;    /* #FBF7F1 */
+  --sand:   36 28% 88%;    /* bordi su sfondo chiaro */
+  /* Brand colors */
+  --ochre:  211 72% 40%;   /* #1870BC — blu fiducia (più leggibile) */
+  --terra:  174 62% 38%;   /* #24B2A3 — teal caldo */
+  --warm:   36 90% 54%;    /* #F5A61A — ambra/oro — accento caldo CTA */
 
   --background:             var(--ink);
   --foreground:             var(--cream);
@@ -26,17 +30,17 @@
   --popover:                var(--ink);
   --popover-foreground:     var(--cream);
   --primary:                var(--ochre);
-  --primary-foreground:     var(--ink);
+  --primary-foreground:     var(--cream);
   --secondary:              var(--terra);
   --secondary-foreground:   var(--cream);
-  --muted:                  240 4% 16%;
-  --muted-foreground:       40 6% 72%;
-  --accent:                 var(--ochre);
+  --muted:                  220 14% 18%;
+  --muted-foreground:       36 12% 70%;
+  --accent:                 var(--warm);
   --accent-foreground:      var(--ink);
   --destructive:            0 72% 51%;
   --destructive-foreground: var(--cream);
-  --border:                 40 30% 90% / 0.18;
-  --input:                  40 30% 90% / 0.18;
+  --border:                 220 18% 88% / 0.16;
+  --input:                  220 18% 88% / 0.16;
   --ring:                   var(--ochre);
   --radius:                 0.75rem;
 
@@ -67,6 +71,7 @@
   --color-border:              hsl(var(--border));
   --color-input:               hsl(var(--input));
   --color-ring:                hsl(var(--ring));
+  --color-warm:                hsl(var(--warm));
 
   --font-display: "Oswald", sans-serif;
   --font-body:    "Inter", sans-serif;
@@ -98,8 +103,8 @@ html, body, #root {
 html { scroll-behavior: smooth; }
 body {
   font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.55;
+  font-size: 17px;          /* 40+ readability */
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -110,15 +115,60 @@ body {
 .font-display { font-family: var(--font-display); }
 .font-body    { font-family: var(--font-body); }
 
-/* ─── Liquid-glass utilities ─────────────────────────────────────────────── */
+/* ─── Sezioni chiare (target 40+) ───────────────────────────────────────── */
+[data-section="light"] {
+  --foreground:       220 22% 12%;
+  --card-foreground:  220 22% 12%;
+  --muted-foreground: 220 12% 42%;
+  --border:           36 22% 74% / 1;
+  background: hsl(36, 55%, 97%);
+  color: hsl(220, 22%, 12%);
+}
+
+[data-section="light"] .liquid-glass {
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.07), inset 0 1px 1px rgba(255,255,255,0.90);
+}
+[data-section="light"] .liquid-glass::before {
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.04) 20%,
+    rgba(0,0,0,0)    40%, rgba(0,0,0,0)    60%,
+    rgba(0,0,0,0.04) 80%, rgba(0,0,0,0.10) 100%);
+}
+
+[data-section="light"] .liquid-glass-strong {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10), inset 0 1px 1px rgba(255,255,255,1);
+}
+[data-section="light"] .liquid-glass-strong::before {
+  background: linear-gradient(180deg,
+    rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.05) 20%,
+    rgba(0,0,0,0)    40%, rgba(0,0,0,0)    60%,
+    rgba(0,0,0,0.05) 80%, rgba(0,0,0,0.12) 100%);
+}
+
+[data-section="light"] .gradient-fade-t {
+  background: linear-gradient(to top, transparent 0%, hsl(36, 55%, 97%) 100%);
+}
+[data-section="light"] .gradient-fade-b {
+  background: linear-gradient(to bottom, transparent 0%, hsl(36, 55%, 97%) 100%);
+}
+
+/* ─── Liquid-glass utilities (dark sections default) ─────────────────────── */
 @layer components {
   .liquid-glass {
-    background: rgba(255, 255, 255, 0.01);
+    background: rgba(255, 255, 255, 0.02);
     background-blend-mode: luminosity;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.10);
     position: relative;
     overflow: hidden;
   }

@@ -23,7 +23,6 @@ export function Hero({ scrollRef }: Props) {
         {/* Video scrub — currentTime driven by scroll progress */}
         <VideoScrub
           src={`${import.meta.env.BASE_URL}hero-dedicare.mp4`}
-          scrollTargetRef={scrollRef}
           className="absolute inset-0 w-full h-full z-0"
         />
 
@@ -59,7 +58,7 @@ export function Hero({ scrollRef }: Props) {
           </motion.div>
 
           <BlurText
-            text="La cura che merita la persona."
+            text="La cura che meriti."
             as="h1"
             className="mt-6 font-display uppercase text-[clamp(40px,7vw,120px)] leading-[0.92] tracking-[-0.02em] text-foreground max-w-[14ch]"
             delay={0.09}

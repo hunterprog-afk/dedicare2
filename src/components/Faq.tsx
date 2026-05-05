@@ -12,7 +12,7 @@ import { FAQ_ITEMS } from "@/lib/constants"
 
 export function Faq() {
   return (
-    <section id="faq" className="relative py-28 md:py-40 border-t border-border/40">
+    <section id="faq" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-16">
         {/* Left column */}
         <div className="md:sticky md:top-24 md:self-start">

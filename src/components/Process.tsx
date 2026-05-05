@@ -4,7 +4,7 @@ import { PROCESS_STEPS } from "@/lib/constants"
 
 export function Process() {
   return (
-    <section id="processo" className="relative py-28 md:py-40 border-t border-border/40">
+    <section id="processo" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-16">
