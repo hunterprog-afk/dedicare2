@@ -1,5 +1,5 @@
 import { motion } from "motion/react"
-import { ArrowUpRight, Stethoscope, Heart, Clock, Ambulance, Activity, Users } from "lucide-react"
+import { ArrowUpRight, Check, Stethoscope, Heart, Clock, Ambulance, Activity, Users } from "lucide-react"
 import { BlurText } from "@/components/BlurText"
 import { SERVICES } from "@/lib/constants"
 
@@ -13,12 +13,12 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 }
 
 const CARD_CLASSES = [
-  "md:row-span-2 md:col-span-1 p-8 min-h-[480px]",
-  "md:col-span-1 p-6 min-h-[228px]",
-  "md:col-span-1 p-6 min-h-[228px]",
-  "md:col-span-2 p-7 min-h-[228px]",
-  "md:col-span-1 p-6 min-h-[228px]",
-  "md:col-span-3 p-7 min-h-[200px]",
+  "md:row-span-2 md:col-span-1 p-8 min-h-[520px]",
+  "md:col-span-1 p-6 min-h-[280px]",
+  "md:col-span-1 p-6 min-h-[280px]",
+  "md:col-span-2 p-7 min-h-[280px]",
+  "md:col-span-1 p-6 min-h-[280px]",
+  "md:col-span-3 p-7 min-h-[220px]",
 ]
 
 export function ServicesBento() {
@@ -67,10 +67,20 @@ export function ServicesBento() {
                 <h3 className="font-display uppercase text-2xl md:text-3xl leading-[0.95] tracking-tight mb-3 max-w-[18ch]">
                   {service.title}
                 </h3>
-                <p className="font-body text-sm text-foreground/65 max-w-[38ch] leading-relaxed">
+                <p className="font-body text-sm text-foreground/75 max-w-[44ch] leading-relaxed mb-4">
                   {service.body}
                 </p>
-                <ArrowUpRight className="absolute top-6 right-6 size-5 text-foreground/25 group-hover:text-foreground/70 transition-colors" />
+                {service.bullets && (
+                  <ul className="font-body text-sm text-foreground/80 space-y-2 mt-auto">
+                    {service.bullets.slice(0, idx === 0 ? 5 : 4).map((b) => (
+                      <li key={b} className="flex items-start gap-2">
+                        <Check className="size-4 text-primary shrink-0 mt-0.5" strokeWidth={2.5} />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <ArrowUpRight className="absolute top-6 right-6 size-5 text-foreground/30 group-hover:text-primary transition-colors" />
               </motion.div>
             )
           })}

@@ -12,11 +12,13 @@ function Card({ quote, name, role }: TestimonialCard) {
       <p className="font-body text-foreground/85 italic leading-relaxed text-[15px] flex-1">
         {quote}
       </p>
-      <div className="mt-auto flex items-center gap-3">
-        <div className="size-9 rounded-full bg-gradient-to-br from-primary/60 to-secondary/60 shrink-0" />
+      <div className="mt-auto flex items-center gap-3 pt-4 border-t border-[hsl(220,12%,88%)]">
+        <div className="size-10 rounded-full bg-gradient-to-br from-primary to-secondary shrink-0 flex items-center justify-center text-white font-display text-base">
+          {name.split(" ").map((n) => n[0]).slice(0, 2).join("")}
+        </div>
         <div>
-          <p className="font-body font-medium text-sm text-foreground">{name}</p>
-          <p className="font-body text-xs text-foreground/50 uppercase tracking-wide">{role}</p>
+          <p className="font-body font-semibold text-sm text-[hsl(220,30%,14%)]">{name}</p>
+          <p className="font-body text-xs text-[hsl(220,12%,38%)] uppercase tracking-wide mt-0.5">{role}</p>
         </div>
       </div>
     </div>

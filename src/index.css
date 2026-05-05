@@ -115,11 +115,24 @@ body {
 .font-body    { font-family: var(--font-body); }
 
 /* ─── Sezioni chiare (target 40+) ──────────────────────────────────────── */
+/* CRITICO: Tailwind v4 @theme risolve var() solo a parse-time per le proprietà
+   typed (--color-*). Per override il cascade dobbiamo sovrascrivere
+   direttamente le --color-* di Tailwind, NON solo le nostre --foreground. */
 [data-section="light"] {
+  /* Variabili interne (per CSS custom rules) */
   --foreground:       220 30% 14%;
   --card-foreground:  220 30% 14%;
   --muted-foreground: 220 12% 38%;
   --border:           220 12% 80% / 1;
+  /* Variabili Tailwind v4 — quelle che le classi text-foreground usano davvero */
+  --color-foreground:        hsl(220, 30%, 14%);
+  --color-card-foreground:   hsl(220, 30%, 14%);
+  --color-popover-foreground:hsl(220, 30%, 14%);
+  --color-muted-foreground:  hsl(220, 12%, 38%);
+  --color-border:            hsl(220, 12%, 80%);
+  --color-input:             hsl(220, 12%, 80%);
+  --color-card:              #ffffff;
+  --color-popover:           #ffffff;
   background: hsl(38, 45%, 94%);
   color: hsl(220, 30%, 14%);
 }

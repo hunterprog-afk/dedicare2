@@ -116,7 +116,7 @@ export function CtaFooter() {
         <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img
-              src={`${import.meta.env.BASE_URL}images/logo/logo-chiaro.png`}
+              src={`${import.meta.env.BASE_URL}images/logo/nobg_logo-chiaro.png`}
               alt="Dedicare Solutions"
               className="h-6 w-auto object-contain opacity-60"
             />

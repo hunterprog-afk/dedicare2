@@ -52,12 +52,12 @@ export function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 pl-3 shrink-0">
             <img
-              src={`${import.meta.env.BASE_URL}images/logo/logo-chiaro.png`}
+              src={`${import.meta.env.BASE_URL}images/logo/nobg_logo-chiaro.png`}
               alt="Dedicare Solutions"
               className="h-8 w-auto object-contain hidden sm:block"
             />
             <img
-              src={`${import.meta.env.BASE_URL}images/logo/pitto-chiaro.png`}
+              src={`${import.meta.env.BASE_URL}images/logo/nobg_pitto-chiaro.png`}
               alt="Dedicare Solutions"
               className="h-8 w-auto object-contain sm:hidden"
             />

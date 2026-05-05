@@ -22,32 +22,71 @@ export const SERVICES = [
   {
     icon: "Stethoscope",
     title: "Assistenza Infermieristica",
-    body: "Interventi professionali a domicilio: somministrazione farmaci, monitoraggio parametri vitali, medicazioni e educazione terapeutica.",
+    body: "Interventi infermieristici professionali a domicilio e in ospedale, condotti da personale abilitato con competenze cliniche avanzate.",
+    bullets: [
+      "Somministrazione terapie e farmaci",
+      "Monitoraggio parametri vitali",
+      "Medicazioni e gestione ferite",
+      "Educazione terapeutica al paziente",
+      "Supporto post-operatorio",
+    ],
   },
   {
     icon: "Heart",
     title: "Operatori OSS",
-    body: "Cura quotidiana e umana: igiene, mobilità, nutrizione, stimolazione cognitiva e supporto emotivo per anziani e disabili.",
+    body: "I nostri OSS offrono supporto qualificato e premuroso per la cura quotidiana, preservando dignità, autonomia e benessere.",
+    bullets: [
+      "Igiene personale e mobilizzazione",
+      "Assistenza nell'alimentazione",
+      "Supporto emotivo e compagnia",
+      "Stimolazione cognitiva",
+      "Coordinamento con i familiari",
+    ],
   },
   {
     icon: "Clock",
     title: "Reperibilità 24/7",
-    body: "Presenza garantita ogni ora del giorno e della notte. Risposta di emergenza rapida e gestione delle situazioni critiche a domicilio.",
+    body: "Presenza garantita ogni ora del giorno e della notte. Risposta di emergenza rapida e gestione delle situazioni critiche.",
+    bullets: [
+      "Pronto intervento h24",
+      "Risposta entro 30 minuti",
+      "Gestione emergenze domiciliari",
+      "Reperibilità festivi inclusi",
+    ],
   },
   {
     icon: "Ambulance",
     title: "Trasporto Protetto",
-    body: "Accompagnamento specializzato per visite specialistiche, terapie ospedaliere e ogni spostamento che richiede assistenza sanitaria dedicata.",
+    body: "Accompagnamento specializzato per visite, terapie e ogni spostamento che richiede assistenza sanitaria dedicata.",
+    bullets: [
+      "Trasporto sanitario assistito",
+      "Accompagnamento a visite specialistiche",
+      "Assistenza durante ricoveri",
+      "Personale infermieristico a bordo",
+    ],
   },
   {
     icon: "Activity",
     title: "Prevenzione Gratuita",
-    body: "Misurazione gratuita di pressione arteriosa, saturazione e frequenza cardiaca ad ogni visita. Perché prevenire è il miglior atto di cura.",
+    body: "Prima di ogni intervento misuriamo gratuitamente i principali parametri vitali del paziente. Perché prevenire è cura.",
+    bullets: [
+      "Pressione arteriosa con sfigmomanometro digitale",
+      "Saturazione SpO₂ con pulsossimetro",
+      "Frequenza cardiaca e ritmo",
+      "Segnalazione anomalie al medico curante",
+      "Completamente gratuito ad ogni visita",
+    ],
   },
   {
     icon: "Users",
     title: "Approccio Multidisciplinare",
     body: "Un team integrato di professionisti sanitari e socio-assistenziali per una presa in carico globale della persona.",
+    bullets: [
+      "Infermieri, OSS, fisioterapisti coordinati",
+      "Piano di cura personalizzato",
+      "Aggiornamenti periodici alla famiglia",
+      "Continuità assistenziale garantita",
+    ],
   },
 ]
 

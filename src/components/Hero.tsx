@@ -4,7 +4,7 @@ import { ArrowUpRight, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { BlurText } from "@/components/BlurText"
 import { VideoScrub } from "@/components/VideoScrub"
-import { PARTNERS } from "@/lib/constants"
+import { PartnerBadge, PARTNERS_DATA } from "@/components/PartnerBadge"
 
 type Props = {
   scrollRef: React.RefObject<HTMLElement | null>
@@ -103,18 +103,13 @@ export function Hero({ scrollRef }: Props) {
         </motion.div>
 
         {/* Partners */}
-        <div className="absolute bottom-10 inset-x-0 flex flex-col items-center gap-4 px-6">
-          <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-white/80">
+        <div className="absolute bottom-8 inset-x-0 flex flex-col items-center gap-3 px-6">
+          <span className="text-[11px] font-body uppercase tracking-[0.18em] text-white/55">
             Collaboriamo con
           </span>
-          <div className="flex items-center gap-6 md:gap-10 flex-wrap justify-center">
-            {PARTNERS.map((p) => (
-              <span
-                key={p}
-                className="font-display italic text-lg md:text-xl text-white/60 tracking-tight"
-              >
-                {p}
-              </span>
+          <div className="flex items-center gap-2 md:gap-3 flex-wrap justify-center max-w-[980px]">
+            {PARTNERS_DATA.map((p) => (
+              <PartnerBadge key={p.abbr} partner={p} variant="dark" />
             ))}
           </div>
         </div>
