@@ -1,13 +1,19 @@
 /* ─── Fonts ──────────────────────────────────────────────────────────────── */
-@import "@fontsource/oswald/300.css";
-@import "@fontsource/oswald/400.css";
-@import "@fontsource/oswald/500.css";
-@import "@fontsource/oswald/600.css";
-@import "@fontsource/oswald/700.css";
-@import "@fontsource/inter/300.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
+/* Only the weights actually used in the UI, latin + latin-ext subsets only */
+@import "@fontsource/oswald/latin-400.css";
+@import "@fontsource/oswald/latin-600.css";
+@import "@fontsource/oswald/latin-700.css";
+@import "@fontsource/oswald/latin-ext-400.css";
+@import "@fontsource/oswald/latin-ext-600.css";
+@import "@fontsource/oswald/latin-ext-700.css";
+@import "@fontsource/inter/latin-300.css";
+@import "@fontsource/inter/latin-400.css";
+@import "@fontsource/inter/latin-500.css";
+@import "@fontsource/inter/latin-600.css";
+@import "@fontsource/inter/latin-ext-300.css";
+@import "@fontsource/inter/latin-ext-400.css";
+@import "@fontsource/inter/latin-ext-500.css";
+@import "@fontsource/inter/latin-ext-600.css";
 
 @import "tailwindcss";
 
@@ -137,6 +143,16 @@
   --animate-marquee:     marquee 28s linear infinite;
   --animate-marquee-rev: marquee-rev 32s linear infinite;
   --animate-fade-up:     fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+.video-shimmer {
+  background: linear-gradient(90deg, #161D2E 0%, #1a2540 50%, #161D2E 100%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
 }
 
 @keyframes marquee     { from { transform: translateX(0) } to { transform: translateX(-50%) } }

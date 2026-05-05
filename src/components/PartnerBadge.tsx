@@ -1,3 +1,5 @@
+import { useState, useId } from "react"
+
 type Partner = {
   name: string
   abbr: string
@@ -88,15 +90,43 @@ type Props = { partner: Partner; variant?: "dark" | "light" }
 
 export function PartnerBadge({ partner, variant = "dark" }: Props) {
   const isLight = variant === "light"
+  const [open, setOpen] = useState(false)
+  const tooltipId = useId()
+
+  const handleClick = () => setOpen((o) => !o)
+
   return (
     <div
-      className={`group relative flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-300 ${
+      className={`group relative flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-300 cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--secondary))] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         isLight
           ? "bg-white border border-[hsl(220,12%,88%)] hover:border-[hsl(220,12%,72%)] hover:shadow-md"
           : "bg-white/[0.04] border border-white/10 hover:bg-white/[0.07] hover:border-white/18"
       }`}
-      title={partner.full}
+      tabIndex={0}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={() => setOpen(false)}
+      onClick={handleClick}
+      aria-describedby={tooltipId}
     >
+      {/* Tooltip */}
+      <div
+        id={tooltipId}
+        role="tooltip"
+        className={`pointer-events-none absolute left-1/2 bottom-[calc(100%+10px)] -translate-x-1/2 z-30 w-max max-w-[280px] px-3 py-3 rounded-xl bg-[#161D2E]/95 backdrop-blur border border-[hsl(var(--secondary))]/30 shadow-[0_8px_24px_rgba(0,0,0,0.35)] text-white/80 text-sm leading-snug font-body transition-all duration-200 ${
+          open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+        }`}
+        aria-hidden={!open}
+      >
+        {partner.full}
+        {/* Arrow */}
+        <span
+          className="absolute left-1/2 top-full -translate-x-1/2 w-2.5 h-2.5 rotate-45 bg-[#161D2E]/95 border-r border-b border-[hsl(var(--secondary))]/30 -mt-[5px]"
+          aria-hidden="true"
+        />
+      </div>
+
       <div
         className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
         style={{

@@ -16,5 +16,28 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) {
+            return 'react'
+          }
+          if (id.includes('/framer-motion/') || id.includes('/motion/') || id.includes('/motion-dom/') || id.includes('/motion-utils/')) {
+            return 'motion'
+          }
+          if (id.includes('/three/')) {
+            return 'three'
+          }
+        },
+      },
+    },
   },
 })

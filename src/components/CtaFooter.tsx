@@ -154,6 +154,32 @@ export function CtaFooter() {
             info@dedicaresolutions.it
           </span>
         </motion.div>
+
+        {/* Google Maps embed */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.95 }}
+          className="w-full max-w-2xl mx-auto mt-12"
+        >
+          <div className="text-center mb-4">
+            <span className="font-body text-[11px] uppercase tracking-[0.2em] text-foreground/55">
+              Vieni a trovarci
+            </span>
+          </div>
+          <div className="rounded-2xl overflow-hidden border border-white/5 max-w-2xl mx-auto">
+            <iframe
+              title="Mappa sede Dedicare Solutions — Via Roma 80, Segrate (MI)"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.123!2d9.298!3d45.494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia%20Roma%2080%2C%2020054%20Segrate%20MI!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen={false}
+              className="w-full h-[240px] md:h-[300px] block border-0"
+              style={{ filter: "invert(0.9) hue-rotate(180deg) saturate(0.7) contrast(0.9)" }}
+            />
+          </div>
+        </motion.div>
       </div>
 
       {/* Footer bar */}

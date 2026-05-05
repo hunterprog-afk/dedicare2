@@ -9,6 +9,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="apple-touch-icon" href="./favicon.svg" />
 
+    <!-- LCP optimization: preload hero poster (32 KB) -->
+    <link rel="preload" as="image" href="./hero-poster.jpg" fetchpriority="high" />
+
     <!-- SEO -->
     <title>Dedicare Solutions — Assistenza Sanitaria a Milano</title>
     <meta name="description" content="Assistenza infermieristica, OSS, trasporto protetto e reperibilità 24/7 nell'area metropolitana di Milano. Dedicare Solutions S.r.l.s." />
@@ -55,13 +58,43 @@
       }
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FW1CTQ06Y"></script>
+    <!-- Google tag (gtag.js) — deferred to after LCP / first interaction -->
     <script>
+      // Stub gtag immediately so any early calls are queued
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5FW1CTQ06Y');
+      window.gtag = function(){ window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', 'G-5FW1CTQ06Y');
+
+      (function loadGtagDeferred() {
+        var GA_ID = 'G-5FW1CTQ06Y';
+        var loaded = false;
+        function loadGtag() {
+          if (loaded) return;
+          loaded = true;
+          var s = document.createElement('script');
+          s.async = true;
+          s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+          document.head.appendChild(s);
+        }
+        // Load after window.load via idle callback, with a 4s safety fallback,
+        // OR earlier on the first user interaction (whichever comes first).
+        function schedule() {
+          if ('requestIdleCallback' in window) {
+            window.requestIdleCallback(loadGtag, { timeout: 4000 });
+          } else {
+            setTimeout(loadGtag, 2500);
+          }
+        }
+        if (document.readyState === 'complete') {
+          schedule();
+        } else {
+          window.addEventListener('load', schedule, { once: true });
+        }
+        ['pointerdown','keydown','touchstart','scroll'].forEach(function(evt){
+          window.addEventListener(evt, loadGtag, { once: true, passive: true });
+        });
+      })();
     </script>
   </head>
   <body>
