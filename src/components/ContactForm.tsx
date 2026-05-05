@@ -1,8 +1,7 @@
 import { useState, type FormEvent, type ChangeEvent } from "react"
 import { Button } from "@/components/ui/button"
 
-// NOTE: sostituire "XXXXXXXX" con l'endpoint reale ottenuto da formspree.io
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/XXXXXXXX"
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkoybjyb"
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
