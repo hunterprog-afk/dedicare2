@@ -12,11 +12,12 @@
 @import "tailwindcss";
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
+/* Palette allineata al sito SD (hunterprog-afk/SD) */
 :root {
-  --ink:    20 15% 9%;
-  --cream:  40 30% 90%;
-  --ochre:  32 55% 65%;
-  --terra:  14 55% 31%;
+  --ink:    211 70% 8%;    /* #0A1928 — navy scuro SD */
+  --cream:  210 40% 94%;  /* #eaf1fb — bianco-blu chiaro */
+  --ochre:  211 82% 36%;  /* #0B5FA5 — blu primario SD */
+  --terra:  174 78% 36%;  /* #15A89A — teal SD */
 
   --background:             var(--ink);
   --foreground:             var(--cream);

@@ -22,7 +22,7 @@ export function Hero({ scrollRef }: Props) {
       <div ref={innerRef} className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Video scrub — currentTime driven by scroll progress */}
         <VideoScrub
-          src="/hero-dedicare.mp4"
+          src={`${import.meta.env.BASE_URL}hero-dedicare.mp4`}
           scrollTargetRef={scrollRef}
           className="absolute inset-0 w-full h-full z-0"
         />
