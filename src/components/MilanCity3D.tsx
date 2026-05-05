@@ -146,24 +146,38 @@ export function MilanCity3D() {
       }
     }
 
-    // Animazione — slow auto-rotate
-    let frame: number
+    // Animazione — slow auto-rotate (pausa quando fuori viewport)
+    let frame: number | null = null
     let t = 0
-    const animate = () => {
-      frame = requestAnimationFrame(animate)
+    let inView = false
+    const tick = () => {
       t += 0.003
-
-      // Lenta rotazione orbitale della camera
       camera.position.x = Math.sin(t) * 18
       camera.position.z = Math.cos(t) * 18
       camera.lookAt(0, 2, 0)
-
-      // Pulsazione luce teal
       tealLight.intensity = 2.5 + Math.sin(t * 2) * 0.5
-
       renderer.render(scene, camera)
+      if (inView) frame = requestAnimationFrame(tick)
     }
-    animate()
+
+    // Pausa/riprendi animazione in base alla visibilità
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries[0]?.isIntersecting ?? false
+        if (visible && !inView) {
+          inView = true
+          tick()
+        } else if (!visible && inView) {
+          inView = false
+          if (frame !== null) cancelAnimationFrame(frame)
+        }
+      },
+      { threshold: 0.05 }
+    )
+    io.observe(el)
+
+    // Render iniziale (frame statico finché non entra in viewport)
+    renderer.render(scene, camera)
 
     // Resize observer
     const ro = new ResizeObserver(() => {
@@ -172,11 +186,13 @@ export function MilanCity3D() {
       camera.aspect = w / h
       camera.updateProjectionMatrix()
       renderer.setSize(w, h)
+      if (!inView) renderer.render(scene, camera)
     })
     ro.observe(el)
 
     return () => {
-      cancelAnimationFrame(frame)
+      if (frame !== null) cancelAnimationFrame(frame)
+      io.disconnect()
       ro.disconnect()
       renderer.dispose()
       el.removeChild(renderer.domElement)
