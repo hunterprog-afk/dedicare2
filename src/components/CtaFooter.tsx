@@ -36,7 +36,7 @@ export function CtaFooter() {
   const isEn = (i18n.resolvedLanguage || i18n.language || "it").startsWith("en")
 
   return (
-    <section id="contatti" className="relative min-h-[100vh] flex flex-col items-center justify-center overflow-hidden border-t border-border/40">
+    <section id="contatti" className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden border-t border-border/40">
       {/* Cinematic background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(200,30%,6%)] via-[hsl(175,35%,5%)] to-[hsl(220,20%,4%)]" />
 
@@ -53,7 +53,7 @@ export function CtaFooter() {
       </div>
 
       {/* CTA content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6 py-20 w-full">
+      <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 py-16 md:py-20 w-full">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -69,7 +69,7 @@ export function CtaFooter() {
           key={i18n.language + "-cta-title"}
           text={t("cta.title")}
           as="h2"
-          className="mt-8 font-display italic text-[clamp(40px,8vw,150px)] leading-[0.88] tracking-[-0.02em] text-center max-w-[16ch]"
+          className="mt-6 md:mt-8 font-display italic text-[clamp(36px,9vw,150px)] leading-[0.9] md:leading-[0.88] tracking-[-0.02em] text-center max-w-[16ch] break-words"
           delay={0.09}
           startDelay={0.1}
         />
@@ -117,10 +117,10 @@ export function CtaFooter() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
-          className="mt-16 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
+          className="mt-12 md:mt-16 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-stretch"
         >
           <ContactForm />
-          <div className="relative rounded-2xl overflow-hidden border border-white/5 min-h-[480px] flex flex-col">
+          <div className="relative rounded-2xl overflow-hidden border border-white/5 min-h-[360px] md:min-h-[480px] flex flex-col">
             <div className="px-6 py-4 border-b border-white/5 bg-white/[0.02]">
               <span className="font-body text-[11px] uppercase tracking-[0.2em] text-foreground/55">
                 {t("cta.vieni_a_trovarci")}
@@ -135,7 +135,7 @@ export function CtaFooter() {
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen={false}
-              className="w-full flex-1 min-h-[400px] block border-0"
+              className="w-full flex-1 min-h-[280px] md:min-h-[400px] block border-0"
               style={{ filter: "invert(0.9) hue-rotate(180deg) saturate(0.7) contrast(0.9)" }}
             />
           </div>

@@ -11,10 +11,10 @@ export function Tariffario() {
   const { t, i18n } = useTranslation()
   const factors = t("tariffario.factors", { returnObjects: true }) as TranslatedFactor[]
   return (
-    <section id="tariffario" className="relative py-28 md:py-40 border-t border-border/40">
+    <section id="tariffario" className="relative py-16 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
             {t("tariffario.eyebrow")}
           </span>
@@ -22,7 +22,7 @@ export function Tariffario() {
             key={i18n.language + "-tariffario-title"}
             text={t("tariffario.title")}
             as="h2"
-            className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[18ch] mx-auto"
+            className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[18ch] mx-auto break-words"
             delay={0.07}
           />
           <motion.p
@@ -43,7 +43,7 @@ export function Tariffario() {
             return (
               <motion.div
                 key={f.title}
-                className="liquid-glass rounded-2xl p-7 flex flex-col gap-5 min-h-[240px] relative"
+                className="liquid-glass rounded-2xl p-6 md:p-7 flex flex-col gap-4 md:gap-5 min-h-[200px] md:min-h-[240px] relative"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}

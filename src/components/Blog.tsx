@@ -109,10 +109,10 @@ export function Blog() {
   }, [i18n.language])
 
   return (
-    <section id="blog" className="relative py-28 md:py-40 border-t border-border/40">
+    <section id="blog" className="relative py-16 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-12 md:mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-flex items-center gap-2">
             <Newspaper className="size-3.5" />
             {t("blog.eyebrow")}
@@ -121,7 +121,7 @@ export function Blog() {
             key={i18n.language + "-blog-title"}
             text={t("blog.title")}
             as="h2"
-            className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight"
+            className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight break-words"
             delay={0.07}
           />
           <motion.p

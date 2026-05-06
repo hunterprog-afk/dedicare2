@@ -16,7 +16,7 @@ export function Team() {
   if (!founder) return null
 
   return (
-    <section id="team" className="relative py-28 md:py-40 border-t border-border/40 overflow-hidden">
+    <section id="team" className="relative py-16 md:py-40 border-t border-border/40 overflow-hidden">
       {/* Decorative glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-3xl pointer-events-none" />
 
@@ -30,7 +30,7 @@ export function Team() {
             key={i18n.language + "-team-title"}
             text={t("team.title")}
             as="h2"
-            className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[20ch] mx-auto"
+            className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[20ch] mx-auto break-words"
             delay={0.07}
           />
           <motion.p
@@ -46,7 +46,7 @@ export function Team() {
 
         {/* Single card centrata — Lisis Zuniga */}
         <motion.div
-          className="liquid-glass rounded-3xl p-8 md:p-12 max-w-3xl mx-auto flex flex-col md:flex-row gap-8 md:gap-10 items-center md:items-start"
+          className="liquid-glass rounded-3xl p-6 md:p-12 max-w-3xl mx-auto flex flex-col md:flex-row gap-6 md:gap-10 items-center md:items-start"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
@@ -59,7 +59,7 @@ export function Team() {
               style={{ background: "linear-gradient(135deg, #15A89A 0%, #0B5FA5 100%)" }}
             />
             <div
-              className="relative rounded-full w-32 h-32 md:w-36 md:h-36 flex items-center justify-center font-display uppercase text-4xl md:text-5xl tracking-tight text-white shadow-2xl"
+              className="relative rounded-full w-28 h-28 md:w-36 md:h-36 flex items-center justify-center font-display uppercase text-3xl md:text-5xl tracking-tight text-white shadow-2xl"
               style={{
                 background: "linear-gradient(135deg, #15A89A 0%, #0B5FA5 100%)",
                 boxShadow: "0 0 0 1px rgba(255,255,255,0.1), 0 8px 32px rgba(11,95,165,0.4)",

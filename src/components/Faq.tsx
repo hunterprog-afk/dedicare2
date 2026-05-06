@@ -16,8 +16,8 @@ export function Faq() {
   const { t, i18n } = useTranslation()
   const items = t("faq.items", { returnObjects: true }) as FaqItem[]
   return (
-    <section id="faq" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
-      <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-16">
+    <section id="faq" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
+      <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-16">
         {/* Left column */}
         <div className="md:sticky md:top-24 md:self-start">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
@@ -27,7 +27,7 @@ export function Faq() {
             key={i18n.language + "-faq-title"}
             text={t("faq.title")}
             as="h2"
-            className="mt-4 font-display uppercase text-5xl md:text-6xl leading-[0.9] tracking-tight"
+            className="mt-4 font-display uppercase text-[clamp(34px,9vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight break-words"
             delay={0.07}
           />
           <motion.p
@@ -68,7 +68,7 @@ export function Faq() {
           <Accordion type="single" collapsible>
             {items.map((item, i) => (
               <AccordionItem key={i} value={`item-${i}`} className="border-border/40">
-                <AccordionTrigger className="font-display uppercase text-lg md:text-xl tracking-tight py-6 hover:no-underline data-[state=open]:text-primary text-left">
+                <AccordionTrigger className="font-display uppercase text-base md:text-xl tracking-tight py-5 md:py-6 hover:no-underline data-[state=open]:text-primary text-left gap-3">
                   {item.q}
                 </AccordionTrigger>
                 <AccordionContent className="font-body text-foreground/70 text-[15px] leading-relaxed pb-6 max-w-[60ch]">

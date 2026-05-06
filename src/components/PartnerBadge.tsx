@@ -114,7 +114,7 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
       <div
         id={tooltipId}
         role="tooltip"
-        className={`pointer-events-none absolute left-1/2 bottom-[calc(100%+10px)] -translate-x-1/2 z-30 w-max max-w-[280px] px-3 py-3 rounded-xl bg-[#161D2E]/95 backdrop-blur border border-[hsl(var(--secondary))]/30 shadow-[0_8px_24px_rgba(0,0,0,0.35)] text-white/80 text-sm leading-snug font-body transition-all duration-200 ${
+        className={`pointer-events-none absolute left-1/2 bottom-[calc(100%+10px)] -translate-x-1/2 z-30 w-[min(280px,calc(100vw-32px))] max-w-[280px] px-3 py-3 rounded-xl bg-[#161D2E]/95 backdrop-blur border border-[hsl(var(--secondary))]/30 shadow-[0_8px_24px_rgba(0,0,0,0.35)] text-white/80 text-sm leading-snug font-body transition-all duration-200 ${
           open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
         }`}
         aria-hidden={!open}
