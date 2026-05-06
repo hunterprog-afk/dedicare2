@@ -97,10 +97,10 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
 
   return (
     <div
-      className={`group relative flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-300 cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--secondary))] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
+      className={`partner-badge group relative flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-300 cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--secondary))] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         isLight
-          ? "bg-white border border-[hsl(220,12%,88%)] hover:border-[hsl(220,12%,72%)] hover:shadow-md"
-          : "bg-white/[0.10] border border-white/25 hover:bg-white/[0.14] hover:border-white/35"
+          ? "partner-badge--light bg-white border border-[hsl(220,12%,88%)] hover:border-[hsl(220,12%,72%)] hover:shadow-md"
+          : "partner-badge--dark bg-white/[0.10] border border-white/25 hover:bg-white/[0.14] hover:border-white/35"
       }`}
       tabIndex={0}
       onMouseEnter={() => setOpen(true)}
@@ -128,12 +128,13 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
       </div>
 
       <div
-        className="flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
+        className="partner-icon flex items-center justify-center w-10 h-10 rounded-xl shrink-0"
         style={{
           background: isLight
             ? `${partner.color}15`
             : "#ffffff",
           color: partner.color,
+          ["--partner-icon-bg-light" as string]: `${partner.color}1F`,
         }}
       >
         <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5">

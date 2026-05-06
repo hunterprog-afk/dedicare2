@@ -156,6 +156,41 @@
   color: hsl(var(--primary) / 0.55);
 }
 
+/* Gradient-fade dentro sezioni dark forced: in light theme NON fadare a cream
+   altrimenti coperti i contenuti (es. partner badges Hero). Fade verso ink. */
+:root.light [data-section="dark"] .gradient-fade-b {
+  background: linear-gradient(to bottom, transparent 0%, hsl(220, 22%, 9%) 100%);
+}
+:root.light [data-section="dark"] .gradient-fade-t {
+  background: linear-gradient(to top, transparent 0%, hsl(220, 22%, 9%) 100%);
+}
+
+/* Partner badges variant=dark in Hero: in light theme convertili a card
+   bianche solide con testo navy + icon box tint colore partner. Su dark
+   gradient di Hero questa coppia bianca + colore offre il massimo contrasto. */
+:root.light [data-section="dark"] .partner-badge--dark {
+  background: #ffffff !important;
+  border: 1px solid hsl(220, 12%, 82%) !important;
+  box-shadow: 0 2px 12px rgba(20, 30, 60, 0.15);
+}
+:root.light [data-section="dark"] .partner-badge--dark:hover {
+  background: #ffffff !important;
+  border-color: hsl(220, 12%, 70%) !important;
+  box-shadow: 0 4px 18px rgba(20, 30, 60, 0.20);
+}
+:root.light [data-section="dark"] .partner-badge--dark .partner-icon {
+  background: var(--partner-icon-bg-light) !important;
+}
+:root.light [data-section="dark"] .partner-badge--dark .text-white {
+  color: hsl(220, 30%, 14%);
+}
+:root.light [data-section="dark"] .partner-badge--dark .text-white\/75 {
+  color: hsl(220, 12%, 38%);
+}
+:root.light [data-section="dark"] .partner-badge--dark .text-white\/55 {
+  color: hsl(220, 12%, 38%);
+}
+
 /* ─── Tailwind v4 theme ──────────────────────────────────────────────────── */
 @theme {
   --color-background:          hsl(var(--background));
