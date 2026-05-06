@@ -18,7 +18,7 @@ export function Pourquoi() {
   const items = t("pourquoi.items", { returnObjects: true }) as TranslatedReason[]
 
   return (
-    <section id="filosofia" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="filosofia" data-section="dark" className="relative py-16 md:py-40 border-t border-border/40 bg-[hsl(220,22%,9%)]">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">

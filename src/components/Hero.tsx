@@ -66,12 +66,13 @@ export function Hero({ scrollRef }: Props) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
+            className="max-w-[92vw]"
           >
-            <div className="liquid-glass rounded-full px-1 py-1 inline-flex items-center gap-2">
-              <span className="bg-primary text-white rounded-full px-3 py-1 text-xs font-semibold font-body">
+            <div className="liquid-glass rounded-full px-1 py-1 inline-flex items-center gap-2 max-w-full">
+              <span className="bg-primary text-white rounded-full px-3 py-1 text-[11px] md:text-xs font-semibold font-body shrink-0">
                 {t("hero.tag_city")}
               </span>
-              <span className="pr-3 text-sm text-white/85 font-body">
+              <span className="pr-3 text-[11px] md:text-sm text-white/90 font-body whitespace-nowrap overflow-hidden text-ellipsis">
                 {t("hero.tag_label")}
               </span>
             </div>
@@ -82,7 +83,7 @@ export function Hero({ scrollRef }: Props) {
             text={t("hero.title")}
             as="h1"
             immediate
-            className="mt-6 font-display uppercase text-[clamp(44px,7vw,120px)] leading-[0.92] tracking-[-0.02em] text-white max-w-[14ch] drop-shadow-2xl"
+            className="mt-10 md:mt-6 font-display uppercase text-[clamp(40px,7vw,120px)] leading-[0.92] tracking-[-0.02em] text-white max-w-[14ch] drop-shadow-2xl"
             delay={0.09}
             startDelay={0.15}
           />
@@ -113,7 +114,7 @@ export function Hero({ scrollRef }: Props) {
             </Button>
             <Button
               variant="heroGlass"
-              className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              className="bg-white/15 hover:bg-white/25 border border-white/40 text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               asChild
             >
               <a href="tel:+393882536992">

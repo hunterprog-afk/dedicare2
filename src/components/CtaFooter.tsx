@@ -36,7 +36,7 @@ export function CtaFooter() {
   const isEn = (i18n.resolvedLanguage || i18n.language || "it").startsWith("en")
 
   return (
-    <section id="contatti" className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden border-t border-border/40">
+    <section id="contatti" data-section="dark" className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden border-t border-border/40">
       {/* Cinematic background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[hsl(200,30%,6%)] via-[hsl(175,35%,5%)] to-[hsl(220,20%,4%)]" />
 
@@ -102,7 +102,7 @@ export function CtaFooter() {
           </Button>
           <Button
             variant="heroGlass"
-            className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="bg-white/15 hover:bg-white/25 border border-white/40 text-white focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             asChild
           >
             <a href="mailto:info@dedicaresolutions.it">
@@ -147,7 +147,7 @@ export function CtaFooter() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.9 }}
-          className="mt-16 flex flex-col sm:flex-row items-center gap-6 text-sm text-foreground/50 font-body"
+          className="mt-16 flex flex-col sm:flex-row items-center gap-6 text-sm text-foreground/80 font-body"
         >
           <span className="flex items-center gap-2">
             <MapPin className="size-4 text-primary/60" />
@@ -177,34 +177,34 @@ export function CtaFooter() {
               width={120}
               height={24}
               loading="lazy"
-              className="h-6 w-auto object-contain opacity-60"
+              className="h-6 w-auto object-contain opacity-90"
             />
-            <span className="font-body text-xs text-foreground/40">
+            <span className="font-body text-xs text-foreground/70">
               {t("cta.copyright")}
             </span>
           </div>
           <nav className="flex items-center gap-6 flex-wrap justify-center">
             <button
               onClick={() => setOpenModal("privacy")}
-              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+              className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.privacy")}
             </button>
             <button
               onClick={() => setOpenModal("cookie")}
-              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+              className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.cookie")}
             </button>
             <button
               onClick={() => setOpenModal("legal")}
-              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+              className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.legal")}
             </button>
             <a
               href="mailto:info@dedicaresolutions.it"
-              className="font-body text-xs text-foreground/40 hover:text-foreground/70 transition-colors focus-visible:ring-2 focus-visible:ring-ring"
+              className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:ring-2 focus-visible:ring-ring"
             >
               info@dedicaresolutions.it
             </a>
@@ -213,7 +213,7 @@ export function CtaFooter() {
             href="https://hunterprog-afk.github.io/SD/"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-body text-xs text-foreground/30 hover:text-foreground/60 transition-colors flex items-center gap-1"
+            className="font-body text-xs text-foreground/60 hover:text-foreground transition-colors flex items-center gap-1"
           >
             {t("cta.sito_classico")} <ArrowUpRight className="size-3" />
           </a>
