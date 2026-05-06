@@ -22,7 +22,7 @@ export function WhatsAppFab() {
 
       {/* FAB button */}
       <a
-        href="https://wa.me/39882536992"
+        href="https://wa.me/393882536992"
         target="_blank"
         rel="noopener noreferrer"
         aria-label={t("whatsapp.aria")}

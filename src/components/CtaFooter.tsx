@@ -96,8 +96,8 @@ export function CtaFooter() {
             className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             asChild
           >
-            <a href="tel:+39882536992">
-              <Phone className="mr-1.5 size-4" /> +39 882 536 992
+            <a href="tel:+393882536992">
+              <Phone className="mr-1.5 size-4" /> +39 388 253 6992
             </a>
           </Button>
           <Button
@@ -156,7 +156,7 @@ export function CtaFooter() {
           <span className="hidden sm:block h-4 w-px bg-border/40" />
           <span className="flex items-center gap-2">
             <Phone className="size-4 text-primary/60" />
-            +39 882 536 992
+            +39 388 253 6992
           </span>
           <span className="hidden sm:block h-4 w-px bg-border/40" />
           <span className="flex items-center gap-2">

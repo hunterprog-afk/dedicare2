@@ -66,7 +66,7 @@ export const noteLegali = {
   sections: [
     {
       heading: "1. Informazioni sulla Società",
-      content: `Dedicare Solutions S.r.l.s.\nSede legale: Via Roma 80, 20054 Segrate (MI), Italia\nPartita IVA: IT11600760968\nLegale rappresentante: Lisis Zuniga\nE-mail: info@dedicaresolutions.it\nPEC: dedicaresolutionssrls@pec.it\nTelefono: +39 882 536 992`,
+      content: `Dedicare Solutions S.r.l.s.\nSede legale: Via Roma 80, 20054 Segrate (MI), Italia\nPartita IVA: IT11600760968\nLegale rappresentante: Lisis Zuniga\nE-mail: info@dedicaresolutions.it\nPEC: dedicaresolutionssrls@pec.it\nTelefono: +39 388 253 6992`,
     },
     {
       heading: "2. Proprietà Intellettuale",

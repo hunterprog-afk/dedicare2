@@ -103,8 +103,8 @@ export function Hero({ scrollRef }: Props) {
               className="focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               asChild
             >
-              <a href="tel:+39882536992">
-                <Phone className="mr-1.5 size-4" /> +39 882 536 992
+              <a href="tel:+393882536992">
+                <Phone className="mr-1.5 size-4" /> +39 388 253 6992
               </a>
             </Button>
           </motion.div>

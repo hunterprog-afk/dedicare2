@@ -188,7 +188,7 @@ export const FAQ_ITEMS = [
   },
   {
     q: "La prima consulenza è davvero gratuita?",
-    a: "Sì, completamente. Un colloquio telefonico o WhatsApp senza alcun impegno per comprendere le vostre esigenze, rispondere alle domande e proporre la soluzione più adatta. Chiamateci o scriveteci al +39 882 536 992.",
+    a: "Sì, completamente. Un colloquio telefonico o WhatsApp senza alcun impegno per comprendere le vostre esigenze, rispondere alle domande e proporre la soluzione più adatta. Chiamateci o scriveteci al +39 388 253 6992.",
   },
   {
     q: "Il personale è qualificato e assicurato?",
@@ -208,6 +208,6 @@ export const FAQ_ITEMS = [
   },
   {
     q: "Come posso attivare il servizio rapidamente?",
-    a: "Contatteci al +39 882 536 992 o via email a info@dedicaresolutions.it. Dopo il colloquio iniziale gratuito, possiamo attivare il servizio in tempi molto brevi — spesso nelle 24-48 ore successive alla valutazione.",
+    a: "Contatteci al +39 388 253 6992 o via email a info@dedicaresolutions.it. Dopo il colloquio iniziale gratuito, possiamo attivare il servizio in tempi molto brevi — spesso nelle 24-48 ore successive alla valutazione.",
   },
 ]
