@@ -182,6 +182,23 @@ body {
 .font-display { font-family: var(--font-display); }
 .font-body    { font-family: var(--font-body); }
 
+/* ─── Sezioni scure forzate (override theme light) ───────────────────────── */
+/* Sezioni con background scuro hardcoded (Hero, Pourquoi, CtaFooter): in
+   light theme `--color-foreground` diventa navy → testo navy su bg scuro =
+   invisibile. Forziamo bianco indipendentemente dal tema. */
+[data-section="dark"] {
+  --foreground:       0 0% 97%;
+  --card-foreground:  0 0% 97%;
+  --muted-foreground: 220 10% 70%;
+  --border:           220 18% 88% / 0.15;
+  --color-foreground:        hsl(0, 0%, 97%);
+  --color-card-foreground:   hsl(0, 0%, 97%);
+  --color-popover-foreground:hsl(0, 0%, 97%);
+  --color-muted-foreground:  hsl(220, 10%, 70%);
+  --color-border:            hsl(220, 18%, 88% / 0.15);
+  color: hsl(0, 0%, 97%);
+}
+
 /* ─── Sezioni chiare (target 40+) ──────────────────────────────────────── */
 /* CRITICO: Tailwind v4 @theme risolve var() solo a parse-time per le proprietà
    typed (--color-*). Per override il cascade dobbiamo sovrascrivere

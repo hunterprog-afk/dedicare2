@@ -100,7 +100,7 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
       className={`group relative flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-300 cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--secondary))] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         isLight
           ? "bg-white border border-[hsl(220,12%,88%)] hover:border-[hsl(220,12%,72%)] hover:shadow-md"
-          : "bg-white/[0.04] border border-white/10 hover:bg-white/[0.07] hover:border-white/18"
+          : "bg-white/[0.10] border border-white/25 hover:bg-white/[0.14] hover:border-white/35"
       }`}
       tabIndex={0}
       onMouseEnter={() => setOpen(true)}
@@ -132,7 +132,7 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
         style={{
           background: isLight
             ? `${partner.color}15`
-            : `${partner.color}22`,
+            : "#ffffff",
           color: partner.color,
         }}
       >
@@ -143,14 +143,14 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
       <div className="flex flex-col leading-tight">
         <span
           className={`font-display text-sm tracking-wide ${
-            isLight ? "text-[hsl(220,30%,14%)]" : "text-white/95"
+            isLight ? "text-[hsl(220,30%,14%)]" : "text-white"
           }`}
         >
           {partner.abbr}
         </span>
         <span
           className={`font-body text-[10px] uppercase tracking-wider ${
-            isLight ? "text-[hsl(220,12%,42%)]" : "text-white/50"
+            isLight ? "text-[hsl(220,12%,42%)]" : "text-white/75"
           }`}
         >
           {partner.name}
