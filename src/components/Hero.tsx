@@ -19,6 +19,7 @@ export function Hero({ scrollRef }: Props) {
     // Outer: tall enough to scroll through the full video (300vh ≈ 8 s video at ~37px/frame)
     <section
       ref={scrollRef as React.RefObject<HTMLElement>}
+      data-section="dark"
       className="relative"
       style={{ height: "300vh" }}
     >

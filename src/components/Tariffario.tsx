@@ -11,7 +11,7 @@ export function Tariffario() {
   const { t, i18n } = useTranslation()
   const factors = t("tariffario.factors", { returnObjects: true }) as TranslatedFactor[]
   return (
-    <section id="tariffario" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="tariffario" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
