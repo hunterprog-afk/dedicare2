@@ -13,7 +13,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Users,
 }
 
-const CARD_CLASS = "p-7 md:p-8 min-h-[360px]"
+const CARD_CLASS = "p-6 md:p-8 min-h-[300px] md:min-h-[360px]"
 
 type TranslatedService = { title: string; body: string; bullets?: string[] }
 
@@ -22,10 +22,10 @@ export function ServicesBento() {
   const translated = t("services.items", { returnObjects: true }) as TranslatedService[]
 
   return (
-    <section id="servizi" data-section="light" className="relative py-28 md:py-40">
+    <section id="servizi" data-section="light" className="relative py-16 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
-        <div className="mb-12">
+        <div className="mb-10 md:mb-12">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
             {t("services.eyebrow")}
           </span>
@@ -33,7 +33,7 @@ export function ServicesBento() {
             key={i18n.language + "-services-title"}
             text={t("services.title")}
             as="h2"
-            className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[22ch]"
+            className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[22ch] break-words"
             delay={0.07}
           />
           <motion.p

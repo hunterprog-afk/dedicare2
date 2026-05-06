@@ -51,7 +51,7 @@ export function Stats() {
   const { t, i18n } = useTranslation()
   const items = t("stats.items", { returnObjects: true }) as TranslatedStat[]
   return (
-    <section className="relative py-32 md:py-44 overflow-hidden">
+    <section className="relative py-20 md:py-44 overflow-hidden">
       {/* Cinematic bg — gradient fallback (no external video dependency) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(200,35%,5%)] via-[hsl(175,30%,7%)] to-[hsl(220,25%,6%)]" />
 
@@ -76,7 +76,7 @@ export function Stats() {
             key={i18n.language + "-stats-title"}
             text={t("stats.title")}
             as="h2"
-            className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[20ch] mx-auto"
+            className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[20ch] mx-auto break-words"
             delay={0.07}
           />
           <motion.p
@@ -90,8 +90,8 @@ export function Stats() {
           </motion.p>
         </div>
 
-        <div className="liquid-glass rounded-3xl p-10 md:p-14">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 relative">
+        <div className="liquid-glass rounded-3xl p-6 md:p-14">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 relative">
             {STATS.map((stat, i) => {
               const Icon = STAT_ICONS[i] ?? Award
               const behavior = ICON_BEHAVIOR[i] ?? "scale"
@@ -134,7 +134,7 @@ export function Stats() {
                     <Icon className="size-6" style={{ color: "hsl(174, 62%, 55%)" }} strokeWidth={1.75} />
                   </motion.div>
 
-                  <span className="font-display italic text-5xl md:text-6xl lg:text-7xl leading-none text-foreground">
+                  <span className="font-display italic text-[clamp(36px,10vw,56px)] md:text-6xl lg:text-7xl leading-none text-foreground break-words">
                     <CountUp value={tr.value} />
                   </span>
                   <span className="font-body text-xs text-foreground/55 mt-3 tracking-wide uppercase">

@@ -24,7 +24,20 @@ export function Hero({ scrollRef }: Props) {
     >
       {/* Sticky inner — stays pinned while the user scrolls through the 300vh */}
       <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Video hero — scroll-scrubbed */}
+        {/* Poster fallback — visible immediately while the video loads (sits behind video) */}
+        <img
+          src={`${import.meta.env.BASE_URL}hero-poster.jpg`}
+          alt=""
+          aria-hidden="true"
+          loading="eager"
+          // @ts-expect-error fetchpriority is a valid HTML attribute not yet typed in React
+          fetchpriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ zIndex: 0 }}
+        />
+
+        {/* Video hero — scroll-scrubbed (overlays poster once loaded) */}
         <VideoScrub
           src={`${import.meta.env.BASE_URL}hero-dedicare.mp4`}
           poster={`${import.meta.env.BASE_URL}hero-poster.jpg`}

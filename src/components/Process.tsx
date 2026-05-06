@@ -88,10 +88,10 @@ export function Process() {
   const { t, i18n } = useTranslation()
   const items = t("process.items", { returnObjects: true }) as TranslatedStep[]
   return (
-    <section id="processo" data-section="light" className="relative py-28 md:py-40 border-t border-border/40">
+    <section id="processo" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-12 md:mb-16">
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
             {t("process.eyebrow")}
           </span>
@@ -99,7 +99,7 @@ export function Process() {
             key={i18n.language + "-process-title"}
             text={t("process.title")}
             as="h2"
-            className="mt-4 font-display uppercase text-4xl md:text-6xl leading-[0.9] tracking-tight max-w-[20ch]"
+            className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[20ch] break-words"
             delay={0.07}
           />
         </div>
@@ -112,7 +112,7 @@ export function Process() {
             return (
               <motion.div
                 key={step.n}
-                className="relative px-0 md:px-8 py-10 md:py-14 flex flex-col gap-4 items-start border-b md:border-b-0 border-border/30 last:border-b-0"
+                className="relative px-0 md:px-8 py-8 md:py-14 flex flex-col gap-3 md:gap-4 items-start border-b md:border-b-0 border-border/30 last:border-b-0"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -134,7 +134,7 @@ export function Process() {
                   <Illustration />
                 </motion.div>
 
-                <span className="font-display text-[80px] md:text-[110px] leading-none text-primary/20 -mb-4 select-none">
+                <span className="font-display text-[64px] md:text-[110px] leading-none text-primary/20 -mb-4 select-none">
                   {step.n.padStart(2, "0")}
                 </span>
                 <h3 className="font-display uppercase text-2xl md:text-3xl tracking-tight">

@@ -7,7 +7,7 @@ type TestimonialCard = { quote: string; name: string; role: string }
 
 function Card({ quote, name, role }: TestimonialCard) {
   return (
-    <div className="liquid-glass rounded-2xl p-7 w-[340px] md:w-[400px] shrink-0 flex flex-col gap-5">
+    <div className="liquid-glass rounded-2xl p-6 md:p-7 w-[290px] md:w-[400px] shrink-0 flex flex-col gap-4 md:gap-5">
       <Quote className="size-5 text-primary/70" />
       <p className="font-body text-foreground/85 italic leading-relaxed text-[15px] flex-1">
         {quote}

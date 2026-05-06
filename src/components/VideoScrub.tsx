@@ -24,17 +24,18 @@ export function VideoScrub({ src, className, poster, containerRef }: Props) {
     video.load()
   }, [src])
 
-  // Listen for loadeddata to mark ready
+  // Mark ready as soon as metadata (duration) is available — much faster than loadeddata
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
     const handleReady = () => setIsReady(true)
-    if (video.readyState >= 2) {
+    // readyState >= 1 = HAVE_METADATA (duration known, scrub can start)
+    if (video.readyState >= 1 && video.duration) {
       setIsReady(true)
       return
     }
-    video.addEventListener("loadeddata", handleReady)
-    return () => video.removeEventListener("loadeddata", handleReady)
+    video.addEventListener("loadedmetadata", handleReady)
+    return () => video.removeEventListener("loadedmetadata", handleReady)
   }, [src])
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
@@ -53,6 +54,9 @@ export function VideoScrub({ src, className, poster, containerRef }: Props) {
         muted
         playsInline
         preload="auto"
+        disablePictureInPicture
+        // @ts-expect-error fetchpriority is a valid HTML attribute not yet typed in React
+        fetchpriority="high"
         aria-hidden="true"
         style={{ objectFit: "cover", transform: "translateZ(0)", willChange: "transform" }}
       />
