@@ -7,8 +7,6 @@ import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/ContactForm"
 import { LegalModal } from "@/components/LegalModal"
 import { OptimizedImage } from "@/components/OptimizedImage"
-import { lazy, Suspense } from "react"
-const MilanCity3D = lazy(() => import("@/components/MilanCity3D").then(m => ({ default: m.MilanCity3D })))
 import { privacyPolicy, cookiePolicy, noteLegali } from "@/content/legal"
 
 type LegalKey = "privacy" | "cookie" | "legal" | null
@@ -113,7 +111,7 @@ export function CtaFooter() {
           </Button>
         </motion.div>
 
-        {/* Form + Città 3D */}
+        {/* Form + Mappa */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -122,16 +120,24 @@ export function CtaFooter() {
           className="mt-16 w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch"
         >
           <ContactForm />
-          <div className="relative rounded-2xl overflow-hidden border border-white/5 min-h-[480px]">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0d1422] to-[#112240]" />
-            <div className="absolute inset-0">
-              <Suspense fallback={null}>
-                <MilanCity3D />
-              </Suspense>
+          <div className="relative rounded-2xl overflow-hidden border border-white/5 min-h-[480px] flex flex-col">
+            <div className="px-6 py-4 border-b border-white/5 bg-white/[0.02]">
+              <span className="font-body text-[11px] uppercase tracking-[0.2em] text-foreground/55">
+                {t("cta.vieni_a_trovarci")}
+              </span>
+              <p className="mt-1 font-display italic text-base text-foreground/85">
+                {t("cta.address")}
+              </p>
             </div>
-            <div className="absolute bottom-5 left-0 right-0 flex justify-center pointer-events-none">
-              <span className="text-[10px] font-body tracking-[0.25em] uppercase text-white/20">Milano</span>
-            </div>
+            <iframe
+              title={t("cta.map_title")}
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.123!2d9.298!3d45.494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia%20Roma%2080%2C%2020054%20Segrate%20MI!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen={false}
+              className="w-full flex-1 min-h-[400px] block border-0"
+              style={{ filter: "invert(0.9) hue-rotate(180deg) saturate(0.7) contrast(0.9)" }}
+            />
           </div>
         </motion.div>
 
@@ -159,31 +165,6 @@ export function CtaFooter() {
           </span>
         </motion.div>
 
-        {/* Google Maps embed */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.95 }}
-          className="w-full max-w-2xl mx-auto mt-12"
-        >
-          <div className="text-center mb-4">
-            <span className="font-body text-[11px] uppercase tracking-[0.2em] text-foreground/55">
-              {t("cta.vieni_a_trovarci")}
-            </span>
-          </div>
-          <div className="rounded-2xl overflow-hidden border border-white/5 max-w-2xl mx-auto">
-            <iframe
-              title={t("cta.map_title")}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2796.123!2d9.298!3d45.494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia%20Roma%2080%2C%2020054%20Segrate%20MI!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen={false}
-              className="w-full h-[240px] md:h-[300px] block border-0"
-              style={{ filter: "invert(0.9) hue-rotate(180deg) saturate(0.7) contrast(0.9)" }}
-            />
-          </div>
-        </motion.div>
       </div>
 
       {/* Footer bar */}

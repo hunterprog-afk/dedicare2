@@ -54,26 +54,18 @@ export function Navbar() {
             boxShadow: "0 4px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
         >
-          {/* Logo + wordmark */}
-          <a href="#" className="flex items-center gap-3 pl-3 shrink-0" aria-label="Dedicare Solutions — home">
-            <OptimizedImage
-              src="images/logo/nobg_logo-chiaro"
-              alt="Dedicare Solutions"
-              width={160}
-              height={32}
-              className="h-8 w-auto object-contain hidden sm:block"
-            />
+          {/* Pittogramma + wordmark */}
+          <a href="#" className="flex items-center gap-3 pl-2 shrink-0" aria-label="Dedicare Solutions — home">
             <OptimizedImage
               src="images/logo/nobg_pitto-chiaro"
               alt="Dedicare Solutions"
-              width={32}
-              height={32}
-              className="h-8 w-auto object-contain sm:hidden"
+              width={48}
+              height={48}
+              className="h-11 w-11 object-contain"
             />
             <span
               aria-hidden="true"
-              className="hidden lg:inline-block font-display uppercase text-sm tracking-wider text-white/85 leading-none pl-1 border-l border-white/15 ml-1"
-              style={{ paddingLeft: "0.75rem" }}
+              className="hidden sm:inline-block font-display uppercase text-sm tracking-wider text-white/90 leading-none pl-3 border-l border-white/15"
             >
               Dedicare Solutions
             </span>

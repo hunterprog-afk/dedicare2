@@ -165,6 +165,18 @@ export function AreeServite() {
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
           >
+            {/* Badge tutta Italia */}
+            <div
+              className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-5 text-[11px] font-body uppercase tracking-wider"
+              style={{
+                background: "hsl(174, 62%, 38%, 0.12)",
+                color: "hsl(174, 62%, 45%)",
+                border: "1px solid hsl(174, 62%, 38%, 0.35)",
+              }}
+            >
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(174, 62%, 45%)" }} />
+              {t("aree.italy_badge")}
+            </div>
             <h3 className="font-display uppercase text-xl tracking-tight mb-5">
               {t("aree.comuni_title")}
             </h3>

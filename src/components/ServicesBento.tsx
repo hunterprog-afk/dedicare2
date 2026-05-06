@@ -13,14 +13,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
   Users,
 }
 
-const CARD_CLASSES = [
-  "md:row-span-2 md:col-span-1 p-8 min-h-[520px]",
-  "md:col-span-1 p-6 min-h-[280px]",
-  "md:col-span-1 p-6 min-h-[280px]",
-  "md:col-span-2 p-7 min-h-[280px]",
-  "md:col-span-1 p-6 min-h-[280px]",
-  "md:col-span-3 p-7 min-h-[220px]",
-]
+const CARD_CLASS = "p-7 md:p-8 min-h-[360px]"
 
 type TranslatedService = { title: string; body: string; bullets?: string[] }
 
@@ -63,7 +56,7 @@ export function ServicesBento() {
               <motion.div
                 key={service.icon}
                 tabIndex={0}
-                className={`liquid-glass rounded-2xl relative overflow-hidden group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(174,62%,45%)] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${CARD_CLASSES[idx]}`}
+                className={`liquid-glass rounded-2xl relative overflow-hidden group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(174,62%,45%)] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${CARD_CLASS}`}
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 260, damping: 26 }}
                 initial={{ opacity: 0, y: 24 }}
@@ -81,7 +74,7 @@ export function ServicesBento() {
                 </p>
                 {item.bullets && (
                   <ul className="font-body text-sm text-foreground/80 space-y-2 mt-auto relative z-[2]">
-                    {item.bullets.slice(0, idx === 0 ? 5 : 4).map((b) => (
+                    {item.bullets.slice(0, 4).map((b) => (
                       <li key={b} className="flex items-start gap-2">
                         <Check className="size-4 text-primary shrink-0 mt-0.5" strokeWidth={2.5} />
                         <span>{b}</span>

@@ -133,11 +133,14 @@
     ]
   },
   "stats": {
+    "eyebrow": "I numeri della nostra cura",
+    "title": "Presenza concreta, ogni giorno.",
+    "intro": "Quattro evidenze che raccontano come trasformiamo l'assistenza in qualcosa di misurabile, vicino e personale.",
     "items": [
-      { "value": "24/7", "label": "Disponibilità" },
+      { "value": "24/7", "label": "Disponibilità reale" },
       { "value": "100%", "label": "Cura personalizzata" },
-      { "value": "3+", "label": "Parametri vitali gratuiti" },
-      { "value": "MI", "label": "Area metropolitana coperta" }
+      { "value": "3+", "label": "Parametri vitali gratuiti ad ogni visita" },
+      { "value": "MI", "label": "Milano e tutto il territorio italiano" }
     ]
   },
   "testimonials": {
@@ -183,38 +186,24 @@
     ]
   },
   "team": {
-    "eyebrow": "Il nostro team",
-    "title": "Le persone dietro alla cura",
-    "intro": "Professionisti selezionati, formati e coordinati direttamente da chi ha costruito Dedicare Solutions.",
+    "eyebrow": "La fondatrice",
+    "title": "La visione dietro alla cura",
+    "intro": "Una guida clinica con un'idea precisa di cosa significhi davvero prendersi cura di una persona.",
     "members": [
       {
         "name": "Lisis Zuniga",
-        "role": "Fondatrice & Coordinatrice clinica",
-        "bio": "Oltre 15 anni di esperienza in assistenza domiciliare. Guida ogni piano di cura con visione clinica e attenzione umana."
-      },
-      {
-        "name": "Dr. Marco Bianchi",
-        "role": "Medico responsabile",
-        "bio": "Specialista in geriatria. Supervisiona protocolli clinici e formazione continua del team sanitario."
-      },
-      {
-        "name": "Sara Romano",
-        "role": "Coordinatrice OSS",
-        "bio": "10 anni di esperienza sul campo e formatrice interna. Garantisce qualità e continuità del servizio OSS."
-      },
-      {
-        "name": "Lucia Ferrari",
-        "role": "Responsabile reperibilità 24/7",
-        "bio": "Punto di contatto operativo per famiglie e professionisti. Coordina urgenze e turni nelle 24 ore."
+        "role": "Fondatrice, Coordinatrice clinica & Anima del progetto",
+        "bio": "Più di quindici anni accanto a famiglie, pazienti e professionisti — in casa, in ospedale, nei momenti più delicati. Lisis ha fondato Dedicare Solutions per riportare al centro ciò che la sanità rischia di perdere: la persona. Seleziona personalmente ogni professionista, supervisiona ogni piano di cura e garantisce che dietro ogni intervento ci siano competenza clinica, ascolto autentico e una presenza umana costante. La sua firma è in ogni dettaglio: dalla prima telefonata gratuita fino al follow-up dopo settimane di assistenza."
       }
     ]
   },
   "aree": {
     "eyebrow": "Copertura territoriale",
     "title": "Dove operiamo",
-    "intro": "Area metropolitana di Milano e comuni limitrofi.",
-    "comuni_title": "Comuni serviti",
-    "comuni_note": "Operiamo anche in zone non elencate previa valutazione. Contattaci per verificare.",
+    "intro": "Sede operativa a Milano. Operiamo in tutta Italia: per trasferte fuori area metropolitana ci organizziamo senza problemi — basta contattarci.",
+    "italy_badge": "Disponibili in tutta Italia",
+    "comuni_title": "Area Milano (servizio capillare)",
+    "comuni_note": "Per assistenza in altre regioni italiane, anche di breve durata o trasferte specifiche, contattaci: studieremo insieme la soluzione migliore.",
     "map_alt": "Mappa stilizzata di Milano e comuni limitrofi",
     "comuni": [
       "Milano (tutte le zone)",
@@ -303,28 +292,13 @@
     ]
   },
   "blog": {
-    "eyebrow": "Blog & news",
+    "eyebrow": "News & approfondimenti",
     "title": "Salute & Prevenzione",
-    "intro": "Approfondimenti pratici per famiglie e caregiver. Stiamo preparando i primi articoli.",
-    "in_arrivo": "In arrivo",
-    "cta": "Iscriviti per essere avvisato",
-    "articles": [
-      {
-        "title": "Prevenzione cadute in casa: 7 consigli pratici",
-        "date": "In arrivo · 2026",
-        "category": "Prevenzione"
-      },
-      {
-        "title": "Quando serve un'infermiera a domicilio?",
-        "date": "In arrivo · 2026",
-        "category": "Assistenza"
-      },
-      {
-        "title": "Caregiver familiari: gestire lo stress",
-        "date": "In arrivo · 2026",
-        "category": "Famiglia"
-      }
-    ]
+    "intro": "Notizie aggiornate in tempo reale dai principali editori italiani su salute, assistenza domiciliare, anziani e caregiver. Selezione automatica.",
+    "live": "Live",
+    "cta": "Iscriviti alla nostra newsletter",
+    "error": "Impossibile caricare le notizie in questo momento. Riprova più tardi o iscriviti per ricevere gli aggiornamenti via email.",
+    "source_note": "Fonte: Google News — selezione automatica, aggiornata in tempo reale."
   },
   "cta": {
     "eyebrow": "Iniziamo insieme",

@@ -133,11 +133,14 @@
     ]
   },
   "stats": {
+    "eyebrow": "The numbers behind our care",
+    "title": "Tangible presence, every day.",
+    "intro": "Four signals of how we turn care into something measurable, close and personal.",
     "items": [
-      { "value": "24/7", "label": "Availability" },
+      { "value": "24/7", "label": "Real availability" },
       { "value": "100%", "label": "Personalised care" },
-      { "value": "3+", "label": "Free vital checks" },
-      { "value": "MI", "label": "Metropolitan coverage" }
+      { "value": "3+", "label": "Free vital checks at every visit" },
+      { "value": "MI", "label": "Milan and all of Italy" }
     ]
   },
   "testimonials": {
@@ -183,38 +186,24 @@
     ]
   },
   "team": {
-    "eyebrow": "Our team",
-    "title": "The people behind the care",
-    "intro": "Professionals selected, trained and coordinated directly by those who built Dedicare Solutions.",
+    "eyebrow": "The founder",
+    "title": "The vision behind the care",
+    "intro": "A clinical lead with a clear idea of what it really means to take care of a person.",
     "members": [
       {
         "name": "Lisis Zuniga",
-        "role": "Founder & Clinical Coordinator",
-        "bio": "Over 15 years of experience in home care. Leads every care plan with clinical vision and human attention."
-      },
-      {
-        "name": "Dr. Marco Bianchi",
-        "role": "Lead Physician",
-        "bio": "Geriatrics specialist. Oversees clinical protocols and ongoing training of the medical team."
-      },
-      {
-        "name": "Sara Romano",
-        "role": "OSS Coordinator",
-        "bio": "10 years of field experience and internal trainer. Ensures quality and continuity of OSS service."
-      },
-      {
-        "name": "Lucia Ferrari",
-        "role": "24/7 On-call Manager",
-        "bio": "Operational point of contact for families and professionals. Coordinates urgencies and shifts around the clock."
+        "role": "Founder, Clinical Coordinator & Heart of the project",
+        "bio": "More than fifteen years alongside families, patients and professionals — at home, in hospital, in the most delicate moments. Lisis founded Dedicare Solutions to bring back what healthcare risks losing: the person. She personally selects every professional, oversees every care plan and ensures every intervention is supported by clinical expertise, genuine listening and steady human presence. Her signature is in every detail: from the first free phone call to the follow-up weeks into the care journey."
       }
     ]
   },
   "aree": {
-    "eyebrow": "Service area",
+    "eyebrow": "Coverage",
     "title": "Where we operate",
-    "intro": "Milan metropolitan area and surrounding municipalities.",
-    "comuni_title": "Municipalities served",
-    "comuni_note": "We also operate in areas not listed, subject to assessment. Contact us to check.",
+    "intro": "Headquarters in Milan. We serve all of Italy — for assignments outside the metropolitan area we organise without issue, just reach out.",
+    "italy_badge": "Available across Italy",
+    "comuni_title": "Milan area (full coverage)",
+    "comuni_note": "For care in other Italian regions, including short-term or one-off assignments, get in touch: we'll find the right solution together.",
     "map_alt": "Stylised map of Milan and surrounding municipalities",
     "comuni": [
       "Milan (all districts)",
@@ -303,28 +292,13 @@
     ]
   },
   "blog": {
-    "eyebrow": "Blog & news",
+    "eyebrow": "News & insights",
     "title": "Health & Prevention",
-    "intro": "Practical insights for families and caregivers. We are preparing the first articles.",
-    "in_arrivo": "Coming soon",
-    "cta": "Subscribe to be notified",
-    "articles": [
-      {
-        "title": "Preventing falls at home: 7 practical tips",
-        "date": "Coming soon · 2026",
-        "category": "Prevention"
-      },
-      {
-        "title": "When do you need a home nurse?",
-        "date": "Coming soon · 2026",
-        "category": "Assistance"
-      },
-      {
-        "title": "Family caregivers: managing stress",
-        "date": "Coming soon · 2026",
-        "category": "Family"
-      }
-    ]
+    "intro": "Real-time news from leading publishers on health, home care, elderly assistance and caregiving. Automated selection.",
+    "live": "Live",
+    "cta": "Subscribe to our newsletter",
+    "error": "Unable to load news right now. Please try again later, or subscribe to receive updates via email.",
+    "source_note": "Source: Google News — automated selection, updated in real time."
   },
   "cta": {
     "eyebrow": "Let's start together",
