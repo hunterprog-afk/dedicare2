@@ -169,12 +169,13 @@
    bianche solide con testo navy + icon box tint colore partner. Su dark
    gradient di Hero questa coppia bianca + colore offre il massimo contrasto. */
 :root.light [data-section="dark"] .partner-badge--dark {
-  background: #ffffff !important;
-  border: 1px solid hsl(220, 12%, 82%) !important;
+  background-color: #ffffff !important;
+  background-image: none !important;
+  border-color: hsl(220, 12%, 82%) !important;
   box-shadow: 0 2px 12px rgba(20, 30, 60, 0.15);
 }
 :root.light [data-section="dark"] .partner-badge--dark:hover {
-  background: #ffffff !important;
+  background-color: #ffffff !important;
   border-color: hsl(220, 12%, 70%) !important;
   box-shadow: 0 4px 18px rgba(20, 30, 60, 0.20);
 }
