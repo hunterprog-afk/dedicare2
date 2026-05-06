@@ -14,8 +14,8 @@
 
     <!-- LCP optimization: preload hero poster (32 KB) -->
     <link rel="preload" as="image" href="./hero-poster.jpg" fetchpriority="high" />
-    <!-- Hero video: prefetch (3.2 MB > 2 MB threshold, avoid blocking LCP) -->
-    <link rel="prefetch" as="video" href="./hero-dedicare.mp4" type="video/mp4" />
+    <!-- Hero video: preload (1.05 MB compressed H.264, faststart enabled) -->
+    <link rel="preload" as="video" href="./hero-dedicare.mp4" type="video/mp4" fetchpriority="high" />
 
     <!-- SEO -->
     <title>Dedicare Solutions — Assistenza Sanitaria a Milano</title>
