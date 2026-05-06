@@ -61,7 +61,7 @@ export function Hero({ scrollRef }: Props) {
         <p className="sr-only">{t("hero.video_alt")}</p>
 
         {/* Content */}
-        <div ref={innerRef} className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6">
+        <div ref={innerRef} className="absolute inset-0 z-10 flex flex-col items-center justify-start pt-[10vh] md:justify-center md:pt-0 text-center px-6">
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
@@ -83,7 +83,7 @@ export function Hero({ scrollRef }: Props) {
             text={t("hero.title")}
             as="h1"
             immediate
-            className="mt-10 md:mt-6 font-display uppercase text-[clamp(40px,7vw,120px)] leading-[0.92] tracking-[-0.02em] text-white max-w-[14ch] drop-shadow-2xl"
+            className="mt-12 md:mt-6 font-display uppercase text-[clamp(40px,7vw,120px)] leading-[0.92] tracking-[-0.02em] text-white max-w-[14ch] drop-shadow-2xl"
             delay={0.09}
             startDelay={0.15}
           />
@@ -92,7 +92,7 @@ export function Hero({ scrollRef }: Props) {
             initial={{ filter: "blur(10px)", opacity: 0, y: 16 }}
             animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 font-body text-base md:text-lg text-white/80 max-w-xl leading-relaxed drop-shadow"
+            className="mt-8 md:mt-6 font-body text-base md:text-lg text-white/80 max-w-xl leading-relaxed drop-shadow"
           >
             {t("hero.subline")}
           </motion.p>
@@ -101,7 +101,7 @@ export function Hero({ scrollRef }: Props) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.6 }}
-            className="mt-10 flex items-center gap-3 flex-wrap justify-center"
+            className="mt-12 md:mt-10 flex items-center gap-3 flex-wrap justify-center"
           >
             <Button
               variant="hero"
@@ -124,7 +124,7 @@ export function Hero({ scrollRef }: Props) {
           </motion.div>
 
           {/* Partners */}
-          <div className="absolute bottom-8 inset-x-0 flex flex-col items-center gap-3 px-6">
+          <div className="absolute bottom-4 md:bottom-8 inset-x-0 flex flex-col items-center gap-5 md:gap-3 px-6">
             <span className="text-[11px] font-body uppercase tracking-[0.18em] text-white/55">
               {t("hero.partners_label")}
             </span>
