@@ -109,7 +109,7 @@ export function Blog() {
   }, [i18n.language])
 
   return (
-    <section id="blog" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="blog" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-12 md:mb-16">

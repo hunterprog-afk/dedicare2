@@ -51,7 +51,7 @@ export function Stats() {
   const { t, i18n } = useTranslation()
   const items = t("stats.items", { returnObjects: true }) as TranslatedStat[]
   return (
-    <section className="relative py-20 md:py-44 overflow-hidden">
+    <section data-section="dark" className="relative py-20 md:py-44 overflow-hidden">
       {/* Cinematic bg — gradient fallback (no external video dependency) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[hsl(200,35%,5%)] via-[hsl(175,30%,7%)] to-[hsl(220,25%,6%)]" />
 

@@ -16,7 +16,7 @@ export function Team() {
   if (!founder) return null
 
   return (
-    <section id="team" className="relative py-16 md:py-40 border-t border-border/40 overflow-hidden">
+    <section id="team" data-section="light" className="relative py-16 md:py-40 border-t border-border/40 overflow-hidden">
       {/* Decorative glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.04] blur-3xl pointer-events-none" />
 
