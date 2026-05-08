@@ -6,12 +6,24 @@ import { BlurText } from "@/components/BlurText"
 
 type FeedItem = {
   title: string
-  link: string
+  url: string
   pubDate: string
   source?: string
   description?: string
+  imageUrl?: string | null
 }
 
+// ─── Apify static JSON (generated at build time) ────────────────────────────
+type ApifyArticle = {
+  title: string
+  url: string
+  source?: string
+  publishedAt?: string
+  imageUrl?: string | null
+  description?: string
+}
+
+// ─── RSS fallback (rss2json) ─────────────────────────────────────────────────
 type Rss2JsonResponse = {
   status: string
   feed?: { title?: string }
@@ -30,7 +42,6 @@ const GRADIENTS = [
   "linear-gradient(135deg, #161D2E 0%, #15A89A 100%)",
 ]
 
-// Google News RSS — query in italiano per healthcare/assistenza
 const FEEDS_BY_LANG: Record<string, string> = {
   it: "https://news.google.com/rss/search?q=assistenza+domiciliare+OR+anziani+salute+OR+caregiver&hl=it&gl=IT&ceid=IT:it",
   en: "https://news.google.com/rss/search?q=home+care+OR+elderly+health+OR+caregiver&hl=en-US&gl=US&ceid=US:en",
@@ -39,7 +50,6 @@ const FEEDS_BY_LANG: Record<string, string> = {
 const RSS_PROXY = "https://api.rss2json.com/v1/api.json?rss_url="
 
 function extractSource(item: { author?: string; title: string }): string {
-  // Google News titles spesso contengono "Titolo - Fonte"
   if (item.author) return item.author
   const dashIdx = item.title.lastIndexOf(" - ")
   if (dashIdx > 0 && dashIdx > item.title.length - 50) {
@@ -68,44 +78,153 @@ function formatDate(pubDate: string, lang: string): string {
   }
 }
 
+// ─── Card ────────────────────────────────────────────────────────────────────
+
+function ArticleCard({ item, index }: { item: FeedItem; index: number }) {
+  const { i18n } = useTranslation()
+  const [imgError, setImgError] = useState(false)
+  const showImage = item.imageUrl && !imgError
+
+  return (
+    <motion.a
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="liquid-glass rounded-2xl overflow-hidden flex flex-col group hover:scale-[1.01] transition-transform"
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: index * 0.08 }}
+    >
+      {/* Cover — real image or gradient fallback */}
+      <div className="relative h-44 w-full overflow-hidden">
+        {showImage ? (
+          <img
+            src={item.imageUrl!}
+            alt={item.title}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+            onError={() => setImgError(true)}
+            loading="lazy"
+          />
+        ) : (
+          <div
+            className="absolute inset-0"
+            style={{ background: GRADIENTS[index % GRADIENTS.length] }}
+          />
+        )}
+
+        {/* Overlay sempre presente per leggibilità */}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 noise opacity-30 pointer-events-none" />
+
+        {/* Live badge */}
+        <span
+          className="absolute top-4 right-4 rounded-full px-3 py-1 font-body text-[11px] tracking-wide uppercase text-white inline-flex items-center gap-1.5"
+          style={{ background: "rgba(0,0,0,0.45)", backdropFilter: "blur(8px)" }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          Live
+        </span>
+
+        {/* Source */}
+        <span className="absolute bottom-4 left-5 font-display uppercase text-xs tracking-wider text-white/90 drop-shadow">
+          {item.source}
+        </span>
+        <ArrowUpRight className="absolute bottom-4 right-5 size-4 text-white/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      </div>
+
+      {/* Body */}
+      <div className="p-6 flex flex-col gap-3 flex-1">
+        <span className="font-body text-xs text-foreground/55 tracking-wide uppercase">
+          {formatDate(item.pubDate, i18n.language)}
+        </span>
+        <h3 className="font-display uppercase text-lg leading-tight tracking-tight line-clamp-3 group-hover:text-primary transition-colors">
+          {item.title}
+        </h3>
+        {item.description && (
+          <p className="font-body text-sm text-foreground/60 line-clamp-2 leading-relaxed">
+            {item.description}
+          </p>
+        )}
+        <div className="mt-auto pt-4 h-px w-10 bg-gradient-to-r from-primary to-transparent" />
+      </div>
+    </motion.a>
+  )
+}
+
+// ─── Main component ───────────────────────────────────────────────────────────
+
 export function Blog() {
   const { t, i18n } = useTranslation()
   const [items, setItems] = useState<FeedItem[]>([])
   const [status, setStatus] = useState<"loading" | "ok" | "error">("loading")
+  const [source, setSource] = useState<"apify" | "rss">("apify")
 
   useEffect(() => {
-    const lang = i18n.language.startsWith("en") ? "en" : "it"
-    const feedUrl = FEEDS_BY_LANG[lang] ?? FEEDS_BY_LANG.it
     let cancelled = false
-
     setStatus("loading")
-    fetch(`${RSS_PROXY}${encodeURIComponent(feedUrl)}`)
-      .then((r) => r.json() as Promise<Rss2JsonResponse>)
-      .then((data) => {
+
+    async function load() {
+      // 1️⃣  Try Apify pre-built JSON (fast, has images, no API key in browser)
+      try {
+        const res = await fetch(`${import.meta.env.BASE_URL}blog-posts.json`)
+        if (res.ok) {
+          const data: ApifyArticle[] = await res.json()
+          if (!cancelled && Array.isArray(data) && data.length > 0) {
+            setItems(
+              data.slice(0, 6).map((a) => ({
+                title: a.title,
+                url: a.url,
+                pubDate: a.publishedAt ?? new Date().toISOString(),
+                source: a.source ?? "Apify News",
+                description: a.description,
+                imageUrl: a.imageUrl,
+              }))
+            )
+            setSource("apify")
+            setStatus("ok")
+            return
+          }
+        }
+      } catch {
+        // fall through to RSS
+      }
+
+      // 2️⃣  Fallback: RSS via rss2json
+      try {
+        const lang = i18n.language.startsWith("en") ? "en" : "it"
+        const feedUrl = FEEDS_BY_LANG[lang] ?? FEEDS_BY_LANG.it
+        const res = await fetch(`${RSS_PROXY}${encodeURIComponent(feedUrl)}`)
+        const data: Rss2JsonResponse = await res.json()
+
         if (cancelled) return
         if (data.status !== "ok" || !data.items?.length) {
           setStatus("error")
           return
         }
+
         const parsed: FeedItem[] = data.items.slice(0, 3).map((it) => {
-          const source = extractSource(it)
+          const src = extractSource(it)
           return {
-            title: cleanTitle(it.title, source),
-            link: it.link,
+            title: cleanTitle(it.title, src),
+            url: it.link,
             pubDate: it.pubDate,
-            source: source || "Google News",
+            source: src || "Google News",
           }
         })
-        setItems(parsed)
-        setStatus("ok")
-      })
-      .catch(() => {
-        if (!cancelled) setStatus("error")
-      })
 
-    return () => {
-      cancelled = true
+        if (!cancelled) {
+          setItems(parsed)
+          setSource("rss")
+          setStatus("ok")
+        }
+      } catch {
+        if (!cancelled) setStatus("error")
+      }
     }
+
+    load()
+    return () => { cancelled = true }
   }, [i18n.language])
 
   return (
@@ -151,7 +270,7 @@ export function Blog() {
           </div>
         )}
 
-        {/* Error fallback — informativo ma elegante */}
+        {/* Error */}
         {status === "error" && (
           <div className="liquid-glass rounded-2xl p-8 flex items-center gap-4">
             <AlertCircle className="size-5 text-primary shrink-0" />
@@ -161,59 +280,21 @@ export function Blog() {
           </div>
         )}
 
-        {/* Cards reali */}
+        {/* Articles grid — up to 6 when Apify, 3 for RSS */}
         {status === "ok" && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className={`grid grid-cols-1 gap-5 ${source === "apify" ? "md:grid-cols-3" : "md:grid-cols-3"}`}>
             {items.map((a, i) => (
-              <motion.a
-                key={a.link}
-                href={a.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="liquid-glass rounded-2xl overflow-hidden flex flex-col group hover:scale-[1.01] transition-transform"
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: i * 0.08 }}
-              >
-                {/* Cover gradiente */}
-                <div
-                  className="relative h-44 w-full overflow-hidden"
-                  style={{ background: GRADIENTS[i] ?? GRADIENTS[0] }}
-                >
-                  <div className="absolute inset-0 noise opacity-40 pointer-events-none" />
-                  <span
-                    className="absolute top-4 right-4 rounded-full px-3 py-1 font-body text-[11px] tracking-wide uppercase text-white inline-flex items-center gap-1.5"
-                    style={{ background: "rgba(0,0,0,0.4)", backdropFilter: "blur(8px)" }}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                    {t("blog.live")}
-                  </span>
-                  <span className="absolute bottom-4 left-5 font-display uppercase text-xs tracking-wider text-white/85">
-                    {a.source}
-                  </span>
-                  <ArrowUpRight className="absolute bottom-4 right-5 size-4 text-white/70 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </div>
-
-                {/* Body */}
-                <div className="p-6 flex flex-col gap-3 flex-1">
-                  <span className="font-body text-xs text-foreground/55 tracking-wide uppercase">
-                    {formatDate(a.pubDate, i18n.language)}
-                  </span>
-                  <h3 className="font-display uppercase text-lg leading-tight tracking-tight line-clamp-3 group-hover:text-primary transition-colors">
-                    {a.title}
-                  </h3>
-                  <div className="mt-auto pt-4 h-px w-10 bg-gradient-to-r from-primary to-transparent" />
-                </div>
-              </motion.a>
+              <ArticleCard key={a.url} item={a} index={i} />
             ))}
           </div>
         )}
 
-        {/* Fonte attribution */}
+        {/* Attribution */}
         {status === "ok" && (
           <p className="mt-6 font-body text-xs text-foreground/40 text-center">
-            {t("blog.source_note")}
+            {source === "apify"
+              ? "Notizie selezionate automaticamente da Apify · aggiornate ad ogni deploy"
+              : t("blog.source_note")}
           </p>
         )}
 

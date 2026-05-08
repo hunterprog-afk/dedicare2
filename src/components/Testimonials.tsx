@@ -1,14 +1,23 @@
-import { Quote } from "lucide-react"
+import { Quote, Star } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { motion } from "motion/react"
 
-type TestimonialCard = { quote: string; name: string; role: string }
+type TestimonialCard = { quote: string; name: string; role: string; stars?: number }
 
-function Card({ quote, name, role }: TestimonialCard) {
+function Card({ quote, name, role, stars }: TestimonialCard) {
+  const starCount = Math.min(5, Math.max(1, Math.round(stars ?? 5)))
+
   return (
     <div className="liquid-glass rounded-2xl p-6 md:p-7 w-[290px] md:w-[400px] shrink-0 flex flex-col gap-4 md:gap-5">
-      <Quote className="size-5 text-primary/70" />
+      <div className="flex items-center justify-between">
+        <Quote className="size-5 text-primary/70" />
+        <div className="flex items-center gap-0.5">
+          {Array.from({ length: starCount }).map((_, i) => (
+            <Star key={i} className="size-3.5 fill-amber-400 text-amber-400" />
+          ))}
+        </div>
+      </div>
       <p className="font-body text-foreground/85 italic leading-relaxed text-[15px] flex-1">
         {quote}
       </p>
@@ -60,19 +69,12 @@ export function Testimonials() {
         </motion.p>
       </div>
 
-      {/* Marquee rows */}
       <div className="group relative flex flex-col gap-5 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
-        {/* Row 1 — left */}
         <div className="flex gap-5 w-max [animation:marquee_28s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {row1.map((tt, i) => (
-            <Card key={i} {...tt} />
-          ))}
+          {row1.map((tt, i) => <Card key={i} {...tt} />)}
         </div>
-        {/* Row 2 — right */}
         <div className="flex gap-5 w-max [animation:marquee-rev_32s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {row2.map((tt, i) => (
-            <Card key={i} {...tt} />
-          ))}
+          {row2.map((tt, i) => <Card key={i} {...tt} />)}
         </div>
       </div>
     </section>

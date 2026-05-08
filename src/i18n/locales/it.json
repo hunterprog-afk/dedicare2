@@ -151,37 +151,44 @@
       {
         "quote": "Abbiamo affidato l'assistenza di nostra madre a Dedicare Solutions dopo una lunga ricerca. La cura e la professionalità che abbiamo trovato hanno superato ogni aspettativa.",
         "name": "Famiglia Rossi",
-        "role": "Milano, paziente anziana"
+        "role": "Milano, paziente anziana",
+        "stars": 5
       },
       {
         "quote": "L'infermiera inviata era puntuale, competente e incredibilmente umana. Mio padre si è sentito subito a proprio agio. Non potevamo chiedere di meglio.",
         "name": "Marco B.",
-        "role": "Segrate, paziente post-operatorio"
+        "role": "Segrate, paziente post-operatorio",
+        "stars": 5
       },
       {
         "quote": "La reperibilità notturna ci ha letteralmente salvato in una situazione di emergenza. In meno di 30 minuti avevano qualcuno a casa nostra.",
         "name": "Giulia T.",
-        "role": "Pioltello, paziente anziana"
+        "role": "Pioltello, paziente anziana",
+        "stars": 5
       },
       {
         "quote": "Il piano di cura personalizzato che hanno costruito per nostra figlia è stato trasformativo. Finalmente ci sentiamo accompagnati, non soli.",
         "name": "Famiglia Marino",
-        "role": "Cologno, paziente pediatrica"
+        "role": "Cologno, paziente pediatrica",
+        "stars": 5
       },
       {
         "quote": "La consulenza iniziale gratuita mi ha convinto subito. Hanno capito la situazione in pochi minuti e proposto una soluzione concreta e sostenibile.",
         "name": "Antonella V.",
-        "role": "Sesto San Giovanni"
+        "role": "Sesto San Giovanni",
+        "stars": 5
       },
       {
         "quote": "Professionisti seri, puntuali e sempre disponibili. La qualità dell'assistenza domiciliare è su un livello che non pensavo possibile nel privato.",
         "name": "Roberto C.",
-        "role": "Milano, familiare caregiver"
+        "role": "Milano, familiare caregiver",
+        "stars": 5
       },
       {
         "quote": "Da quando seguono mio nonno, la sua qualità di vita è migliorata visibilmente. Stimolazione cognitiva e attenzione alla persona, non solo alla malattia.",
         "name": "Chiara L.",
-        "role": "Vimodrone, paziente con demenza"
+        "role": "Vimodrone, paziente con demenza",
+        "stars": 5
       }
     ]
   },
@@ -284,6 +291,10 @@
       {
         "q": "Cosa include la misurazione gratuita dei parametri vitali?",
         "a": "Ad ogni visita, il nostro personale misura gratuitamente pressione arteriosa, saturazione dell'ossigeno e frequenza cardiaca. I valori vengono registrati e comunicati alla famiglia, contribuendo a un monitoraggio preventivo continuo."
+      },
+      {
+        "q": "Le spese di assistenza domiciliare sono detraibili fiscalmente?",
+        "a": "Sì. In Italia le spese per assistenza infermieristica e per addetti all'assistenza di persone non autosufficienti sono detraibili al 19% nella dichiarazione dei redditi (art. 15 TUIR). Alcune prestazioni sono anche esenti IVA ai sensi del D.P.R. 633/72. Forniamo tutta la documentazione necessaria — fatture intestate correttamente e certificazioni — per rendere la detrazione semplice e completa."
       },
       {
         "q": "Come posso attivare il servizio rapidamente?",

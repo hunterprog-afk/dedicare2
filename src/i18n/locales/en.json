@@ -151,37 +151,44 @@
       {
         "quote": "We entrusted our mother's care to Dedicare Solutions after a long search. The care and professionalism we found exceeded every expectation.",
         "name": "Famiglia Rossi",
-        "role": "Milan, elderly patient"
+        "role": "Milan, elderly patient",
+        "stars": 5
       },
       {
         "quote": "The nurse they sent was punctual, competent and incredibly human. My father felt at ease immediately. We couldn't have asked for better.",
         "name": "Marco B.",
-        "role": "Segrate, post-operative patient"
+        "role": "Segrate, post-operative patient",
+        "stars": 5
       },
       {
         "quote": "Their night-time on-call service literally saved us in an emergency. In less than 30 minutes someone was at our home.",
         "name": "Giulia T.",
-        "role": "Pioltello, elderly patient"
+        "role": "Pioltello, elderly patient",
+        "stars": 5
       },
       {
         "quote": "The personalised care plan they built for our daughter was transformative. We finally feel accompanied, not alone.",
         "name": "Famiglia Marino",
-        "role": "Cologno, paediatric patient"
+        "role": "Cologno, paediatric patient",
+        "stars": 5
       },
       {
         "quote": "The free initial consultation convinced me right away. They understood the situation in minutes and proposed a concrete, sustainable solution.",
         "name": "Antonella V.",
-        "role": "Sesto San Giovanni"
+        "role": "Sesto San Giovanni",
+        "stars": 5
       },
       {
         "quote": "Serious, punctual professionals, always available. The quality of home care is on a level I didn't think possible in private services.",
         "name": "Roberto C.",
-        "role": "Milan, family caregiver"
+        "role": "Milan, family caregiver",
+        "stars": 5
       },
       {
         "quote": "Since they've been caring for my grandfather, his quality of life has visibly improved. Cognitive stimulation and attention to the person, not just the illness.",
         "name": "Chiara L.",
-        "role": "Vimodrone, dementia patient"
+        "role": "Vimodrone, dementia patient",
+        "stars": 5
       }
     ]
   },
@@ -284,6 +291,10 @@
       {
         "q": "What does the free vital signs check include?",
         "a": "At every visit, our staff measures blood pressure, oxygen saturation and heart rate at no cost. Values are recorded and communicated to the family, contributing to ongoing preventive monitoring."
+      },
+      {
+        "q": "Are home care expenses tax-deductible in Italy?",
+        "a": "Yes. In Italy, expenses for nursing assistance and for carers of non-self-sufficient persons are deductible at 19% on your income tax return (art. 15 TUIR). Some services are also VAT-exempt. We provide all the documentation you need — correctly itemised invoices and certifications — to make the deduction straightforward."
       },
       {
         "q": "How quickly can I activate the service?",
