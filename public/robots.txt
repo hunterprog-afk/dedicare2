@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hunterprog-afk.github.io/dedicare2/sitemap.xml
+Sitemap: https://dedicaresolutions.it/sitemap.xml

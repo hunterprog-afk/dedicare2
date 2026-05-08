@@ -23,14 +23,14 @@
     <meta name="keywords" content="assistenza domiciliare Milano, infermiere a domicilio, OSS, badante, cura anziani Milano, assistenza sanitaria" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="googlebot" content="index, follow" />
-    <link rel="canonical" href="https://hunterprog-afk.github.io/dedicare2/" />
+    <link rel="canonical" href="https://dedicaresolutions.it/" />
 
     <!-- OpenGraph -->
     <meta property="og:title" content="Dedicare Solutions — Assistenza Sanitaria a Milano" />
     <meta property="og:description" content="Assistenza infermieristica, OSS, trasporto protetto e reperibilità 24/7 nell'area metropolitana di Milano. Dedicare Solutions S.r.l.s." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hunterprog-afk.github.io/dedicare2/" />
-    <meta property="og:image" content="https://hunterprog-afk.github.io/dedicare2/og-image.png" />
+    <meta property="og:url" content="https://dedicaresolutions.it/" />
+    <meta property="og:image" content="https://dedicaresolutions.it/og-image.png" />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:site_name" content="Dedicare Solutions S.r.l.s." />
 
@@ -39,28 +39,75 @@
     <meta name="twitter:title" content="Dedicare Solutions — Assistenza Sanitaria a Milano" />
     <meta name="twitter:description" content="Assistenza infermieristica, OSS, trasporto protetto e reperibilità 24/7 nell'area metropolitana di Milano. Dedicare Solutions S.r.l.s." />
 
-    <!-- Structured Data: schema.org MedicalBusiness -->
+    <!-- Structured Data: schema.org MedicalBusiness + LocalBusiness -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "MedicalBusiness",
+        "@type": ["MedicalBusiness", "LocalBusiness"],
+        "@id": "https://dedicaresolutions.it/#organization",
         "name": "Dedicare Solutions S.r.l.s.",
-        "url": "https://hunterprog-afk.github.io/dedicare2/",
+        "alternateName": "Dedicare Solutions",
+        "description": "Assistenza infermieristica, OSS, trasporto protetto e reperibilità 24/7 nell'area metropolitana di Milano.",
+        "url": "https://dedicaresolutions.it/",
         "telephone": "+39 388 253 6992",
         "email": "info@dedicaresolutions.it",
-        "image": "https://hunterprog-afk.github.io/dedicare2/og-image.png",
+        "image": "https://dedicaresolutions.it/og-image.png",
+        "logo": "https://dedicaresolutions.it/images/logo/scritta-chiara.png",
+        "priceRange": "€€",
+        "vatID": "IT11600760968",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Via Roma 80",
           "addressLocality": "Segrate",
-          "postalCode": "20054",
+          "postalCode": "20090",
           "addressRegion": "MI",
           "addressCountry": "IT"
         },
-        "areaServed": "Milano e provincia",
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 45.4885,
+          "longitude": 9.2870
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Milano" },
+          { "@type": "City", "name": "Segrate" },
+          { "@type": "City", "name": "Sesto San Giovanni" },
+          { "@type": "City", "name": "Cinisello Balsamo" },
+          { "@type": "City", "name": "Cologno Monzese" },
+          { "@type": "City", "name": "Pioltello" },
+          { "@type": "City", "name": "Vimodrone" },
+          { "@type": "City", "name": "San Donato Milanese" },
+          { "@type": "City", "name": "Peschiera Borromeo" },
+          { "@type": "City", "name": "Rozzano" },
+          { "@type": "City", "name": "Corsico" }
+        ],
+        "medicalSpecialty": ["Geriatrics", "Nursing", "HomeHealthcare"],
         "founder": {
           "@type": "Person",
-          "name": "Lisis Zuniga"
+          "name": "Lisis Zuniga",
+          "jobTitle": "Coordinatrice Clinica & Fondatrice"
+        },
+        "sameAs": [
+          "https://wa.me/393882536992"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servizi di assistenza domiciliare",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Assistenza Infermieristica a domicilio" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Operatori Socio Sanitari (OSS)" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Reperibilità 24/7" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trasporto Protetto" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Prevenzione e parametri vitali gratuita" } }
+          ]
         }
       }
     </script>
