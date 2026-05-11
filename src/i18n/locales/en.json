@@ -4,6 +4,7 @@
     "filosofia": "Philosophy",
     "processo": "Process",
     "faq": "FAQ",
+    "lavora": "Work with us",
     "contattaci": "Contact us",
     "menu": "Menu"
   },
@@ -21,10 +22,13 @@
     "title": "Everything you need, under one trusted care.",
     "intro": "Certified professionals at home, in hospital and during every transfer. Each service is tailored to the person, not the diagnosis.",
     "scopri": "Discover more",
+    "modal_cta": "Request this service",
+    "modal_close": "Close",
     "items": [
       {
         "title": "Nursing Care",
         "body": "Professional nursing care at home and in hospital, delivered by licensed staff with advanced clinical skills.",
+        "longDescription": "A high-standard home nursing service for people returning home after hospital stays or living with chronic conditions. Our licensed nurses work in close coordination with the attending physician to ensure continuity of care, medication safety and real peace of mind for the family, every single day.",
         "bullets": [
           "Therapy and medication administration",
           "Vital signs monitoring",
@@ -36,6 +40,7 @@
       {
         "title": "Healthcare Assistants (OSS)",
         "body": "Our healthcare assistants provide qualified, compassionate support for daily care, preserving dignity, autonomy and well-being.",
+        "longDescription": "Dedicare's healthcare assistants are selected for both technical skill and human empathy. They support the patient with daily activities discreetly and respectfully, ease the family's caregiving load and become a steady, familiar presence in the home — capable of restoring rhythm, calm and connection.",
         "bullets": [
           "Personal hygiene and mobility",
           "Mealtime assistance",
@@ -47,6 +52,7 @@
       {
         "title": "24/7 On-call",
         "body": "A real presence at any hour of day and night. Fast emergency response and management of critical situations.",
+        "longDescription": "A direct line that's always open, holidays included, staffed by clinical professionals who already know the patient's history. When something goes wrong we coordinate the right response quickly, avoiding unnecessary ER visits and giving the family the certainty that somebody will answer — at any hour, any day.",
         "bullets": [
           "24h emergency response",
           "On-site within 30 minutes",
@@ -57,6 +63,7 @@
       {
         "title": "Medical Transport",
         "body": "Specialised escorting for medical visits, therapies and any transfer requiring dedicated healthcare assistance.",
+        "longDescription": "Safe medical transfers to outpatient clinics, day hospitals and specialist visits, with nursing staff on board whenever the clinical condition requires it. We plan schedules, paperwork and logistics so the family doesn't have to worry about anything: one single point of contact handles everything, from the moment you leave home until you return.",
         "bullets": [
           "Assisted medical transport",
           "Escort to specialist visits",
@@ -67,6 +74,7 @@
       {
         "title": "Free Prevention Check",
         "body": "Before every visit we measure the main vital parameters of the patient at no cost. Because prevention is care.",
+        "longDescription": "At every visit, before starting the actual intervention, we measure blood pressure, oxygen saturation and heart rate at no cost. It's a small check that can catch important signals early, keep the attending physician informed and build a clear picture of how the patient is doing over time. For us, prevention is part of care.",
         "bullets": [
           "Blood pressure with digital sphygmomanometer",
           "SpO₂ saturation with pulse oximeter",
@@ -78,6 +86,7 @@
       {
         "title": "Multidisciplinary Approach",
         "body": "An integrated team of healthcare and social-care professionals for a holistic care experience.",
+        "longDescription": "Nurses, healthcare assistants, physiotherapists and a dedicated care manager all work on the same care plan, sharing information and goals. This integrated approach lets us follow the person in all their complexity, adapt the intervention as the clinical situation evolves and keep the family constantly informed through a single point of reference.",
         "bullets": [
           "Coordinated nurses, OSS, physiotherapists",
           "Personalised care plan",
@@ -206,29 +215,29 @@
   },
   "aree": {
     "eyebrow": "Coverage",
-    "title": "Where we operate",
-    "intro": "Headquarters in Milan. We serve all of Italy — for assignments outside the metropolitan area we organise without issue, just reach out.",
-    "italy_badge": "Available across Italy",
-    "comuni_title": "Milan area (full coverage)",
-    "comuni_note": "For care in other Italian regions, including short-term or one-off assignments, get in touch: we'll find the right solution together.",
-    "map_alt": "Stylised map of Milan and surrounding municipalities",
+    "title": "Milan and Greater Milan",
+    "intro": "We operate in Milan city and across Greater Milan (Sesto San Giovanni, Cinisello Balsamo, Cologno Monzese, Bresso, Cusano Milanino, Monza, Rho, San Donato, Cernusco, Segrate, and the entire metropolitan area). For locations outside the metropolitan area we evaluate travel on request.",
+    "italy_badge": "Travel on request",
+    "comuni_title": "Milan and Greater Milan",
+    "comuni_note": "For areas outside the metropolitan region we evaluate travel on request: contact us and we'll find the best solution together.",
+    "map_alt": "Stylised map of Milan and Greater Milan",
     "comuni": [
       "Milan (all districts)",
-      "Segrate",
       "Sesto San Giovanni",
       "Cinisello Balsamo",
       "Cologno Monzese",
-      "Pioltello",
-      "Vimodrone",
+      "Bresso",
+      "Cusano Milanino",
+      "Monza",
+      "Rho",
       "San Donato Milanese",
-      "Peschiera Borromeo",
-      "Rozzano",
-      "Corsico"
+      "Cernusco sul Naviglio",
+      "Segrate"
     ]
   },
   "tariffario": {
     "eyebrow": "Quote",
-    "title": "Transparency in costs",
+    "title": "Fees & Terms",
     "intro": "Every plan is personalised. We don't publish fixed price lists because every family deserves a real assessment.",
     "cta": "Request a free quote",
     "factors": [
@@ -310,6 +319,59 @@
     "cta": "Subscribe to our newsletter",
     "error": "Unable to load news right now. Please try again later, or subscribe to receive updates via email.",
     "source_note": "Source: Google News — automated selection, updated in real time."
+  },
+  "curriculum": {
+    "eyebrow": "Work with us",
+    "title": "Join the Dedicare team",
+    "intro": "We're looking for professionals who share our way of caring: clinical expertise, genuine listening and a steady human presence. Send us your CV — we read every application personally.",
+    "reasons_title": "Why work with Dedicare",
+    "reasons": [
+      {
+        "title": "Continuous training",
+        "body": "Ongoing clinical updates, initial mentoring and clear internal growth paths."
+      },
+      {
+        "title": "Human workplace",
+        "body": "Close clinical coordination, sustainable shifts and real listening to the people who work with us."
+      },
+      {
+        "title": "Proper contracts",
+        "body": "Italian CCNL framework, professional liability coverage and reliable payments."
+      },
+      {
+        "title": "Work that matters",
+        "body": "Personalised care plans and lasting relationships with patients and families. Not assembly-line care."
+      }
+    ],
+    "form_title": "Apply now",
+    "nome": "First name",
+    "cognome": "Last name",
+    "email": "Email",
+    "telefono": "Phone",
+    "posizione": "Position",
+    "posizione_placeholder": "Select a position",
+    "posizioni": {
+      "oss": "Healthcare Assistant (OSS)",
+      "infermiere": "Nurse",
+      "fisioterapista": "Physiotherapist",
+      "badante": "Live-in carer",
+      "altro": "Other"
+    },
+    "messaggio": "Message",
+    "placeholder_messaggio": "Experience, availability, qualifications…",
+    "cv": "CV (PDF, max 5MB)",
+    "cv_select": "Choose file",
+    "cv_none": "No file selected",
+    "gdpr": "I consent to the processing of my personal data for recruitment purposes under GDPR (EU Reg. 2016/679)",
+    "submit": "Send application",
+    "submitting": "Sending…",
+    "success_title": "Application received!",
+    "success_body": "Thank you. We'll review your profile and contact you if it matches our current openings.",
+    "success_retry": "Send another application",
+    "error_send": "Sending failed. Please retry or email info@dedicaresolutions.it.",
+    "error_network": "Network error. Check your connection and retry.",
+    "error_filesize": "The file exceeds 5MB.",
+    "error_filetype": "Unsupported format. Please upload a PDF."
   },
   "cta": {
     "eyebrow": "Let's start together",
