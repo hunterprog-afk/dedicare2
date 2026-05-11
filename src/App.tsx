@@ -9,11 +9,11 @@ const Team           = lazy(() => import("@/components/Team").then(m => ({ defau
 const Process        = lazy(() => import("@/components/Process").then(m => ({ default: m.Process })))
 const AreeServite    = lazy(() => import("@/components/AreeServite").then(m => ({ default: m.AreeServite })))
 const Stats          = lazy(() => import("@/components/Stats").then(m => ({ default: m.Stats })))
-const Certificazioni = lazy(() => import("@/components/Certificazioni").then(m => ({ default: m.Certificazioni })))
 const Tariffario     = lazy(() => import("@/components/Tariffario").then(m => ({ default: m.Tariffario })))
 const Testimonials   = lazy(() => import("@/components/Testimonials").then(m => ({ default: m.Testimonials })))
 const Faq            = lazy(() => import("@/components/Faq").then(m => ({ default: m.Faq })))
 const Blog           = lazy(() => import("@/components/Blog").then(m => ({ default: m.Blog })))
+const Curriculum     = lazy(() => import("@/components/Curriculum").then(m => ({ default: m.Curriculum })))
 const CtaFooter      = lazy(() => import("@/components/CtaFooter").then(m => ({ default: m.CtaFooter })))
 
 const LazyFallback = <div style={{ minHeight: '400px' }} />
@@ -33,11 +33,11 @@ export default function App() {
           <Process />
           <AreeServite />
           <Stats />
-          <Certificazioni />
           <Tariffario />
           <Testimonials />
           <Faq />
           <Blog />
+          <Curriculum />
           <CtaFooter />
         </Suspense>
       </main>

@@ -1,25 +1,37 @@
+import { useState } from "react"
 import { motion } from "motion/react"
-import { ArrowUpRight, Check, Stethoscope, Heart, Clock, Ambulance, Activity, Users } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { SERVICES } from "@/lib/constants"
+import { ServiceModal, type ServiceModalData } from "@/components/ServiceModal"
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
-  Stethoscope,
-  Heart,
-  Clock,
-  Ambulance,
-  Activity,
-  Users,
+type TranslatedService = {
+  title: string
+  body: string
+  longDescription?: string
+  bullets?: string[]
 }
-
-const CARD_CLASS = "p-6 md:p-8 min-h-[300px] md:min-h-[360px]"
-
-type TranslatedService = { title: string; body: string; bullets?: string[] }
 
 export function ServicesBento() {
   const { t, i18n } = useTranslation()
   const translated = t("services.items", { returnObjects: true }) as TranslatedService[]
+
+  const [modalOpen, setModalOpen] = useState(false)
+  const [activeData, setActiveData] = useState<ServiceModalData | null>(null)
+
+  const openService = (idx: number) => {
+    const service = SERVICES[idx]
+    const item = translated[idx] ?? { title: service.title, body: service.body, bullets: service.bullets }
+    setActiveData({
+      title: item.title,
+      image: service.image,
+      body: item.body,
+      longDescription: item.longDescription,
+      bullets: item.bullets ?? service.bullets,
+    })
+    setModalOpen(true)
+  }
 
   return (
     <section id="servizi" data-section="light" className="relative py-16 md:py-40">
@@ -47,80 +59,81 @@ export function ServicesBento() {
           </motion.p>
         </div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        {/* Bento grid — minimal image cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
           {SERVICES.map((service, idx) => {
-            const Icon = ICON_MAP[service.icon] ?? Stethoscope
             const item = translated[idx] ?? { title: service.title, body: service.body, bullets: service.bullets }
             return (
-              <motion.div
-                key={service.icon}
-                tabIndex={0}
-                className={`liquid-glass rounded-2xl relative overflow-hidden group flex flex-col focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(174,62%,45%)] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${CARD_CLASS}`}
-                whileHover={{ y: -4 }}
-                transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              <motion.button
+                key={service.slug ?? service.icon}
+                type="button"
+                onClick={() => openService(idx)}
+                className="group relative overflow-hidden rounded-2xl aspect-[4/3] text-left border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(174,62%,45%)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: idx * 0.05 }}
+                aria-label={`${item.title} — ${t("services.scopri")}`}
               >
-                <div className="liquid-glass-strong rounded-full w-11 h-11 flex items-center justify-center mb-5 shrink-0 relative z-[2]">
-                  <Icon className="size-5 text-foreground" />
-                </div>
-                <h3 className="font-display uppercase text-2xl md:text-3xl leading-[0.95] tracking-tight mb-3 max-w-[18ch] relative z-[2]">
-                  {item.title}
-                </h3>
-                <p className="font-body text-sm text-foreground/75 max-w-[44ch] leading-relaxed mb-4 relative z-[2]">
-                  {item.body}
-                </p>
-                {item.bullets && (
-                  <ul className="font-body text-sm text-foreground/80 space-y-2 mt-auto relative z-[2]">
-                    {item.bullets.slice(0, 4).map((b) => (
-                      <li key={b} className="flex items-start gap-2">
-                        <Check className="size-4 text-primary shrink-0 mt-0.5" strokeWidth={2.5} />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                {/* Background image */}
+                <img
+                  src={service.image}
+                  alt={`Dedicare Solutions — ${item.title} a Milano e hinterland`}
+                  loading="lazy"
+                  decoding="async"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                />
 
-                {/* Hover overlay — teal gradient with reveal */}
+                {/* Dark gradient overlay for legibility */}
                 <div
-                  className="pointer-events-none absolute inset-0 z-[1] opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500"
+                  className="absolute inset-0 pointer-events-none"
                   style={{
                     background:
-                      "linear-gradient(135deg, hsl(174, 62%, 38%, 0.18) 0%, hsl(174, 62%, 45%, 0.10) 60%, transparent 100%)",
-                    backdropFilter: "blur(2px)",
-                    WebkitBackdropFilter: "blur(2px)",
+                      "linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0.12) 100%)",
                   }}
                   aria-hidden="true"
                 />
 
-                {/* Reveal arrow CTA */}
-                <div className="pointer-events-none absolute bottom-5 right-5 z-[3] flex items-center gap-1.5 translate-y-2 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 group-focus-visible:opacity-100 group-focus-visible:translate-y-0 transition-all duration-400 ease-out">
+                {/* Title bottom-left */}
+                <div className="absolute inset-x-0 bottom-0 p-5 md:p-6 flex items-end justify-between gap-3">
+                  <h3 className="font-display uppercase text-xl md:text-2xl leading-[0.95] tracking-tight text-white max-w-[14ch]">
+                    {item.title}
+                  </h3>
+
+                  {/* CTA pill */}
                   <span
-                    className="font-body text-xs uppercase tracking-wider"
-                    style={{ color: "hsl(174, 62%, 38%)" }}
+                    className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-3 pr-2 py-1.5 text-[11px] uppercase tracking-wider font-body text-white border border-white/30 bg-white/10 backdrop-blur-sm transition-all group-hover:bg-white group-hover:text-black group-hover:border-white"
                   >
-                    {t("services.scopri")}
-                  </span>
-                  <span
-                    className="rounded-full w-7 h-7 flex items-center justify-center"
-                    style={{
-                      background: "hsl(174, 62%, 38%)",
-                      color: "#fff",
-                    }}
-                  >
-                    <ArrowUpRight className="size-3.5" strokeWidth={2.5} />
+                    <span className="whitespace-nowrap">{t("services.scopri")}</span>
+                    <span
+                      className="size-5 rounded-full flex items-center justify-center bg-white/20 group-hover:bg-black/15 transition-colors"
+                      aria-hidden="true"
+                    >
+                      <ArrowUpRight className="size-3" strokeWidth={2.5} />
+                    </span>
                   </span>
                 </div>
 
-                {/* Static top-right arrow (base state) */}
-                <ArrowUpRight className="absolute top-6 right-6 size-5 text-foreground/30 group-hover:opacity-0 transition-opacity z-[2]" />
-              </motion.div>
+                {/* Subtle teal hover glow */}
+                <div
+                  className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, hsl(174, 62%, 38%, 0.20) 0%, hsl(174, 62%, 45%, 0.08) 60%, transparent 100%)",
+                  }}
+                  aria-hidden="true"
+                />
+              </motion.button>
             )
           })}
         </div>
       </div>
+
+      <ServiceModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        data={activeData}
+      />
     </section>
   )
 }

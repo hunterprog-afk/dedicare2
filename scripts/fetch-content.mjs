@@ -72,7 +72,7 @@ async function fetchNews() {
       // apify/google-search-scraper — queries must be newline-separated string
       id: "apify/google-search-scraper",
       input: {
-        queries: "assistenza domiciliare anziani Milano\ncaregiver salute italia 2025",
+        queries: "salute anziani prevenzione Milano\ncaregiver benessere italia 2025",
         maxPagesPerQuery: 1,
         resultsPerPage: 6,
         mobileResults: false,
@@ -84,7 +84,7 @@ async function fetchNews() {
       id: "apify/cheerio-scraper",
       input: {
         startUrls: [
-          { url: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3Dassistenza%2Bdomiciliare%2Banziani%26hl%3Dit%26gl%3DIT%26ceid%3DIT%3Ait" },
+          { url: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3Dsalute%2Banziani%2Bprevenzione%26hl%3Dit%26gl%3DIT%26ceid%3DIT%3Ait" },
         ],
         pageFunction: `async function pageFunction(context) {
           const { $, request, log } = context;

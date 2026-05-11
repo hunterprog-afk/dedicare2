@@ -4,6 +4,7 @@
     "filosofia": "Filosofia",
     "processo": "Processo",
     "faq": "FAQ",
+    "lavora": "Lavora con noi",
     "contattaci": "Contattaci",
     "menu": "Menu"
   },
@@ -21,10 +22,13 @@
     "title": "Tutto ciò di cui hai bisogno, sotto un'unica cura.",
     "intro": "Professionisti certificati a domicilio, in ospedale e in ogni spostamento. Ogni servizio è calibrato sulla persona, non sulla diagnosi.",
     "scopri": "Scopri di più",
+    "modal_cta": "Richiedi questo servizio",
+    "modal_close": "Chiudi",
     "items": [
       {
         "title": "Assistenza Infermieristica",
         "body": "Interventi infermieristici professionali a domicilio e in ospedale, condotti da personale abilitato con competenze cliniche avanzate.",
+        "longDescription": "Un servizio infermieristico domiciliare di alto profilo clinico, pensato per chi rientra a casa dopo un ricovero o convive con una patologia cronica. I nostri infermieri abilitati lavorano in coordinamento con il medico curante per garantire continuità assistenziale, sicurezza terapeutica e tranquillità alla famiglia, ogni giorno.",
         "bullets": [
           "Somministrazione terapie e farmaci",
           "Monitoraggio parametri vitali",
@@ -36,6 +40,7 @@
       {
         "title": "Operatori OSS",
         "body": "I nostri OSS offrono supporto qualificato e premuroso per la cura quotidiana, preservando dignità, autonomia e benessere.",
+        "longDescription": "Gli Operatori Socio-Sanitari di Dedicare sono selezionati per competenza tecnica ed empatia. Affiancano l'assistito nelle attività quotidiane con discrezione e rispetto, sostengono la famiglia nei momenti più impegnativi e diventano un punto di riferimento costante nella casa, capace di restituire ritmo, serenità e relazione.",
         "bullets": [
           "Igiene personale e mobilizzazione",
           "Assistenza nell'alimentazione",
@@ -47,6 +52,7 @@
       {
         "title": "Reperibilità 24/7",
         "body": "Presenza garantita ogni ora del giorno e della notte. Risposta di emergenza rapida e gestione delle situazioni critiche.",
+        "longDescription": "Una linea diretta sempre attiva, festivi inclusi, gestita da personale clinico che conosce la storia dell'assistito. In caso di urgenza coordiniamo l'intervento più adatto entro tempi rapidi, evitando ricorsi inutili al pronto soccorso e dando alla famiglia la certezza che qualcuno risponderà, in qualsiasi ora.",
         "bullets": [
           "Pronto intervento h24",
           "Risposta entro 30 minuti",
@@ -57,6 +63,7 @@
       {
         "title": "Trasporto Protetto",
         "body": "Accompagnamento specializzato per visite, terapie e ogni spostamento che richiede assistenza sanitaria dedicata.",
+        "longDescription": "Trasferimenti sanitari sicuri verso ambulatori, day-hospital, cliniche e visite specialistiche, con personale infermieristico a bordo quando la condizione clinica lo richiede. Pianifichiamo orari, documenti e logistica perché la famiglia non debba pensare a nulla: si occupa di tutto un solo referente, dall'uscita al rientro a casa.",
         "bullets": [
           "Trasporto sanitario assistito",
           "Accompagnamento a visite specialistiche",
@@ -67,6 +74,7 @@
       {
         "title": "Prevenzione Gratuita",
         "body": "Prima di ogni intervento misuriamo gratuitamente i principali parametri vitali del paziente. Perché prevenire è cura.",
+        "longDescription": "A ogni nostra visita, prima ancora di iniziare l'intervento, rileviamo gratuitamente pressione, saturazione e frequenza cardiaca. È un piccolo controllo che permette di intercettare in anticipo segnali importanti, di informare il medico curante e di costruire nel tempo un quadro chiaro dell'andamento clinico. Prevenire, per noi, fa parte della cura.",
         "bullets": [
           "Pressione arteriosa con sfigmomanometro digitale",
           "Saturazione SpO₂ con pulsossimetro",
@@ -78,6 +86,7 @@
       {
         "title": "Approccio Multidisciplinare",
         "body": "Un team integrato di professionisti sanitari e socio-assistenziali per una presa in carico globale della persona.",
+        "longDescription": "Infermieri, OSS, fisioterapisti e care manager lavorano sullo stesso piano di cura, condividendo informazioni e obiettivi. Questo approccio integrato permette di seguire la persona nella sua complessità, adattare l'intervento all'evolvere della situazione clinica e mantenere la famiglia costantemente informata, con un'unica voce di riferimento.",
         "bullets": [
           "Infermieri, OSS, fisioterapisti coordinati",
           "Piano di cura personalizzato",
@@ -206,29 +215,29 @@
   },
   "aree": {
     "eyebrow": "Copertura territoriale",
-    "title": "Dove operiamo",
-    "intro": "Sede operativa a Milano. Operiamo in tutta Italia: per trasferte fuori area metropolitana ci organizziamo senza problemi — basta contattarci.",
-    "italy_badge": "Disponibili in tutta Italia",
-    "comuni_title": "Area Milano (servizio capillare)",
-    "comuni_note": "Per assistenza in altre regioni italiane, anche di breve durata o trasferte specifiche, contattaci: studieremo insieme la soluzione migliore.",
-    "map_alt": "Mappa stilizzata di Milano e comuni limitrofi",
+    "title": "Milano e Hinterland",
+    "intro": "Operiamo a Milano città e nell'hinterland (Sesto San Giovanni, Cinisello Balsamo, Cologno Monzese, Bresso, Cusano Milanino, Monza, Rho, San Donato, Cernusco, Segrate, e tutta l'area metropolitana). Per zone fuori dall'area metropolitana valutiamo trasferte su richiesta.",
+    "italy_badge": "Trasferte su richiesta",
+    "comuni_title": "Milano e hinterland",
+    "comuni_note": "Per zone fuori dall'area metropolitana valutiamo trasferte su richiesta: contattaci per studiare insieme la soluzione migliore.",
+    "map_alt": "Mappa stilizzata di Milano e hinterland",
     "comuni": [
       "Milano (tutte le zone)",
-      "Segrate",
       "Sesto San Giovanni",
       "Cinisello Balsamo",
       "Cologno Monzese",
-      "Pioltello",
-      "Vimodrone",
+      "Bresso",
+      "Cusano Milanino",
+      "Monza",
+      "Rho",
       "San Donato Milanese",
-      "Peschiera Borromeo",
-      "Rozzano",
-      "Corsico"
+      "Cernusco sul Naviglio",
+      "Segrate"
     ]
   },
   "tariffario": {
     "eyebrow": "Preventivo",
-    "title": "Trasparenza nei costi",
+    "title": "Tariffe e Modalità",
     "intro": "Ogni piano è personalizzato. Non pubblichiamo listini fissi perché ogni famiglia merita una valutazione reale.",
     "cta": "Richiedi un preventivo gratuito",
     "factors": [
@@ -310,6 +319,59 @@
     "cta": "Iscriviti alla nostra newsletter",
     "error": "Impossibile caricare le notizie in questo momento. Riprova più tardi o iscriviti per ricevere gli aggiornamenti via email.",
     "source_note": "Fonte: Google News — selezione automatica, aggiornata in tempo reale."
+  },
+  "curriculum": {
+    "eyebrow": "Lavora con noi",
+    "title": "Unisciti al team Dedicare",
+    "intro": "Cerchiamo professionisti che condividano il nostro modo di intendere la cura: competenza clinica, ascolto autentico e una presenza umana costante. Mandaci il tuo CV: lo leggiamo personalmente.",
+    "reasons_title": "Perché lavorare con Dedicare",
+    "reasons": [
+      {
+        "title": "Formazione continua",
+        "body": "Aggiornamento clinico costante, affiancamento iniziale e percorsi di crescita interna."
+      },
+      {
+        "title": "Ambiente umano",
+        "body": "Coordinamento clinico vicino, turni sostenibili e ascolto reale delle persone che lavorano con noi."
+      },
+      {
+        "title": "Contratto regolare",
+        "body": "Inquadramento secondo CCNL, copertura assicurativa professionale e pagamenti puntuali."
+      },
+      {
+        "title": "Lavoro che ha senso",
+        "body": "Piani di cura personalizzati e relazioni durature con pazienti e famiglie. Non assistenza in serie."
+      }
+    ],
+    "form_title": "Candidati ora",
+    "nome": "Nome",
+    "cognome": "Cognome",
+    "email": "Email",
+    "telefono": "Telefono",
+    "posizione": "Posizione",
+    "posizione_placeholder": "Seleziona una posizione",
+    "posizioni": {
+      "oss": "Operatore Socio Sanitario (OSS)",
+      "infermiere": "Infermiere",
+      "fisioterapista": "Fisioterapista",
+      "badante": "Badante / Assistente familiare",
+      "altro": "Altro"
+    },
+    "messaggio": "Messaggio",
+    "placeholder_messaggio": "Esperienza, disponibilità, qualifiche…",
+    "cv": "Curriculum Vitae (PDF, max 5MB)",
+    "cv_select": "Seleziona file",
+    "cv_none": "Nessun file selezionato",
+    "gdpr": "Acconsento al trattamento dei dati personali per finalità di selezione del personale ai sensi del GDPR (Reg. UE 2016/679)",
+    "submit": "Invia candidatura",
+    "submitting": "Invio in corso…",
+    "success_title": "Candidatura ricevuta!",
+    "success_body": "Grazie. Esamineremo il tuo profilo e ti ricontatteremo se in linea con le ricerche in corso.",
+    "success_retry": "Invia un'altra candidatura",
+    "error_send": "Invio fallito. Riprova o scrivici a info@dedicaresolutions.it.",
+    "error_network": "Errore di rete. Controlla la connessione e riprova.",
+    "error_filesize": "Il file supera i 5MB.",
+    "error_filetype": "Formato non supportato. Carica un PDF."
   },
   "cta": {
     "eyebrow": "Iniziamo insieme",

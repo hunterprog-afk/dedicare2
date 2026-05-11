@@ -43,8 +43,8 @@ const GRADIENTS = [
 ]
 
 const FEEDS_BY_LANG: Record<string, string> = {
-  it: "https://news.google.com/rss/search?q=assistenza+domiciliare+OR+anziani+salute+OR+caregiver&hl=it&gl=IT&ceid=IT:it",
-  en: "https://news.google.com/rss/search?q=home+care+OR+elderly+health+OR+caregiver&hl=en-US&gl=US&ceid=US:en",
+  it: "https://news.google.com/rss/search?q=salute+anziani+OR+prevenzione+OR+caregiver+OR+benessere&hl=it&gl=IT&ceid=IT:it",
+  en: "https://news.google.com/rss/search?q=elderly+health+OR+prevention+OR+caregiver+OR+wellness&hl=en-US&gl=US&ceid=US:en",
 }
 
 const RSS_PROXY = "https://api.rss2json.com/v1/api.json?rss_url="
