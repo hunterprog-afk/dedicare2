@@ -7,6 +7,7 @@ export const NAV_ITEMS = [
   { key: "filosofia", href: "#filosofia" },
   { key: "processo",  href: "#processo" },
   { key: "faq",       href: "#faq" },
+  { key: "lavora",    href: "#lavora-con-noi" },
 ] as const
 
 export const PARTNERS = [
@@ -21,6 +22,8 @@ export const PARTNERS = [
 export const SERVICES = [
   {
     icon: "Stethoscope",
+    slug: "assistenza-infermieristica",
+    image: "/images/services/assistenza-infermieristica.jpg",
     title: "Assistenza Infermieristica",
     body: "Interventi infermieristici professionali a domicilio e in ospedale, condotti da personale abilitato con competenze cliniche avanzate.",
     bullets: [
@@ -33,6 +36,8 @@ export const SERVICES = [
   },
   {
     icon: "Heart",
+    slug: "operatori-oss",
+    image: "/images/services/operatori-oss.jpg",
     title: "Operatori OSS",
     body: "I nostri OSS offrono supporto qualificato e premuroso per la cura quotidiana, preservando dignità, autonomia e benessere.",
     bullets: [
@@ -45,6 +50,8 @@ export const SERVICES = [
   },
   {
     icon: "Clock",
+    slug: "reperibilita-24-7",
+    image: "/images/services/reperibilita-24-7.jpg",
     title: "Reperibilità 24/7",
     body: "Presenza garantita ogni ora del giorno e della notte. Risposta di emergenza rapida e gestione delle situazioni critiche.",
     bullets: [
@@ -56,6 +63,8 @@ export const SERVICES = [
   },
   {
     icon: "Ambulance",
+    slug: "trasporto-protetto",
+    image: "/images/services/trasporto-protetto.jpg",
     title: "Trasporto Protetto",
     body: "Accompagnamento specializzato per visite, terapie e ogni spostamento che richiede assistenza sanitaria dedicata.",
     bullets: [
@@ -67,6 +76,8 @@ export const SERVICES = [
   },
   {
     icon: "Activity",
+    slug: "prevenzione-gratuita",
+    image: "/images/services/prevenzione-gratuita.jpg",
     title: "Prevenzione Gratuita",
     body: "Prima di ogni intervento misuriamo gratuitamente i principali parametri vitali del paziente. Perché prevenire è cura.",
     bullets: [
@@ -79,6 +90,8 @@ export const SERVICES = [
   },
   {
     icon: "Users",
+    slug: "approccio-multidisciplinare",
+    image: "/images/services/approccio-multidisciplinare.jpg",
     title: "Approccio Multidisciplinare",
     body: "Un team integrato di professionisti sanitari e socio-assistenziali per una presa in carico globale della persona.",
     bullets: [
