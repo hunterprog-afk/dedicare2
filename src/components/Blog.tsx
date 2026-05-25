@@ -42,12 +42,31 @@ const GRADIENTS = [
   "linear-gradient(135deg, #161D2E 0%, #15A89A 100%)",
 ]
 
+// Feed RSS — focus SALUTE pubblica + TECNOLOGIA sanitaria (esclude assistenza/caregiver)
 const FEEDS_BY_LANG: Record<string, string> = {
-  it: "https://news.google.com/rss/search?q=assistenza+domiciliare+OR+anziani+salute+OR+caregiver&hl=it&gl=IT&ceid=IT:it",
-  en: "https://news.google.com/rss/search?q=home+care+OR+elderly+health+OR+caregiver&hl=en-US&gl=US&ceid=US:en",
+  it: "https://news.google.com/rss/search?q=%28salute+OR+telemedicina+OR+sanit%C3%A0+digitale+OR+intelligenza+artificiale+medicina+OR+prevenzione%29+-assistenza+-domiciliare+-caregiver&hl=it&gl=IT&ceid=IT:it",
+  en: "https://news.google.com/rss/search?q=%28health+OR+telemedicine+OR+digital+health+OR+AI+medicine+OR+health+tech+OR+prevention%29+-caregiver+-homecare&hl=en-US&gl=US&ceid=US:en",
 }
 
 const RSS_PROXY = "https://api.rss2json.com/v1/api.json?rss_url="
+
+// 🚫 Filtra notizie su assistenza domiciliare/caregiver — il sito vuole solo salute & healthtech
+const EXCLUDE_PATTERNS: RegExp[] = [
+  /\bcaregiver\b/i,
+  /\bassistenza\s+domiciliar/i,
+  /\bADI\b/,
+  /\bassistente\s+familiar/i,
+  /\bbadant/i,
+  /assistenza\s+anziani/i,
+  /assistenza\s+infermieristic/i,
+  /assistenza\s+ospedalier/i,
+  /\bhome\s*care\b/i,
+]
+
+function isAllowedTopic(title: string, description: string | undefined = ""): boolean {
+  const haystack = `${title} ${description ?? ""}`
+  return !EXCLUDE_PATTERNS.some((rx) => rx.test(haystack))
+}
 
 function extractSource(item: { author?: string; title: string }): string {
   if (item.author) return item.author
@@ -171,8 +190,10 @@ export function Blog() {
         if (res.ok) {
           const data: ApifyArticle[] = await res.json()
           if (!cancelled && Array.isArray(data) && data.length > 0) {
+            // Filtra eventuali articoli su assistenza/caregiver (doppio safety net)
+            const filtered = data.filter((a) => isAllowedTopic(a.title, a.description))
             setItems(
-              data.slice(0, 6).map((a) => ({
+              filtered.slice(0, 6).map((a) => ({
                 title: a.title,
                 url: a.url,
                 pubDate: a.publishedAt ?? new Date().toISOString(),
@@ -203,15 +224,18 @@ export function Blog() {
           return
         }
 
-        const parsed: FeedItem[] = data.items.slice(0, 3).map((it) => {
-          const src = extractSource(it)
-          return {
-            title: cleanTitle(it.title, src),
-            url: it.link,
-            pubDate: it.pubDate,
-            source: src || "Google News",
-          }
-        })
+        const parsed: FeedItem[] = data.items
+          .filter((it) => isAllowedTopic(it.title, it.description))
+          .slice(0, 3)
+          .map((it) => {
+            const src = extractSource(it)
+            return {
+              title: cleanTitle(it.title, src),
+              url: it.link,
+              pubDate: it.pubDate,
+              source: src || "Google News",
+            }
+          })
 
         if (!cancelled) {
           setItems(parsed)

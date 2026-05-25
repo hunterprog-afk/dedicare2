@@ -65,26 +65,49 @@ async function runActor(actorId, input, timeoutSecs = 90, memoryMb = 256) {
 
 // ─── News ───────────────────────────────────────────────────────────────────
 
+/**
+ * Blocklist: parole/regex che, se presenti in titolo o description,
+ * fanno scartare l'articolo. Target = solo notizie di SALUTE pubblica
+ * e TECNOLOGIA sanitaria, NIENTE assistenza domiciliare/caregiver.
+ */
+const EXCLUDE_PATTERNS = [
+  /\bcaregiver\b/i,
+  /\bassistenza\s+domiciliar/i,
+  /\bADI\b/,
+  /\bassistente\s+familiar/i,
+  /\bbadant/i,
+  /assistenza\s+anziani/i,
+  /assistenza\s+infermieristic/i,
+  /assistenza\s+ospedalier/i,
+]
+
+function isAllowedTopic(item) {
+  const haystack = `${item.title ?? ""} ${item.description ?? item.snippet ?? ""}`
+  return !EXCLUDE_PATTERNS.some((rx) => rx.test(haystack))
+}
+
 async function fetchNews() {
   // Try multiple known actors in order until one works
   const NEWS_ACTORS = [
     {
       // apify/google-search-scraper — queries must be newline-separated string
+      // Focus: SALUTE pubblica + TECNOLOGIA sanitaria. NIENTE assistenza/caregiver (filtrato sotto).
       id: "apify/google-search-scraper",
       input: {
-        queries: "assistenza domiciliare anziani Milano\ncaregiver salute italia 2025",
+        queries: "notizie ricerca medica Italia novità 2026\ntelemedicina app salute smartphone novità\nintelligenza artificiale diagnosi medicina precision health",
         maxPagesPerQuery: 1,
-        resultsPerPage: 6,
+        resultsPerPage: 10,
         mobileResults: false,
         includeUnfilteredResults: false,
       },
     },
     {
       // Fallback: web scraper on Google News RSS
+      // Salute + healthtech, esclude assistenza domiciliare e caregiver
       id: "apify/cheerio-scraper",
       input: {
         startUrls: [
-          { url: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3Dassistenza%2Bdomiciliare%2Banziani%26hl%3Dit%26gl%3DIT%26ceid%3DIT%3Ait" },
+          { url: "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fnews.google.com%2Frss%2Fsearch%3Fq%3D%28salute%2BOR%2Btelemedicina%2BOR%2Bsanit%25C3%25A0%2Bdigitale%2BOR%2Bintelligenza%2Bartificiale%2Bmedicina%29%2B-assistenza%2B-domiciliare%2B-caregiver%26hl%3Dit%26gl%3DIT%26ceid%3DIT%3Ait" },
         ],
         pageFunction: `async function pageFunction(context) {
           const { $, request, log } = context;
@@ -120,6 +143,8 @@ async function fetchNews() {
           const urlOk = url.startsWith("http") || url.startsWith("www.")
           return title.trim().length > 5 && urlOk
         })
+        // 🚫 Post-filter: rimuovi tutto ciò che è assistenza/caregiver
+        .filter(isAllowedTopic)
         .slice(0, 6)
         .map((it) => {
           let url = it.url ?? it.link ?? it.displayedUrl ?? "#"
