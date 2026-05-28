@@ -124,7 +124,7 @@ export function ServiceModal({ open, onClose, data }: ServiceModalProps) {
             </div>
 
             {/* Body — scrollable */}
-            <div className="overflow-y-auto px-6 py-6 text-white/80 font-body text-sm leading-relaxed space-y-5 scroll-smooth">
+            <div className="overflow-y-auto p-6 text-white/80 font-body text-sm leading-relaxed space-y-5 scroll-smooth">
               {data.longDescription && (
                 <p className="text-white/85 text-[15px] leading-relaxed">
                   {data.longDescription}

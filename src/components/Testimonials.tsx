@@ -71,10 +71,10 @@ export function Testimonials() {
 
       <div className="group relative flex flex-col gap-5 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         <div className="flex gap-5 w-max [animation:marquee_28s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {row1.map((tt, i) => <Card key={i} {...tt} />)}
+          {row1.map((tt) => <Card key={`r1-${tt.author}`} {...tt} />)}
         </div>
         <div className="flex gap-5 w-max [animation:marquee-rev_32s_linear_infinite] group-hover:[animation-play-state:paused]">
-          {row2.map((tt, i) => <Card key={i} {...tt} />)}
+          {row2.map((tt) => <Card key={`r2-${tt.author}`} {...tt} />)}
         </div>
       </div>
     </section>

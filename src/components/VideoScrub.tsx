@@ -55,7 +55,6 @@ export function VideoScrub({ src, className, poster, containerRef }: Props) {
         playsInline
         preload="auto"
         disablePictureInPicture
-        fetchPriority="high"
         aria-hidden="true"
         style={{ objectFit: "cover", transform: "translateZ(0)", willChange: "transform" }}
       />
