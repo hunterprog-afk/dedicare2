@@ -21,7 +21,8 @@ const ICON_BEHAVIOR = ["spin", "scale", "rotate", "pulse"] as const
 function CountUp({ value }: { value: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref as React.RefObject<Element>, { once: true, amount: 0.15, margin: "0px 0px -10% 0px" })
-  const [display, setDisplay] = useState(value)
+  // Stato solo per il frame corrente dell'animazione; quando undefined ricade sul prop `value`.
+  const [animated, setAnimated] = useState<string>()
 
   useEffect(() => {
     if (!inView) return
@@ -29,7 +30,7 @@ function CountUp({ value }: { value: string }) {
     // Esempi animabili: "100%", "3+", "15"
     // NON animabili (mostrati così come sono): "24/7", "MI", "h24"
     const match = value.match(/^([^\d]*)(\d+)([^\d]*)$/)
-    if (!match) { setDisplay(value); return }
+    if (!match) return
     const [, prefix, digits, suffix] = match
     const numeric = parseInt(digits, 10)
     let start: number | null = null
@@ -38,13 +39,13 @@ function CountUp({ value }: { value: string }) {
       if (!start) start = ts
       const prog = Math.min((ts - start) / duration, 1)
       const eased = 1 - Math.pow(1 - prog, 3)
-      setDisplay(`${prefix}${Math.floor(eased * numeric)}${suffix}`)
+      setAnimated(`${prefix}${Math.floor(eased * numeric)}${suffix}`)
       if (prog < 1) requestAnimationFrame(step)
     }
     requestAnimationFrame(step)
   }, [inView, value])
 
-  return <span ref={ref}>{display}</span>
+  return <span ref={ref}>{animated ?? value}</span>
 }
 
 export function Stats() {

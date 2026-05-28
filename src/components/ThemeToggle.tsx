@@ -25,14 +25,14 @@ function applyTheme(theme: Theme) {
 
 export function ThemeToggle() {
   const { t } = useTranslation()
-  const [theme, setTheme] = useState<Theme>("dark")
+  // Lazy initializer: legge localStorage / prefers-color-scheme una sola volta al mount,
+  // evitando un useEffect di sola inizializzazione.
+  const [theme, setTheme] = useState<Theme>(() => getInitialTheme())
 
-  // Init from localStorage / prefers-color-scheme
+  // Side effect: applica la classe `light` al root ogni volta che theme cambia.
   useEffect(() => {
-    const initial = getInitialTheme()
-    setTheme(initial)
-    applyTheme(initial)
-  }, [])
+    applyTheme(theme)
+  }, [theme])
 
   const toggle = () => {
     const next: Theme = theme === "dark" ? "light" : "dark"

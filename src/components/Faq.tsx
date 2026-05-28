@@ -67,7 +67,7 @@ export function Faq() {
         >
           <Accordion type="single" collapsible>
             {items.map((item, i) => (
-              <AccordionItem key={i} value={`item-${i}`} className="border-border/40">
+              <AccordionItem key={item.q} value={`item-${i}`} className="border-border/40">
                 <AccordionTrigger className="font-display uppercase text-base md:text-xl tracking-tight py-5 md:py-6 hover:no-underline data-[state=open]:text-primary text-left gap-3">
                   {item.q}
                 </AccordionTrigger>
