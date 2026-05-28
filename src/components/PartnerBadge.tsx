@@ -97,6 +97,7 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
 
   return (
     <div
+      role="button"
       className={`partner-badge group relative flex items-center gap-3 rounded-2xl px-4 py-3 transition-all duration-300 cursor-default focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--secondary))] focus-visible:ring-offset-2 focus-visible:ring-offset-background ${
         isLight
           ? "partner-badge--light bg-white border border-[hsl(220,12%,88%)] hover:border-[hsl(220,12%,72%)] hover:shadow-md"
@@ -108,6 +109,12 @@ export function PartnerBadge({ partner, variant = "dark" }: Props) {
       onFocus={() => setOpen(true)}
       onBlur={() => setOpen(false)}
       onClick={handleClick}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          handleClick()
+        }
+      }}
       aria-describedby={tooltipId}
     >
       {/* Tooltip */}

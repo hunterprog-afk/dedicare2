@@ -48,8 +48,8 @@ export function Navbar() {
             background: scrolled
               ? "rgba(8, 16, 40, 0.92)"
               : "rgba(8, 16, 40, 0.78)",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
             border: "1px solid rgba(255,255,255,0.12)",
             boxShadow: "0 4px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
@@ -130,8 +130,8 @@ export function Navbar() {
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 px-8"
             style={{
               background: "rgba(8, 16, 40, 0.97)",
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
             }}
           >
             {NAV_ITEMS.map((item) => (
