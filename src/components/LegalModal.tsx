@@ -66,7 +66,7 @@ export function LegalModal({ open, onClose, title, children }: LegalModalProps) 
         </div>
 
         {/* Contenuto scrollabile */}
-        <div className="overflow-y-auto px-6 py-6 text-white/75 font-body text-sm leading-relaxed space-y-4 scroll-smooth">
+        <div className="overflow-y-auto p-6 text-white/75 font-body text-sm leading-relaxed space-y-4 scroll-smooth">
           {children}
         </div>
 

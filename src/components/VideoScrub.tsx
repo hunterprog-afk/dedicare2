@@ -55,8 +55,7 @@ export function VideoScrub({ src, className, poster, containerRef }: Props) {
         playsInline
         preload="auto"
         disablePictureInPicture
-        // @ts-expect-error fetchpriority is a valid HTML attribute not yet typed in React
-        fetchpriority="high"
+        fetchPriority="high"
         aria-hidden="true"
         style={{ objectFit: "cover", transform: "translateZ(0)", willChange: "transform" }}
       />

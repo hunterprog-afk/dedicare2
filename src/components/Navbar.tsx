@@ -43,7 +43,7 @@ export function Navbar() {
       >
         {/* Dark frosted glass pill — always readable over any section */}
         <div
-          className="rounded-full px-2 py-2 flex items-center justify-between gap-4"
+          className="rounded-full p-2 flex items-center justify-between gap-4"
           style={{
             background: scrolled
               ? "rgba(8, 16, 40, 0.92)"
@@ -55,7 +55,7 @@ export function Navbar() {
           }}
         >
           {/* Pittogramma + wordmark */}
-          <a href="#" className="flex items-center gap-3 pl-2 shrink-0" aria-label="Dedicare Solutions — home">
+          <a href="#top" className="flex items-center gap-3 pl-2 shrink-0" aria-label="Dedicare Solutions — home">
             <OptimizedImage
               src="images/logo/nobg_pitto-chiaro"
               alt="Dedicare Solutions"
