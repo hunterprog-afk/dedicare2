@@ -124,7 +124,7 @@ export function AreeServite() {
                     r="14"
                     fill="#15A89A"
                     fillOpacity="0.18"
-                    initial={{ scale: 0 }}
+                    initial={{ scale: 0.95, opacity: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
@@ -134,7 +134,7 @@ export function AreeServite() {
                     cy={p.y}
                     r="5"
                     fill="#15A89A"
-                    initial={{ scale: 0 }}
+                    initial={{ scale: 0.95, opacity: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.4 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}

@@ -43,19 +43,19 @@ export function Navbar() {
       >
         {/* Dark frosted glass pill — always readable over any section */}
         <div
-          className="rounded-full px-2 py-2 flex items-center justify-between gap-4"
+          className="rounded-full p-2 flex items-center justify-between gap-4"
           style={{
             background: scrolled
               ? "rgba(8, 16, 40, 0.92)"
               : "rgba(8, 16, 40, 0.78)",
-            backdropFilter: "blur(24px)",
-            WebkitBackdropFilter: "blur(24px)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
             border: "1px solid rgba(255,255,255,0.12)",
             boxShadow: "0 4px 32px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.08)",
           }}
         >
           {/* Pittogramma + wordmark */}
-          <a href="#" className="flex items-center gap-3 pl-2 shrink-0" aria-label="Dedicare Solutions — home">
+          <a href="#top" className="flex items-center gap-3 pl-2 shrink-0" aria-label="Dedicare Solutions — home">
             <OptimizedImage
               src="images/logo/nobg_pitto-chiaro"
               alt="Dedicare Solutions"
@@ -130,8 +130,8 @@ export function Navbar() {
             className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 px-8"
             style={{
               background: "rgba(8, 16, 40, 0.97)",
-              backdropFilter: "blur(24px)",
-              WebkitBackdropFilter: "blur(24px)",
+              backdropFilter: "blur(16px)",
+              WebkitBackdropFilter: "blur(16px)",
             }}
           >
             {NAV_ITEMS.map((item) => (

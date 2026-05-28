@@ -31,8 +31,7 @@ export function Hero({ scrollRef }: Props) {
           alt=""
           aria-hidden="true"
           loading="eager"
-          // @ts-expect-error fetchpriority is a valid HTML attribute not yet typed in React
-          fetchpriority="high"
+          fetchPriority="high"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ zIndex: 0 }}
@@ -69,7 +68,7 @@ export function Hero({ scrollRef }: Props) {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="max-w-[92vw]"
           >
-            <div className="liquid-glass rounded-full px-1 py-1 inline-flex items-center gap-2 max-w-full">
+            <div className="liquid-glass rounded-full p-1 inline-flex items-center gap-2 max-w-full">
               <span className="bg-primary text-white rounded-full px-3 py-1 text-[11px] md:text-xs font-semibold font-body shrink-0">
                 {t("hero.tag_city")}
               </span>
