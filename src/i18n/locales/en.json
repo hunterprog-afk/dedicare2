@@ -26,18 +26,6 @@
     "modal_close": "Close",
     "items": [
       {
-        "title": "Nursing Care",
-        "body": "Professional nursing care at home and in hospital, delivered by licensed staff with advanced clinical skills.",
-        "longDescription": "A high-standard home nursing service for people returning home after hospital stays or living with chronic conditions. Our licensed nurses work in close coordination with the attending physician to ensure continuity of care, medication safety and real peace of mind for the family, every single day.",
-        "bullets": [
-          "Therapy and medication administration",
-          "Vital signs monitoring",
-          "Wound dressing and management",
-          "Patient therapeutic education",
-          "Post-operative support"
-        ]
-      },
-      {
         "title": "Healthcare Assistants (OSS)",
         "body": "Our healthcare assistants provide qualified, compassionate support for daily care, preserving dignity, autonomy and well-being.",
         "longDescription": "Dedicare's healthcare assistants are selected for both technical skill and human empathy. They support the patient with daily activities discreetly and respectfully, ease the family's caregiving load and become a steady, familiar presence in the home — capable of restoring rhythm, calm and connection.",
@@ -61,7 +49,7 @@
         ]
       },
       {
-        "title": "Medical Transport",
+        "title": "Accompaniment",
         "body": "Specialised escorting for medical visits, therapies and any transfer requiring dedicated healthcare assistance.",
         "longDescription": "Safe medical transfers to outpatient clinics, day hospitals and specialist visits, with nursing staff on board whenever the clinical condition requires it. We plan schedules, paperwork and logistics so the family doesn't have to worry about anything: one single point of contact handles everything, from the moment you leave home until you return.",
         "bullets": [
@@ -72,25 +60,13 @@
         ]
       },
       {
-        "title": "Free Prevention Check",
-        "body": "Before every visit we measure the main vital parameters of the patient at no cost. Because prevention is care.",
-        "longDescription": "At every visit, before starting the actual intervention, we measure blood pressure, oxygen saturation and heart rate at no cost. It's a small check that can catch important signals early, keep the attending physician informed and build a clear picture of how the patient is doing over time. For us, prevention is part of care.",
-        "bullets": [
-          "Blood pressure with digital sphygmomanometer",
-          "SpO₂ saturation with pulse oximeter",
-          "Heart rate and rhythm",
-          "Anomaly reporting to the GP",
-          "Completely free at every visit"
-        ]
-      },
-      {
         "title": "Multidisciplinary Approach",
         "body": "An integrated team of healthcare and social-care professionals for a holistic care experience.",
-        "longDescription": "Nurses, healthcare assistants, physiotherapists and a dedicated care manager all work on the same care plan, sharing information and goals. This integrated approach lets us follow the person in all their complexity, adapt the intervention as the clinical situation evolves and keep the family constantly informed through a single point of reference.",
+        "longDescription": "A wound care specialist, physiotherapists, nurses, healthcare assistants and a dedicated care manager all work on the same care plan, sharing information and goals. This integrated approach lets us follow the person in all their complexity, adapt the intervention as the clinical situation evolves and keep the family constantly informed through a single point of reference.",
         "bullets": [
-          "Coordinated nurses, OSS, physiotherapists",
+          "Coordinated wound care specialist, physiotherapists, nurses and OSS",
           "Personalised care plan",
-          "Regular updates to the family",
+          "Constant updates to the family",
           "Guaranteed continuity of care"
         ]
       }
@@ -129,7 +105,7 @@
       },
       {
         "title": "Assessment",
-        "body": "Comprehensive clinical assessment to define a personalised care plan, shared with the whole family."
+        "body": "Comprehensive assessment to define a personalised assistance plan, shared with the whole family."
       },
       {
         "title": "Activation",
@@ -137,7 +113,7 @@
       },
       {
         "title": "Follow-up",
-        "body": "Regular family updates, plan reviews and 24/7 on-call availability for any clinical need."
+        "body": "Constant family updates, plan reviews and 24/7 on-call availability for any clinical need."
       }
     ]
   },
@@ -243,14 +219,14 @@
     "factors": [
       {
         "title": "Type of assistance",
-        "body": "Nursing, OSS, specialist or multidisciplinary support: each profile has different rates and timing."
+        "body": "Wound care specialist, physiotherapists, OSS and specialist or multidisciplinary support: each profile has different rates and timing."
       },
       {
         "title": "Duration and frequency",
         "body": "Single visit, scheduled shifts, continuous presence or 24/7 on-call all affect the financial plan."
       },
       {
-        "title": "Clinical complexity",
+        "title": "Patient condition",
         "body": "Conditions, active therapies, medical devices and dependency levels define the real need."
       },
       {

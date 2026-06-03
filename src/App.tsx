@@ -5,7 +5,6 @@ import { WhatsAppFab }  from "@/components/WhatsAppFab"
 
 const ServicesBento  = lazy(() => import("@/components/ServicesBento").then(m => ({ default: m.ServicesBento })))
 const Pourquoi       = lazy(() => import("@/components/Pourquoi").then(m => ({ default: m.Pourquoi })))
-const Team           = lazy(() => import("@/components/Team").then(m => ({ default: m.Team })))
 const Process        = lazy(() => import("@/components/Process").then(m => ({ default: m.Process })))
 const AreeServite    = lazy(() => import("@/components/AreeServite").then(m => ({ default: m.AreeServite })))
 const Stats          = lazy(() => import("@/components/Stats").then(m => ({ default: m.Stats })))
@@ -29,7 +28,6 @@ export default function App() {
         <Suspense fallback={LazyFallback}>
           <ServicesBento />
           <Pourquoi />
-          <Team />
           <Process />
           <AreeServite />
           <Stats />

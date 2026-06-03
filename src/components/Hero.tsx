@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { BlurText } from "@/components/BlurText"
 import { VideoScrub } from "@/components/VideoScrub"
-import { PartnerBadge, PARTNERS_DATA } from "@/components/PartnerBadge"
 
 type Props = {
   scrollRef: React.RefObject<HTMLElement | null>
@@ -122,18 +121,6 @@ export function Hero({ scrollRef }: Props) {
               </a>
             </Button>
           </motion.div>
-
-          {/* Partners */}
-          <div className="absolute bottom-4 md:bottom-8 inset-x-0 flex flex-col items-center gap-5 md:gap-3 px-6">
-            <span className="text-[11px] font-body uppercase tracking-[0.18em] text-white/55">
-              {t("hero.partners_label")}
-            </span>
-            <div className="flex items-center gap-2 md:gap-3 flex-wrap justify-center max-w-[980px]">
-              {PARTNERS_DATA.map((p) => (
-                <PartnerBadge key={p.abbr} partner={p} variant="dark" />
-              ))}
-            </div>
-          </div>
         </div>
       </div>
     </section>

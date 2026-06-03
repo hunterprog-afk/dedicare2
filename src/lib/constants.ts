@@ -21,20 +21,6 @@ export const PARTNERS = [
 
 export const SERVICES = [
   {
-    icon: "Stethoscope",
-    slug: "assistenza-infermieristica",
-    image: "/images/services/assistenza-infermieristica.jpg",
-    title: "Assistenza Infermieristica",
-    body: "Interventi infermieristici professionali a domicilio e in ospedale, condotti da personale abilitato con competenze cliniche avanzate.",
-    bullets: [
-      "Somministrazione terapie e farmaci",
-      "Monitoraggio parametri vitali",
-      "Medicazioni e gestione ferite",
-      "Educazione terapeutica al paziente",
-      "Supporto post-operatorio",
-    ],
-  },
-  {
     icon: "Heart",
     slug: "operatori-oss",
     image: "/images/services/operatori-oss.jpg",
@@ -65,7 +51,7 @@ export const SERVICES = [
     icon: "Ambulance",
     slug: "trasporto-protetto",
     image: "/images/services/trasporto-protetto.jpg",
-    title: "Trasporto Protetto",
+    title: "Accompagnamento",
     body: "Accompagnamento specializzato per visite, terapie e ogni spostamento che richiede assistenza sanitaria dedicata.",
     bullets: [
       "Trasporto sanitario assistito",
@@ -75,29 +61,15 @@ export const SERVICES = [
     ],
   },
   {
-    icon: "Activity",
-    slug: "prevenzione-gratuita",
-    image: "/images/services/prevenzione-gratuita.jpg",
-    title: "Prevenzione Gratuita",
-    body: "Prima di ogni intervento misuriamo gratuitamente i principali parametri vitali del paziente. Perché prevenire è cura.",
-    bullets: [
-      "Pressione arteriosa con sfigmomanometro digitale",
-      "Saturazione SpO₂ con pulsossimetro",
-      "Frequenza cardiaca e ritmo",
-      "Segnalazione anomalie al medico curante",
-      "Completamente gratuito ad ogni visita",
-    ],
-  },
-  {
     icon: "Users",
     slug: "approccio-multidisciplinare",
     image: "/images/services/approccio-multidisciplinare.jpg",
     title: "Approccio Multidisciplinare",
     body: "Un team integrato di professionisti sanitari e socio-assistenziali per una presa in carico globale della persona.",
     bullets: [
-      "Infermieri, OSS, fisioterapisti coordinati",
+      "Vulnologo, fisioterapisti, infermieri e OSS coordinati",
       "Piano di cura personalizzato",
-      "Aggiornamenti periodici alla famiglia",
+      "Aggiornamenti costanti alla famiglia",
       "Continuità assistenziale garantita",
     ],
   },
@@ -135,7 +107,7 @@ export const PROCESS_STEPS = [
   {
     n: "2",
     title: "Valutazione",
-    body: "Valutazione clinica completa per definire un piano di cura personalizzato, condiviso con tutta la famiglia.",
+    body: "Valutazione completa per definire un piano di assistenza personalizzato, condiviso con tutta la famiglia.",
   },
   {
     n: "3",
@@ -145,7 +117,7 @@ export const PROCESS_STEPS = [
   {
     n: "4",
     title: "Follow-up",
-    body: "Aggiornamenti periodici alla famiglia, revisione del piano e reperibilità H24 per qualsiasi necessità clinica.",
+    body: "Aggiornamenti costanti alla famiglia, revisione del piano e reperibilità H24 per qualsiasi necessità clinica.",
   },
 ]
 

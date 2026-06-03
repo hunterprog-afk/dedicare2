@@ -26,18 +26,6 @@
     "modal_close": "Chiudi",
     "items": [
       {
-        "title": "Assistenza Infermieristica",
-        "body": "Interventi infermieristici professionali a domicilio e in ospedale, condotti da personale abilitato con competenze cliniche avanzate.",
-        "longDescription": "Un servizio infermieristico domiciliare di alto profilo clinico, pensato per chi rientra a casa dopo un ricovero o convive con una patologia cronica. I nostri infermieri abilitati lavorano in coordinamento con il medico curante per garantire continuità assistenziale, sicurezza terapeutica e tranquillità alla famiglia, ogni giorno.",
-        "bullets": [
-          "Somministrazione terapie e farmaci",
-          "Monitoraggio parametri vitali",
-          "Medicazioni e gestione ferite",
-          "Educazione terapeutica al paziente",
-          "Supporto post-operatorio"
-        ]
-      },
-      {
         "title": "Operatori OSS",
         "body": "I nostri OSS offrono supporto qualificato e premuroso per la cura quotidiana, preservando dignità, autonomia e benessere.",
         "longDescription": "Gli Operatori Socio-Sanitari di Dedicare sono selezionati per competenza tecnica ed empatia. Affiancano l'assistito nelle attività quotidiane con discrezione e rispetto, sostengono la famiglia nei momenti più impegnativi e diventano un punto di riferimento costante nella casa, capace di restituire ritmo, serenità e relazione.",
@@ -61,7 +49,7 @@
         ]
       },
       {
-        "title": "Trasporto Protetto",
+        "title": "Accompagnamento",
         "body": "Accompagnamento specializzato per visite, terapie e ogni spostamento che richiede assistenza sanitaria dedicata.",
         "longDescription": "Trasferimenti sanitari sicuri verso ambulatori, day-hospital, cliniche e visite specialistiche, con personale infermieristico a bordo quando la condizione clinica lo richiede. Pianifichiamo orari, documenti e logistica perché la famiglia non debba pensare a nulla: si occupa di tutto un solo referente, dall'uscita al rientro a casa.",
         "bullets": [
@@ -72,25 +60,13 @@
         ]
       },
       {
-        "title": "Prevenzione Gratuita",
-        "body": "Prima di ogni intervento misuriamo gratuitamente i principali parametri vitali del paziente. Perché prevenire è cura.",
-        "longDescription": "A ogni nostra visita, prima ancora di iniziare l'intervento, rileviamo gratuitamente pressione, saturazione e frequenza cardiaca. È un piccolo controllo che permette di intercettare in anticipo segnali importanti, di informare il medico curante e di costruire nel tempo un quadro chiaro dell'andamento clinico. Prevenire, per noi, fa parte della cura.",
-        "bullets": [
-          "Pressione arteriosa con sfigmomanometro digitale",
-          "Saturazione SpO₂ con pulsossimetro",
-          "Frequenza cardiaca e ritmo",
-          "Segnalazione anomalie al medico curante",
-          "Completamente gratuito ad ogni visita"
-        ]
-      },
-      {
         "title": "Approccio Multidisciplinare",
         "body": "Un team integrato di professionisti sanitari e socio-assistenziali per una presa in carico globale della persona.",
-        "longDescription": "Infermieri, OSS, fisioterapisti e care manager lavorano sullo stesso piano di cura, condividendo informazioni e obiettivi. Questo approccio integrato permette di seguire la persona nella sua complessità, adattare l'intervento all'evolvere della situazione clinica e mantenere la famiglia costantemente informata, con un'unica voce di riferimento.",
+        "longDescription": "Vulnologo, fisioterapisti, infermieri, OSS e care manager lavorano sullo stesso piano di cura, condividendo informazioni e obiettivi. Questo approccio integrato permette di seguire la persona nella sua complessità, adattare l'intervento all'evolvere della situazione clinica e mantenere la famiglia costantemente informata, con un'unica voce di riferimento.",
         "bullets": [
-          "Infermieri, OSS, fisioterapisti coordinati",
+          "Vulnologo, fisioterapisti, infermieri e OSS coordinati",
           "Piano di cura personalizzato",
-          "Aggiornamenti periodici alla famiglia",
+          "Aggiornamenti costanti alla famiglia",
           "Continuità assistenziale garantita"
         ]
       }
@@ -129,7 +105,7 @@
       },
       {
         "title": "Valutazione",
-        "body": "Valutazione clinica completa per definire un piano di cura personalizzato, condiviso con tutta la famiglia."
+        "body": "Valutazione completa per definire un piano di assistenza personalizzato, condiviso con tutta la famiglia."
       },
       {
         "title": "Attivazione",
@@ -137,7 +113,7 @@
       },
       {
         "title": "Follow-up",
-        "body": "Aggiornamenti periodici alla famiglia, revisione del piano e reperibilità H24 per qualsiasi necessità clinica."
+        "body": "Aggiornamenti costanti alla famiglia, revisione del piano e reperibilità H24 per qualsiasi necessità clinica."
       }
     ]
   },
@@ -243,14 +219,14 @@
     "factors": [
       {
         "title": "Tipologia di assistenza",
-        "body": "Infermieristica, OSS, supporto specialistico o multidisciplinare: ogni profilo ha tariffe e tempi diversi."
+        "body": "Vulnologo, fisioterapisti, OSS e supporto specialistico o multidisciplinare: ogni profilo ha tariffe e tempi diversi."
       },
       {
         "title": "Durata e frequenza",
         "body": "Visita singola, turni programmati, presenza continuativa o reperibilità 24/7 incidono sul piano economico."
       },
       {
-        "title": "Complessità clinica",
+        "title": "Condizione del paziente",
         "body": "Patologie, terapie attive, dispositivi medici e livelli di non autosufficienza definiscono il fabbisogno reale."
       },
       {

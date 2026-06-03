@@ -310,11 +310,11 @@ export function Curriculum() {
                     disabled={status === "loading"}
                     className={inputBase}
                   >
-                    <option value="" disabled>
+                    <option value="" disabled className="bg-white text-neutral-500">
                       {t("curriculum.posizione_placeholder")}
                     </option>
                     {POSITION_KEYS.map((k) => (
-                      <option key={k} value={t(`curriculum.posizioni.${k}`)}>
+                      <option key={k} value={t(`curriculum.posizioni.${k}`)} className="bg-white text-neutral-900">
                         {t(`curriculum.posizioni.${k}`)}
                       </option>
                     ))}
