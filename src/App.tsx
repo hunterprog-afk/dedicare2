@@ -4,6 +4,7 @@ import { Hero }         from "@/components/Hero"
 import { WhatsAppFab }  from "@/components/WhatsAppFab"
 
 const ServicesBento  = lazy(() => import("@/components/ServicesBento").then(m => ({ default: m.ServicesBento })))
+const Assistiti      = lazy(() => import("@/components/Assistiti").then(m => ({ default: m.Assistiti })))
 const Pourquoi       = lazy(() => import("@/components/Pourquoi").then(m => ({ default: m.Pourquoi })))
 const Process        = lazy(() => import("@/components/Process").then(m => ({ default: m.Process })))
 const AreeServite    = lazy(() => import("@/components/AreeServite").then(m => ({ default: m.AreeServite })))
@@ -26,6 +27,7 @@ export default function App() {
         <Hero scrollRef={heroRef} />
         <Suspense fallback={LazyFallback}>
           <ServicesBento />
+          <Assistiti />
           <Pourquoi />
           <Process />
           <AreeServite />

@@ -17,6 +17,17 @@
     "partners_label": "We partner with",
     "video_alt": "Dedicare Solutions presentation video — professional healthcare assistance in the Milan metropolitan area."
   },
+  "assistiti": {
+    "eyebrow": "Who we care for",
+    "title": "Care tailored to every person",
+    "intro": "Seniors, adults, children and people with disabilities: every story is different. We build the assistance around the person and their family, not the other way round.",
+    "items": [
+      { "title": "Seniors", "body": "Continuous home care, management of chronic conditions and dementia, prevention and daily companionship to live at home safely." },
+      { "title": "Adults & post-hospital", "body": "Protected discharges, post-operative support and management of therapies and recovery paths, to get back to everyday life." },
+      { "title": "Children", "body": "Paediatric home care and support for families in managing conditions and fragilities, with gentleness and competence." },
+      { "title": "People with disabilities", "body": "Support for autonomy and continuous assistance, with a multidisciplinary team coordinating every aspect of care." }
+    ]
+  },
   "services": {
     "eyebrow": "Our services",
     "title": "Everything you need, under one trusted care.",

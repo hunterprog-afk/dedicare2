@@ -75,6 +75,29 @@ export const SERVICES = [
   },
 ]
 
+export const ASSISTITI = [
+  {
+    icon: "HeartHandshake",
+    title: "Anziani",
+    body: "Assistenza domiciliare continuativa, gestione di cronicità e demenza, prevenzione e compagnia quotidiana per vivere la casa in sicurezza.",
+  },
+  {
+    icon: "Stethoscope",
+    title: "Adulti & post-ricovero",
+    body: "Dimissioni protette, supporto post-operatorio e gestione di terapie e percorsi di recupero, per tornare alla vita di ogni giorno.",
+  },
+  {
+    icon: "Baby",
+    title: "Bambini",
+    body: "Assistenza pediatrica domiciliare e supporto alle famiglie nella gestione di patologie e fragilità, con delicatezza e competenza.",
+  },
+  {
+    icon: "Accessibility",
+    title: "Persone con disabilità",
+    body: "Supporto all'autonomia e assistenza continuativa, con un team multidisciplinare che coordina ogni aspetto della cura.",
+  },
+]
+
 export const REASONS = [
   {
     icon: "ShieldCheck",
