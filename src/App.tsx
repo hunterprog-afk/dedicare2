@@ -11,7 +11,6 @@ const Stats          = lazy(() => import("@/components/Stats").then(m => ({ defa
 const Tariffario     = lazy(() => import("@/components/Tariffario").then(m => ({ default: m.Tariffario })))
 const Testimonials   = lazy(() => import("@/components/Testimonials").then(m => ({ default: m.Testimonials })))
 const Faq            = lazy(() => import("@/components/Faq").then(m => ({ default: m.Faq })))
-const Blog           = lazy(() => import("@/components/Blog").then(m => ({ default: m.Blog })))
 const Curriculum     = lazy(() => import("@/components/Curriculum").then(m => ({ default: m.Curriculum })))
 const CtaFooter      = lazy(() => import("@/components/CtaFooter").then(m => ({ default: m.CtaFooter })))
 
@@ -34,7 +33,6 @@ export default function App() {
           <Tariffario />
           <Testimonials />
           <Faq />
-          <Blog />
           <Curriculum />
           <CtaFooter />
         </Suspense>
