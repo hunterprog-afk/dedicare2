@@ -1,4 +1,4 @@
-import { motion, useInView } from "motion/react"
+import { m, useInView } from "motion/react"
 import { Fragment, useRef } from "react"
 
 type Props = {
@@ -31,7 +31,7 @@ export function BlurText({
     <Tag ref={ref as never} className={className}>
       {words.map((w, i) => (
         <Fragment key={i}>
-          <motion.span
+          <m.span
             className="inline-block will-change-[filter,transform,opacity]"
             initial={{ filter: "blur(10px)", opacity: 0, y: 24 }}
             animate={shouldAnimate ? { filter: "blur(0px)", opacity: 1, y: 0 } : undefined}
@@ -42,7 +42,7 @@ export function BlurText({
             }}
           >
             {w}
-          </motion.span>
+          </m.span>
           {i < words.length - 1 ? " " : ""}
         </Fragment>
       ))}

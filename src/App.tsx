@@ -1,4 +1,5 @@
 import { lazy, Suspense, useRef } from "react"
+import { LazyMotion, domAnimation } from "motion/react"
 import { Navbar }       from "@/components/Navbar"
 import { Hero }         from "@/components/Hero"
 import { WhatsAppFab }  from "@/components/WhatsAppFab"
@@ -21,25 +22,27 @@ export default function App() {
   const heroRef = useRef<HTMLElement>(null)
 
   return (
-    <div className="bg-background text-foreground min-h-screen">
-      <Navbar />
-      <main>
-        <Hero scrollRef={heroRef} />
-        <Suspense fallback={LazyFallback}>
-          <ServicesBento />
-          <Assistiti />
-          <Pourquoi />
-          <Process />
-          <AreeServite />
-          <Stats />
-          <Tariffario />
-          <Testimonials />
-          <Faq />
-          <Curriculum />
-          <CtaFooter />
-        </Suspense>
-      </main>
-      <WhatsAppFab />
-    </div>
+    <LazyMotion features={domAnimation}>
+      <div className="bg-background text-foreground min-h-screen">
+        <Navbar />
+        <main>
+          <Hero scrollRef={heroRef} />
+          <Suspense fallback={LazyFallback}>
+            <ServicesBento />
+            <Assistiti />
+            <Pourquoi />
+            <Process />
+            <AreeServite />
+            <Stats />
+            <Tariffario />
+            <Testimonials />
+            <Faq />
+            <Curriculum />
+            <CtaFooter />
+          </Suspense>
+        </main>
+        <WhatsAppFab />
+      </div>
+    </LazyMotion>
   )
 }

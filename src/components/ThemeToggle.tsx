@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import { m, AnimatePresence } from "motion/react"
 import { Sun, Moon } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
@@ -58,7 +58,7 @@ export function ThemeToggle() {
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (
-          <motion.span
+          <m.span
             key="moon"
             initial={{ rotate: -90, opacity: 0, scale: 0.6 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
@@ -67,9 +67,9 @@ export function ThemeToggle() {
             className="flex"
           >
             <Moon className="size-4" />
-          </motion.span>
+          </m.span>
         ) : (
-          <motion.span
+          <m.span
             key="sun"
             initial={{ rotate: 90, opacity: 0, scale: 0.6 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
@@ -78,7 +78,7 @@ export function ThemeToggle() {
             className="flex"
           >
             <Sun className="size-4" />
-          </motion.span>
+          </m.span>
         )}
       </AnimatePresence>
     </button>
