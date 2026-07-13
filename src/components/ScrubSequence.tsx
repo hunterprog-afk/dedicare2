@@ -86,12 +86,17 @@ export function ScrubSequence({
   }, [])
 
   useEffect(() => {
-    if (prefersReduced.current) {
-      const mid = Math.floor(frameCount / 2)
-      const img = imagesRef.current[mid]
-      if (img?.complete) drawImage(img)
-      else img?.addEventListener("load", () => drawImage(img), { once: true })
+    if (!prefersReduced.current) return
+    const mid = Math.floor(frameCount / 2)
+    const img = imagesRef.current[mid]
+    if (!img) return
+    if (img.complete) {
+      drawImage(img)
+      return
     }
+    const handleLoad = () => drawImage(img)
+    img.addEventListener("load", handleLoad, { once: true })
+    return () => img.removeEventListener("load", handleLoad)
   }, [frameCount])
 
   const currentIndex = () => {

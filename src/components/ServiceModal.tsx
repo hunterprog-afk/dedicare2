@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useEffectEvent, useRef } from "react"
 import { AnimatePresence, motion } from "motion/react"
 import { Check, X, ArrowRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
@@ -33,14 +33,18 @@ export function ServiceModal({ open, onClose, data }: ServiceModalProps) {
   }, [open])
 
   // ESC to close
+  const onEscape = useEffectEvent(() => {
+    onClose()
+  })
+
   useEffect(() => {
     if (!open) return
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
+      if (e.key === "Escape") onEscape()
     }
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
-  }, [open, onClose])
+  }, [open])
 
   // Move focus to close button on open
   useEffect(() => {

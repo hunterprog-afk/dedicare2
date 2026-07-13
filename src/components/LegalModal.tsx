@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useEffectEvent } from "react"
 import { X } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
@@ -24,14 +24,18 @@ export function LegalModal({ open, onClose, title, children }: LegalModalProps) 
   }, [open])
 
   // Chiude con tasto Escape
+  const onEscape = useEffectEvent(() => {
+    onClose()
+  })
+
   useEffect(() => {
     if (!open) return
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose()
+      if (e.key === "Escape") onEscape()
     }
     window.addEventListener("keydown", handleKey)
     return () => window.removeEventListener("keydown", handleKey)
-  }, [open, onClose])
+  }, [open])
 
   if (!open) return null
 
