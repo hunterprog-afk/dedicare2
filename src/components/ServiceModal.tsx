@@ -142,7 +142,7 @@ export function ServiceModal({ open, onClose, data }: ServiceModalProps) {
                       <Check
                         className="size-4 shrink-0 mt-0.5"
                         strokeWidth={2.5}
-                        style={{ color: "hsl(174, 62%, 55%)" }}
+                        style={{ color: "hsl(168, 49%, 42%)" }}
                       />
                       <span className="text-white/85">{b}</span>
                     </li>
@@ -162,7 +162,7 @@ export function ServiceModal({ open, onClose, data }: ServiceModalProps) {
               <button
                 onClick={handleCtaClick}
                 className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg text-sm font-body font-medium text-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 order-1 sm:order-2"
-                style={{ background: "hsl(174, 62%, 38%)" }}
+                style={{ background: "hsl(168, 49%, 38%)" }}
               >
                 <span>{t("services.modal_cta", "Richiedi questo servizio")}</span>
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />

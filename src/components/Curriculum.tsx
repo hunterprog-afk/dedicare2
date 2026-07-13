@@ -128,8 +128,8 @@ export function Curriculum() {
   return (
     <section
       id="lavora-con-noi"
-      data-section="dark"
-      className="relative py-16 md:py-40 border-t border-border/40 bg-[hsl(220,22%,9%)]"
+      data-section="light"
+      className="relative py-16 md:py-40"
     >
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
@@ -199,7 +199,7 @@ export function Curriculum() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="rounded-2xl bg-[hsl(210,30%,8%)]/80 border border-white/10 p-6 md:p-8 flex flex-col gap-5"
+            className="rounded-2xl bg-[hsl(222,35%,13%)]/95 border border-white/10 p-6 md:p-8 flex flex-col gap-5 shadow-xl shadow-black/10"
           >
             {status === "success" ? (
               <div className="text-center py-6">

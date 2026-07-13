@@ -44,14 +44,14 @@ export function Hero({ scrollRef }: Props) {
           containerRef={scrollRef}
         />
 
-        {/* Base dark overlay */}
-        <div className="absolute inset-0 z-[1] bg-black/65" />
+        {/* Base dark overlay — tinta navy brand invece di nero piatto */}
+        <div className="absolute inset-0 z-[1] bg-[hsl(222,35%,10%)]/65" />
 
         {/* Center darkening radial */}
-        <div className="absolute inset-0 z-[2] bg-[radial-gradient(70%_55%_at_50%_42%,rgba(0,0,0,0.35)_0%,transparent_100%)]" />
+        <div className="absolute inset-0 z-[2] bg-[radial-gradient(70%_55%_at_50%_42%,rgba(10,15,28,0.35)_0%,transparent_100%)]" />
 
         {/* Top gradient */}
-        <div className="absolute top-0 inset-x-0 h-32 z-[3] bg-gradient-to-b from-black/40 to-transparent" />
+        <div className="absolute top-0 inset-x-0 h-32 z-[3] bg-gradient-to-b from-[hsl(222,35%,8%)]/45 to-transparent" />
 
         {/* Bottom fade into next section */}
         <div className="absolute bottom-0 inset-x-0 h-[35vh] z-[3] gradient-fade-b" />

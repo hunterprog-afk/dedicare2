@@ -18,7 +18,7 @@ export function Assistiti() {
   const items = t("assistiti.items", { returnObjects: true }) as TranslatedAssistito[]
 
   return (
-    <section id="assistiti" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="assistiti" data-section="light" className="relative py-16 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">

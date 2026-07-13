@@ -5,7 +5,7 @@ import { PROCESS_STEPS } from "@/lib/constants"
 
 type TranslatedStep = { title: string; body: string }
 
-const TEAL = "#15A89A"
+const TEAL = "#3FB9A1"
 
 const svgProps = {
   width: 80,
@@ -88,7 +88,7 @@ export function Process() {
   const { t, i18n } = useTranslation()
   const items = t("process.items", { returnObjects: true }) as TranslatedStep[]
   return (
-    <section id="processo" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="processo" data-section="light" className="relative py-16 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-12 md:mb-16">

@@ -21,7 +21,7 @@ export function AreeServite() {
   const { t, i18n } = useTranslation()
   const comuni = t("aree.comuni", { returnObjects: true }) as string[]
   return (
-    <section id="aree" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="aree" data-section="light" className="relative py-16 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="mb-12 md:mb-16">
@@ -63,12 +63,12 @@ export function AreeServite() {
             >
               <defs>
                 <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
-                  <stop offset="0%" stopColor="#0B5FA5" stopOpacity="0.18" />
+                  <stop offset="0%" stopColor="#2A78B8" stopOpacity="0.18" />
                   <stop offset="100%" stopColor="#161D2E" stopOpacity="0" />
                 </radialGradient>
                 <linearGradient id="riverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#0B5FA5" stopOpacity="0.5" />
-                  <stop offset="100%" stopColor="#15A89A" stopOpacity="0.4" />
+                  <stop offset="0%" stopColor="#2A78B8" stopOpacity="0.5" />
+                  <stop offset="100%" stopColor="#3FB9A1" stopOpacity="0.4" />
                 </linearGradient>
               </defs>
 
@@ -122,7 +122,7 @@ export function AreeServite() {
                     cx={p.x}
                     cy={p.y}
                     r="14"
-                    fill="#15A89A"
+                    fill="#3FB9A1"
                     fillOpacity="0.18"
                     initial={{ scale: 0.95, opacity: 0 }}
                     whileInView={{ scale: 1 }}
@@ -133,7 +133,7 @@ export function AreeServite() {
                     cx={p.x}
                     cy={p.y}
                     r="5"
-                    fill="#15A89A"
+                    fill="#3FB9A1"
                     initial={{ scale: 0.95, opacity: 0 }}
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
@@ -169,12 +169,12 @@ export function AreeServite() {
             <div
               className="inline-flex items-center gap-2 rounded-full px-3 py-1 mb-5 text-[11px] font-body uppercase tracking-wider"
               style={{
-                background: "hsl(174, 62%, 38%, 0.12)",
-                color: "hsl(174, 62%, 45%)",
-                border: "1px solid hsl(174, 62%, 38%, 0.35)",
+                background: "hsl(168, 49%, 38%, 0.12)",
+                color: "hsl(168, 49%, 42%)",
+                border: "1px solid hsl(168, 49%, 38%, 0.35)",
               }}
             >
-              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(174, 62%, 45%)" }} />
+              <span className="w-1.5 h-1.5 rounded-full" style={{ background: "hsl(168, 49%, 42%)" }} />
               {t("aree.italy_badge")}
             </div>
             <h3 className="font-display uppercase text-xl tracking-tight mb-5">
@@ -185,7 +185,7 @@ export function AreeServite() {
                 <li key={c} className="flex items-center gap-2 font-body text-sm text-foreground/80">
                   <span
                     className="inline-block w-2 h-2 rounded-full shrink-0"
-                    style={{ background: "#15A89A" }}
+                    style={{ background: "#3FB9A1" }}
                   />
                   {c}
                 </li>

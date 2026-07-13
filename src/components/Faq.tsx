@@ -16,7 +16,7 @@ export function Faq() {
   const { t, i18n } = useTranslation()
   const items = t("faq.items", { returnObjects: true }) as FaqItem[]
   return (
-    <section id="faq" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="faq" data-section="light" className="relative py-16 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-16">
         {/* Left column */}
         <div className="md:sticky md:top-24 md:self-start">

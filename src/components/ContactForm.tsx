@@ -82,7 +82,7 @@ export function ContactForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl bg-[hsl(210,30%,8%)]/80 border border-white/10 p-8 text-center">
+      <div className="rounded-2xl bg-[hsl(222,35%,11%)]/80 border border-white/10 p-8 text-center">
         <div className="mb-4 flex justify-center">
           <span className="flex items-center justify-center w-14 h-14 rounded-full bg-primary/20 text-primary text-3xl">
             ✓
@@ -106,7 +106,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-2xl bg-[hsl(210,30%,8%)]/80 border border-white/10 p-6 md:p-8 flex flex-col gap-5"
+      className="rounded-2xl bg-[hsl(222,35%,11%)]/80 border border-white/10 p-6 md:p-8 flex flex-col gap-5"
     >
       <p className="font-display italic text-xl text-white/90 mb-1">
         {t("contactform.intro")}

@@ -68,7 +68,7 @@ export function ServicesBento() {
                 key={service.slug ?? service.icon}
                 type="button"
                 onClick={() => openService(idx)}
-                className="group relative overflow-hidden rounded-2xl aspect-[4/3] text-left border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(174,62%,45%)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="group relative overflow-hidden rounded-2xl aspect-[4/3] text-left border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(168,49%,42%)] focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
@@ -119,7 +119,7 @@ export function ServicesBento() {
                   className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity duration-500"
                   style={{
                     background:
-                      "linear-gradient(135deg, hsl(174, 62%, 38%, 0.20) 0%, hsl(174, 62%, 45%, 0.08) 60%, transparent 100%)",
+                      "linear-gradient(135deg, hsl(168, 49%, 38%, 0.20) 0%, hsl(168, 49%, 42%, 0.08) 60%, transparent 100%)",
                   }}
                   aria-hidden="true"
                 />

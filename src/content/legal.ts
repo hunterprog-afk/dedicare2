@@ -61,6 +61,36 @@ export const cookiePolicy = {
   ],
 }
 
+export const trasparenza = {
+  title: "Trasparenza",
+  sections: [
+    {
+      heading: "1. Identità Aziendale",
+      content: `Dedicare Solutions S.R.L.S. è una società sanitaria privata con sede a Segrate (MI), fondata con la missione di rendere accessibile un'assistenza sanitaria di eccellenza a chiunque ne abbia necessità, nel rispetto della dignità e dell'autonomia di ogni persona.\n\nOperiamo nell'area metropolitana milanese offrendo servizi infermieristici domiciliari, assistenza socio-sanitaria, trasporto protetto e monitoraggio dei parametri vitali — tutti erogati da professionisti certificati e costantemente aggiornati.\n\nDedicare Solutions S.R.L.S. — Socio Unico\nVia Roma 80 – 20054 Segrate (MI)\nP.IVA e C.F.: IT11600760968 · REA: MI–2613682 · Capitale Sociale: € 1.000,00 i.v.\nForma giuridica: S.R.L.S. Socio Unico · Settore: Assistenza Sanitaria Privata · Area operativa: Milano e Provincia.`,
+    },
+    {
+      heading: "2. Governance e Leadership",
+      content: `La governance di Dedicare Solutions si fonda su una struttura semplice, trasparente e orientata al paziente. La guida strategica e operativa è affidata alla Fondatrice, che risponde direttamente della qualità dei servizi erogati e delle scelte etiche dell'organizzazione.\n\nLisis Zuniga — Fondatrice & Direttrice Sanitaria. Professionista sanitaria con comprovata esperienza internazionale, ha fondato Dedicare Solutions con la convinzione che ogni paziente meriti un'assistenza straordinaria, tempestiva e profondamente personalizzata. È responsabile della definizione degli standard clinici, della selezione e formazione del personale, e della supervisione etica di ogni intervento erogato.\n\nLa struttura organizzativa privilegia la comunicazione diretta con pazienti e famiglie, l'assenza di intermediari nella catena assistenziale e la responsabilità individuale di ogni operatore per la qualità del proprio intervento.`,
+    },
+    {
+      heading: "3. Valori Etici",
+      content: `Dignità della Persona — Ogni paziente è trattato con rispetto assoluto, indipendentemente dalla condizione clinica, dall'età o dal contesto sociale. La dignità è inviolabile.\n\nRigore Scientifico — I nostri protocolli clinici sono aggiornati costantemente secondo le più recenti linee guida nazionali e internazionali, senza compromessi sulla qualità.\n\nComunicazione Aperta — Trasparenza totale con pazienti e famiglie. Nessuna informazione clinica viene omessa o edulcorata: la verità, detta con umanità, è rispetto.\n\nEquità nell'Accesso — L'eccellenza sanitaria deve essere accessibile. Offriamo consulenze iniziali gratuite e strutturiamo i servizi per adattarsi alle diverse esigenze economiche.\n\nFormazione Continua — Ogni operatore è tenuto ad aggiornarsi periodicamente. La crescita professionale del team è un investimento diretto sulla qualità delle cure erogate.\n\nRiservatezza Assoluta — I dati sensibili dei pazienti sono trattati con la massima riservatezza, nel pieno rispetto del GDPR e del segreto professionale sanitario.`,
+    },
+    {
+      heading: "4. I Nostri Impegni",
+      content: `1. Misurazione gratuita dei parametri vitali ad ogni visita — pressione arteriosa, saturazione e frequenza cardiaca, con segnalazione immediata di eventuali anomalie.\n\n2. Consulenza iniziale gratuita e senza impegno — telefonica o WhatsApp, per valutare le esigenze del paziente prima di qualsiasi accordo economico.\n\n3. Reperibilità 24 ore su 24, 7 giorni su 7 — sempre raggiungibili per emergenze, aggiornamenti clinici e qualsiasi necessità urgente.\n\n4. Piano assistenziale personalizzato e condiviso — nessun protocollo standardizzato: ogni piano è costruito su misura e approvato con i familiari prima dell'avvio del servizio.\n\n5. Aggiornamento periodico ai familiari — comunicazioni chiare, puntuali e accessibili anche a chi non ha competenze sanitarie.`,
+    },
+    {
+      heading: "5. Qualità & Standard Operativi",
+      content: `Dedicare Solutions adotta standard operativi rigorosi in ogni fase del servizio, dalla selezione del personale all'erogazione delle cure, fino al follow-up post-intervento.\n\nSelezione Rigorosa — ogni operatore è valutato per competenze tecniche, deontologiche e relazionali prima dell'inserimento nel team.\n\nProtocolli Clinici Aggiornati — procedure operative allineate alle linee guida ISS, OMS e alle normative sanitarie nazionali vigenti.\n\nMonitoraggio Continuo — verifica periodica della qualità degli interventi tramite feedback di pazienti, familiari e supervisione interna. Ogni strumento diagnostico utilizzato è certificato e periodicamente calibrato.`,
+    },
+    {
+      heading: "6. Contatti per la Trasparenza",
+      content: `Per qualsiasi richiesta di informazioni sull'azienda, sulla governance o sui nostri standard etici e operativi:\n\nDedicare Solutions S.R.L.S. — Ufficio Relazioni\nEmail: info@dedicaresolutions.it\nPEC: dedicaresolutionssrls@pec.it\nTel: +39 388 253 6992\nVia Roma 80 – 20054 Segrate (MI)`,
+    },
+  ],
+}
+
 export const noteLegali = {
   title: "Note Legali",
   sections: [

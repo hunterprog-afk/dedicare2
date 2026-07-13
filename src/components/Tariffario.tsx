@@ -11,7 +11,7 @@ export function Tariffario() {
   const { t, i18n } = useTranslation()
   const factors = t("tariffario.factors", { returnObjects: true }) as TranslatedFactor[]
   return (
-    <section id="tariffario" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="tariffario" data-section="light" className="relative py-16 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)]">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
@@ -80,7 +80,7 @@ export function Tariffario() {
           <a
             href="#contatti"
             className="group inline-flex items-center gap-3 rounded-full px-7 py-4 font-body text-sm tracking-wide text-white transition-all hover:scale-[1.02]"
-            style={{ background: "linear-gradient(135deg, #15A89A 0%, #0B5FA5 100%)" }}
+            style={{ background: "linear-gradient(135deg, #3FB9A1 0%, #2A78B8 100%)" }}
           >
             {t("tariffario.cta")}
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />

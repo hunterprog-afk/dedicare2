@@ -18,15 +18,24 @@
 @import "tailwindcss";
 
 /* ─── Design Tokens ──────────────────────────────────────────────────────── */
+/* Palette estratta dal logo ufficiale Dedicare Solutions (Master 3D Papercraft,
+   dedicare logo/final/3d/svg/*.svg — cfr. BRAND-BOOK.md §3):
+     Dedicare Navy #161D2E → hsl(222 35% 13%)
+     Care Blue     #2A78B8 → hsl(207 63% 44%)
+     Vital Teal    #3FB9A1 → hsl(168 49% 46%)
+     Off-white     #F7F5F2 → hsl(36  30% 96%)
+     Slate         #5A6B7B → hsl(209 15% 42%)
+   Sostituisce l'approssimazione precedente (troppo scura/desaturata in dark,
+   toni "ochre/terra" non allineati all'hex reale del logo). */
 :root {
-  --ink:    220 22% 9%;     /* navy caldo scuro */
-  --ink-2:  220 20% 12%;    /* navy leggermente più chiaro per varietà */
-  --cream:  38 45% 94%;     /* crema calda — non bianco puro */
-  --cream-2:36 35% 90%;     /* crema più satura per accenti */
-  --sand:   36 28% 84%;
-  --ochre:  211 72% 42%;    /* blu fiducia (leggermente più brillante) */
-  --terra:  174 62% 38%;    /* teal caldo */
-  --warm:   36 90% 54%;     /* ambra/oro CTA */
+  --ink:    222 35% 13%;    /* Dedicare Navy — più ricca e meno "cupa" della precedente 220 22% 9% */
+  --ink-2:  222 30% 18%;    /* navy leggermente più chiara per varietà/profondità card */
+  --cream:  36 30% 96%;     /* Off-white caldo del logo — luminoso, non bianco piatto */
+  --cream-2:34 25% 91%;     /* crema più satura per accenti */
+  --sand:   32 20% 83%;
+  --ochre:  207 63% 44%;    /* Care Blue — blu fiducia del logo */
+  --terra:  168 49% 46%;    /* Vital Teal — teal del logo */
+  --warm:   36 90% 54%;     /* ambra/oro CTA (accento extra, non dal logo) */
 
   --background:             var(--ink);
   --foreground:             0 0% 97%;
@@ -38,8 +47,8 @@
   --primary-foreground:     0 0% 100%;
   --secondary:              var(--terra);
   --secondary-foreground:   0 0% 100%;
-  --muted:                  220 14% 18%;
-  --muted-foreground:       220 8% 68%;
+  --muted:                  222 18% 20%;
+  --muted-foreground:       220 10% 70%;
   --accent:                 var(--warm);
   --accent-foreground:      var(--ink);
   --destructive:            0 72% 51%;
@@ -58,41 +67,41 @@
 
 /* ─── Light theme override (toggle) ──────────────────────────────────────── */
 :root.light {
-  --ink:    220 22% 9%;
-  --cream:  38 45% 97%;
+  --ink:    222 35% 13%;
+  --cream:  36 30% 97%;
 
-  --background:             38 45% 97%;
-  --foreground:             220 30% 12%;
+  --background:             36 30% 97%;
+  --foreground:             222 30% 14%;
   --card:                   0 0% 100%;
-  --card-foreground:        220 30% 12%;
+  --card-foreground:        222 30% 14%;
   --popover:                0 0% 100%;
-  --popover-foreground:     220 30% 12%;
-  --primary:                211 72% 38%;
+  --popover-foreground:     222 30% 14%;
+  --primary:                207 63% 40%;
   --primary-foreground:     0 0% 100%;
-  --secondary:              174 62% 36%;
+  --secondary:              168 55% 35%;
   --secondary-foreground:   0 0% 100%;
-  --muted:                  220 14% 92%;
-  --muted-foreground:       220 12% 38%;
-  --accent:                 174 62% 36%;
+  --muted:                  36 20% 91%;
+  --muted-foreground:       209 15% 38%;
+  --accent:                 168 55% 35%;
   --accent-foreground:      0 0% 100%;
   --destructive:            0 72% 48%;
   --destructive-foreground: 0 0% 100%;
-  --border:                 220 18% 12% / 0.12;
-  --input:                  220 18% 12% / 0.12;
-  --ring:                   211 72% 38%;
+  --border:                 32 15% 82% / 1;
+  --input:                  32 15% 82% / 1;
+  --ring:                   207 63% 40%;
 }
 
 :root.light html,
 :root.light body,
 .light body {
-  background: hsl(38, 45%, 97%);
-  color: hsl(220, 30%, 12%);
+  background: hsl(36, 30%, 97%);
+  color: hsl(222, 30%, 14%);
 }
 
 /* Liquid glass adapt for light mode (dark sections become subtle white surfaces) */
 :root.light .liquid-glass {
   background: rgba(255, 255, 255, 0.85);
-  border: 1px solid hsl(220, 12%, 88%);
+  border: 1px solid hsl(32, 15%, 88%);
   box-shadow: 0 2px 24px rgba(20, 30, 60, 0.06), 0 1px 4px rgba(20, 30, 60, 0.04);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -100,18 +109,20 @@
 :root.light .liquid-glass::before { display: none; }
 
 :root.light .liquid-glass-strong {
-  background: hsl(211, 72%, 38%, 0.10);
-  border: 1px solid hsl(211, 72%, 38%, 0.22);
+  background: hsl(207, 63%, 40%, 0.10);
+  border: 1px solid hsl(207, 63%, 40%, 0.22);
   box-shadow: none;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 :root.light .liquid-glass-strong::before { display: none; }
 
-/* In light theme, le sezioni data-section="dark" (Hero, Pourquoi, Stats,
-   CtaFooter) hanno bg scuro hardcoded. Glass cards e pill al loro interno
-   devono restare scuri, altrimenti diventano bianchi su dark + testo bianco
-   = invisibili. Revert al default dark glass. */
+/* In light theme, le sezioni data-section="dark" (Hero, CtaFooter — bookend
+   scuri intenzionali) hanno bg scuro hardcoded. Glass cards e pill al loro
+   interno devono restare scuri, altrimenti diventano bianchi su dark + testo
+   bianco = invisibili. Revert al default dark glass.
+   NOTA: Pourquoi, Stats, Curriculum sono stati convertiti a data-section="light"
+   (fix 2026-07-14: restavano scuri anche in light theme — bug corretto). */
 :root.light [data-section="dark"] .liquid-glass {
   background: rgba(255, 255, 255, 0.05);
   border: none;
@@ -159,10 +170,10 @@
 /* Gradient-fade dentro sezioni dark forced: in light theme NON fadare a cream
    altrimenti coperti i contenuti (es. partner badges Hero). Fade verso ink. */
 :root.light [data-section="dark"] .gradient-fade-b {
-  background: linear-gradient(to bottom, transparent 0%, hsl(220, 22%, 9%) 100%);
+  background: linear-gradient(to bottom, transparent 0%, hsl(222, 35%, 13%) 100%);
 }
 :root.light [data-section="dark"] .gradient-fade-t {
-  background: linear-gradient(to top, transparent 0%, hsl(220, 22%, 9%) 100%);
+  background: linear-gradient(to top, transparent 0%, hsl(222, 35%, 13%) 100%);
 }
 
 /* Partner badges variant=dark in Hero: in light theme convertili a card
@@ -171,25 +182,25 @@
 :root.light [data-section="dark"] .partner-badge--dark {
   background-color: #ffffff !important;
   background-image: none !important;
-  border-color: hsl(220, 12%, 82%) !important;
+  border-color: hsl(32, 15%, 82%) !important;
   box-shadow: 0 2px 12px rgba(20, 30, 60, 0.15);
 }
 :root.light [data-section="dark"] .partner-badge--dark:hover {
   background-color: #ffffff !important;
-  border-color: hsl(220, 12%, 70%) !important;
+  border-color: hsl(32, 15%, 70%) !important;
   box-shadow: 0 4px 18px rgba(20, 30, 60, 0.20);
 }
 :root.light [data-section="dark"] .partner-badge--dark .partner-icon {
   background: var(--partner-icon-bg-light) !important;
 }
 :root.light [data-section="dark"] .partner-badge--dark .text-white {
-  color: hsl(220, 30%, 14%);
+  color: hsl(222, 30%, 14%);
 }
 :root.light [data-section="dark"] .partner-badge--dark .text-white\/75 {
-  color: hsl(220, 12%, 38%);
+  color: hsl(209, 15%, 38%);
 }
 :root.light [data-section="dark"] .partner-badge--dark .text-white\/55 {
-  color: hsl(220, 12%, 38%);
+  color: hsl(209, 15%, 38%);
 }
 
 /* ─── Tailwind v4 theme ──────────────────────────────────────────────────── */
@@ -267,9 +278,12 @@ body {
 .font-body    { font-family: var(--font-body); }
 
 /* ─── Sezioni scure forzate (override theme light) ───────────────────────── */
-/* Sezioni con background scuro hardcoded (Hero, Pourquoi, CtaFooter): in
-   light theme `--color-foreground` diventa navy → testo navy su bg scuro =
-   invisibile. Forziamo bianco indipendentemente dal tema. */
+/* Solo Hero e CtaFooter restano bookend scuri intenzionali (video hero /
+   CTA finale) in ENTRAMBI i temi — pattern comune, non un bug. In light
+   theme `--color-foreground` diventa navy → testo navy su bg scuro sarebbe
+   invisibile, quindi forziamo bianco indipendentemente dal tema.
+   Pourquoi, Stats e Curriculum sono stati spostati a data-section="light"
+   (commutano correttamente col tema — fix 2026-07-14). */
 [data-section="dark"] {
   --foreground:       0 0% 97%;
   --card-foreground:  0 0% 97%;
@@ -289,21 +303,21 @@ body {
    direttamente le --color-* di Tailwind, NON solo le nostre --foreground. */
 :root.light [data-section="light"] {
   /* Variabili interne (per CSS custom rules) */
-  --foreground:       220 30% 14%;
-  --card-foreground:  220 30% 14%;
-  --muted-foreground: 220 12% 38%;
-  --border:           220 12% 80% / 1;
+  --foreground:       222 30% 14%;
+  --card-foreground:  222 30% 14%;
+  --muted-foreground: 209 15% 38%;
+  --border:           32 15% 80% / 1;
   /* Variabili Tailwind v4 — quelle che le classi text-foreground usano davvero */
-  --color-foreground:        hsl(220, 30%, 14%);
-  --color-card-foreground:   hsl(220, 30%, 14%);
-  --color-popover-foreground:hsl(220, 30%, 14%);
-  --color-muted-foreground:  hsl(220, 12%, 38%);
-  --color-border:            hsl(220, 12%, 80%);
-  --color-input:             hsl(220, 12%, 80%);
+  --color-foreground:        hsl(222, 30%, 14%);
+  --color-card-foreground:   hsl(222, 30%, 14%);
+  --color-popover-foreground:hsl(222, 30%, 14%);
+  --color-muted-foreground:  hsl(209, 15%, 38%);
+  --color-border:            hsl(32, 15%, 80%);
+  --color-input:             hsl(32, 15%, 80%);
   --color-card:              #ffffff;
   --color-popover:           #ffffff;
-  background: hsl(38, 45%, 94%);
-  color: hsl(220, 30%, 14%);
+  background: hsl(36, 30%, 96%);
+  color: hsl(222, 30%, 14%);
 }
 
 /* Card bianche solide su sezioni chiare */
@@ -311,17 +325,17 @@ body {
   background: #ffffff;
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border: 1px solid hsl(220, 12%, 88%);
+  border: 1px solid hsl(32, 15%, 88%);
   box-shadow: 0 2px 24px rgba(20, 30, 60, 0.06), 0 1px 4px rgba(20, 30, 60, 0.04);
 }
 :root.light [data-section="light"] .liquid-glass::before { display: none; }
 
 /* PILL tag inline (es. "I nostri servizi") — distingui dalle card grandi */
 :root.light [data-section="light"] .liquid-glass.rounded-full {
-  background: hsl(211, 72%, 42%);
+  background: hsl(207, 63%, 42%);
   color: #ffffff !important;
-  border: 1px solid hsl(211, 72%, 42%);
-  box-shadow: 0 2px 8px rgba(24, 112, 188, 0.20);
+  border: 1px solid hsl(207, 63%, 42%);
+  box-shadow: 0 2px 8px rgba(42, 120, 184, 0.20);
   font-weight: 500;
   letter-spacing: 0.01em;
 }
@@ -331,11 +345,11 @@ body {
 
 /* Icon container nelle card chiare: tint blu primario */
 :root.light [data-section="light"] .liquid-glass-strong {
-  background: hsl(211, 72%, 42%, 0.10);
+  background: hsl(207, 63%, 42%, 0.10);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   box-shadow: none;
-  border: 1px solid hsl(211, 72%, 42%, 0.22);
+  border: 1px solid hsl(207, 63%, 42%, 0.22);
 }
 :root.light [data-section="light"] .liquid-glass-strong::before { display: none; }
 :root.light [data-section="light"] .liquid-glass-strong svg { color: hsl(var(--primary)); }
@@ -349,7 +363,7 @@ body {
 :root.light [data-section="light"] .text-foreground\/60,
 :root.light [data-section="light"] .text-foreground\/55,
 :root.light [data-section="light"] .text-foreground\/50 {
-  color: hsl(220, 15%, 30%);
+  color: hsl(209, 18%, 28%);
 }
 
 /* Process step numbers — invisibili a /20 su crema, alza a /55 */
@@ -357,23 +371,32 @@ body {
   color: hsl(var(--primary) / 0.55);
 }
 
-/* Transition border tra sezioni light */
+/* Transition border tra sezioni light (residuo: la maggior parte delle sezioni
+   non usa più border-t dopo la rimozione dei divisori 2026-07-14) */
 :root.light [data-section="light"].border-t {
-  border-top-color: hsl(220, 12%, 86%) !important;
+  border-top-color: hsl(32, 15%, 86%) !important;
 }
 
 /* Gradient fade su sezioni light: dissolve verso crema, non verso dark */
 :root.light [data-section="light"] .gradient-fade-t {
-  background: linear-gradient(to top, transparent 0%, hsl(38, 45%, 94%) 100%);
+  background: linear-gradient(to top, transparent 0%, hsl(36, 30%, 96%) 100%);
 }
 :root.light [data-section="light"] .gradient-fade-b {
-  background: linear-gradient(to bottom, transparent 0%, hsl(38, 45%, 94%) 100%);
+  background: linear-gradient(to bottom, transparent 0%, hsl(36, 30%, 96%) 100%);
 }
 
 /* Accordion FAQ in light section — separatori più visibili */
 :root.light [data-section="light"] [data-slot="accordion-item"],
 :root.light [data-section="light"] .border-border\/40 {
-  border-color: hsl(220, 12%, 82%) !important;
+  border-color: hsl(32, 15%, 82%) !important;
+}
+
+/* ─── Sezione Stats: gradient decorativo di sfondo, theme-aware ─────────── */
+/* Dark theme (default): navy→teal profondo, brand-derived (non più blu-grigio
+   generico). Light theme: wash tenue crema→teal, coerente col resto delle
+   sezioni "light". Vedi Stats.tsx (.stats-bg-gradient). */
+:root.light [data-section="light"] .stats-bg-gradient {
+  background: linear-gradient(135deg, hsl(36, 30%, 97%) 0%, hsl(168, 40%, 93%) 50%, hsl(36, 30%, 96%) 100%);
 }
 
 /* ─── Liquid-glass utilities (sezioni scure) ─────────────────────────────── */
@@ -440,5 +463,27 @@ body {
     position: absolute; inset: 0;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
     opacity: .5; mix-blend-mode: overlay; pointer-events: none;
+  }
+}
+
+/* ─── Scala tipografica desktop più generosa ─────────────────────────────── */
+/* Il corpo testo (card, intro, FAQ, testimonial) usava text-sm/text-base/
+   text-[15px] uguali su mobile e desktop → "caratteri piccoli" su schermi
+   grandi. Bump solo da 768px in su; mobile invariato. Non tocca text-xs
+   (eyebrow/badge, per design piccoli in maiuscolo) né i titoli (già
+   clamp()/text-6xl generosi). Unlayered: vince sulle utility Tailwind
+   (@layer utilities) per cascata, stesso pattern già in uso sopra. */
+@media (min-width: 768px) {
+  .text-sm {
+    font-size: 0.9375rem;   /* 14px → 15px */
+    line-height: 1.5rem;
+  }
+  .text-base {
+    font-size: 1.0625rem;   /* 16px → 17px */
+    line-height: 1.75rem;
+  }
+  .text-\[15px\] {
+    font-size: 1.0625rem;   /* FAQ answer, testimonial quote: 15px → 17px */
+    line-height: 1.7;
   }
 }

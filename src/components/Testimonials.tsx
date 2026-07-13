@@ -46,7 +46,7 @@ export function Testimonials() {
   ]
 
   return (
-    <section id="testimonianze" data-section="light" className="relative py-16 md:py-40 border-t border-border/40">
+    <section id="testimonianze" data-section="light" className="relative py-16 md:py-40">
       <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] mb-12 md:mb-16">
         <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
           {t("testimonials.eyebrow")}

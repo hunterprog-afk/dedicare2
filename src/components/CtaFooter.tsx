@@ -1,15 +1,15 @@
 import { useState } from "react"
 import { motion } from "motion/react"
-import { ArrowUpRight, Phone, Mail, MapPin } from "lucide-react"
+import { Phone, Mail, MapPin } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { Button } from "@/components/ui/button"
 import { ContactForm } from "@/components/ContactForm"
 import { LegalModal } from "@/components/LegalModal"
 import { OptimizedImage } from "@/components/OptimizedImage"
-import { privacyPolicy, cookiePolicy, noteLegali } from "@/content/legal"
+import { privacyPolicy, cookiePolicy, noteLegali, trasparenza } from "@/content/legal"
 
-type LegalKey = "privacy" | "cookie" | "legal" | null
+type LegalKey = "privacy" | "cookie" | "legal" | "trasparenza" | null
 
 function LegalContent({ sections }: { sections: { heading: string; content: string }[] }) {
   return (
@@ -28,6 +28,7 @@ const legalDocs = {
   privacy: privacyPolicy,
   cookie: cookiePolicy,
   legal: noteLegali,
+  trasparenza: trasparenza,
 }
 
 export function CtaFooter() {
@@ -36,9 +37,9 @@ export function CtaFooter() {
   const isEn = (i18n.resolvedLanguage || i18n.language || "it").startsWith("en")
 
   return (
-    <section id="contatti" data-section="dark" className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden border-t border-border/40">
-      {/* Cinematic background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(200,30%,6%)] via-[hsl(175,35%,5%)] to-[hsl(220,20%,4%)]" />
+    <section id="contatti" data-section="dark" className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden">
+      {/* Cinematic background — navy→teal brand gradient (meno cupo del nero/grigio-blu generico precedente) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(222,35%,10%)] via-[hsl(168,30%,9%)] to-[hsl(222,32%,8%)]" />
 
       {/* Noise */}
       <div className="absolute inset-0 noise pointer-events-none" />
@@ -149,7 +150,7 @@ export function CtaFooter() {
       </div>
 
       {/* Footer bar */}
-      <div className="relative z-10 w-full border-t border-border/30 mt-auto">
+      <div className="relative z-10 w-full mt-auto">
         <div className="max-w-[var(--max)] mx-auto px-[var(--gutter)] py-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-center sm:text-left max-w-full">
             <OptimizedImage
@@ -166,22 +167,32 @@ export function CtaFooter() {
           </div>
           <nav className="flex items-center gap-6 flex-wrap justify-center">
             <button
+              type="button"
               onClick={() => setOpenModal("privacy")}
               className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.privacy")}
             </button>
             <button
+              type="button"
               onClick={() => setOpenModal("cookie")}
               className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.cookie")}
             </button>
             <button
+              type="button"
               onClick={() => setOpenModal("legal")}
               className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.legal")}
+            </button>
+            <button
+              type="button"
+              onClick={() => setOpenModal("trasparenza")}
+              className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+            >
+              {t("cta.trasparenza")}
             </button>
             <a
               href="mailto:info@dedicaresolutions.it"
@@ -190,14 +201,6 @@ export function CtaFooter() {
               info@dedicaresolutions.it
             </a>
           </nav>
-          <a
-            href="https://hunterprog-afk.github.io/SD/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-body text-xs text-foreground/60 hover:text-foreground transition-colors flex items-center gap-1"
-          >
-            {t("cta.sito_classico")} <ArrowUpRight className="size-3" />
-          </a>
         </div>
       </div>
       {/* Modal legali — sempre in italiano per validità legale */}

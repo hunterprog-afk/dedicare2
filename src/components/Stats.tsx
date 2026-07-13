@@ -52,9 +52,11 @@ export function Stats() {
   const { t, i18n } = useTranslation()
   const items = t("stats.items", { returnObjects: true }) as TranslatedStat[]
   return (
-    <section data-section="dark" className="relative py-20 md:py-44 overflow-hidden">
-      {/* Cinematic bg — gradient fallback (no external video dependency) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(200,35%,5%)] via-[hsl(175,30%,7%)] to-[hsl(220,25%,6%)]" />
+    <section id="risultati" data-section="light" className="relative py-20 md:py-44 overflow-hidden">
+      {/* Cinematic bg — gradient fallback (no external video dependency). Dark
+          theme: navy→teal brand gradient. Light theme: swapped via
+          .stats-bg-gradient override in index.css. */}
+      <div className="stats-bg-gradient absolute inset-0 bg-gradient-to-br from-[hsl(222,35%,9%)] via-[hsl(168,30%,10%)] to-[hsl(222,32%,8%)]" />
 
       {/* Top + bottom fades */}
       <div className="absolute top-0 inset-x-0 h-[200px] z-[1] gradient-fade-t" />
@@ -118,8 +120,8 @@ export function Stats() {
                     style={{
                       width: 56,
                       height: 56,
-                      background: "hsl(174, 62%, 38%, 0.12)",
-                      border: "1px solid hsl(174, 62%, 38%, 0.45)",
+                      background: "hsl(var(--secondary) / 0.14)",
+                      border: "1px solid hsl(var(--secondary) / 0.45)",
                     }}
                     whileHover={hover}
                     transition={{ type: "spring", stiffness: 260, damping: 18 }}
@@ -132,7 +134,7 @@ export function Stats() {
                       ? { transition: { duration: 2.4, repeat: Infinity, ease: "easeInOut" } }
                       : {})}
                   >
-                    <Icon className="size-6" style={{ color: "hsl(174, 62%, 55%)" }} strokeWidth={1.75} />
+                    <Icon className="size-6" style={{ color: "hsl(var(--secondary))" }} strokeWidth={1.75} />
                   </motion.div>
 
                   <span className="font-display italic text-[clamp(36px,10vw,56px)] md:text-6xl lg:text-7xl leading-none text-foreground break-words">
