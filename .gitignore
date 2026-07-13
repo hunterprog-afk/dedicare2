@@ -25,3 +25,6 @@ dist-ssr
 
 # Video source (frames are committed, source video is not)
 input/
+
+# graphify knowledge graph (generato)
+graphify-out/
