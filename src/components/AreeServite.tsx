@@ -1,4 +1,4 @@
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 
@@ -35,7 +35,7 @@ export function AreeServite() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -43,12 +43,12 @@ export function AreeServite() {
             className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
           >
             {t("aree.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Mappa stilizzata */}
-          <motion.div
+          <m.div
             className="liquid-glass rounded-2xl p-4 md:p-6 lg:col-span-3 overflow-hidden"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -118,7 +118,7 @@ export function AreeServite() {
               {/* Pin */}
               {PINS.map((p, i) => (
                 <g key={p.label}>
-                  <motion.circle
+                  <m.circle
                     cx={p.x}
                     cy={p.y}
                     r="14"
@@ -129,7 +129,7 @@ export function AreeServite() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.3 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
                   />
-                  <motion.circle
+                  <m.circle
                     cx={p.x}
                     cy={p.y}
                     r="5"
@@ -155,10 +155,10 @@ export function AreeServite() {
                 </g>
               ))}
             </svg>
-          </motion.div>
+          </m.div>
 
           {/* Lista comuni */}
-          <motion.div
+          <m.div
             className="liquid-glass rounded-2xl p-6 md:p-7 lg:col-span-2"
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -195,7 +195,7 @@ export function AreeServite() {
             <p className="mt-4 font-body text-xs text-foreground/55 leading-relaxed">
               {t("aree.comuni_note")}
             </p>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

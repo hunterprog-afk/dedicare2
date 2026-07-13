@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { ArrowUpRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -48,7 +48,7 @@ export function ServicesBento() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[22ch] break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -56,7 +56,7 @@ export function ServicesBento() {
             className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
           >
             {t("services.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Bento grid — minimal image cards */}
@@ -64,7 +64,7 @@ export function ServicesBento() {
           {SERVICES.map((service, idx) => {
             const item = translated[idx] ?? { title: service.title, body: service.body, bullets: service.bullets }
             return (
-              <motion.button
+              <m.button
                 key={service.slug ?? service.icon}
                 type="button"
                 onClick={() => openService(idx)}
@@ -123,7 +123,7 @@ export function ServicesBento() {
                   }}
                   aria-hidden="true"
                 />
-              </motion.button>
+              </m.button>
             )
           })}
         </div>
