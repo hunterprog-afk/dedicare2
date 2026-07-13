@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { Mail, ArrowUpRight, Newspaper, AlertCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -105,7 +105,7 @@ function ArticleCard({ item, index }: { item: FeedItem; index: number }) {
   const showImage = item.imageUrl && !imgError
 
   return (
-    <motion.a
+    <m.a
       href={item.url}
       target="_blank"
       rel="noopener noreferrer"
@@ -167,7 +167,7 @@ function ArticleCard({ item, index }: { item: FeedItem; index: number }) {
         )}
         <div className="mt-auto pt-4 h-px w-10 bg-gradient-to-r from-primary to-transparent" />
       </div>
-    </motion.a>
+    </m.a>
   )
 }
 
@@ -267,7 +267,7 @@ export function Blog() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -275,7 +275,7 @@ export function Blog() {
             className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
           >
             {t("blog.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Loading skeleton */}
@@ -323,7 +323,7 @@ export function Blog() {
         )}
 
         {/* CTA */}
-        <motion.div
+        <m.div
           className="mt-12 flex justify-center"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -338,7 +338,7 @@ export function Blog() {
             {t("blog.cta")}
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )
