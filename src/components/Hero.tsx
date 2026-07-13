@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { ArrowUpRight, Phone } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
@@ -61,7 +61,7 @@ export function Hero({ scrollRef }: Props) {
 
         {/* Content */}
         <div ref={innerRef} className="absolute inset-0 z-10 flex flex-col items-center justify-start pt-[10vh] md:justify-center md:pt-0 text-center px-6">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
@@ -75,7 +75,7 @@ export function Hero({ scrollRef }: Props) {
                 {t("hero.tag_label")}
               </span>
             </div>
-          </motion.div>
+          </m.div>
 
           <BlurText
             key={i18n.language + "-hero-title"}
@@ -87,16 +87,16 @@ export function Hero({ scrollRef }: Props) {
             startDelay={0.15}
           />
 
-          <motion.p
+          <m.p
             initial={{ filter: "blur(10px)", opacity: 0, y: 16 }}
             animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 md:mt-6 font-body text-base md:text-lg text-white/80 max-w-xl leading-relaxed drop-shadow"
           >
             {t("hero.subline")}
-          </motion.p>
+          </m.p>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.1, duration: 0.6 }}
@@ -120,7 +120,7 @@ export function Hero({ scrollRef }: Props) {
                 <Phone className="mr-1.5 size-4" /> +39 388 253 6992
               </a>
             </Button>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

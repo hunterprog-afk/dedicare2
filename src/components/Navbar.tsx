@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import { m, AnimatePresence } from "motion/react"
 import { ArrowUpRight, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { OptimizedImage } from "@/components/OptimizedImage"
@@ -122,7 +122,7 @@ export function Navbar() {
       {/* Mobile full-screen sheet */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -16 }}
@@ -149,7 +149,7 @@ export function Navbar() {
                 {t("nav.contattaci")} <ArrowUpRight className="ml-1 size-4" />
               </a>
             </Button>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </>

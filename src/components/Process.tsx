@@ -1,4 +1,4 @@
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 import { PROCESS_STEPS } from "@/lib/constants"
@@ -110,7 +110,7 @@ export function Process() {
             const Illustration = ILLUSTRATIONS[i] ?? PhoneWaves
             const item = items[i] ?? { title: step.title, body: step.body }
             return (
-              <motion.div
+              <m.div
                 key={step.n}
                 className="relative px-0 md:px-8 py-8 md:py-14 flex flex-col gap-3 md:gap-4 items-start border-b md:border-b-0 border-border/30 last:border-b-0"
                 initial={{ opacity: 0, y: 24 }}
@@ -124,7 +124,7 @@ export function Process() {
                 )}
 
                 {/* Custom SVG illustration */}
-                <motion.div
+                <m.div
                   initial={{ opacity: 0, scale: 0.85 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true, amount: 0.4 }}
@@ -132,7 +132,7 @@ export function Process() {
                   className="mb-2"
                 >
                   <Illustration />
-                </motion.div>
+                </m.div>
 
                 <span className="font-display text-[64px] md:text-[110px] leading-none text-primary/20 -mb-4 select-none">
                   {step.n.padStart(2, "0")}
@@ -143,7 +143,7 @@ export function Process() {
                 <p className="font-body text-sm text-foreground/65 leading-relaxed max-w-[30ch]">
                   {item.body}
                 </p>
-              </motion.div>
+              </m.div>
             )
           })}
         </div>

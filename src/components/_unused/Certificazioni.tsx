@@ -1,4 +1,4 @@
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { ShieldCheck, BadgeCheck, Lock, FileCheck2, Handshake } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -25,7 +25,7 @@ export function Certificazioni() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[20ch] mx-auto break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -33,7 +33,7 @@ export function Certificazioni() {
             className="mt-4 font-body text-foreground/60 text-base max-w-xl mx-auto leading-relaxed"
           >
             {t("certificazioni.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Grid badges — 5 cols desktop, scroll mobile */}
@@ -42,7 +42,7 @@ export function Certificazioni() {
             {items.map((c, i) => {
               const Icon = CERT_ICONS[i] ?? BadgeCheck
               return (
-                <motion.div
+                <m.div
                   key={c.title}
                   className="liquid-glass rounded-2xl p-6 flex flex-col items-center text-center gap-3 w-[220px] md:w-auto shrink-0 border border-transparent transition-colors hover:border-primary/40"
                   style={{ borderColor: "rgba(21,168,154,0.25)" }}
@@ -63,7 +63,7 @@ export function Certificazioni() {
                   <span className="font-body text-xs text-foreground/55">
                     {c.detail}
                   </span>
-                </motion.div>
+                </m.div>
               )
             })}
           </div>

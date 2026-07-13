@@ -1,4 +1,4 @@
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { MessageCircle } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -30,7 +30,7 @@ export function Faq() {
             className="mt-4 font-display uppercase text-[clamp(34px,9vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -38,8 +38,8 @@ export function Faq() {
             className="mt-5 font-body text-foreground/60 text-base leading-relaxed max-w-[36ch]"
           >
             {t("faq.intro")}
-          </motion.p>
-          <motion.div
+          </m.p>
+          <m.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -55,11 +55,11 @@ export function Faq() {
                 <MessageCircle className="mr-2 size-4" /> {t("faq.cta")}
               </a>
             </Button>
-          </motion.div>
+          </m.div>
         </div>
 
         {/* Right column */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
@@ -77,7 +77,7 @@ export function Faq() {
               </AccordionItem>
             ))}
           </Accordion>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

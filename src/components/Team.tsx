@@ -1,4 +1,4 @@
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
 
@@ -33,7 +33,7 @@ export function Team() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[20ch] mx-auto break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -41,11 +41,11 @@ export function Team() {
             className="mt-4 font-body text-foreground/60 text-base max-w-xl mx-auto leading-relaxed"
           >
             {t("team.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Single card centrata — Lisis Zuniga */}
-        <motion.div
+        <m.div
           className="liquid-glass rounded-3xl p-6 md:p-12 max-w-3xl mx-auto flex flex-col md:flex-row gap-6 md:gap-10 items-center md:items-start"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ export function Team() {
               {founder.bio}
             </p>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

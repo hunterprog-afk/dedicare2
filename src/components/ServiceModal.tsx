@@ -1,5 +1,5 @@
 import { useEffect, useEffectEvent, useRef } from "react"
-import { AnimatePresence, motion } from "motion/react"
+import { AnimatePresence, m } from "motion/react"
 import { Check, X, ArrowRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
 
@@ -79,7 +79,7 @@ export function ServiceModal({ open, onClose, data }: ServiceModalProps) {
           aria-label={data.title}
         >
           {/* Overlay */}
-          <motion.div
+          <m.div
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={onClose}
             aria-hidden="true"
@@ -90,7 +90,7 @@ export function ServiceModal({ open, onClose, data }: ServiceModalProps) {
           />
 
           {/* Panel */}
-          <motion.div
+          <m.div
             className="relative z-10 w-full sm:max-w-2xl max-h-[92dvh] flex flex-col rounded-t-2xl sm:rounded-2xl bg-[#161D2E] border border-white/10 shadow-2xl mx-0 sm:mx-4 overflow-hidden"
             initial={{ opacity: 0, y: 24, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -172,7 +172,7 @@ export function ServiceModal({ open, onClose, data }: ServiceModalProps) {
                 <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
               </button>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       )}
     </AnimatePresence>

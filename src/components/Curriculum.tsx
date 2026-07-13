@@ -1,5 +1,5 @@
 import { useState, type FormEvent, type ChangeEvent } from "react"
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { GraduationCap, Heart, ShieldCheck, Sparkles, Upload, Briefcase } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -145,7 +145,7 @@ export function Curriculum() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[20ch] break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -153,12 +153,12 @@ export function Curriculum() {
             className="mt-4 font-body text-foreground/60 text-base max-w-[52ch] leading-relaxed"
           >
             {t("curriculum.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* SX: motivi */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -189,10 +189,10 @@ export function Curriculum() {
                 )
               })}
             </ul>
-          </motion.div>
+          </m.div>
 
           {/* DX: form */}
-          <motion.form
+          <m.form
             onSubmit={handleSubmit}
             noValidate
             initial={{ opacity: 0, y: 24 }}
@@ -399,7 +399,7 @@ export function Curriculum() {
                 </Button>
               </>
             )}
-          </motion.form>
+          </m.form>
         </div>
       </div>
     </section>
