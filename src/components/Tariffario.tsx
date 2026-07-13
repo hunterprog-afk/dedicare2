@@ -1,4 +1,4 @@
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { Stethoscope, CalendarClock, Activity, Sparkles, ArrowUpRight } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -25,7 +25,7 @@ export function Tariffario() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[18ch] mx-auto break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -33,7 +33,7 @@ export function Tariffario() {
             className="mt-4 font-body text-foreground/60 text-base max-w-xl mx-auto leading-relaxed"
           >
             {t("tariffario.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         {/* Grid fattori */}
@@ -41,7 +41,7 @@ export function Tariffario() {
           {factors.map((f, i) => {
             const Icon = FACTOR_ICONS[i] ?? Stethoscope
             return (
-              <motion.div
+              <m.div
                 key={f.title}
                 className="liquid-glass rounded-2xl p-6 md:p-7 flex flex-col gap-4 md:gap-5 min-h-[200px] md:min-h-[240px] relative"
                 initial={{ opacity: 0, y: 24 }}
@@ -64,13 +64,13 @@ export function Tariffario() {
                   </p>
                 </div>
                 <div className="mt-auto h-px w-10 bg-gradient-to-r from-primary to-transparent" />
-              </motion.div>
+              </m.div>
             )
           })}
         </div>
 
         {/* CTA */}
-        <motion.div
+        <m.div
           className="mt-12 flex justify-center"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export function Tariffario() {
             {t("tariffario.cta")}
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
-        </motion.div>
+        </m.div>
       </div>
     </section>
   )

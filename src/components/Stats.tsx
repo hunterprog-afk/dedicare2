@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { motion, useInView } from "motion/react"
+import { m, useInView } from "motion/react"
 import { Award, Users, BadgeCheck, Clock } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -82,7 +82,7 @@ export function Stats() {
             className="mt-4 font-display uppercase text-[clamp(32px,8vw,60px)] md:text-6xl leading-[0.95] md:leading-[0.9] tracking-tight max-w-[20ch] mx-auto break-words"
             delay={0.07}
           />
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
             whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             viewport={{ once: true, amount: 0.3 }}
@@ -90,7 +90,7 @@ export function Stats() {
             className="mt-4 font-body text-foreground/60 text-base max-w-xl mx-auto leading-relaxed"
           >
             {t("stats.intro")}
-          </motion.p>
+          </m.p>
         </div>
 
         <div className="liquid-glass rounded-3xl p-6 md:p-14">
@@ -101,7 +101,7 @@ export function Stats() {
               const hover = HOVER_ANIM[behavior] ?? { scale: 1.1 }
               const tr = items[i] ?? stat
               return (
-                <motion.div
+                <m.div
                   key={stat.label}
                   className="flex flex-col items-start relative group"
                   initial={{ opacity: 0, y: 20 }}
@@ -115,7 +115,7 @@ export function Stats() {
                   )}
 
                   {/* Icon circle */}
-                  <motion.div
+                  <m.div
                     className="mb-5 flex items-center justify-center rounded-full"
                     style={{
                       width: 56,
@@ -135,7 +135,7 @@ export function Stats() {
                       : {})}
                   >
                     <Icon className="size-6" style={{ color: "hsl(var(--secondary))" }} strokeWidth={1.75} />
-                  </motion.div>
+                  </m.div>
 
                   <span className="font-display italic text-[clamp(36px,10vw,56px)] md:text-6xl lg:text-7xl leading-none text-foreground break-words">
                     <CountUp value={tr.value} />
@@ -143,7 +143,7 @@ export function Stats() {
                   <span className="font-body text-xs text-foreground/55 mt-3 tracking-wide uppercase">
                     {tr.label}
                   </span>
-                </motion.div>
+                </m.div>
               )
             })}
           </div>

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { motion } from "motion/react"
+import { m } from "motion/react"
 import { Phone, Mail, MapPin } from "lucide-react"
 import { useTranslation } from "react-i18next"
 import { BlurText } from "@/components/BlurText"
@@ -55,7 +55,7 @@ export function CtaFooter() {
 
       {/* CTA content */}
       <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 py-16 md:py-20 w-full">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -64,7 +64,7 @@ export function CtaFooter() {
           <span className="liquid-glass rounded-full px-4 py-1.5 text-xs font-body text-foreground/80 inline-block">
             {t("cta.eyebrow")}
           </span>
-        </motion.div>
+        </m.div>
 
         <BlurText
           key={i18n.language + "-cta-title"}
@@ -75,7 +75,7 @@ export function CtaFooter() {
           startDelay={0.1}
         />
 
-        <motion.p
+        <m.p
           initial={{ opacity: 0, y: 16, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, amount: 0.3 }}
@@ -83,9 +83,9 @@ export function CtaFooter() {
           className="mt-8 font-body text-base md:text-lg text-foreground/70 max-w-xl text-center leading-relaxed"
         >
           {t("cta.subline")}
-        </motion.p>
+        </m.p>
 
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -110,10 +110,10 @@ export function CtaFooter() {
               <Mail className="mr-1.5 size-4" /> {t("cta.scrivici")}
             </a>
           </Button>
-        </motion.div>
+        </m.div>
 
         {/* Form contatti */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -121,10 +121,10 @@ export function CtaFooter() {
           className="mt-12 md:mt-16 w-full max-w-2xl"
         >
           <ContactForm />
-        </motion.div>
+        </m.div>
 
         {/* Contact info strip */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -145,7 +145,7 @@ export function CtaFooter() {
             <Mail className="size-4 text-primary/60" />
             info@dedicaresolutions.it
           </span>
-        </motion.div>
+        </m.div>
 
       </div>
 
