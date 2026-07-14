@@ -9,7 +9,7 @@ import { LegalModal } from "@/components/LegalModal"
 import { OptimizedImage } from "@/components/OptimizedImage"
 import { privacyPolicy, cookiePolicy, noteLegali, trasparenza } from "@/content/legal"
 
-type LegalKey = "privacy" | "cookie" | "legal" | "trasparenza" | null
+type LegalKey = "privacy" | "cookie" | "legal" | "trasparenza"
 
 function LegalContent({ sections }: { sections: { heading: string; content: string }[] }) {
   return (
@@ -33,8 +33,18 @@ const legalDocs = {
 
 export function CtaFooter() {
   const { t, i18n } = useTranslation()
-  const [openModal, setOpenModal] = useState<LegalKey>(null)
+  // `legalOpen` pilota solo apertura/chiusura del <dialog>; `legalKey` resta
+  // sull'ultimo documento mostrato anche a modal chiuso, così il pannello
+  // (che LegalModal tiene sempre montato per l'animazione di uscita CSS) non
+  // perde mai il contenuto durante la transizione di chiusura.
+  const [legalOpen, setLegalOpen] = useState(false)
+  const [legalKey, setLegalKey] = useState<LegalKey>("privacy")
   const isEn = (i18n.resolvedLanguage || i18n.language || "it").startsWith("en")
+
+  function openLegal(key: LegalKey) {
+    setLegalKey(key)
+    setLegalOpen(true)
+  }
 
   return (
     <section id="contatti" data-section="dark" className="relative min-h-[100svh] flex flex-col items-center justify-center overflow-hidden">
@@ -168,28 +178,28 @@ export function CtaFooter() {
           <nav className="flex items-center gap-6 flex-wrap justify-center">
             <button
               type="button"
-              onClick={() => setOpenModal("privacy")}
+              onClick={() => openLegal("privacy")}
               className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.privacy")}
             </button>
             <button
               type="button"
-              onClick={() => setOpenModal("cookie")}
+              onClick={() => openLegal("cookie")}
               className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.cookie")}
             </button>
             <button
               type="button"
-              onClick={() => setOpenModal("legal")}
+              onClick={() => openLegal("legal")}
               className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.legal")}
             </button>
             <button
               type="button"
-              onClick={() => setOpenModal("trasparenza")}
+              onClick={() => openLegal("trasparenza")}
               className="font-body text-xs text-foreground/70 hover:text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {t("cta.trasparenza")}
@@ -203,21 +213,22 @@ export function CtaFooter() {
           </nav>
         </div>
       </div>
-      {/* Modal legali — sempre in italiano per validità legale */}
-      {openModal && (
-        <LegalModal
-          open={true}
-          onClose={() => setOpenModal(null)}
-          title={legalDocs[openModal].title}
-        >
-          {isEn && (
-            <p className="text-xs italic text-white/55 border-l-2 border-primary/40 pl-3 mb-2">
-              {t("legal_modal.disclaimer")}
-            </p>
-          )}
-          <LegalContent sections={legalDocs[openModal].sections} />
-        </LegalModal>
-      )}
+      {/* Modal legali — sempre in italiano per validità legale.
+          Montato sempre (non solo quando aperto): il <dialog> nativo gestisce
+          la propria visibilità via showModal()/close(), e deve restare nel
+          DOM per la durata della transizione di chiusura CSS. */}
+      <LegalModal
+        open={legalOpen}
+        onClose={() => setLegalOpen(false)}
+        title={legalDocs[legalKey].title}
+      >
+        {isEn && (
+          <p className="text-xs italic text-white/55 border-l-2 border-primary/40 pl-3 mb-2">
+            {t("legal_modal.disclaimer")}
+          </p>
+        )}
+        <LegalContent sections={legalDocs[legalKey].sections} />
+      </LegalModal>
     </section>
   )
 }
