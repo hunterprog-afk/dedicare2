@@ -19,4 +19,15 @@ export default defineConfig([
       globals: globals.browser,
     },
   },
+  {
+    // File di supporto ai test (helper/setup): non passano mai per Fast
+    // Refresh del dev server (non sono raggiungibili dall'app in
+    // esecuzione), quindi la regola su "solo componenti esportati" non si
+    // applica — test-utils.tsx esporta volutamente anche `render` custom e
+    // il re-export di @testing-library/react.
+    files: ['src/test/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
 ])
