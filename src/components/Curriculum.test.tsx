@@ -4,11 +4,17 @@ import userEvent from "@testing-library/user-event"
 import { render } from "@/test/test-utils"
 import { Curriculum } from "@/components/Curriculum"
 
-// Caratterizza il comportamento ATTUALE del form di candidatura prima dello
-// split in sotto-componenti (00 - vedi 06 - Prossimi passi / DECISION-NEEDED
-// no-giant-component). Il refactor deve lasciare questi test verdi senza
-// modifiche: se un test qui cambia, è un cambio di comportamento, non solo
-// di struttura.
+// Caratterizza il comportamento del form di candidatura dopo lo split in
+// sotto-componenti (vedi 06 - Prossimi passi / DECISION-NEEDED
+// no-giant-component). Un refactor puramente strutturale deve lasciare
+// questi test verdi senza modifiche: se un test qui cambia, è un cambio di
+// comportamento, non solo di struttura.
+//
+// Fix 2026-07-14: i 2 test "upload: rifiuta..." asserivano DI PROPOSITO
+// l'assenza dell'alert di errore (bug pre-esistente in `handleFile`, che
+// impostava `errorMsg` ma non `status`). Il bug è stato corretto in
+// useCurriculumForm.ts — i test ora asseriscono l'alert visibile con il
+// messaggio corretto.
 
 const FORMSPREE_URL = "https://formspree.io/f/mkoybjyb"
 
@@ -80,8 +86,14 @@ describe("Curriculum — form di candidatura", () => {
     expect(screen.queryByRole("alert")).not.toBeInTheDocument()
   })
 
-  it("upload: rifiuta un file non-PDF, resetta l'input e torna a 'nessun file'", async () => {
-    const user = userEvent.setup()
+  it("upload: rifiuta un file non-PDF, resetta l'input e mostra l'errore", async () => {
+    // applyAccept: false — l'attributo accept="application/pdf" sull'input
+    // è solo un filtro "consigliato" per il selettore di file del SO
+    // (bypassabile con "Tutti i file", drag&drop, ecc.), non una validazione
+    // reale del browser. user-event lo applica per default e scarterebbe il
+    // file PRIMA che raggiunga `handleFile`, mascherando così il branch di
+    // validazione tipo-file che questo test vuole esercitare.
+    const user = userEvent.setup({ applyAccept: false })
     render(<Curriculum />)
 
     const file = new File(["x"], "curriculum.docx", {
@@ -90,18 +102,15 @@ describe("Curriculum — form di candidatura", () => {
     const input = screen.getByLabelText(/Seleziona file/) as HTMLInputElement
     await user.upload(input, file)
 
-    // NOTA (bug pre-esistente, non introdotto da questo refactor — vedi
-    // Curriculum.tsx `handleFile`): l'errore viene calcolato in
-    // `errorMsg` ma il paragrafo role="alert" si mostra solo quando
-    // `status === "error"`, che `handleFile` non imposta mai. Il messaggio
-    // "Formato non supportato" NON è quindi visibile all'utente oggi — qui
-    // caratterizziamo il comportamento reale, non quello atteso.
+    // Fix 2026-07-14 (vedi Curriculum.tsx `handleFile`): la validazione del
+    // file ora imposta anche `status="error"`, quindi il paragrafo
+    // role="alert" con il messaggio è visibile all'utente.
     expect(input.value).toBe("")
     expect(screen.getByText("Nessun file selezionato")).toBeInTheDocument()
-    expect(screen.queryByRole("alert")).not.toBeInTheDocument()
+    expect(screen.getByRole("alert")).toHaveTextContent("Formato non supportato. Carica un PDF.")
   })
 
-  it("upload: rifiuta un PDF oltre i 5MB e resetta l'input (stesso bug di visibilità del messaggio)", async () => {
+  it("upload: rifiuta un PDF oltre i 5MB, resetta l'input e mostra l'errore", async () => {
     const user = userEvent.setup()
     render(<Curriculum />)
 
@@ -111,19 +120,21 @@ describe("Curriculum — form di candidatura", () => {
 
     expect(input.value).toBe("")
     expect(screen.getByText("Nessun file selezionato")).toBeInTheDocument()
-    expect(screen.queryByRole("alert")).not.toBeInTheDocument()
+    expect(screen.getByRole("alert")).toHaveTextContent("Il file supera i 5MB.")
   })
 
-  it("upload: selezionare un file valido dopo un errore lo accetta comunque", async () => {
-    const user = userEvent.setup()
+  it("upload: selezionare un file valido dopo un errore lo accetta comunque e pulisce l'errore", async () => {
+    const user = userEvent.setup({ applyAccept: false })
     render(<Curriculum />)
 
     const input = screen.getByLabelText(/Seleziona file/) as HTMLInputElement
     await user.upload(input, new File(["x"], "bad.txt", { type: "text/plain" }))
     expect(screen.getByText("Nessun file selezionato")).toBeInTheDocument()
+    expect(screen.getByRole("alert")).toHaveTextContent("Formato non supportato. Carica un PDF.")
 
     await user.upload(input, makePdfFile("ok.pdf"))
     expect(screen.getByText("ok.pdf")).toBeInTheDocument()
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument()
   })
 
   it("submit: invia i campi attesi (incluso il file) a Formspree e mostra la schermata di successo", async () => {

@@ -32,11 +32,15 @@ const INITIAL_FIELDS: CurriculumFields = {
  * isolare la logica dal markup (vedi 06 - Prossimi passi / DECISION-NEEDED
  * no-giant-component nel report react-doctor 2026-07-14).
  *
- * Comportamento invariato rispetto all'originale, bug pre-esistente incluso:
- * `handleFile` imposta `errorMsg` ma non `status`, quindi il messaggio di
- * errore di validazione upload (tipo/dimensione file) non viene mai
- * mostrato — vedi Curriculum.test.tsx per la caratterizzazione esplicita.
- * Non corretto qui di proposito: refactor puramente strutturale.
+ * Fix 2026-07-14: `handleFile` ora imposta anche `status="error"` quando la
+ * validazione del file (tipo/dimensione) fallisce, cosicché il paragrafo
+ * role="alert" in CurriculumFormFields (gated su `status === "error" &&
+ * errorMsg`) sia effettivamente visibile. In precedenza veniva impostato
+ * solo `errorMsg`, con reset silenzioso dell'input e nessun feedback
+ * all'utente — vedi Curriculum.test.tsx per i test aggiornati.
+ * `handleFile` resetta anche `status` a "idle" a ogni chiamata (prima di
+ * validare) cosí un file valido, o anche l'annullamento della selezione,
+ * ripulisce coerentemente un errore precedente (di file o di submit).
  */
 export function useCurriculumForm() {
   const { t } = useTranslation()
@@ -62,6 +66,7 @@ export function useCurriculumForm() {
 
   function handleFile(e: ChangeEvent<HTMLInputElement>) {
     setErrorMsg("")
+    setStatus("idle")
     const file = e.target.files?.[0] ?? null
     if (!file) {
       setCv(null)
@@ -69,12 +74,14 @@ export function useCurriculumForm() {
     }
     if (file.type !== "application/pdf") {
       setErrorMsg(t("curriculum.error_filetype"))
+      setStatus("error")
       setCv(null)
       e.target.value = ""
       return
     }
     if (file.size > MAX_FILE_BYTES) {
       setErrorMsg(t("curriculum.error_filesize"))
+      setStatus("error")
       setCv(null)
       e.target.value = ""
       return
