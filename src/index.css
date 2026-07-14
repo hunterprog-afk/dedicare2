@@ -487,3 +487,84 @@ body {
     line-height: 1.7;
   }
 }
+
+/* ─── Native <dialog> modals (LegalModal, ServiceModal) ──────────────────── */
+/* Reset the UA dialog chrome and drive enter/exit purely with CSS:
+   @starting-style supplies the "from" state on first paint (needed because a
+   display:none → flex transition otherwise has nothing to interpolate from),
+   and transition-behavior: allow-discrete keeps `display`/`overlay` (the two
+   discrete, top-layer-relevant properties) rendered for the duration of the
+   transition instead of snapping away instantly. This means Escape, backdrop
+   click and dialog.close() all get the same fade — no JS timers, no
+   AnimatePresence needed inside the dialog. Baseline-available across
+   Chrome/Edge/Firefox/Safari well ahead of 2026, so no fallback is provided;
+   browsers without support just skip the transition (dialog opens/closes
+   instantly, still fully functional).
+   Panel offset (16px / scale 0.98) intentionally reuses the SAME pose for
+   both the enter-start and exit-end state (the original Framer Motion
+   version used slightly different y-offsets for enter vs exit — 24px vs
+   16px — which is not practical to express with a single CSS custom
+   property pair without duplicating the whole ruleset; the visual delta at
+   this magnitude is negligible over a 250-300ms transition). */
+dialog.native-dialog {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  background: rgb(0 0 0 / 0%);
+  overflow: visible;
+  transition:
+    background-color 0.25s ease,
+    backdrop-filter 0.25s ease,
+    display 0.3s ease allow-discrete,
+    overlay 0.3s ease allow-discrete;
+}
+
+dialog.native-dialog:not([open]) {
+  display: none;
+}
+
+dialog.native-dialog[open] {
+  background: rgb(0 0 0 / 70%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+@starting-style {
+  dialog.native-dialog[open] {
+    background: rgb(0 0 0 / 0%);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+  }
+}
+
+.native-dialog__panel {
+  transition:
+    opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+dialog.native-dialog:not([open]) .native-dialog__panel {
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+}
+
+@starting-style {
+  dialog.native-dialog[open] .native-dialog__panel {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+/* prefers-reduced-motion: keep the native show/hide, drop the motion */
+@media (prefers-reduced-motion: reduce) {
+  dialog.native-dialog,
+  .native-dialog__panel {
+    transition-duration: 0.01ms !important;
+  }
+}
