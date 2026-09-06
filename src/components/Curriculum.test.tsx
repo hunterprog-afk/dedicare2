@@ -3,6 +3,7 @@ import { screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { render } from "@/test/test-utils"
 import { Curriculum } from "@/components/Curriculum"
+import { CANDIDATURA_ENDPOINT, INFORMATIVA_CANDIDATI_URL, INFORMATIVA_CANDIDATI_VERSIONE } from "@/lib/formsApi"
 
 // Caratterizza il comportamento del form di candidatura dopo lo split in
 // sotto-componenti (vedi 06 - Prossimi passi / DECISION-NEEDED
@@ -15,8 +16,15 @@ import { Curriculum } from "@/components/Curriculum"
 // impostava `errorMsg` ma non `status`). Il bug è stato corretto in
 // useCurriculumForm.ts — i test ora asseriscono l'alert visibile con il
 // messaggio corretto.
-
-const FORMSPREE_URL = "https://formspree.io/f/mkoybjyb"
+//
+// 2026-09: migrazione dal precedente fornitore terzo di modulistica
+// all'endpoint pubblico del bot aziendale (CONTRATTO-moduli-sito-m365.md
+// §1/§5/§8). Via la checkbox "privacy" (per i
+// curricula il consenso non è dovuto, art. 111-bis Codice Privacy) —
+// sostituita da un link all'informativa candidati dedicata. Aggiunta la
+// validazione client dei campi obbligatori (prima demandata solo a
+// `required` HTML, mai applicato perché il form ha `noValidate`) e i nuovi
+// casi di errore mappati per status HTTP (429/413/503).
 
 function makePdfFile(name = "cv.pdf", sizeBytes = 1024) {
   const bytes = new Uint8Array(sizeBytes)
@@ -31,7 +39,6 @@ async function fillRequiredFields(user: ReturnType<typeof userEvent.setup>) {
     screen.getByLabelText(/^Posizione/),
     "Operatore Socio Sanitario (OSS)"
   )
-  await user.click(screen.getByLabelText(/Acconsento al trattamento/))
 }
 
 describe("Curriculum — form di candidatura", () => {
@@ -44,7 +51,7 @@ describe("Curriculum — form di candidatura", () => {
     vi.restoreAllMocks()
   })
 
-  it("renders tutti i campi del form con le label corrette", () => {
+  it("renders tutti i campi del form con le label corrette, senza la checkbox privacy", () => {
     render(<Curriculum />)
     expect(screen.getByLabelText(/^Nome/)).toBeInTheDocument()
     expect(screen.getByLabelText(/^Cognome/)).toBeInTheDocument()
@@ -52,25 +59,23 @@ describe("Curriculum — form di candidatura", () => {
     expect(screen.getByLabelText(/^Telefono/)).toBeInTheDocument()
     expect(screen.getByLabelText(/^Posizione/)).toBeInTheDocument()
     expect(screen.getByLabelText(/^Messaggio/)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Acconsento al trattamento/)).toBeInTheDocument()
-    expect(screen.getByRole("button", { name: "Invia candidatura" })).toBeInTheDocument()
+    expect(screen.queryByLabelText(/Acconsento/)).not.toBeInTheDocument()
+    const submit = screen.getByRole("button", { name: "Invia candidatura" })
+    expect(submit).toBeInTheDocument()
+    expect(submit).toBeEnabled()
   })
 
-  it("disabilita il bottone di invio finché la privacy non è accettata", async () => {
-    const user = userEvent.setup()
+  it("mostra il link all'informativa privacy candidati (nuova scheda) e l'hint sotto il campo CV", () => {
     render(<Curriculum />)
 
-    const submit = screen.getByRole("button", { name: "Invia candidatura" })
-    expect(submit).toBeDisabled()
+    const link = screen.getByRole("link", { name: /informativa privacy per i candidati/i })
+    expect(link).toHaveAttribute("href", INFORMATIVA_CANDIDATI_URL)
+    expect(link).toHaveAttribute("target", "_blank")
+    expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"))
 
-    await user.type(screen.getByLabelText(/^Nome/), "Maria")
-    expect(submit).toBeDisabled()
-
-    await user.click(screen.getByLabelText(/Acconsento al trattamento/))
-    expect(submit).toBeEnabled()
-
-    await user.click(screen.getByLabelText(/Acconsento al trattamento/))
-    expect(submit).toBeDisabled()
+    expect(
+      screen.getByText(/non servono dati sulla salute, convinzioni religiose o politiche/i)
+    ).toBeInTheDocument()
   })
 
   it("upload: accetta un PDF valido sotto i 5MB", async () => {
@@ -102,8 +107,8 @@ describe("Curriculum — form di candidatura", () => {
     const input = screen.getByLabelText(/Seleziona file/) as HTMLInputElement
     await user.upload(input, file)
 
-    // Fix 2026-07-14 (vedi Curriculum.tsx `handleFile`): la validazione del
-    // file ora imposta anche `status="error"`, quindi il paragrafo
+    // Fix 2026-07-14 (vedi useCurriculumForm.ts `handleFile`): la validazione
+    // del file ora imposta anche `status="error"`, quindi il paragrafo
     // role="alert" con il messaggio è visibile all'utente.
     expect(input.value).toBe("")
     expect(screen.getByText("Nessun file selezionato")).toBeInTheDocument()
@@ -137,8 +142,24 @@ describe("Curriculum — form di candidatura", () => {
     expect(screen.queryByRole("alert")).not.toBeInTheDocument()
   })
 
-  it("submit: invia i campi attesi (incluso il file) a Formspree e mostra la schermata di successo", async () => {
-    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) })
+  it("submit: senza i campi obbligatori mostra l'errore di validazione e non chiama fetch", async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<Curriculum />)
+
+    await user.click(screen.getByRole("button", { name: "Invia candidatura" }))
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        "Compila i campi obbligatori (nome, cognome, email valida e posizione)."
+      )
+    })
+    expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it("submit: invia i campi attesi (incluso il file, l'honeypot vuoto, lingua e informativa_versione) all'endpoint del bot", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) })
     vi.stubGlobal("fetch", fetchMock)
     const user = userEvent.setup()
     render(<Curriculum />)
@@ -156,7 +177,7 @@ describe("Curriculum — form di candidatura", () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1)
     const [url, init] = fetchMock.mock.calls[0]
-    expect(url).toBe(FORMSPREE_URL)
+    expect(url).toBe(CANDIDATURA_ENDPOINT)
     expect(init.method).toBe("POST")
     expect(init.headers).toMatchObject({ Accept: "application/json" })
 
@@ -167,13 +188,15 @@ describe("Curriculum — form di candidatura", () => {
     expect(body.get("telefono")).toBe("3331234567")
     expect(body.get("posizione")).toBe("Operatore Socio Sanitario (OSS)")
     expect(body.get("messaggio")).toBe("Disponibile da subito")
-    expect(body.get("_subject")).toBe("Candidatura — Lavora con noi")
+    expect(body.get("sito_web")).toBe("")
+    expect(body.get("lingua")).toBe("it")
+    expect(body.get("informativa_versione")).toBe(INFORMATIVA_CANDIDATI_VERSIONE)
     const cvEntry = body.get("cv") as File
     expect(cvEntry.name).toBe("cv.pdf")
   })
 
   it("submit: senza CV allegato non include il campo cv nel FormData", async () => {
-    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) })
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) })
     vi.stubGlobal("fetch", fetchMock)
     const user = userEvent.setup()
     render(<Curriculum />)
@@ -204,37 +227,14 @@ describe("Curriculum — form di candidatura", () => {
     expect(screen.getByRole("button", { name: "Invio in corso…" })).toBeDisabled()
     expect(screen.getByLabelText(/^Nome/)).toBeDisabled()
 
-    resolveFetch({ ok: true, json: async () => ({}) })
+    resolveFetch({ ok: true, status: 200, json: async () => ({ ok: true }) })
     await waitFor(() => {
       expect(screen.getByText("Candidatura ricevuta!")).toBeInTheDocument()
     })
   })
 
-  it("submit: risposta non-ok mostra l'errore restituito dal server", async () => {
-    const fetchMock = vi.fn().mockResolvedValue({
-      ok: false,
-      json: async () => ({ error: "Email non valida secondo Formspree" }),
-    })
-    vi.stubGlobal("fetch", fetchMock)
-    const user = userEvent.setup()
-    render(<Curriculum />)
-
-    await fillRequiredFields(user)
-    await user.click(screen.getByRole("button", { name: "Invia candidatura" }))
-
-    await waitFor(() => {
-      expect(screen.getByRole("alert")).toHaveTextContent("Email non valida secondo Formspree")
-    })
-    expect(screen.getByRole("button", { name: "Invia candidatura" })).toBeInTheDocument()
-  })
-
-  it("submit: risposta non-ok senza body di errore usa il messaggio di fallback", async () => {
-    const fetchMock = vi.fn().mockResolvedValue({
-      ok: false,
-      json: async () => {
-        throw new Error("no json")
-      },
-    })
+  it("submit: risposta 429 mostra il messaggio di troppi tentativi", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: false, status: 429 })
     vi.stubGlobal("fetch", fetchMock)
     const user = userEvent.setup()
     render(<Curriculum />)
@@ -244,7 +244,37 @@ describe("Curriculum — form di candidatura", () => {
 
     await waitFor(() => {
       expect(screen.getByRole("alert")).toHaveTextContent(
-        "Invio fallito. Riprova o scrivici a info@dedicaresolutions.it."
+        "Troppi tentativi in poco tempo. Riprova tra qualche minuto o scrivici a info@dedicaresolutions.it."
+      )
+    })
+  })
+
+  it("submit: risposta 413 mostra il messaggio sul limite dei 5MB", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: false, status: 413 })
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<Curriculum />)
+
+    await fillRequiredFields(user)
+    await user.click(screen.getByRole("button", { name: "Invia candidatura" }))
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent("Il file supera i 5MB.")
+    })
+  })
+
+  it("submit: risposta 503 mostra il messaggio di invio non riuscito", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: false, status: 503 })
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<Curriculum />)
+
+    await fillRequiredFields(user)
+    await user.click(screen.getByRole("button", { name: "Invia candidatura" }))
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        "Invio non riuscito. Riprova più tardi o invia il CV direttamente a info@dedicaresolutions.it."
       )
     })
   })
@@ -266,7 +296,7 @@ describe("Curriculum — form di candidatura", () => {
   })
 
   it("dopo il successo, 'invia un'altra candidatura' riporta al form vuoto", async () => {
-    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) })
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) })
     vi.stubGlobal("fetch", fetchMock)
     const user = userEvent.setup()
     render(<Curriculum />)
@@ -279,11 +309,11 @@ describe("Curriculum — form di candidatura", () => {
 
     expect(screen.getByRole("button", { name: "Invia candidatura" })).toBeInTheDocument()
     expect((screen.getByLabelText(/^Nome/) as HTMLInputElement).value).toBe("")
-    expect(screen.getByRole("button", { name: "Invia candidatura" })).toBeDisabled()
+    expect(screen.getByRole("button", { name: "Invia candidatura" })).toBeEnabled()
   })
 
   it("dopo un invio riuscito, i campi e il CV vengono azzerati", async () => {
-    const fetchMock = vi.fn().mockResolvedValue({ ok: true, json: async () => ({}) })
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) })
     vi.stubGlobal("fetch", fetchMock)
     const user = userEvent.setup()
     const { container } = render(<Curriculum />)
