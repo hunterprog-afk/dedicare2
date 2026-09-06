@@ -22,22 +22,10 @@
     "title": "Una cura su misura per ogni persona",
     "intro": "Anziani, adulti, bambini e persone con disabilità: ogni storia è diversa. Costruiamo l'assistenza attorno alla persona e alla sua famiglia, non viceversa.",
     "items": [
-      {
-        "title": "Anziani",
-        "body": "Assistenza domiciliare continuativa, gestione di cronicità e demenza, prevenzione e compagnia quotidiana per vivere la casa in sicurezza."
-      },
-      {
-        "title": "Adulti & post-ricovero",
-        "body": "Dimissioni protette, supporto post-operatorio e gestione di terapie e percorsi di recupero, per tornare alla vita di ogni giorno."
-      },
-      {
-        "title": "Bambini",
-        "body": "Assistenza pediatrica domiciliare e supporto alle famiglie nella gestione di patologie e fragilità, con delicatezza e competenza."
-      },
-      {
-        "title": "Persone con disabilità",
-        "body": "Supporto all'autonomia e assistenza continuativa, con un team multidisciplinare che coordina ogni aspetto della cura."
-      }
+      { "title": "Anziani", "body": "Assistenza domiciliare continuativa, gestione di cronicità e demenza, prevenzione e compagnia quotidiana per vivere la casa in sicurezza." },
+      { "title": "Adulti & post-ricovero", "body": "Dimissioni protette, supporto post-operatorio e gestione di terapie e percorsi di recupero, per tornare alla vita di ogni giorno." },
+      { "title": "Bambini", "body": "Assistenza pediatrica domiciliare e supporto alle famiglie nella gestione di patologie e fragilità, con delicatezza e competenza." },
+      { "title": "Persone con disabilità", "body": "Supporto all'autonomia e assistenza continuativa, con un team multidisciplinare che coordina ogni aspetto della cura." }
     ]
   },
   "services": {
@@ -145,22 +133,10 @@
     "title": "Presenza concreta, ogni giorno.",
     "intro": "Quattro evidenze che raccontano come trasformiamo l'assistenza in qualcosa di misurabile, vicino e personale.",
     "items": [
-      {
-        "value": "24/7",
-        "label": "Disponibilità reale"
-      },
-      {
-        "value": "100%",
-        "label": "Cura personalizzata"
-      },
-      {
-        "value": "3+",
-        "label": "Parametri vitali gratuiti ad ogni visita"
-      },
-      {
-        "value": "MI",
-        "label": "Milano e tutto il territorio italiano"
-      }
+      { "value": "24/7", "label": "Disponibilità reale" },
+      { "value": "100%", "label": "Cura personalizzata" },
+      { "value": "3+", "label": "Parametri vitali gratuiti ad ogni visita" },
+      { "value": "MI", "label": "Milano e tutto il territorio italiano" }
     ]
   },
   "testimonials": {
@@ -275,26 +251,11 @@
     "title": "Certificazioni & Conformità",
     "intro": "Operiamo nel pieno rispetto delle normative sanitarie e di tutela del cittadino.",
     "items": [
-      {
-        "title": "Accreditamento ASL Milano",
-        "detail": "Operatore riconosciuto"
-      },
-      {
-        "title": "Albo Operatori Sanitari",
-        "detail": "Iscrizione regolare"
-      },
-      {
-        "title": "Conformità GDPR",
-        "detail": "Reg. UE 2016/679"
-      },
-      {
-        "title": "Polizza RC Professionale",
-        "detail": "Copertura completa"
-      },
-      {
-        "title": "Convenzioni INPS",
-        "detail": "Ente convenzionato"
-      }
+      { "title": "Accreditamento ASL Milano", "detail": "Operatore riconosciuto" },
+      { "title": "Albo Operatori Sanitari", "detail": "Iscrizione regolare" },
+      { "title": "Conformità GDPR", "detail": "Reg. UE 2016/679" },
+      { "title": "Polizza RC Professionale", "detail": "Copertura completa" },
+      { "title": "Convenzioni INPS", "detail": "Ente convenzionato" }
     ]
   },
   "faq": {
