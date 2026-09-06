@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event"
 import { render } from "@/test/test-utils"
 import { ContactForm } from "@/components/ContactForm"
 import { CONTATTO_ENDPOINT, PRIVACY_POLICY_VERSIONE } from "@/lib/formsApi"
+import i18n from "@/i18n"
 
 // 2026-09: migrazione dal precedente fornitore terzo di modulistica
 // all'endpoint pubblico del bot aziendale (CONTRATTO-moduli-sito-m365.md
@@ -30,9 +31,12 @@ describe("ContactForm — form di contatto", () => {
     onOpenPrivacy.mockClear()
   })
 
-  afterEach(() => {
+  afterEach(async () => {
     vi.unstubAllGlobals()
     vi.restoreAllMocks()
+    // Vedi Curriculum.test.tsx: alcuni test cambiano la lingua attiva,
+    // ripristiniamo sempre "it" per non lasciare stato tra i test.
+    await i18n.changeLanguage("it")
   })
 
   it("renders tutti i campi, l'hint sulla salute e il link all'informativa, senza checkbox privacy", () => {
@@ -54,13 +58,45 @@ describe("ContactForm — form di contatto", () => {
     expect(screen.getByRole("button", { name: "Invia messaggio" })).toBeEnabled()
   })
 
-  it("il link dell'informativa privacy chiama onOpenPrivacy (apre il modal, non naviga)", async () => {
+  it("honeypot: nascosto, fuori dal tab order, ignorato dai password manager e inviato vuoto", () => {
+    const { container } = render(<ContactForm onOpenPrivacy={onOpenPrivacy} />)
+    const honeypot = container.querySelector('input[name="sito_web"]') as HTMLInputElement
+
+    expect(honeypot).toBeInTheDocument()
+    expect(honeypot).toHaveAttribute("aria-hidden", "true")
+    expect(honeypot).toHaveAttribute("tabindex", "-1")
+    // Vedi Curriculum.test.tsx: i password manager compilano per euristica
+    // sul `name` (ignorano autoComplete="off"), quindi un utente reale con
+    // "sito_web" precompilato verrebbe scartato in silenzio dal bot.
+    expect(honeypot).toHaveAttribute("data-1p-ignore", "true")
+    expect(honeypot).toHaveAttribute("data-lpignore", "true")
+    expect(honeypot).toHaveAttribute("data-bwignore", "true")
+    expect(honeypot.value).toBe("")
+
+    // 4 campi testuali visibili attesi: nome, telefono, email, messaggio.
+    // Se l'honeypot perdesse aria-hidden comparirebbe come quinto elemento.
+    expect(screen.getAllByRole("textbox")).toHaveLength(4)
+    expect(screen.getAllByRole("textbox")).not.toContain(honeypot)
+  })
+
+  it("i campi obbligatori hanno i maxLength lato client coerenti col contratto API (§1)", () => {
+    render(<ContactForm onOpenPrivacy={onOpenPrivacy} />)
+    expect(screen.getByLabelText(/^Nome/)).toHaveAttribute("maxlength", "100")
+    expect(screen.getByLabelText(/^Telefono/)).toHaveAttribute("maxlength", "40")
+    expect(screen.getByLabelText(/^Email/)).toHaveAttribute("maxlength", "254")
+    expect(screen.getByLabelText(/^Messaggio/)).toHaveAttribute("maxlength", "5000")
+  })
+
+  it("il link dell'informativa privacy chiama onOpenPrivacy (apre il modal, non naviga) e non invia nulla", async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal("fetch", fetchMock)
     const user = userEvent.setup()
     render(<ContactForm onOpenPrivacy={onOpenPrivacy} />)
 
     await user.click(screen.getByRole("button", { name: "informativa privacy" }))
 
     expect(onOpenPrivacy).toHaveBeenCalledTimes(1)
+    expect(fetchMock).not.toHaveBeenCalled()
   })
 
   it("submit: senza i campi obbligatori mostra l'errore di validazione e non chiama fetch", async () => {
@@ -69,6 +105,25 @@ describe("ContactForm — form di contatto", () => {
     const user = userEvent.setup()
     render(<ContactForm onOpenPrivacy={onOpenPrivacy} />)
 
+    await user.click(screen.getByRole("button", { name: "Invia messaggio" }))
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        "Compila i campi obbligatori (nome, email valida e messaggio)."
+      )
+    })
+    expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it("submit: email malformata (mario@) mostra l'errore di validazione e non chiama fetch", async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<ContactForm onOpenPrivacy={onOpenPrivacy} />)
+
+    await user.type(screen.getByLabelText(/^Nome/), "Giulia")
+    await user.type(screen.getByLabelText(/^Email/), "mario@")
+    await user.type(screen.getByLabelText(/^Messaggio/), "Vorrei informazioni")
     await user.click(screen.getByRole("button", { name: "Invia messaggio" }))
 
     await waitFor(() => {
@@ -111,6 +166,52 @@ describe("ContactForm — form di contatto", () => {
       sito_web: "",
       lingua: "it",
       informativa_versione: PRIVACY_POLICY_VERSIONE,
+    })
+  })
+
+  it("submit: quando la lingua attiva è l'inglese invia lingua='en' (ripristinata a 'it' in afterEach)", async () => {
+    await i18n.changeLanguage("en")
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) })
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<ContactForm onOpenPrivacy={onOpenPrivacy} />)
+
+    await user.type(screen.getByLabelText(/^Name/), "Giulia")
+    await user.type(screen.getByLabelText(/^Email/), "giulia@example.com")
+    await user.type(screen.getByLabelText(/^Message/), "I need information")
+    await user.click(screen.getByRole("button", { name: "Send message" }))
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1))
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string)
+    expect(body.lingua).toBe("en")
+  })
+
+  it("submit: un doppio click con fetch lenta genera una sola chiamata (il bottone si disabilita subito)", async () => {
+    let resolveFetch: (value: unknown) => void = () => {}
+    const fetchMock = vi.fn(
+      () =>
+        new Promise((resolve) => {
+          resolveFetch = resolve
+        })
+    )
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<ContactForm onOpenPrivacy={onOpenPrivacy} />)
+
+    await fillRequiredFields(user)
+    await user.click(screen.getByRole("button", { name: "Invia messaggio" }))
+    // L'icona di spinner è aria-hidden, quindi il nome accessibile del
+    // bottone durante il caricamento resta il solo testo "Invio in corso…"
+    // (stesso pattern di Curriculum.test.tsx). Il bottone è già disabilitato
+    // quando arriva questo secondo click: un bottone HTML disabled non
+    // emette eventi click, né nel browser né in jsdom.
+    await user.click(screen.getByRole("button", { name: "Invio in corso…" }))
+
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+
+    resolveFetch({ ok: true, status: 200, json: async () => ({ ok: true }) })
+    await waitFor(() => {
+      expect(screen.getByText("Messaggio inviato!")).toBeInTheDocument()
     })
   })
 

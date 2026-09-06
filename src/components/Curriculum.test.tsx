@@ -4,6 +4,7 @@ import userEvent from "@testing-library/user-event"
 import { render } from "@/test/test-utils"
 import { Curriculum } from "@/components/Curriculum"
 import { CANDIDATURA_ENDPOINT, INFORMATIVA_CANDIDATI_URL, INFORMATIVA_CANDIDATI_VERSIONE } from "@/lib/formsApi"
+import i18n from "@/i18n"
 
 // Caratterizza il comportamento del form di candidatura dopo lo split in
 // sotto-componenti (vedi 06 - Prossimi passi / DECISION-NEEDED
@@ -46,9 +47,13 @@ describe("Curriculum — form di candidatura", () => {
     vi.stubGlobal("fetch", vi.fn())
   })
 
-  afterEach(() => {
+  afterEach(async () => {
     vi.unstubAllGlobals()
     vi.restoreAllMocks()
+    // Alcuni test cambiano la lingua attiva (vedi "lingua='en'..."): la
+    // ripristiniamo sempre a "it" per non lasciare stato tra i test (lo
+    // stesso motivo per cui src/test/setup.ts la forza in beforeAll).
+    await i18n.changeLanguage("it")
   })
 
   it("renders tutti i campi del form con le label corrette, senza la checkbox privacy", () => {
@@ -76,6 +81,39 @@ describe("Curriculum — form di candidatura", () => {
     expect(
       screen.getByText(/non servono dati sulla salute, convinzioni religiose o politiche/i)
     ).toBeInTheDocument()
+  })
+
+  it("honeypot: nascosto, fuori dal tab order, ignorato dai password manager e inviato vuoto", () => {
+    const { container } = render(<Curriculum />)
+    const honeypot = container.querySelector('input[name="sito_web"]') as HTMLInputElement
+
+    expect(honeypot).toBeInTheDocument()
+    expect(honeypot).toHaveAttribute("aria-hidden", "true")
+    expect(honeypot).toHaveAttribute("tabindex", "-1")
+    // data-1p-ignore/data-lpignore/data-bwignore: 1Password/LastPass/Bitwarden
+    // compilano i campi per euristica sul `name` (ignorano autoComplete="off"),
+    // quindi un candidato reale con "sito_web" precompilato verrebbe scartato
+    // in silenzio dal bot come honeypot pieno (contratto §3.1).
+    expect(honeypot).toHaveAttribute("data-1p-ignore", "true")
+    expect(honeypot).toHaveAttribute("data-lpignore", "true")
+    expect(honeypot).toHaveAttribute("data-bwignore", "true")
+    expect(honeypot.value).toBe("")
+
+    // 5 campi testuali visibili attesi: nome, cognome, email, telefono,
+    // messaggio. Se l'honeypot perdesse aria-hidden comparirebbe come sesto
+    // elemento (gli input text/email/tel e la textarea condividono il ruolo
+    // accessibile "textbox").
+    expect(screen.getAllByRole("textbox")).toHaveLength(5)
+    expect(screen.getAllByRole("textbox")).not.toContain(honeypot)
+  })
+
+  it("i campi obbligatori hanno i maxLength lato client coerenti col contratto API (§1)", () => {
+    render(<Curriculum />)
+    expect(screen.getByLabelText(/^Nome/)).toHaveAttribute("maxlength", "100")
+    expect(screen.getByLabelText(/^Cognome/)).toHaveAttribute("maxlength", "100")
+    expect(screen.getByLabelText(/^Email/)).toHaveAttribute("maxlength", "254")
+    expect(screen.getByLabelText(/^Telefono/)).toHaveAttribute("maxlength", "40")
+    expect(screen.getByLabelText(/^Messaggio/)).toHaveAttribute("maxlength", "5000")
   })
 
   it("upload: accetta un PDF valido sotto i 5MB", async () => {
@@ -158,6 +196,67 @@ describe("Curriculum — form di candidatura", () => {
     expect(fetchMock).not.toHaveBeenCalled()
   })
 
+  it("submit: email malformata (mario@) mostra l'errore di validazione e non chiama fetch", async () => {
+    const fetchMock = vi.fn()
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<Curriculum />)
+
+    await user.type(screen.getByLabelText(/^Nome/), "Maria")
+    await user.type(screen.getByLabelText(/^Cognome/), "Rossi")
+    await user.type(screen.getByLabelText(/^Email/), "mario@")
+    await user.selectOptions(screen.getByLabelText(/^Posizione/), "Operatore Socio Sanitario (OSS)")
+    await user.click(screen.getByRole("button", { name: "Invia candidatura" }))
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent(
+        "Compila i campi obbligatori (nome, cognome, email valida e posizione)."
+      )
+    })
+    expect(fetchMock).not.toHaveBeenCalled()
+  })
+
+  it("submit: un doppio click con fetch lenta genera una sola chiamata (il bottone si disabilita subito)", async () => {
+    let resolveFetch: (value: unknown) => void = () => {}
+    const fetchMock = vi.fn(
+      () =>
+        new Promise((resolve) => {
+          resolveFetch = resolve
+        })
+    )
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<Curriculum />)
+
+    await fillRequiredFields(user)
+    await user.click(screen.getByRole("button", { name: "Invia candidatura" }))
+    // Il bottone è già disabilitato ("Invio in corso…") quando arriva questo
+    // secondo click: un bottone HTML disabled non emette eventi click, né
+    // nel browser né in jsdom.
+    await user.click(screen.getByRole("button", { name: "Invio in corso…" }))
+
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+
+    resolveFetch({ ok: true, status: 200, json: async () => ({ ok: true }) })
+    await waitFor(() => {
+      expect(screen.getByText("Candidatura ricevuta!")).toBeInTheDocument()
+    })
+  })
+
+  it("submit: risposta 415 mostra il messaggio di formato non supportato", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({ ok: false, status: 415 })
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<Curriculum />)
+
+    await fillRequiredFields(user)
+    await user.click(screen.getByRole("button", { name: "Invia candidatura" }))
+
+    await waitFor(() => {
+      expect(screen.getByRole("alert")).toHaveTextContent("Formato non supportato. Carica un PDF.")
+    })
+  })
+
   it("submit: invia i campi attesi (incluso il file, l'honeypot vuoto, lingua e informativa_versione) all'endpoint del bot", async () => {
     const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) })
     vi.stubGlobal("fetch", fetchMock)
@@ -193,6 +292,25 @@ describe("Curriculum — form di candidatura", () => {
     expect(body.get("informativa_versione")).toBe(INFORMATIVA_CANDIDATI_VERSIONE)
     const cvEntry = body.get("cv") as File
     expect(cvEntry.name).toBe("cv.pdf")
+  })
+
+  it("submit: quando la lingua attiva è l'inglese invia lingua='en' (ripristinata a 'it' in afterEach)", async () => {
+    await i18n.changeLanguage("en")
+    const fetchMock = vi.fn().mockResolvedValue({ ok: true, status: 200, json: async () => ({ ok: true }) })
+    vi.stubGlobal("fetch", fetchMock)
+    const user = userEvent.setup()
+    render(<Curriculum />)
+
+    await user.type(screen.getByLabelText(/^First name/), "Maria")
+    await user.type(screen.getByLabelText(/^Last name/), "Rossi")
+    await user.type(screen.getByLabelText(/^Email/), "maria.rossi@example.com")
+    await user.selectOptions(screen.getByLabelText(/^Position/), "Healthcare Assistant (OSS)")
+
+    await user.click(screen.getByRole("button", { name: "Send application" }))
+
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(1))
+    const body = fetchMock.mock.calls[0][1].body as FormData
+    expect(body.get("lingua")).toBe("en")
   })
 
   it("submit: senza CV allegato non include il campo cv nel FormData", async () => {
