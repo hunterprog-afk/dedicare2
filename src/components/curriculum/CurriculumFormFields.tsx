@@ -1,7 +1,8 @@
 import { type ChangeEvent } from "react"
 import { Upload } from "lucide-react"
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
+import { INFORMATIVA_CANDIDATI_URL } from "@/lib/formsApi"
 import type { CurriculumFields, FormStatus } from "@/hooks/useCurriculumForm"
 
 type PositionKey = "oss" | "infermiere" | "fisioterapista" | "badante" | "altro"
@@ -24,7 +25,13 @@ interface CurriculumFormFieldsProps {
 
 /** Campi del form di candidatura + upload CV + submit. Markup puro: tutto
  *  lo stato/la logica vive in useCurriculumForm, passato come props da
- *  CurriculumForm. */
+ *  CurriculumForm.
+ *
+ *  2026-09: via la checkbox "privacy" (per i curricula il consenso non è
+ *  dovuto, art. 111-bis Codice Privacy) — sostituita da una dichiarazione di
+ *  presa visione con link all'informativa candidati dedicata (paragrafo
+ *  `Trans`, MAI `dangerouslySetInnerHTML`). Aggiunto hint sotto il campo CV
+ *  e un honeypot anti-spam invisibile (`sito_web`) fuori dal tab order. */
 export function CurriculumFormFields({
   fields,
   cv,
@@ -53,6 +60,7 @@ export function CurriculumFormFields({
             type="text"
             required
             autoComplete="given-name"
+            maxLength={100}
             value={fields.nome}
             onChange={onChange}
             disabled={disabled}
@@ -69,6 +77,7 @@ export function CurriculumFormFields({
             type="text"
             required
             autoComplete="family-name"
+            maxLength={100}
             value={fields.cognome}
             onChange={onChange}
             disabled={disabled}
@@ -88,6 +97,7 @@ export function CurriculumFormFields({
             type="email"
             required
             autoComplete="email"
+            maxLength={254}
             value={fields.email}
             onChange={onChange}
             disabled={disabled}
@@ -103,6 +113,7 @@ export function CurriculumFormFields({
             name="telefono"
             type="tel"
             autoComplete="tel"
+            maxLength={40}
             value={fields.telefono}
             onChange={onChange}
             disabled={disabled}
@@ -143,6 +154,7 @@ export function CurriculumFormFields({
           id="cv-messaggio"
           name="messaggio"
           rows={4}
+          maxLength={5000}
           placeholder={t("curriculum.placeholder_messaggio")}
           value={fields.messaggio}
           onChange={onChange}
@@ -171,26 +183,60 @@ export function CurriculumFormFields({
             accept="application/pdf"
             onChange={onFile}
             disabled={disabled}
+            aria-describedby="cv-file-hint"
             className="sr-only"
           />
         </label>
+        <p id="cv-file-hint" className="mt-1.5 text-xs font-body text-white/60 leading-relaxed">
+          {t("curriculum.hint_cv")}
+        </p>
       </div>
 
-      <label className="flex items-start gap-3 cursor-pointer group">
-        <input
-          name="privacy"
-          type="checkbox"
-          required
-          checked={fields.privacy}
-          onChange={onChange}
-          disabled={disabled}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border border-white/20 bg-white/5 accent-primary cursor-pointer"
+      {/* Honeypot anti-spam (contratto §5): invisibile e fuori dal tab order.
+          Nessuna label associata (aria-hidden lo nasconde comunque agli
+          screen reader, ma qui evitiamo anche solo di scrivere un testo
+          visibile collegato). Se valorizzato il bot finge un 200 OK e
+          scarta la richiesta. `data-1p-ignore`/`data-lpignore`/
+          `data-bwignore` escludono il campo dal riempimento automatico di
+          1Password/LastPass/Bitwarden: questi gestori compilano per
+          euristica sul `name` (non rispettano autoComplete="off") e un
+          candidato reale con un campo "sito_web" precompilato verrebbe
+          scartato in silenzio dal bot come honeypot pieno. */}
+      <input
+        name="sito_web"
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        data-1p-ignore="true"
+        data-lpignore="true"
+        data-bwignore="true"
+        className="hidden"
+        value={fields.sito_web}
+        onChange={onChange}
+      />
+
+      <p className="font-body text-xs text-white/50 leading-relaxed">
+        <Trans
+          i18nKey="curriculum.informativa"
+          components={{
+            privacyLink: (
+              <a
+                href={INFORMATIVA_CANDIDATI_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[hsl(207,70%,68%)] hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded"
+              />
+            ),
+          }}
         />
-        <span className="font-body text-xs text-white/50 group-hover:text-white/70 transition-colors leading-relaxed">
-          {t("curriculum.gdpr")}
-          <span className="text-primary"> *</span>
-        </span>
-      </label>
+        {/* Trans sostituisce i figli del placemarker con il testo tradotto:
+            non è possibile annidare qui uno <span> aggiuntivo dentro l'<a>
+            (vedi CONTRATTO-moduli-sito-m365.md ADDENDUM 1). L'annuncio che
+            il link apre una nuova scheda segue quindi nello stesso
+            paragrafo, invece che dentro l'elemento <a>. */}
+        <span className="sr-only"> (si apre in una nuova scheda)</span>
+      </p>
 
       {status === "error" && errorMsg && (
         <p
@@ -204,7 +250,7 @@ export function CurriculumFormFields({
       <Button
         type="submit"
         variant="hero"
-        disabled={status === "loading" || !fields.privacy}
+        disabled={status === "loading"}
         className="w-full mt-1 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === "loading" ? t("curriculum.submitting") : t("curriculum.submit")}
