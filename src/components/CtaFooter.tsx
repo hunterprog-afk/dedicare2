@@ -130,7 +130,7 @@ export function CtaFooter() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.85 }}
           className="mt-12 md:mt-16 w-full max-w-2xl"
         >
-          <ContactForm />
+          <ContactForm onOpenPrivacy={() => openLegal("privacy")} />
         </m.div>
 
         {/* Contact info strip */}

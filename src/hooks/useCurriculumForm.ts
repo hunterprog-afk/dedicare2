@@ -1,8 +1,13 @@
 import { useState, type FormEvent, type ChangeEvent } from "react"
 import { useTranslation } from "react-i18next"
+import {
+  CANDIDATURA_ENDPOINT,
+  INFORMATIVA_CANDIDATI_VERSIONE,
+  mapCandidaturaErrorKey,
+} from "@/lib/formsApi"
 
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkoybjyb"
 const MAX_FILE_BYTES = 5 * 1024 * 1024
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export type FormStatus = "idle" | "loading" | "success" | "error"
 
@@ -13,7 +18,10 @@ export interface CurriculumFields {
   telefono: string
   posizione: string
   messaggio: string
-  privacy: boolean
+  /** Honeypot anti-spam (campo `sito_web` del contratto §1/§3.1): deve
+   *  restare vuoto. Un valore non vuoto fa scartare la richiesta lato bot
+   *  (che comunque risponde 200 per non rivelare il filtro all'eventuale bot). */
+  sito_web: string
 }
 
 const INITIAL_FIELDS: CurriculumFields = {
@@ -23,13 +31,13 @@ const INITIAL_FIELDS: CurriculumFields = {
   telefono: "",
   posizione: "",
   messaggio: "",
-  privacy: false,
+  sito_web: "",
 }
 
 /**
  * Stato e logica del form di candidatura "Lavora con noi" (validazione
- * campi, upload CV, submit a Formspree). Estratto da Curriculum.tsx per
- * isolare la logica dal markup (vedi 06 - Prossimi passi / DECISION-NEEDED
+ * campi, upload CV, submit). Estratto da Curriculum.tsx per isolare la
+ * logica dal markup (vedi 06 - Prossimi passi / DECISION-NEEDED
  * no-giant-component nel report react-doctor 2026-07-14).
  *
  * Fix 2026-07-14: `handleFile` ora imposta anche `status="error"` quando la
@@ -41,9 +49,18 @@ const INITIAL_FIELDS: CurriculumFields = {
  * `handleFile` resetta anche `status` a "idle" a ogni chiamata (prima di
  * validare) cosí un file valido, o anche l'annullamento della selezione,
  * ripulisce coerentemente un errore precedente (di file o di submit).
+ *
+ * 2026-09: submit migrato dal precedente fornitore terzo di modulistica
+ * all'endpoint pubblico del bot aziendale (CONTRATTO-moduli-sito-m365.md
+ * §1/§5) — niente più checkbox
+ * "privacy": per i curricula il consenso non è dovuto (art. 111-bis Codice
+ * Privacy), sostituita da una dichiarazione di presa visione dell'apposita
+ * informativa (vedi CurriculumFormFields). Aggiunta validazione client dei
+ * campi obbligatori (prima li validava solo `required` HTML, mai applicato
+ * perché il form ha `noValidate`) e honeypot anti-spam `sito_web`.
  */
 export function useCurriculumForm() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
 
   const [fields, setFields] = useState<CurriculumFields>(INITIAL_FIELDS)
   const [cv, setCv] = useState<File | null>(null)
@@ -53,15 +70,8 @@ export function useCurriculumForm() {
   function handleChange(
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
-    const { name, value, type } = e.target
-    if (type === "checkbox") {
-      setFields((prev) => ({
-        ...prev,
-        [name]: (e.target as HTMLInputElement).checked,
-      }))
-    } else {
-      setFields((prev) => ({ ...prev, [name]: value }))
-    }
+    const { name, value } = e.target
+    setFields((prev) => ({ ...prev, [name]: value }))
   }
 
   function handleFile(e: ChangeEvent<HTMLInputElement>) {
@@ -91,14 +101,24 @@ export function useCurriculumForm() {
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!fields.privacy) return
+
+    const campiObbligatoriValidi =
+      fields.nome.trim() !== "" &&
+      fields.cognome.trim() !== "" &&
+      EMAIL_REGEX.test(fields.email.trim()) &&
+      fields.posizione.trim() !== ""
+
+    if (!campiObbligatoriValidi) {
+      setErrorMsg(t("curriculum.error_required"))
+      setStatus("error")
+      return
+    }
 
     setStatus("loading")
     setErrorMsg("")
 
     try {
       const body = new FormData()
-      body.append("_subject", "Candidatura — Lavora con noi")
       body.append("nome", fields.nome)
       body.append("cognome", fields.cognome)
       body.append("email", fields.email)
@@ -106,8 +126,11 @@ export function useCurriculumForm() {
       body.append("posizione", fields.posizione)
       body.append("messaggio", fields.messaggio)
       if (cv) body.append("cv", cv, cv.name)
+      body.append("sito_web", fields.sito_web)
+      body.append("lingua", (i18n.resolvedLanguage ?? i18n.language ?? "it").slice(0, 2))
+      body.append("informativa_versione", INFORMATIVA_CANDIDATI_VERSIONE)
 
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(CANDIDATURA_ENDPOINT, {
         method: "POST",
         headers: { Accept: "application/json" },
         body,
@@ -118,10 +141,7 @@ export function useCurriculumForm() {
         setFields(INITIAL_FIELDS)
         setCv(null)
       } else {
-        const data = await res.json().catch(() => ({}))
-        setErrorMsg(
-          (data as { error?: string }).error ?? t("curriculum.error_send")
-        )
+        setErrorMsg(t(`curriculum.${mapCandidaturaErrorKey(res.status)}`))
         setStatus("error")
       }
     } catch {

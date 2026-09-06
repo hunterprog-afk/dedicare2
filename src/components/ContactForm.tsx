@@ -1,8 +1,7 @@
 import { useState, type FormEvent, type ChangeEvent } from "react"
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
-
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mkoybjyb"
+import { CONTATTO_ENDPOINT, PRIVACY_POLICY_VERSIONE, mapContattoErrorKey } from "@/lib/formsApi"
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
@@ -11,7 +10,8 @@ interface FormFields {
   telefono: string
   email: string
   messaggio: string
-  privacy: boolean
+  /** Honeypot anti-spam (contratto §1/§3.1): deve restare vuoto. */
+  sito_web: string
 }
 
 const INITIAL_FIELDS: FormFields = {
@@ -19,36 +19,54 @@ const INITIAL_FIELDS: FormFields = {
   telefono: "",
   email: "",
   messaggio: "",
-  privacy: false,
+  sito_web: "",
 }
 
-export function ContactForm() {
-  const { t } = useTranslation()
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+interface ContactFormProps {
+  /** Apre il modal Privacy Policy (CtaFooter possiede `openLegal("privacy")`). */
+  onOpenPrivacy: () => void
+}
+
+/**
+ * 2026-09: submit migrato dal precedente fornitore terzo di modulistica
+ * all'endpoint pubblico del bot aziendale (CONTRATTO-moduli-sito-m365.md
+ * §1/§5). Via la checkbox
+ * "privacy": sostituita da una dichiarazione di presa visione della Privacy
+ * Policy (link che apre il modal esistente, non una nuova pagina). Aggiunta
+ * validazione client dei campi obbligatori e honeypot anti-spam `sito_web`.
+ */
+export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
+  const { t, i18n } = useTranslation()
   const [fields, setFields] = useState<FormFields>(INITIAL_FIELDS)
   const [status, setStatus] = useState<FormStatus>("idle")
   const [errorMsg, setErrorMsg] = useState<string>("")
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-    const { name, value, type } = e.target
-    if (type === "checkbox") {
-      setFields((prev) => ({
-        ...prev,
-        [name]: (e.target as HTMLInputElement).checked,
-      }))
-    } else {
-      setFields((prev) => ({ ...prev, [name]: value }))
-    }
+    const { name, value } = e.target
+    setFields((prev) => ({ ...prev, [name]: value }))
   }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!fields.privacy) return
+
+    const campiObbligatoriValidi =
+      fields.nome.trim() !== "" &&
+      EMAIL_REGEX.test(fields.email.trim()) &&
+      fields.messaggio.trim() !== ""
+
+    if (!campiObbligatoriValidi) {
+      setErrorMsg(t("contactform.error_required"))
+      setStatus("error")
+      return
+    }
 
     setStatus("loading")
     setErrorMsg("")
 
     try {
-      const res = await fetch(FORMSPREE_ENDPOINT, {
+      const res = await fetch(CONTATTO_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
@@ -56,6 +74,9 @@ export function ContactForm() {
           telefono: fields.telefono,
           email: fields.email,
           messaggio: fields.messaggio,
+          sito_web: fields.sito_web,
+          lingua: (i18n.resolvedLanguage ?? i18n.language ?? "it").slice(0, 2),
+          informativa_versione: PRIVACY_POLICY_VERSIONE,
         }),
       })
 
@@ -63,10 +84,7 @@ export function ContactForm() {
         setStatus("success")
         setFields(INITIAL_FIELDS)
       } else {
-        const data = await res.json().catch(() => ({}))
-        setErrorMsg(
-          (data as { error?: string }).error ?? t("contactform.error_send")
-        )
+        setErrorMsg(t(`contactform.${mapContattoErrorKey(res.status)}`))
         setStatus("error")
       }
     } catch {
@@ -178,30 +196,45 @@ export function ContactForm() {
           name="messaggio"
           required
           rows={4}
+          aria-describedby="cf-messaggio-hint"
           placeholder={t("contactform.placeholder_messaggio")}
           value={fields.messaggio}
           onChange={handleChange}
           disabled={status === "loading"}
           className={`${inputBase} resize-none`}
         />
+        <p id="cf-messaggio-hint" className="mt-1.5 text-[11px] font-body text-white/40 leading-relaxed">
+          {t("contactform.hint_salute")}
+        </p>
       </div>
 
-      {/* Privacy checkbox */}
-      <label className="flex items-start gap-3 cursor-pointer group">
-        <input
-          name="privacy"
-          type="checkbox"
-          required
-          checked={fields.privacy}
-          onChange={handleChange}
-          disabled={status === "loading"}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border border-white/20 bg-white/5 accent-primary cursor-pointer"
+      {/* Honeypot anti-spam (contratto §5): invisibile e fuori dal tab order.
+          Nessuna label associata a testo visibile. */}
+      <input
+        name="sito_web"
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+        value={fields.sito_web}
+        onChange={handleChange}
+      />
+
+      <p className="font-body text-xs text-white/50 leading-relaxed">
+        <Trans
+          i18nKey="contactform.informativa"
+          components={{
+            privacyLink: (
+              <button
+                type="button"
+                onClick={onOpenPrivacy}
+                className="text-primary/80 underline underline-offset-2 hover:text-primary"
+              />
+            ),
+          }}
         />
-        <span className="font-body text-xs text-white/50 group-hover:text-white/70 transition-colors leading-relaxed">
-          {t("contactform.gdpr")}
-          <span className="text-primary"> *</span>
-        </span>
-      </label>
+      </p>
 
       {/* Error message */}
       {status === "error" && errorMsg && (
@@ -217,7 +250,7 @@ export function ContactForm() {
       <Button
         type="submit"
         variant="hero"
-        disabled={status === "loading" || !fields.privacy}
+        disabled={status === "loading"}
         className="w-full mt-1 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === "loading" ? (

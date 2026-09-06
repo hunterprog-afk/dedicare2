@@ -81,4 +81,26 @@ public/
   logo.svg
 ```
 
+## Moduli (candidatura/contatti)
+
+I due moduli del sito (candidatura "Lavora con noi" e contatti nel footer) inviano tramite gli endpoint pubblici del bot aziendale `report-ore-bot` (Node su Fly.io, regione Francoforte), che inoltra via Microsoft Graph a info@dedicaresolutions.it. Il precedente fornitore terzo di modulistica è stato dismesso a settembre 2026: non ha mai aderito all'EU-U.S. Data Privacy Framework e non risultava alcun accordo ex art. 28 GDPR (DPA) agli atti.
+
+- `POST /public/candidatura` (`multipart/form-data`, con CV in PDF) — vedi `src/hooks/useCurriculumForm.ts`
+- `POST /public/contatto` (`application/json`) — vedi `src/components/ContactForm.tsx`
+- Client comune, base URL ed endpoint: `src/lib/formsApi.ts`
+
+Per sviluppo locale, punta `VITE_FORMS_API_BASE` a un'istanza locale del bot (default in produzione: `https://dedicare-report-ore-bot.fly.dev`, hardcoded in `formsApi.ts`):
+
+```bash
+cp .env.example .env
+# .env → VITE_FORMS_API_BASE=http://localhost:3100
+```
+
+Non committare mai il file `.env` (solo `.env.example`).
+
+Al posto della checkbox "Acconsento" (non dovuta per le candidature ex art. 111-bis Codice Privacy) entrambi i moduli mostrano una dichiarazione di presa visione con link alla relativa informativa:
+
+- Candidatura → pagina statica dedicata [`public/informativa-candidati.html`](public/informativa-candidati.html), pubblicata su `/informativa-candidati.html`
+- Contatti → modal Privacy Policy esistente (`LegalModal`, aperto da `CtaFooter`)
+
 © 2025 Dedicare Solutions S.R.L.S. — P.IVA IT11600760968
