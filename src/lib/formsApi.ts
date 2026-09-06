@@ -1,3 +1,5 @@
+import type { i18n as I18n } from "i18next"
+
 /**
  * Client per gli endpoint pubblici del bot aziendale (`report-ore-bot`, Node
  * nativo su Fly.io regione fra/Francoforte) che hanno sostituito il
@@ -6,19 +8,23 @@
  * Graph `sendMail` app-only a info@dedicaresolutions.it, senza persistenza
  * né sub-fornitori terzi di modulistica (nessun OpenAI nel percorso dati).
  *
- * Il fornitore precedente è stato dismesso il 2026-09: mai stato
- * partecipante EU-U.S. Data Privacy Framework (né, prima, del suo
- * predecessore Privacy Shield, da cui risultava ritirato), nessun DPA
- * pubblico agli atti — vedi CONTRATTO-moduli-sito-m365.md §0 e il devlog
- * legale del 2026-09-05 per il dettaglio della verifica.
+ * Il fornitore precedente è stato dismesso il 2026-09: certificato Privacy
+ * Shield dal 2019, ritirato il 26/04/2022, mai entrato nel Data Privacy
+ * Framework; nessun DPA pubblico agli atti — vedi
+ * CONTRATTO-moduli-sito-m365.md §0 e il devlog legale del 2026-09-05 per il
+ * dettaglio della verifica.
  *
  * Contratto API vincolante: CONTRATTO-moduli-sito-m365.md §1/§2 (condiviso
  * col repo report-ore-bot, che implementa il server).
  */
 
-export const FORMS_API_BASE: string =
+// `.replace(/\/+$/, "")` tollera uno slash finale nella variabile d'ambiente
+// (es. "http://localhost:3000/"), evitando endpoint con "//public/..." se
+// qualcuno la valorizza con la barra finale.
+export const FORMS_API_BASE: string = (
   (import.meta.env.VITE_FORMS_API_BASE as string | undefined) ??
   "https://dedicare-report-ore-bot.fly.dev"
+).replace(/\/+$/, "")
 
 export const CANDIDATURA_ENDPOINT = `${FORMS_API_BASE}/public/candidatura`
 export const CONTATTO_ENDPOINT = `${FORMS_API_BASE}/public/contatto`
@@ -47,6 +53,7 @@ export type CandidaturaErrorKey =
   | "error_required"
   | "error_rate_limit"
   | "error_filesize"
+  | "error_filetype"
   | "error_send"
 
 export type ContattoErrorKey = "error_required" | "error_rate_limit" | "error_send"
@@ -64,6 +71,8 @@ export function mapCandidaturaErrorKey(status: number): CandidaturaErrorKey {
       return "error_required"
     case 413:
       return "error_filesize"
+    case 415:
+      return "error_filetype"
     case 429:
       return "error_rate_limit"
     default:
@@ -83,4 +92,22 @@ export function mapContattoErrorKey(status: number): ContattoErrorKey {
     default:
       return "error_send"
   }
+}
+
+/** Regex di validazione client dell'indirizzo e-mail, condivisa dai due
+ *  moduli (curriculum e contatti): niente CR/LF, un solo "@", dominio con
+ *  un punto. È solo un filtro lato UI — la validazione che conta è quella
+ *  server-side descritta nel contratto §3.4. */
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+/** Valida un indirizzo e-mail lato client (stessa regex per entrambi i moduli). */
+export function isEmailValida(email: string): boolean {
+  return EMAIL_REGEX.test(email.trim())
+}
+
+/** Codice lingua a 2 lettere (`it`/`en`) da inviare al bot nel campo
+ *  `lingua`, derivato dall'istanza `i18n` di react-i18next. Stessa logica
+ *  per entrambi i moduli. */
+export function linguaCorrente(i18n: Pick<I18n, "resolvedLanguage" | "language">): string {
+  return (i18n.resolvedLanguage ?? i18n.language ?? "it").slice(0, 2)
 }

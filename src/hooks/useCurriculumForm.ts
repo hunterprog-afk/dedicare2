@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next"
 import {
   CANDIDATURA_ENDPOINT,
   INFORMATIVA_CANDIDATI_VERSIONE,
+  isEmailValida,
+  linguaCorrente,
   mapCandidaturaErrorKey,
 } from "@/lib/formsApi"
 
 const MAX_FILE_BYTES = 5 * 1024 * 1024
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export type FormStatus = "idle" | "loading" | "success" | "error"
 
@@ -105,7 +106,7 @@ export function useCurriculumForm() {
     const campiObbligatoriValidi =
       fields.nome.trim() !== "" &&
       fields.cognome.trim() !== "" &&
-      EMAIL_REGEX.test(fields.email.trim()) &&
+      isEmailValida(fields.email) &&
       fields.posizione.trim() !== ""
 
     if (!campiObbligatoriValidi) {
@@ -127,7 +128,7 @@ export function useCurriculumForm() {
       body.append("messaggio", fields.messaggio)
       if (cv) body.append("cv", cv, cv.name)
       body.append("sito_web", fields.sito_web)
-      body.append("lingua", (i18n.resolvedLanguage ?? i18n.language ?? "it").slice(0, 2))
+      body.append("lingua", linguaCorrente(i18n))
       body.append("informativa_versione", INFORMATIVA_CANDIDATI_VERSIONE)
 
       const res = await fetch(CANDIDATURA_ENDPOINT, {

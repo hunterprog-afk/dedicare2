@@ -60,6 +60,7 @@ export function CurriculumFormFields({
             type="text"
             required
             autoComplete="given-name"
+            maxLength={100}
             value={fields.nome}
             onChange={onChange}
             disabled={disabled}
@@ -76,6 +77,7 @@ export function CurriculumFormFields({
             type="text"
             required
             autoComplete="family-name"
+            maxLength={100}
             value={fields.cognome}
             onChange={onChange}
             disabled={disabled}
@@ -95,6 +97,7 @@ export function CurriculumFormFields({
             type="email"
             required
             autoComplete="email"
+            maxLength={254}
             value={fields.email}
             onChange={onChange}
             disabled={disabled}
@@ -110,6 +113,7 @@ export function CurriculumFormFields({
             name="telefono"
             type="tel"
             autoComplete="tel"
+            maxLength={40}
             value={fields.telefono}
             onChange={onChange}
             disabled={disabled}
@@ -150,6 +154,7 @@ export function CurriculumFormFields({
           id="cv-messaggio"
           name="messaggio"
           rows={4}
+          maxLength={5000}
           placeholder={t("curriculum.placeholder_messaggio")}
           value={fields.messaggio}
           onChange={onChange}
@@ -182,7 +187,7 @@ export function CurriculumFormFields({
             className="sr-only"
           />
         </label>
-        <p id="cv-file-hint" className="mt-1.5 text-[11px] font-body text-white/40 leading-relaxed">
+        <p id="cv-file-hint" className="mt-1.5 text-xs font-body text-white/60 leading-relaxed">
           {t("curriculum.hint_cv")}
         </p>
       </div>
@@ -191,13 +196,21 @@ export function CurriculumFormFields({
           Nessuna label associata (aria-hidden lo nasconde comunque agli
           screen reader, ma qui evitiamo anche solo di scrivere un testo
           visibile collegato). Se valorizzato il bot finge un 200 OK e
-          scarta la richiesta. */}
+          scarta la richiesta. `data-1p-ignore`/`data-lpignore`/
+          `data-bwignore` escludono il campo dal riempimento automatico di
+          1Password/LastPass/Bitwarden: questi gestori compilano per
+          euristica sul `name` (non rispettano autoComplete="off") e un
+          candidato reale con un campo "sito_web" precompilato verrebbe
+          scartato in silenzio dal bot come honeypot pieno. */}
       <input
         name="sito_web"
         type="text"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
+        data-1p-ignore="true"
+        data-lpignore="true"
+        data-bwignore="true"
         className="hidden"
         value={fields.sito_web}
         onChange={onChange}
@@ -212,11 +225,17 @@ export function CurriculumFormFields({
                 href={INFORMATIVA_CANDIDATI_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary/80 underline underline-offset-2 hover:text-primary"
+                className="text-[hsl(207,70%,68%)] hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded"
               />
             ),
           }}
         />
+        {/* Trans sostituisce i figli del placemarker con il testo tradotto:
+            non è possibile annidare qui uno <span> aggiuntivo dentro l'<a>
+            (vedi CONTRATTO-moduli-sito-m365.md ADDENDUM 1). L'annuncio che
+            il link apre una nuova scheda segue quindi nello stesso
+            paragrafo, invece che dentro l'elemento <a>. */}
+        <span className="sr-only"> (si apre in una nuova scheda)</span>
       </p>
 
       {status === "error" && errorMsg && (

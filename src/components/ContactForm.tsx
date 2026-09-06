@@ -1,7 +1,13 @@
 import { useState, type FormEvent, type ChangeEvent } from "react"
 import { Trans, useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
-import { CONTATTO_ENDPOINT, PRIVACY_POLICY_VERSIONE, mapContattoErrorKey } from "@/lib/formsApi"
+import {
+  CONTATTO_ENDPOINT,
+  PRIVACY_POLICY_VERSIONE,
+  isEmailValida,
+  linguaCorrente,
+  mapContattoErrorKey,
+} from "@/lib/formsApi"
 
 type FormStatus = "idle" | "loading" | "success" | "error"
 
@@ -21,8 +27,6 @@ const INITIAL_FIELDS: FormFields = {
   messaggio: "",
   sito_web: "",
 }
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 interface ContactFormProps {
   /** Apre il modal Privacy Policy (CtaFooter possiede `openLegal("privacy")`). */
@@ -53,7 +57,7 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
 
     const campiObbligatoriValidi =
       fields.nome.trim() !== "" &&
-      EMAIL_REGEX.test(fields.email.trim()) &&
+      isEmailValida(fields.email) &&
       fields.messaggio.trim() !== ""
 
     if (!campiObbligatoriValidi) {
@@ -75,7 +79,7 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
           email: fields.email,
           messaggio: fields.messaggio,
           sito_web: fields.sito_web,
-          lingua: (i18n.resolvedLanguage ?? i18n.language ?? "it").slice(0, 2),
+          lingua: linguaCorrente(i18n),
           informativa_versione: PRIVACY_POLICY_VERSIONE,
         }),
       })
@@ -141,6 +145,7 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
           type="text"
           required
           autoComplete="name"
+          maxLength={100}
           placeholder={t("contactform.placeholder_nome")}
           value={fields.nome}
           onChange={handleChange}
@@ -160,6 +165,7 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
             name="telefono"
             type="tel"
             autoComplete="tel"
+            maxLength={40}
             placeholder={t("contactform.placeholder_telefono")}
             value={fields.telefono}
             onChange={handleChange}
@@ -177,6 +183,7 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
             type="email"
             required
             autoComplete="email"
+            maxLength={254}
             placeholder={t("contactform.placeholder_email")}
             value={fields.email}
             onChange={handleChange}
@@ -196,6 +203,7 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
           name="messaggio"
           required
           rows={4}
+          maxLength={5000}
           aria-describedby="cf-messaggio-hint"
           placeholder={t("contactform.placeholder_messaggio")}
           value={fields.messaggio}
@@ -203,19 +211,28 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
           disabled={status === "loading"}
           className={`${inputBase} resize-none`}
         />
-        <p id="cf-messaggio-hint" className="mt-1.5 text-[11px] font-body text-white/40 leading-relaxed">
+        <p id="cf-messaggio-hint" className="mt-1.5 text-xs font-body text-white/60 leading-relaxed">
           {t("contactform.hint_salute")}
         </p>
       </div>
 
       {/* Honeypot anti-spam (contratto §5): invisibile e fuori dal tab order.
-          Nessuna label associata a testo visibile. */}
+          Nessuna label associata a testo visibile. `data-1p-ignore`/
+          `data-lpignore`/`data-bwignore` escludono il campo dal riempimento
+          automatico di 1Password/LastPass/Bitwarden: questi gestori
+          compilano per euristica sul `name` (non rispettano
+          autoComplete="off") e un utente reale con un campo "sito_web"
+          precompilato verrebbe scartato in silenzio dal bot come honeypot
+          pieno. */}
       <input
         name="sito_web"
         type="text"
         tabIndex={-1}
         autoComplete="off"
         aria-hidden="true"
+        data-1p-ignore="true"
+        data-lpignore="true"
+        data-bwignore="true"
         className="hidden"
         value={fields.sito_web}
         onChange={handleChange}
@@ -229,7 +246,7 @@ export function ContactForm({ onOpenPrivacy }: ContactFormProps) {
               <button
                 type="button"
                 onClick={onOpenPrivacy}
-                className="text-primary/80 underline underline-offset-2 hover:text-primary"
+                className="text-[hsl(207,70%,68%)] hover:text-white underline underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 rounded"
               />
             ),
           }}
