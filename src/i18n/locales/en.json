@@ -389,7 +389,7 @@
     "cv_select": "Choose file",
     "cv_none": "No file selected",
     "hint_cv": "Include in your CV only information useful for the selection: no health data, religious or political beliefs, or details about family members.",
-    "informativa": "By submitting your application you confirm that you have read the <privacyLink>candidate privacy notice</privacyLink> (in Italian). No consent is requested: under Italian law (art. 111-bis Privacy Code) it is not required for CVs.",
+    "informativa": "By submitting your application you confirm that you have read the <privacyLink>candidate privacy notice</privacyLink> (in Italian). No consent is needed: we use your data only to assess your application (Art. 6(1)(b) GDPR; under Italian law, Art. 111-bis of the Privacy Code, consent is not required for CVs), and you can ask us to delete it at any time.",
     "submit": "Send application",
     "submitting": "Sending…",
     "success_title": "Application received!",
