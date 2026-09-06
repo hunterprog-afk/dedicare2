@@ -1,7 +1,8 @@
 import { type ChangeEvent } from "react"
 import { Upload } from "lucide-react"
-import { useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
+import { INFORMATIVA_CANDIDATI_URL } from "@/lib/formsApi"
 import type { CurriculumFields, FormStatus } from "@/hooks/useCurriculumForm"
 
 type PositionKey = "oss" | "infermiere" | "fisioterapista" | "badante" | "altro"
@@ -24,7 +25,13 @@ interface CurriculumFormFieldsProps {
 
 /** Campi del form di candidatura + upload CV + submit. Markup puro: tutto
  *  lo stato/la logica vive in useCurriculumForm, passato come props da
- *  CurriculumForm. */
+ *  CurriculumForm.
+ *
+ *  2026-09: via la checkbox "privacy" (per i curricula il consenso non è
+ *  dovuto, art. 111-bis Codice Privacy) — sostituita da una dichiarazione di
+ *  presa visione con link all'informativa candidati dedicata (paragrafo
+ *  `Trans`, MAI `dangerouslySetInnerHTML`). Aggiunto hint sotto il campo CV
+ *  e un honeypot anti-spam invisibile (`sito_web`) fuori dal tab order. */
 export function CurriculumFormFields({
   fields,
   cv,
@@ -171,26 +178,46 @@ export function CurriculumFormFields({
             accept="application/pdf"
             onChange={onFile}
             disabled={disabled}
+            aria-describedby="cv-file-hint"
             className="sr-only"
           />
         </label>
+        <p id="cv-file-hint" className="mt-1.5 text-[11px] font-body text-white/40 leading-relaxed">
+          {t("curriculum.hint_cv")}
+        </p>
       </div>
 
-      <label className="flex items-start gap-3 cursor-pointer group">
-        <input
-          name="privacy"
-          type="checkbox"
-          required
-          checked={fields.privacy}
-          onChange={onChange}
-          disabled={disabled}
-          className="mt-0.5 h-4 w-4 shrink-0 rounded border border-white/20 bg-white/5 accent-primary cursor-pointer"
+      {/* Honeypot anti-spam (contratto §5): invisibile e fuori dal tab order.
+          Nessuna label associata (aria-hidden lo nasconde comunque agli
+          screen reader, ma qui evitiamo anche solo di scrivere un testo
+          visibile collegato). Se valorizzato il bot finge un 200 OK e
+          scarta la richiesta. */}
+      <input
+        name="sito_web"
+        type="text"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+        value={fields.sito_web}
+        onChange={onChange}
+      />
+
+      <p className="font-body text-xs text-white/50 leading-relaxed">
+        <Trans
+          i18nKey="curriculum.informativa"
+          components={{
+            privacyLink: (
+              <a
+                href={INFORMATIVA_CANDIDATI_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary/80 underline underline-offset-2 hover:text-primary"
+              />
+            ),
+          }}
         />
-        <span className="font-body text-xs text-white/50 group-hover:text-white/70 transition-colors leading-relaxed">
-          {t("curriculum.gdpr")}
-          <span className="text-primary"> *</span>
-        </span>
-      </label>
+      </p>
 
       {status === "error" && errorMsg && (
         <p
@@ -204,7 +231,7 @@ export function CurriculumFormFields({
       <Button
         type="submit"
         variant="hero"
-        disabled={status === "loading" || !fields.privacy}
+        disabled={status === "loading"}
         className="w-full mt-1 disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {status === "loading" ? t("curriculum.submitting") : t("curriculum.submit")}
