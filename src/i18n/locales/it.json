@@ -1,311 +1,161 @@
 {
+  "meta": {
+    "title": "Dedicare Solutions — Assistenza domiciliare a Milano",
+    "description": "Assistenza domiciliare a Milano e hinterland: operatori OSS, turni anche 24 ore su 24 e notti, accompagnamento a visite e terapie. Prima consulenza gratuita.",
+    "og_locale": "it_IT"
+  },
+  "a11y": { "skip": "Vai al contenuto" },
   "nav": {
-    "servizi": "Servizi",
-    "filosofia": "Filosofia",
-    "processo": "Processo",
-    "faq": "FAQ",
-    "lavora": "Lavora con noi",
-    "contattaci": "Contattaci",
-    "menu": "Menu"
+    "chiama": "Chiama",
+    "chiama_aria": "Chiama Dedicare Solutions al +39 388 253 6992",
+    "logo_aria": "Dedicare Solutions, torna all'inizio",
+    "servizi": "Servizi"
+  },
+  "language": {
+    "label": "Lingua",
+    "switch_to_en": "Switch to English",
+    "switch_to_it": "Passa all'italiano"
+  },
+  "ore": {
+    "titolo": "Le ore del turno",
+    "pill_aria": "Le ore del turno: apri l'indice. Sono le {{time}}.",
+    "chiudi": "Chiudi",
+    "voci": {
+      "a-chi": "A chi ci rivolgiamo",
+      "servizi": "I nostri servizi",
+      "assistenza-24-7": "Assistenza 24/7",
+      "perche": "Perché sceglierci",
+      "come-funziona": "Come lavoriamo",
+      "aree": "Milano e hinterland",
+      "tariffe": "Tariffe e modalità",
+      "faq": "Domande frequenti",
+      "lavora-con-noi": "Lavora con noi",
+      "contatti": "Contattaci"
+    }
   },
   "hero": {
-    "tag_city": "Milano",
-    "tag_label": "Assistenza Sanitaria Professionale",
-    "title": "La cura che meriti.",
-    "subline": "Dedicare Solutions affianca anziani, adulti, bambini e disabili nel percorso di cura — a domicilio, in ospedale e in ogni spostamento.",
-    "cta_primary": "Consulenza gratuita",
-    "partners_label": "Collaboriamo con",
-    "video_alt": "Video di presentazione di Dedicare Solutions — assistenza sanitaria professionale nell'area metropolitana di Milano."
+    "eyebrow": "Assistenza domiciliare · Milano e hinterland",
+    "h1_a": "Assistenza a casa,",
+    "h1_b": "di giorno e di notte.",
+    "sub": "Operatori OSS e infermieri per anziani, adulti dopo un ricovero, bambini e persone con disabilità. Anche 24 ore su 24.",
+    "cta_call": "Chiama per la consulenza gratuita",
+    "cta_whatsapp": "Scrivici su WhatsApp"
   },
   "assistiti": {
     "eyebrow": "A chi ci rivolgiamo",
-    "title": "Una cura su misura per ogni persona",
+    "title_a": "Alle 22 comincia il turno.",
+    "title_b": "Per chi?",
     "intro": "Anziani, adulti, bambini e persone con disabilità: ogni storia è diversa. Costruiamo l'assistenza attorno alla persona e alla sua famiglia, non viceversa.",
     "items": [
-      { "title": "Anziani", "body": "Assistenza domiciliare continuativa, gestione di cronicità e demenza, prevenzione e compagnia quotidiana per vivere la casa in sicurezza." },
-      { "title": "Adulti & post-ricovero", "body": "Dimissioni protette, supporto post-operatorio e gestione di terapie e percorsi di recupero, per tornare alla vita di ogni giorno." },
-      { "title": "Bambini", "body": "Assistenza pediatrica domiciliare e supporto alle famiglie nella gestione di patologie e fragilità, con delicatezza e competenza." },
-      { "title": "Persone con disabilità", "body": "Supporto all'autonomia e assistenza continuativa, con un team multidisciplinare che coordina ogni aspetto della cura." }
+      { "title": "Anziani", "body": "Assistenza domiciliare continuativa, anche per persone con malattie croniche o demenza, e compagnia quotidiana per vivere la casa in sicurezza." },
+      { "title": "Adulti dopo un ricovero", "body": "Assistenza a casa dopo un ricovero o un intervento e supporto nel percorso di recupero, per tornare alla vita di ogni giorno." },
+      { "title": "Bambini", "body": "Supporto alle famiglie di bambini e ragazzi con malattie o disabilità: valutiamo insieme ogni situazione, caso per caso." },
+      { "title": "Persone con disabilità", "body": "Supporto all'autonomia e assistenza continuativa, con infermieri e OSS che lavorano sullo stesso piano." }
     ]
   },
-  "services": {
+  "servizi": {
     "eyebrow": "I nostri servizi",
     "title": "Tutto ciò di cui hai bisogno, sotto un'unica cura.",
-    "intro": "Professionisti certificati a domicilio, in ospedale e in ogni spostamento. Ogni servizio è calibrato sulla persona, non sulla diagnosi.",
+    "intro": "Professionisti qualificati a domicilio, in ospedale e in ogni spostamento. Ogni servizio è calibrato sulla persona, non sulla diagnosi.",
     "scopri": "Scopri di più",
-    "modal_cta": "Richiedi questo servizio",
-    "modal_close": "Chiudi",
-    "items": [
-      {
+    "torna_orario": "Torna all'orario dei servizi",
+    "items": {
+      "assistenza247": {
+        "title": "Assistenza 24/7",
+        "body": "Turni a domicilio di giorno, di notte e nei festivi, fino alla presenza continua 24 ore su 24.",
+        "emergenza": "Per un'emergenza sanitaria: 112.",
+        "longDescription": "Organizziamo la presenza in casa sulle ore che servono davvero: notti, fine settimana, festivi, fino alla copertura completa 24 ore su 24 con più operatrici che si alternano. Cerchiamo di mantenere le stesse operatrici, perché la persona ritrovi volti conosciuti; se un'operatrice manca, la sostituta la cerchiamo noi. Questo servizio non sostituisce i soccorsi: in caso di emergenza sanitaria chiamate subito il 112.",
+        "bullets": ["Notti, fine settimana e festivi", "Presenza continua 24 ore su 24", "Le stesse operatrici, per quanto possibile", "Se un'operatrice manca, la sostituta la cerchiamo noi"]
+      },
+      "oss": {
         "title": "Operatori OSS",
         "body": "I nostri OSS offrono supporto qualificato e premuroso per la cura quotidiana, preservando dignità, autonomia e benessere.",
         "longDescription": "Gli Operatori Socio-Sanitari di Dedicare sono selezionati per competenza tecnica ed empatia. Affiancano l'assistito nelle attività quotidiane con discrezione e rispetto, sostengono la famiglia nei momenti più impegnativi e diventano un punto di riferimento costante nella casa, capace di restituire ritmo, serenità e relazione.",
-        "bullets": [
-          "Igiene personale e mobilizzazione",
-          "Assistenza nell'alimentazione",
-          "Supporto emotivo e compagnia",
-          "Stimolazione cognitiva",
-          "Coordinamento con i familiari"
-        ]
+        "bullets": ["Igiene personale e mobilizzazione", "Assistenza nell'alimentazione", "Supporto emotivo e compagnia", "Stimolazione cognitiva", "Coordinamento con i familiari"]
       },
-      {
-        "title": "Reperibilità 24/7",
-        "body": "Presenza garantita ogni ora del giorno e della notte. Risposta di emergenza rapida e gestione delle situazioni critiche.",
-        "longDescription": "Una linea diretta sempre attiva, festivi inclusi, gestita da personale clinico che conosce la storia dell'assistito. In caso di urgenza coordiniamo l'intervento più adatto entro tempi rapidi, evitando ricorsi inutili al pronto soccorso e dando alla famiglia la certezza che qualcuno risponderà, in qualsiasi ora.",
-        "bullets": [
-          "Pronto intervento h24",
-          "Risposta entro 30 minuti",
-          "Gestione emergenze domiciliari",
-          "Reperibilità festivi inclusi"
-        ]
-      },
-      {
+      "accompagnamento": {
         "title": "Accompagnamento",
-        "body": "Accompagnamento specializzato per visite, terapie e ogni spostamento che richiede assistenza sanitaria dedicata.",
-        "longDescription": "Trasferimenti sanitari sicuri verso ambulatori, day-hospital, cliniche e visite specialistiche, con personale infermieristico a bordo quando la condizione clinica lo richiede. Pianifichiamo orari, documenti e logistica perché la famiglia non debba pensare a nulla: si occupa di tutto un solo referente, dall'uscita al rientro a casa.",
-        "bullets": [
-          "Trasporto sanitario assistito",
-          "Accompagnamento a visite specialistiche",
-          "Assistenza durante ricoveri",
-          "Personale infermieristico a bordo"
-        ]
+        "body": "Un nostro operatore accompagna la persona a visite, esami e terapie, e la assiste anche durante i viaggi.",
+        "longDescription": "Accompagniamo la persona ad ambulatori, day hospital, cliniche e visite specialistiche con un nostro operatore, e con un infermiere su vostra richiesta o su indicazione del medico. Su richiesta, possiamo seguire l'assistito anche in viaggio. Organizziamo con voi orari, documenti e logistica, dall'uscita al rientro a casa.",
+        "bullets": ["Visite, esami e terapie", "Assistenza durante i ricoveri", "Su richiesta, assistenza anche in viaggio", "Infermiere su richiesta o su indicazione del medico"]
       },
-      {
-        "title": "Approccio Multidisciplinare",
-        "body": "Un team integrato di professionisti sanitari e socio-assistenziali per una presa in carico globale della persona.",
-        "longDescription": "Vulnologo, fisioterapisti, infermieri, OSS e care manager lavorano sullo stesso piano di cura, condividendo informazioni e obiettivi. Questo approccio integrato permette di seguire la persona nella sua complessità, adattare l'intervento all'evolvere della situazione clinica e mantenere la famiglia costantemente informata, con un'unica voce di riferimento.",
-        "bullets": [
-          "Vulnologo, fisioterapisti, infermieri e OSS coordinati",
-          "Piano di cura personalizzato",
-          "Aggiornamenti costanti alla famiglia",
-          "Continuità assistenziale garantita"
-        ]
+      "multidisciplinare": {
+        "title": "Approccio multidisciplinare",
+        "body": "Infermieri e OSS lavorano sullo stesso piano; se servono altri professionisti, vi aiutiamo a trovarli e ci coordiniamo con loro.",
+        "longDescription": "Infermieri e OSS lavorano sullo stesso piano di assistenza e condividono informazioni e obiettivi. Se servono altri professionisti, per esempio un fisioterapista, vi aiutiamo a trovarli e ci coordiniamo con loro. Così l'assistenza si adatta quando le esigenze cambiano e la famiglia ha un unico riferimento.",
+        "bullets": ["Infermieri e OSS coordinati", "Piano di assistenza personalizzato", "Aggiornamenti costanti alla famiglia", "Altri professionisti: vi aiutiamo a trovarli"]
       }
-    ]
+    }
   },
-  "pourquoi": {
+  "cambio": {
+    "title": "Alle 6 il turno di notte passa le consegne a quello del giorno.",
+    "body": "Cerchiamo di mantenere le stesse operatrici, perché la persona ritrovi volti conosciuti; se un'operatrice manca, la sostituta la cerchiamo noi."
+  },
+  "perche": {
     "eyebrow": "Perché sceglierci",
-    "title": "Non solo assistenza. Una presenza.",
+    "title_a": "Non solo assistenza.",
+    "title_b": "Una presenza.",
     "intro": "Ogni dettaglio del nostro servizio è progettato per portare sollievo alla famiglia e dignità alla persona assistita.",
     "items": [
-      {
-        "title": "Personale Certificato",
-        "body": "Selezione rigorosa e formazione continua. Ogni professionista è qualificato, assicurato e regolarmente aggiornato."
-      },
-      {
-        "title": "Disponibili Sempre",
-        "body": "Reperibilità 24 ore su 24, 7 giorni su 7. Perché le necessità di salute non rispettano gli orari di ufficio."
-      },
-      {
-        "title": "Prima Consulenza Gratuita",
-        "body": "Un colloquio telefonico o WhatsApp senza impegno per comprendere le vostre esigenze e proporre la soluzione più adatta."
-      },
-      {
-        "title": "Area Metropolitana",
-        "body": "Copertura capillare nell'intera area metropolitana di Milano. Interveniamo dove siete, quando ne avete bisogno."
-      }
+      { "title": "Qualifiche chiare", "body": "Lavoriamo con OSS con attestato di qualifica e infermieri iscritti all'Ordine (OPI). Prima dell'avvio vi diciamo la qualifica di chi entrerà in casa." },
+      { "title": "Anche 24 ore su 24", "body": "Turni di giorno, di notte e nei festivi, fino alla presenza continua con più operatrici che si alternano." },
+      { "title": "Prima consulenza gratuita", "body": "Un colloquio telefonico o WhatsApp senza impegno per comprendere le vostre esigenze e proporre la soluzione più adatta." },
+      { "title": "Milano e hinterland", "body": "Lavoriamo a Milano e nei comuni vicini. La disponibilità dipende dagli operatori in zona: la verifichiamo insieme a voi." }
     ]
   },
-  "process": {
+  "processo": {
     "eyebrow": "Come lavoriamo",
     "title": "Semplice, trasparente, umano.",
+    "chiusura": "Poi la giornata riprende il suo ritmo.",
     "items": [
-      {
-        "title": "Primo Contatto",
-        "body": "Consulenza gratuita telefonica o WhatsApp per comprendere le esigenze del paziente e della famiglia. Senza impegno."
-      },
-      {
-        "title": "Valutazione",
-        "body": "Valutazione completa per definire un piano di assistenza personalizzato, condiviso con tutta la famiglia."
-      },
-      {
-        "title": "Attivazione",
-        "body": "Assegnazione del professionista più adatto e avvio tempestivo dell'assistenza con monitoraggio immediato dei parametri vitali."
-      },
-      {
-        "title": "Follow-up",
-        "body": "Aggiornamenti costanti alla famiglia, revisione del piano e reperibilità H24 per qualsiasi necessità clinica."
-      }
-    ]
-  },
-  "stats": {
-    "eyebrow": "I numeri della nostra cura",
-    "title": "Presenza concreta, ogni giorno.",
-    "intro": "Quattro evidenze che raccontano come trasformiamo l'assistenza in qualcosa di misurabile, vicino e personale.",
-    "items": [
-      { "value": "24/7", "label": "Disponibilità reale" },
-      { "value": "100%", "label": "Cura personalizzata" },
-      { "value": "3+", "label": "Parametri vitali gratuiti ad ogni visita" },
-      { "value": "MI", "label": "Milano e tutto il territorio italiano" }
-    ]
-  },
-  "testimonials": {
-    "eyebrow": "Testimonianze",
-    "title": "Parlano meglio di noi.",
-    "intro": "Le famiglie che ci hanno scelto descrivono meglio di chiunque cosa significa essere davvero accompagnati.",
-    "items": [
-      {
-        "quote": "Abbiamo affidato l'assistenza di nostra madre a Dedicare Solutions dopo una lunga ricerca. La cura e la professionalità che abbiamo trovato hanno superato ogni aspettativa.",
-        "name": "Famiglia Rossi",
-        "role": "Milano, paziente anziana",
-        "stars": 5
-      },
-      {
-        "quote": "L'infermiera inviata era puntuale, competente e incredibilmente umana. Mio padre si è sentito subito a proprio agio. Non potevamo chiedere di meglio.",
-        "name": "Marco B.",
-        "role": "Segrate, paziente post-operatorio",
-        "stars": 5
-      },
-      {
-        "quote": "La reperibilità notturna ci ha letteralmente salvato in una situazione di emergenza. In meno di 30 minuti avevano qualcuno a casa nostra.",
-        "name": "Giulia T.",
-        "role": "Pioltello, paziente anziana",
-        "stars": 5
-      },
-      {
-        "quote": "Il piano di cura personalizzato che hanno costruito per nostra figlia è stato trasformativo. Finalmente ci sentiamo accompagnati, non soli.",
-        "name": "Famiglia Marino",
-        "role": "Cologno, paziente pediatrica",
-        "stars": 5
-      },
-      {
-        "quote": "La consulenza iniziale gratuita mi ha convinto subito. Hanno capito la situazione in pochi minuti e proposto una soluzione concreta e sostenibile.",
-        "name": "Antonella V.",
-        "role": "Sesto San Giovanni",
-        "stars": 5
-      },
-      {
-        "quote": "Professionisti seri, puntuali e sempre disponibili. La qualità dell'assistenza domiciliare è su un livello che non pensavo possibile nel privato.",
-        "name": "Roberto C.",
-        "role": "Milano, familiare caregiver",
-        "stars": 5
-      },
-      {
-        "quote": "Da quando seguono mio nonno, la sua qualità di vita è migliorata visibilmente. Stimolazione cognitiva e attenzione alla persona, non solo alla malattia.",
-        "name": "Chiara L.",
-        "role": "Vimodrone, paziente con demenza",
-        "stars": 5
-      }
-    ]
-  },
-  "team": {
-    "eyebrow": "La fondatrice",
-    "title": "La visione dietro alla cura",
-    "intro": "Una guida clinica con un'idea precisa di cosa significhi davvero prendersi cura di una persona.",
-    "members": [
-      {
-        "name": "Lisis Zuniga",
-        "role": "Fondatrice, Coordinatrice clinica & Anima del progetto",
-        "bio": "Più di quindici anni accanto a famiglie, pazienti e professionisti — in casa, in ospedale, nei momenti più delicati. Lisis ha fondato Dedicare Solutions per riportare al centro ciò che la sanità rischia di perdere: la persona. Seleziona personalmente ogni professionista, supervisiona ogni piano di cura e garantisce che dietro ogni intervento ci siano competenza clinica, ascolto autentico e una presenza umana costante. La sua firma è in ogni dettaglio: dalla prima telefonata gratuita fino al follow-up dopo settimane di assistenza."
-      }
+      { "title": "Primo contatto", "body": "Consulenza gratuita telefonica o WhatsApp per comprendere le esigenze del paziente e della famiglia. Senza impegno." },
+      { "title": "Valutazione", "body": "Valutazione delle esigenze insieme alla famiglia, per definire un piano di assistenza personalizzato." },
+      { "title": "Attivazione", "body": "Assegnazione dell'operatore più adatto alla persona e avvio dell'assistenza nei tempi concordati con la famiglia." },
+      { "title": "Follow-up", "body": "Aggiornamenti costanti alla famiglia, revisione del piano quando le esigenze cambiano e, se un'operatrice manca, la sostituta la cerchiamo noi." }
     ]
   },
   "aree": {
     "eyebrow": "Copertura territoriale",
-    "title": "Milano e Hinterland",
-    "intro": "Operiamo a Milano città e nell'hinterland (Sesto San Giovanni, Cinisello Balsamo, Cologno Monzese, Bresso, Cusano Milanino, Monza, Rho, San Donato, Cernusco, Segrate, e tutta l'area metropolitana). Per zone fuori dall'area metropolitana valutiamo trasferte su richiesta.",
-    "italy_badge": "Trasferte su richiesta",
-    "comuni_title": "Milano e hinterland",
-    "comuni_note": "Per zone fuori dall'area metropolitana valutiamo trasferte su richiesta: contattaci per studiare insieme la soluzione migliore.",
+    "title": "Milano e hinterland",
+    "intro": "Lavoriamo a Milano città e nei comuni dell'hinterland. La disponibilità dipende dagli operatori in zona: contattateci e la verifichiamo insieme. Per zone fuori dall'area metropolitana valutiamo trasferte su richiesta.",
     "map_alt": "Mappa stilizzata di Milano e hinterland",
-    "comuni": [
-      "Milano (tutte le zone)",
-      "Sesto San Giovanni",
-      "Cinisello Balsamo",
-      "Cologno Monzese",
-      "Bresso",
-      "Cusano Milanino",
-      "Monza",
-      "Rho",
-      "San Donato Milanese",
-      "Cernusco sul Naviglio",
-      "Segrate"
-    ]
+    "sede": "sede",
+    "comuni": ["Milano (tutte le zone)", "Sesto San Giovanni", "Cinisello Balsamo", "Cologno Monzese", "Bresso", "Cusano Milanino", "Monza", "Rho", "San Donato Milanese", "Cernusco sul Naviglio", "Segrate"]
   },
   "tariffario": {
     "eyebrow": "Preventivo",
-    "title": "Tariffe e Modalità",
-    "intro": "Ogni piano è personalizzato. Non pubblichiamo listini fissi perché ogni famiglia merita una valutazione reale.",
+    "title": "Tariffe e modalità",
+    "intro": "Ogni piano è personalizzato e il preventivo è gratuito. La tariffa è oraria e dipende dalle ore di assistenza, dai festivi e dalle eventuali trasferte.",
     "cta": "Richiedi un preventivo gratuito",
+    "prefill": "Vorrei un preventivo",
     "factors": [
-      {
-        "title": "Tipologia di assistenza",
-        "body": "Vulnologo, fisioterapisti, OSS e supporto specialistico o multidisciplinare: ogni profilo ha tariffe e tempi diversi."
-      },
-      {
-        "title": "Durata e frequenza",
-        "body": "Visita singola, turni programmati, presenza continuativa o reperibilità 24/7 incidono sul piano economico."
-      },
-      {
-        "title": "Condizione del paziente",
-        "body": "Patologie, terapie attive, dispositivi medici e livelli di non autosufficienza definiscono il fabbisogno reale."
-      },
-      {
-        "title": "Servizi accessori",
-        "body": "Trasporto protetto, prevenzione domiciliare, coordinamento con il medico curante e accompagnamento."
-      }
+      { "title": "Tipologia di assistenza", "body": "OSS, infermieri e supporto specialistico o multidisciplinare: ogni profilo ha tariffe e tempi diversi." },
+      { "title": "Durata e frequenza", "body": "Visita singola, turni programmati, notti o presenza continua 24 ore su 24 incidono sul piano economico." },
+      { "title": "Condizione del paziente", "body": "Patologie, terapie attive, dispositivi medici e livelli di non autosufficienza definiscono il fabbisogno reale." },
+      { "title": "Servizi accessori", "body": "Accompagnamento a visite e terapie, assistenza durante i ricoveri e in viaggio." }
     ]
   },
-  "certificazioni": {
-    "eyebrow": "Garanzie",
-    "title": "Certificazioni & Conformità",
-    "intro": "Operiamo nel pieno rispetto delle normative sanitarie e di tutela del cittadino.",
-    "items": [
-      { "title": "Accreditamento ASL Milano", "detail": "Operatore riconosciuto" },
-      { "title": "Albo Operatori Sanitari", "detail": "Iscrizione regolare" },
-      { "title": "Conformità GDPR", "detail": "Reg. UE 2016/679" },
-      { "title": "Polizza RC Professionale", "detail": "Copertura completa" },
-      { "title": "Convenzioni INPS", "detail": "Ente convenzionato" }
-    ]
-  },
+  "sera": { "title": "Di sera e di notte i turni continuano." },
   "faq": {
     "eyebrow": "FAQ",
     "title": "Domande frequenti.",
-    "intro": "Non trovate la risposta che cercate? Scriveteci direttamente — risponderemo entro poche ore.",
+    "intro": "Non trovate la risposta che cercate? Scriveteci o chiamateci.",
     "cta": "Scrivici",
     "items": [
-      {
-        "q": "A chi si rivolge Dedicare Solutions?",
-        "a": "Assistiamo anziani, adulti post-ospedalizzazione, bambini e persone con disabilità fisiche o cognitive che necessitano di supporto sanitario o socio-assistenziale a domicilio, in ospedale o durante gli spostamenti nell'area metropolitana di Milano."
-      },
-      {
-        "q": "La prima consulenza è davvero gratuita?",
-        "a": "Sì, completamente. Un colloquio telefonico o WhatsApp senza alcun impegno per comprendere le vostre esigenze, rispondere alle domande e proporre la soluzione più adatta. Chiamateci o scriveteci al +39 388 253 6992."
-      },
-      {
-        "q": "Il personale è qualificato e assicurato?",
-        "a": "Assolutamente. Ogni professionista — infermieri, OSS, assistenti — è rigorosamente selezionato, in possesso delle qualifiche previste dalla normativa italiana, coperto da assicurazione professionale e sottoposto a formazione continua."
-      },
-      {
-        "q": "Operate solo a Milano o anche nelle zone limitrofe?",
-        "a": "Copriamo l'intera area metropolitana di Milano: Segrate, Pioltello, Sesto San Giovanni, Cologno Monzese, Vimodrone e comuni limitrofi. Contatteci per verificare la copertura nella vostra zona."
-      },
-      {
-        "q": "Come funziona l'assistenza notturna e nei weekend?",
-        "a": "Siamo disponibili 24 ore su 24, 7 giorni su 7, festivi inclusi. La reperibilità continua non è un'opzione aggiuntiva: è parte integrante del nostro servizio perché le necessità cliniche non seguono un orario."
-      },
-      {
-        "q": "Cosa include la misurazione gratuita dei parametri vitali?",
-        "a": "Ad ogni visita, il nostro personale misura gratuitamente pressione arteriosa, saturazione dell'ossigeno e frequenza cardiaca. I valori vengono registrati e comunicati alla famiglia, contribuendo a un monitoraggio preventivo continuo."
-      },
-      {
-        "q": "Le spese di assistenza domiciliare sono detraibili fiscalmente?",
-        "a": "Sì. In Italia le spese per assistenza infermieristica e per addetti all'assistenza di persone non autosufficienti sono detraibili al 19% nella dichiarazione dei redditi (art. 15 TUIR). Alcune prestazioni sono anche esenti IVA ai sensi del D.P.R. 633/72. Forniamo tutta la documentazione necessaria — fatture intestate correttamente e certificazioni — per rendere la detrazione semplice e completa."
-      },
-      {
-        "q": "Come posso attivare il servizio rapidamente?",
-        "a": "Contatteci al +39 388 253 6992 o via email a info@dedicaresolutions.it. Dopo il colloquio iniziale gratuito, possiamo attivare il servizio in tempi molto brevi — spesso nelle 24-48 ore successive alla valutazione."
-      }
+      { "q": "A chi si rivolge Dedicare Solutions?", "a": "Assistiamo anziani, adulti dopo un ricovero, bambini e persone con disabilità fisiche o cognitive che hanno bisogno di assistenza a domicilio, in ospedale o durante gli spostamenti, a Milano e nell'hinterland." },
+      { "q": "La prima consulenza è davvero gratuita?", "a": "Sì, completamente. Un colloquio telefonico o WhatsApp senza alcun impegno per comprendere le vostre esigenze, rispondere alle domande e proporre la soluzione più adatta. Chiamateci o scriveteci al +39 388 253 6992." },
+      { "q": "Che qualifica ha il personale?", "a": "Lavoriamo con operatori socio-sanitari (OSS) con attestato di qualifica e con infermieri iscritti all'Ordine delle professioni infermieristiche (OPI). Prima dell'avvio vi diciamo la qualifica di chi entrerà in casa." },
+      { "q": "Operate solo a Milano o anche nelle zone limitrofe?", "a": "Lavoriamo a Milano e nei comuni dell'hinterland. La disponibilità dipende dagli operatori presenti nella vostra zona: contattateci e la verifichiamo insieme. Per zone più lontane valutiamo trasferte su richiesta." },
+      { "q": "Come funziona l'assistenza notturna e nei weekend?", "a": "Organizziamo turni di notte, nei fine settimana e nei festivi, fino alla presenza continua 24 ore su 24 con più operatrici che si alternano. Per un'emergenza sanitaria chiamate sempre il 112." },
+      { "q": "Le spese di assistenza domiciliare sono detraibili fiscalmente?", "a": "Alcune spese di assistenza danno diritto a detrazioni IRPEF, nei limiti e alle condizioni previsti dalla legge: dipendono dal tipo di prestazione, dalla condizione della persona assistita e dal reddito di chi paga, e richiedono un pagamento tracciabile. Emettiamo regolare fattura; per sapere se potete detrarre la spesa e con quali documenti, rivolgetevi al CAF o al commercialista." },
+      { "q": "Come si attiva il servizio?", "a": "Chiamateci al +39 388 253 6992 o scriveteci a info@dedicaresolutions.it. Dopo il colloquio gratuito e la valutazione fissiamo insieme l'avvio: se c'è un operatore disponibile nella vostra zona, anche in pochi giorni." }
     ]
   },
-  "blog": {
-    "eyebrow": "News & approfondimenti",
-    "title": "Salute & Prevenzione",
-    "intro": "Notizie aggiornate in tempo reale dai principali editori italiani su salute, assistenza domiciliare, anziani e caregiver. Selezione automatica.",
-    "live": "Live",
-    "cta": "Iscriviti alla nostra newsletter",
-    "error": "Impossibile caricare le notizie in questo momento. Riprova più tardi o iscriviti per ricevere gli aggiornamenti via email.",
-    "source_note": "Fonte: Google News — selezione automatica, aggiornata in tempo reale."
+  "form": {
+    "legenda": "I campi con * sono obbligatori.",
+    "field_required": "Questo campo è obbligatorio.",
+    "field_email": "Scrivi un indirizzo email valido, per esempio nome@esempio.it.",
+    "field_too_long": "Il testo è troppo lungo: al massimo {{max}} caratteri."
   },
   "curriculum": {
     "eyebrow": "Lavora con noi",
@@ -313,22 +163,10 @@
     "intro": "Cerchiamo professionisti che condividano il nostro modo di intendere la cura: competenza clinica, ascolto autentico e una presenza umana costante. Mandaci il tuo CV: lo leggiamo personalmente.",
     "reasons_title": "Perché lavorare con Dedicare",
     "reasons": [
-      {
-        "title": "Formazione continua",
-        "body": "Aggiornamento clinico costante, affiancamento iniziale e percorsi di crescita interna."
-      },
-      {
-        "title": "Ambiente umano",
-        "body": "Coordinamento clinico vicino, turni sostenibili e ascolto reale delle persone che lavorano con noi."
-      },
-      {
-        "title": "Contratto regolare",
-        "body": "Inquadramento secondo CCNL, copertura assicurativa professionale e pagamenti puntuali."
-      },
-      {
-        "title": "Vicino a casa tua",
-        "body": "Ti affidiamo assistiti nella tua zona dell'area di Milano: meno spostamenti e più tempo dedicato alla cura."
-      }
+      { "title": "Formazione continua", "body": "Aggiornamento clinico costante, affiancamento iniziale e percorsi di crescita interna." },
+      { "title": "Ambiente umano", "body": "Coordinamento clinico vicino, turni sostenibili e ascolto reale delle persone che lavorano con noi." },
+      { "title": "Contratto regolare", "body": "Inquadramento secondo CCNL, copertura assicurativa professionale e pagamenti puntuali." },
+      { "title": "Vicino a casa tua", "body": "Ti affidiamo assistiti nella tua zona dell'area di Milano: meno spostamenti e più tempo dedicato alla cura." }
     ],
     "form_title": "Candidati ora",
     "nome": "Nome",
@@ -341,7 +179,7 @@
       "oss": "Operatore Socio Sanitario (OSS)",
       "infermiere": "Infermiere",
       "fisioterapista": "Fisioterapista",
-      "badante": "Badante / Assistente familiare",
+      "assistente": "Assistente familiare",
       "altro": "Altro"
     },
     "messaggio": "Messaggio",
@@ -349,30 +187,26 @@
     "cv": "Curriculum Vitae (PDF, max 5MB)",
     "cv_select": "Seleziona file",
     "cv_none": "Nessun file selezionato",
-    "gdpr": "Acconsento al trattamento dei dati personali per finalità di selezione del personale ai sensi del GDPR (Reg. UE 2016/679)",
+    "hint_cv": "Inserisci nel curriculum solo informazioni utili alla selezione: non servono dati sulla salute, convinzioni religiose o politiche, né dati di familiari.",
+    "informativa": "Inviando la candidatura dichiari di aver letto l'<privacyLink>informativa privacy per i candidati</privacyLink>. Non serve un consenso: usiamo i tuoi dati solo per valutare la candidatura (art. 6.1.b GDPR; per i curricula il consenso non è dovuto — art. 111-bis del Codice Privacy) e puoi chiederci di cancellarli quando vuoi.",
     "submit": "Invia candidatura",
     "submitting": "Invio in corso…",
     "success_title": "Candidatura ricevuta!",
     "success_body": "Grazie. Esamineremo il tuo profilo e ti ricontatteremo se in linea con le ricerche in corso.",
     "success_retry": "Invia un'altra candidatura",
-    "error_send": "Invio fallito. Riprova o scrivici a info@dedicaresolutions.it.",
+    "error_required": "Compila i campi obbligatori (nome, cognome, email valida e posizione).",
+    "error_rate_limit": "Troppi tentativi in poco tempo. Riprova tra qualche minuto o scrivici a info@dedicaresolutions.it.",
+    "error_send": "Invio non riuscito. Riprova più tardi o invia il CV direttamente a info@dedicaresolutions.it.",
     "error_network": "Errore di rete. Controlla la connessione e riprova.",
     "error_filesize": "Il file supera i 5MB.",
     "error_filetype": "Formato non supportato. Carica un PDF."
   },
-  "cta": {
+  "contatti": {
     "eyebrow": "Iniziamo insieme",
     "title": "Pronti a prendersi cura.",
     "subline": "Una chiamata gratuita. Un piano su misura. L'assistenza che la vostra famiglia merita.",
-    "scrivici": "Scrivici",
-    "vieni_a_trovarci": "Vieni a trovarci",
-    "address": "Via Roma 80, Segrate (MI)",
-    "copyright": "© 2025 Dedicare Solutions S.R.L.S. — P.IVA IT11600760968",
-    "privacy": "Privacy Policy",
-    "cookie": "Cookie Policy",
-    "legal": "Note Legali",
-    "trasparenza": "Trasparenza",
-    "map_title": "Mappa sede Dedicare Solutions — Via Roma 80, Segrate (MI)"
+    "email_label": "Email",
+    "emergenza": "Per un'emergenza sanitaria chiamate il 112: telefono, WhatsApp e modulo non sono un servizio di pronto intervento."
   },
   "contactform": {
     "intro": "Oppure scrivici direttamente",
@@ -383,30 +217,51 @@
     "placeholder_nome": "Mario Rossi",
     "placeholder_telefono": "+39 333 000 0000",
     "placeholder_email": "mario@esempio.it",
-    "placeholder_messaggio": "Raccontaci di cosa avete bisogno…",
-    "gdpr": "Acconsento al trattamento dei dati personali ai sensi del GDPR (Reg. UE 2016/679)",
+    "placeholder_messaggio": "Che tipo di assistenza vi serve e in quale zona?",
+    "hint_salute": "Per tutelare la riservatezza, non inserire qui informazioni sullo stato di salute tuo o di un familiare: potremo approfondire per telefono.",
+    "informativa": "Inviando il messaggio dichiari di aver letto l'<privacyLink>informativa privacy</privacyLink>. I dati servono solo a rispondere alla tua richiesta.",
     "submit": "Invia messaggio",
     "submitting": "Invio in corso…",
     "success_title": "Messaggio inviato!",
     "success_body": "Ti risponderemo al più presto. Grazie per averci contattato.",
     "success_retry": "Invia un altro messaggio",
+    "error_required": "Compila i campi obbligatori (nome, email valida e messaggio).",
+    "error_rate_limit": "Troppi tentativi in poco tempo. Riprova tra qualche minuto o chiamaci al +39 388 253 6992.",
     "error_send": "Invio fallito. Riprova o contattaci direttamente.",
     "error_network": "Errore di rete. Controlla la connessione e riprova."
   },
   "whatsapp": {
-    "tooltip": "Scrivici su WhatsApp",
-    "aria": "Scrivici su WhatsApp"
+    "aria": "Scrivici su WhatsApp",
+    "prefill": "Buongiorno, vorrei informazioni sui servizi di assistenza domiciliare di Dedicare Solutions."
   },
-  "theme": {
-    "to_light": "Attiva tema chiaro",
-    "to_dark": "Attiva tema scuro"
+  "mobilebar": { "label": "Contatti rapidi", "call": "Chiama", "whatsapp": "WhatsApp" },
+  "footer": {
+    "slogan": "La cura che meriti.",
+    "copyright": "© {{year}} Dedicare Solutions S.r.l.s. (società a responsabilità limitata semplificata) · Sede legale Via Roma 80, 20054 Segrate (MI) · C.F., P.IVA e n. iscrizione al Registro Imprese di Milano Monza Brianza Lodi 11600760968 · REA MI-2613682 · Capitale sociale € 1.000,00 sottoscritto e interamente versato · PEC dedicaresolutionssrls@pec.it",
+    "legal_nav": "Note legali e contatti",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "legal": "Note Legali",
+    "in_italian": ""
   },
-  "language": {
-    "switch_to_en": "Switch to English",
-    "switch_to_it": "Passa all'italiano"
+  "legal": {
+    "back": "← Torna al sito",
+    "description_privacy": "Informativa privacy del sito dedicaresolutions.it di Dedicare Solutions S.r.l.s.",
+    "description_cookie": "Cookie Policy del sito dedicaresolutions.it di Dedicare Solutions S.r.l.s.",
+    "description_note": "Note legali del sito dedicaresolutions.it di Dedicare Solutions S.r.l.s."
   },
-  "legal_modal": {
-    "close": "Chiudi",
-    "disclaimer": ""
+  "img": {
+    "notte-finestra": "Facciata di un palazzo milanese di notte, con una sola finestra accesa.",
+    "notte-lampada": "Di notte, una mano sistema la coperta accanto a una lampada accesa.",
+    "notte-cucina": "Cucina in penombra alle quattro, una tazza di camomilla sul tavolo.",
+    "alba-naviglio": "Il Naviglio Grande all'alba, nebbia rosata sull'acqua e lampioni ancora accesi.",
+    "alba-persiane": "Luce dell'alba tra le persiane su parquet a spina di pesce e una poltrona.",
+    "mattino-tazza": "Una mano giovane sostiene la mano anziana attorno a una tazza di caffellatte.",
+    "mattino-accompagnamento": "Due persone di spalle, a braccetto, escono da un portone milanese nel sole.",
+    "giorno-piano": "Tavolo con quaderno, calendario dei turni e le mani di due persone che parlano.",
+    "giorno-gioco": "Le mani di un bambino e di un'adulta costruiscono una torre di legno.",
+    "sera-balcone": "Finestra aperta su un balcone con gerani e i tetti di Milano al tramonto.",
+    "ingresso-turno": "Ingresso di casa: giacca appesa, borsa di tela e chiavi in un piattino.",
+    "sera-tram": "Sera a una fermata del tram: un'operatrice di spalle scende con la borsa."
   }
 }

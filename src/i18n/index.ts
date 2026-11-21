@@ -1,38 +1,24 @@
-import i18n from "i18next"
+import i18next, { type i18n } from "i18next"
 import { initReactI18next } from "react-i18next"
-import LanguageDetector from "i18next-browser-languagedetector"
 import it from "./locales/it.json"
 import en from "./locales/en.json"
+import type { Lang } from "@/routes"
 
-void i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources: {
-      it: { common: it },
-      en: { common: en },
-    },
-    fallbackLng: "it",
-    supportedLngs: ["it", "en"],
-    defaultNS: "common",
-    ns: ["common"],
-    interpolation: { escapeValue: false },
-    detection: {
-      order: ["localStorage", "navigator", "htmlTag"],
-      caches: ["localStorage"],
-      lookupLocalStorage: "dedicare-lang",
-    },
-    returnObjects: true,
-  })
-
-i18n.on("languageChanged", (lng) => {
-  if (typeof document !== "undefined") {
-    document.documentElement.lang = lng
-  }
-})
-
-if (typeof document !== "undefined") {
-  document.documentElement.lang = i18n.language || "it"
+const resources = {
+  it: { translation: it },
+  en: { translation: en },
 }
 
-export default i18n
+/** Istanza sincrona, una per render: nessun detector, nessun localStorage. */
+export function createI18n(lang: Lang): i18n {
+  const instance = i18next.createInstance()
+  instance.use(initReactI18next).init({
+    resources,
+    lng: lang,
+    fallbackLng: "it",
+    initAsync: false,
+    interpolation: { escapeValue: false },
+    returnObjects: true,
+  })
+  return instance
+}

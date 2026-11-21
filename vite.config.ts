@@ -5,17 +5,18 @@ import path from 'path'
 
 export default defineConfig({
   base: '/',
-  plugins: [
-    tailwindcss(),
-    react(),
-  ],
+  plugins: [tailwindcss(), react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@fonts': path.resolve(__dirname, 'node_modules/@fontsource-variable'),
     },
   },
+  define: {
+    __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()),
+  },
   build: {
-    sourcemap: true,
+    sourcemap: false,
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -29,12 +30,6 @@ export default defineConfig({
           if (!id.includes('node_modules')) return
           if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) {
             return 'react'
-          }
-          if (id.includes('/framer-motion/') || id.includes('/motion/') || id.includes('/motion-dom/') || id.includes('/motion-utils/')) {
-            return 'motion'
-          }
-          if (id.includes('/three/')) {
-            return 'three'
           }
         },
       },
