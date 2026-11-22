@@ -6,6 +6,7 @@ import {
   crossesChapter,
   cubicBezier,
   dPhase,
+  safeDecode,
   discCenter,
   discState,
   fmt,
@@ -180,5 +181,14 @@ describe("fasi e orologio", () => {
       expect(v).toBeGreaterThanOrEqual(prev)
       prev = v
     }
+  })
+})
+
+describe("safeDecode", () => {
+  it("decodifica l'hash valido e non lancia su quello malformato", () => {
+    expect(safeDecode("cambio%20turno")).toBe("cambio turno")
+    expect(safeDecode("%E0")).toBe("%E0")
+    expect(safeDecode("%")).toBe("%")
+    expect(safeDecode("sera")).toBe("sera")
   })
 })

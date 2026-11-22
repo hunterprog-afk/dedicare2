@@ -216,3 +216,12 @@ export function cubicBezier(x1: number, y1: number, x2: number, y2: number): (p:
     return ((ay * u + by) * u + cy) * u
   }
 }
+
+/** decodeURIComponent che non lancia: un hash malformato (es. `#%E0`) resta com'è. */
+export function safeDecode(s: string): string {
+  try {
+    return decodeURIComponent(s)
+  } catch {
+    return s
+  }
+}

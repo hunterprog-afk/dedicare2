@@ -15,6 +15,7 @@ import {
   layerValues,
   NEAR,
   quantize,
+  safeDecode,
   timeAt,
   uiPhase,
   type Anchor,
@@ -288,7 +289,7 @@ async function start() {
   if (pivot && scrollY > 0 && Math.abs(after - before) > 1) scrollTo(0, scrollY + after - before)
   measure()
   // Arrivo con #cambio-turno o #sera: il salto nativo porta la cima sotto l'header, ma lì l'ora è al centro.
-  const hashId = decodeURIComponent(location.hash.slice(1))
+  const hashId = safeDecode(location.hash.slice(1))
   const hashEl = hashId && centerAt.has(hashId) ? document.getElementById(hashId) : null
   if (hashEl && Math.abs(hashEl.getBoundingClientRect().top - H) < 4) scrollTo(0, centerAt.get(hashId)!)
   lastY = scrollY
@@ -390,7 +391,7 @@ async function start() {
   document.addEventListener("click", (e) => {
     if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
     const a = (e.target as Element | null)?.closest?.<HTMLAnchorElement>("a[href^='#']")
-    const id = a ? decodeURIComponent(a.hash.slice(1)) : ""
+    const id = a ? safeDecode(a.hash.slice(1)) : ""
     const target = id ? document.getElementById(id) : null
     if (!target) return
     const at = centerAt.get(id)
