@@ -13,6 +13,8 @@
   },
   "language": {
     "label": "Lingua",
+    "label_header": "Lingua del sito",
+    "label_footer": "Lingua, a fondo pagina",
     "switch_to_en": "Switch to English",
     "switch_to_it": "Passa all'italiano"
   },

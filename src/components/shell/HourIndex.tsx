@@ -9,9 +9,9 @@ export function HourIndex() {
   return (
     <nav id="indice-ore" popover="auto" aria-labelledby="indice-ore-titolo">
       <div className="index-head">
-        <h2 id="indice-ore-titolo" className="t-h3">
+        <p id="indice-ore-titolo" className="t-h3">
           {t("ore.titolo")}
-        </h2>
+        </p>
         <button type="button" className="index-close" popoverTarget="indice-ore" popoverTargetAction="hide" aria-label={t("ore.chiudi")}>
           <XIcon />
         </button>

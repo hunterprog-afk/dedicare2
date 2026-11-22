@@ -14,7 +14,7 @@
   }
   .form-legend {
     margin: 0;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.4;
     color: #5a5482;
   }
@@ -83,24 +83,26 @@
   }
   .field-error {
     margin: 0;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.4;
     font-weight: 700;
     color: #231c4d;
   }
   .field-hint {
     margin: 0;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.4;
     color: #5a5482;
   }
   .form-consent {
     margin: 0;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1.5;
     color: #231c4d;
   }
   .form-consent a {
+    /* Area toccabile di 44 px anche in una riga di testo: il padding di un elemento in linea non sposta le righe. */
+    padding-block: 12px;
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
@@ -192,7 +194,7 @@
     outline-offset: 3px;
   }
   .cv-name {
-    font-size: 15px;
+    font-size: 16px;
     color: #5a5482;
     overflow-wrap: anywhere;
   }

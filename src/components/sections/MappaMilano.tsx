@@ -65,7 +65,7 @@ export function MappaMilano({ active, onActive }: Props) {
           onMouseLeave={() => onActive(null)}
         />
       ))}
-      <text x="446" y="308" fontSize="15" fontWeight="700" fill="#231C4D" fontFamily="var(--font-sans)">
+      <text x="446" y="308" fontSize="26" fontWeight="700" fill="#231C4D" fontFamily="var(--font-sans)">
         {t("aree.sede")}
       </text>
     </svg>

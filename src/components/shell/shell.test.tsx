@@ -7,6 +7,7 @@ import { Header } from "./Header"
 import { MobileBar } from "./MobileBar"
 import { Sky } from "./Sky"
 import { Disc } from "./Disc"
+import { Footer } from "./Footer"
 
 describe("guscio fisso", () => {
   it("il binario ha 25 tacche e 10 link-capitolo con aria-label «HH:00, etichetta»", () => {
@@ -54,6 +55,22 @@ describe("guscio fisso", () => {
     expect(container.querySelector("header")).toHaveClass("is-solid")
     expect(container.querySelector('a[href="/en/"]')).not.toBeNull()
     expect(container.querySelector(".clock-pill")).toBeNull()
+  })
+
+  it("i tre selettori di lingua hanno nomi di landmark diversi e il foglio non ha titoli", () => {
+    const { container } = renderWithI18n(
+      <>
+        <Header />
+        <HourIndex />
+        <Footer />
+      </>,
+    )
+    const names = [...container.querySelectorAll("nav.lang-switch")].map((n) => n.getAttribute("aria-label"))
+    expect(names).toEqual(["Lingua del sito", "Lingua", "Lingua, a fondo pagina"])
+    expect(new Set(names).size).toBe(3)
+    // Il foglio dell'indice precede l'h1 nel DOM: il suo titolo non è un'intestazione.
+    expect(container.querySelector("#indice-ore h1, #indice-ore h2, #indice-ore h3")).toBeNull()
+    expect(container.querySelector("#indice-ore-titolo")).toHaveTextContent("Le ore del turno")
   })
 
   it("la barra contatti ha Chiama e WhatsApp con il testo precompilato", () => {

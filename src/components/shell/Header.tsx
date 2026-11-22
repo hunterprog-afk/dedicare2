@@ -24,7 +24,7 @@ export function Header({ variant = "home" }: HeaderProps) {
             EN
           </a>
         ) : (
-          <LangSwitch />
+          <LangSwitch place="header" />
         )}
         <a className="header-call" href={PHONE_HREF} aria-label={t("nav.chiama_aria")}>
           <PhoneIcon />

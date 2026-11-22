@@ -39,7 +39,7 @@ export function Footer() {
               ))}
             </ul>
           </nav>
-          <LangSwitch />
+          <LangSwitch place="footer" />
         </div>
         <p className="footer-copyright">{t("footer.copyright", { year: __BUILD_YEAR__ })}</p>
       </div>
