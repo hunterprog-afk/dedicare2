@@ -11,7 +11,7 @@ export function ClockRail() {
     <nav className="clock-rail" aria-label={t("ore.titolo")}>
       <div className="clock-line" />
       {TICKS.map((k) => (
-        <span key={k} className="clock-tick" style={{ top: `calc(20vh + 60vh * ${k} / 24)` }} />
+        <span key={k} className="clock-tick" style={{ top: `calc(var(--rail-top) + var(--rail-span) * ${k} / 24)` }} />
       ))}
       {INDEX_ENTRIES.map((e, i) => {
         const hh = formatHour(e.t).slice(0, 2)
@@ -22,7 +22,7 @@ export function ClockRail() {
             href={`#${e.id}`}
             data-chapter={e.id}
             aria-label={`${hh}:00, ${t(`ore.voci.${e.id}`)}`}
-            style={{ top: `calc(20vh + 60vh * ${e.t / 60} / 24 - 12px)` }}
+            style={{ top: `calc(var(--rail-top) + var(--rail-span) * ${e.t / 60} / 24 - 12px)` }}
           >
             <span aria-hidden="true">{hh}</span>
           </a>

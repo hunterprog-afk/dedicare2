@@ -77,10 +77,11 @@ export function timeAt(keys: readonly Key[], y: number): number {
 const SKY: ReadonlyArray<readonly [number, number, number, number]> = [
   [0, 300, 0, -1],
   [300, 360, 0, 1],
-  [360, 420, 1, -1],
-  [420, 480, 1, 2],
-  [480, 510, 2, 3],
-  [510, 780, 3, -1],
+  // Il testo chiaro dell'assistenza 24/7 resta sul cielo fino a t = 470: l'alba arriva solo quando la foto a tutto schermo del cambio turno la copre.
+  [360, 470, 1, -1],
+  [470, 480, 1, 2],
+  [480, 500, 2, 3],
+  [500, 780, 3, -1],
   [780, 840, 3, 4],
   [840, 1080, 4, -1],
   [1080, 1140, 4, 5],

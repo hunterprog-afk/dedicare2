@@ -89,7 +89,8 @@ if (rail && matchMedia("(prefers-reduced-motion: reduce)").matches && "Intersect
     root.dataset.dphase = tone === "dark" ? "notte" : tone === "light" ? "mattino" : "tramonto"
     times.forEach((el) => (el.textContent = label))
     pill?.setAttribute("aria-label", aria.replace(/\d\d:\d\d/, label))
-    moving.forEach((el, k) => (el.style.transform = `translateY(calc(${20 + t / 24}vh - ${k ? 11 : 7}px))`))
+    const track = rail.querySelector(".clock-line")?.getBoundingClientRect()
+    if (track) moving.forEach((el, k) => (el.style.transform = `translateY(${track.top + (track.height * t) / 1440 - (k ? 11 : 7)}px)`))
     let c = i
     while (c > 0 && !chapters.has(secs[c].id)) c--
     marks.forEach((el) => (el.dataset.chapter === secs[c].id ? el.setAttribute("aria-current", "location") : el.removeAttribute("aria-current")))

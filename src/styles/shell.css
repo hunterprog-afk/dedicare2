@@ -215,16 +215,32 @@
       pointer-events: none;
       color: var(--ui-ink);
       font-family: var(--font-mono);
-      font-size: 15px;
+      font-size: 16px;
       letter-spacing: 0.04em;
       transition: var(--phase-tr);
+      /* Il binario sta centrato sotto l'header e lascia almeno 24 px fra due ore vicine (area cliccabile senza sovrapposizioni). */
+      --rail-span: max(72vh, min(576px, calc(100vh - 168px)));
+      --rail-top: calc((100vh - var(--rail-span)) / 2 + 36px);
     }
+  }
+  /* Fascia dietro il binario: le ore restano leggibili qualunque sia il cielo o la foto che passa dietro. */
+  .clock-rail::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: calc(var(--rail-top) - 28px);
+    height: calc(var(--rail-span) + 56px);
+    width: 120px;
+    border-radius: 0 28px 28px 0;
+    background: rgb(from var(--ui-bg) r g b / 0.74);
+    -webkit-mask-image: linear-gradient(90deg, #17123a 0, #17123a 84px, transparent 100%);
+    mask-image: linear-gradient(90deg, #17123a 0, #17123a 84px, transparent 100%);
   }
   .clock-line {
     position: absolute;
     left: 32px;
-    top: 20vh;
-    height: 60vh;
+    top: var(--rail-top);
+    height: var(--rail-span);
     width: 1px;
     background: var(--ui-line);
   }
@@ -269,7 +285,7 @@
     top: 0;
     width: 12px;
     height: 14px;
-    transform: translateY(calc(20vh - 7px));
+    transform: translateY(calc(var(--rail-top) - 7px));
     display: none;
   }
   .clock-indicator path { fill: var(--ui-ink); }
@@ -277,13 +293,15 @@
   html.rm .clock-indicator { display: block; }
   .clock-now {
     position: absolute;
-    left: 52px;
+    left: 46px;
     top: 0;
     z-index: 1;
-    transform: translateY(calc(20vh - 11px));
+    transform: translateY(calc(var(--rail-top) - 11px));
     padding: 2px 6px;
     border-radius: 999px;
+    /* Opaca: il numero della tacca sul binario non deve intravedersi sotto l'ora. */
     background: var(--ui-bg);
+    background: rgb(from var(--ui-bg) r g b / 1);
     color: var(--ui-ink);
     line-height: 1;
   }
@@ -296,14 +314,14 @@
     justify-content: center;
     gap: 6px;
     width: 76px;
-    height: 32px;
+    height: 44px;
     padding: 0;
     border: 0;
     border-radius: 999px;
     background: var(--ui-pill-bg);
     color: var(--ui-ink);
     font-family: var(--font-mono);
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 0.04em;
     cursor: pointer;
   }
@@ -496,6 +514,14 @@
     transition: text-decoration-thickness 160ms var(--ease-out);
   }
   .link-text:hover { text-decoration-thickness: 2px; }
+  /* Sul telefono i link di testo arrivano a 44 px di altezza senza spostare le righe. */
+  @media (max-width: 1023px) {
+    .link-text {
+      display: inline-block;
+      padding-block: 10px;
+      margin-block: -10px;
+    }
+  }
 
   /* ---- Foglio, etichetta d'ora, foto. ---- */
   .sheet {

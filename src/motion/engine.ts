@@ -53,6 +53,7 @@ async function start() {
   const sun = $(".disc-sun")
   const indicator = $(".clock-indicator")
   const now = $(".clock-now")
+  const railLine = $(".clock-line")
   const pill = $(".clock-pill")
   const pillAria = pill?.getAttribute("aria-label") ?? ""
   const logoInner = $(".site-header .logo[data-phase='live'] .logo-inner")
@@ -60,6 +61,7 @@ async function start() {
   const chapterEls = $$("[data-chapter]")
   const chapterIds = new Set(chapterEls.map((el) => el.dataset.chapter))
   const photoB = $("#assistenza-24-7 .photo-b")
+  const tagA = $("#assistenza-24-7 .photo-a .a247-tag")
   const cambio = $(".cambio-photo")
   const sera = $(".sera-photo")
 
@@ -70,6 +72,7 @@ async function start() {
   const setIndY = indicator && setter(indicator, "y", "px")
   const setNowY = now && setter(now, "y", "px")
   const setBO = photoB && setter(photoB, "opacity")
+  const setTagA = tagA && setter(tagA, "opacity")
   const setCambio = cambio && setter(cambio, "scale")
   const setSera = sera && setter(sera, "scale")
 
@@ -89,6 +92,7 @@ async function start() {
   let keys: Key[] = [{ y: 0, t: 0 }]
   let vh = innerHeight
   let H = 72
+  let rail = { top: 0, h: 1 }
   let pinOn = false
   let pin = { s: 0, e: 1 }
   let cambioM = { top: 0, h: 1 }
@@ -99,6 +103,8 @@ async function start() {
   function measure() {
     vh = innerHeight
     H = mqDesk.matches ? 72 : 60
+    const rl = railLine?.getBoundingClientRect()
+    if (rl) rail = { top: rl.top, h: rl.height }
     pinOn = mqPin.matches
     const y0 = scrollY
     const maxScroll = root.scrollHeight - vh
@@ -123,7 +129,7 @@ async function start() {
     }
     keys = buildKeys(anchors, { H, vh, maxScroll })
     if (moon && sun) gsap.set([moon, sun], { x: innerWidth * 0.89 - 56 })
-    if (!pinOn && photoB) gsap.set(photoB, { clearProps: "opacity" })
+    if (!pinOn && photoB) gsap.set([photoB, tagA ?? []], { clearProps: "opacity" })
     dirty = true
   }
 
@@ -184,7 +190,7 @@ async function start() {
 
     // Indicatore sul binario (durante l'intro segue la sua interpolazione).
     const ti = intro ? intro.t : t
-    const iy = 0.2 * vh + (0.6 * vh * ti) / 1440 - 7
+    const iy = rail.top + (rail.h * ti) / 1440 - 7
     setIndY?.(iy)
     setNowY?.(iy - 4)
 
@@ -207,7 +213,11 @@ async function start() {
     }
 
     // Palchi.
-    if (pinOn && setBO) setBO(clamp((clamp((y - pin.s) / (pin.e - pin.s)) - 0.4) / 0.2))
+    if (pinOn && setBO) {
+      const b = clamp((clamp((y - pin.s) / (pin.e - pin.s)) - 0.4) / 0.2)
+      setBO(b)
+      setTagA?.(1 - b)
+    }
     if (setCambio) {
       const p = pinOn ? (y - cambioM.top) / (cambioM.h - vh || 1) : (y - cambioM.top + vh) / (cambioM.h + vh)
       setCambio(1.08 - 0.08 * clamp(p))
