@@ -1,0 +1,253 @@
+@layer components {
+  /* Sezioni con elementi al vivo (foto fino al bordo dello schermo): nessuno scorrimento orizzontale. */
+  .sec-clip {
+    overflow-x: clip;
+  }
+  .t-h2,
+  .t-h3,
+  .t-display {
+    overflow-wrap: break-word;
+  }
+  .sec-intro {
+    margin-top: 24px;
+    max-width: 64ch;
+  }
+  .sec-body {
+    margin-top: 24px;
+    max-width: 64ch;
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+  .sec-head-gap {
+    margin-top: 40px;
+  }
+  @media (min-width: 1024px) {
+    .sec-head-gap {
+      margin-top: 64px;
+    }
+  }
+
+  /* Ingressi: partono nascosti solo con html.motion (lo aggiunge il motore di movimento). */
+  html.motion [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  html.motion [data-reveal="x"] {
+    transform: translateX(-16px);
+  }
+  html.motion [data-reveal="fade"] {
+    transform: none;
+  }
+  html.motion [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
+      transform 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  }
+  html.motion [data-word] {
+    opacity: 0;
+  }
+  html.motion [data-word].is-in {
+    opacity: 1;
+    transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+  }
+
+  /* Punti: lineetta 12 x 1 px. */
+  .svc-bullets {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+  }
+  .svc-bullets li {
+    position: relative;
+    padding-left: 28px;
+    line-height: 32px;
+    font-size: var(--text-body);
+  }
+  .svc-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 12px;
+    height: 1px;
+    background: var(--btn-bg);
+  }
+
+  /* Dettagli dei servizi e risposte: `<details>` nativi. */
+  .svc-details {
+    margin-top: 16px;
+  }
+  .svc-details summary,
+  .faq-item summary {
+    cursor: pointer;
+    list-style: none;
+  }
+  .svc-details summary::-webkit-details-marker,
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+  .svc-details summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 48px;
+    font: 700 18px/1.2 var(--font-sans);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  .svc-details summary svg {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    transition: transform 200ms var(--ease-out);
+  }
+  .svc-details[open] summary svg {
+    transform: rotate(45deg);
+  }
+  .svc-long {
+    margin: 16px 0 0;
+    max-width: 64ch;
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+  @supports selector(::details-content) {
+    .svc-details,
+    .faq-item {
+      interpolate-size: allow-keywords;
+    }
+    .svc-details::details-content,
+    .faq-item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size 280ms var(--ease-out),
+        content-visibility 280ms allow-discrete;
+    }
+    .svc-details[open]::details-content,
+    .faq-item[open]::details-content {
+      block-size: auto;
+    }
+  }
+
+  /* Riga del 112: mai animata. */
+  .emergency {
+    margin: 24px 0 0;
+    max-width: 64ch;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  /* Etichetta d'ora piccola in Mono (sulle foto e sopra le foto). */
+  .photo-tag {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: var(--hour);
+  }
+
+  /* Foto al vivo a destra (sul telefono: a tutta larghezza, 280 px). */
+  .bleed-photo .pic {
+    border-radius: 0;
+    aspect-ratio: auto !important;
+    height: 280px;
+  }
+  .bleed-photo {
+    margin-inline: calc(-1 * var(--wrap-l));
+  }
+  @media (min-width: 1024px) {
+    .bleed-photo {
+      margin-left: 0;
+      margin-right: calc(-1 * (100vw - var(--wrap-l) - var(--wrap-w)));
+    }
+    .bleed-photo .pic {
+      border-radius: 28px 0 0 28px;
+      aspect-ratio: 3 / 2 !important;
+      height: auto;
+    }
+  }
+
+  /* Fotografie con altezza fissa sul telefono. */
+  .pic-h260 .pic {
+    aspect-ratio: auto !important;
+    height: 260px;
+  }
+  .pic-h233 .pic {
+    aspect-ratio: auto !important;
+    height: 233px;
+  }
+  @media (min-width: 1024px) {
+    .pic-h260 .pic,
+    .pic-h233 .pic {
+      aspect-ratio: 3 / 2 !important;
+      height: auto;
+    }
+  }
+
+  /* Palco a tutto schermo (cambio turno e sera): foto, velo basso e testo in basso a sinistra. */
+  .stage-full {
+    position: relative;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+  }
+  .stage-full .stage-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto !important;
+    transform-origin: 50% 50%;
+  }
+  .stage-veil {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 55%;
+    background: linear-gradient(0deg, rgb(35 28 77 / 0.72) 0%, rgb(35 28 77 / 0) 100%);
+  }
+  .stage-text {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: calc(96px + env(safe-area-inset-bottom));
+    color: #fff4ef;
+  }
+  .stage-text .hour-label {
+    color: #fff4ef;
+  }
+  .stage-text h2,
+  .stage-text p {
+    color: #fff4ef;
+  }
+  .stage-text .stage-body {
+    margin-top: 24px;
+  }
+  @media (min-width: 1024px) {
+    .stage-text {
+      left: 7vw;
+      right: auto;
+      bottom: 14vh;
+      width: min(720px, 50vw);
+    }
+  }
+  /* Con il motore di movimento e uno schermo abbastanza alto, il palco resta fermo per la corsa della sezione. */
+  @media (min-width: 1024px) and (min-height: 700px) {
+    html.sky-on .stage-run {
+      height: 200vh;
+      min-height: 0;
+      overflow: visible;
+    }
+    html.sky-on .stage-run.stage-run-sera {
+      height: 120vh;
+    }
+    html.sky-on .stage-run .stage-full {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
+  }
+}
