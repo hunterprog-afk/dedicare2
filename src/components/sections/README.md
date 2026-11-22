@@ -27,7 +27,7 @@ sui testi dell'HTML pre-renderizzato si attiva da solo.
 | `Contatti.tsx` | `#contatti` | 3.15 (il modulo è dei moduli) | builder delle sezioni |
 | `../shell/Footer.tsx` | `<footer>` | 4.1 | builder di footer e legali |
 | `../legal/LegalPage.tsx` | `/privacy/`, `/cookie/`, `/note-legali/` | 4.2 | builder di footer e legali |
-| `../forms/ContactForm.tsx`, `CurriculumForm.tsx` | moduli dentro i fogli di contatti e lavora con noi | 5 | builder dei moduli |
+| `../forms/ContactForm.tsx`, `CurriculumForm.tsx` (+ da creare: `Field.tsx`, `useForm.ts`, `src/lib/formsApi.ts`, `src/lib/validation.ts`) | moduli dentro i fogli di contatti e lavora con noi | 5 | builder dei moduli |
 
 ## Convenzioni
 
