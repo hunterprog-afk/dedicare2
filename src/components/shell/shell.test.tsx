@@ -10,16 +10,17 @@ import { Disc } from "./Disc"
 import { Footer } from "./Footer"
 
 describe("guscio fisso", () => {
-  it("il binario ha 25 tacche e 10 link-capitolo con aria-label «HH:00, etichetta»", () => {
+  it("il binario ha 25 tacche e 15 link-capitolo con aria-label «HH:00, etichetta»", () => {
     const { container } = renderWithI18n(<ClockRail />)
     expect(container.querySelectorAll(".clock-tick")).toHaveLength(25)
     const links = container.querySelectorAll<HTMLAnchorElement>("a.clock-chapter")
-    expect(links).toHaveLength(10)
+    expect(links).toHaveLength(15)
     expect(links[0]).toHaveAttribute("href", "#a-chi")
     expect(links[0]).toHaveAttribute("aria-label", "22:00, A chi ci rivolgiamo")
     expect(links[2]).toHaveAttribute("href", "#assistenza-24-7")
     expect(links[2]).toHaveAttribute("aria-label", "02:00, Assistenza 24/7")
-    expect([...links].map((l) => l.textContent)).toEqual(["22", "01", "02", "12", "14", "17", "18", "20", "21", "22"])
+    expect([...links].map((l) => l.textContent)).toEqual(["22", "01", "02", "06", "07", "10", "11", "12", "14", "17", "18", "19", "20", "21", "22"])
+    expect(links[4]).toHaveAttribute("aria-label", "07:00, Operatori OSS")
     expect(container.querySelector(".clock-now")).toHaveTextContent("22:00")
   })
 
@@ -30,12 +31,12 @@ describe("guscio fisso", () => {
     expect(pill).toHaveAttribute("aria-label", "Le ore del turno: apri l'indice. Sono le 22:00.")
   })
 
-  it("il foglio ha 10 righe, il bottone chiudi e il selettore di lingua", () => {
+  it("il foglio ha 15 righe, il bottone chiudi e il selettore di lingua", () => {
     const { container } = renderWithI18n(<HourIndex />)
     const nav = container.querySelector("#indice-ore")!
     expect(nav).toHaveAttribute("popover")
     expect(nav).toHaveAttribute("aria-labelledby", "indice-ore-titolo")
-    expect(nav.querySelectorAll("a.index-row")).toHaveLength(10)
+    expect(nav.querySelectorAll("a.index-row")).toHaveLength(15)
     const close = within(nav as HTMLElement).getByRole("button", { name: "Chiudi", hidden: true })
     expect(close).toHaveAttribute("popovertargetaction", "hide")
     expect(within(nav as HTMLElement).getByRole("navigation", { name: "Lingua", hidden: true })).toBeInTheDocument()

@@ -4,7 +4,7 @@ import { INDEX_ENTRIES, formatHour } from "@/content/hours"
 
 const TICKS = Array.from({ length: 25 }, (_, k) => k)
 
-/** Binario dell'orologio (solo ≥ 1024 px): 25 tacche, 10 link-capitolo, indicatore e ora corrente. */
+/** Binario dell'orologio (solo ≥ 1024 px): 25 tacche, 15 link-capitolo, indicatore e ora corrente. */
 export function ClockRail() {
   const { t } = useTranslation()
   return (
@@ -21,6 +21,7 @@ export function ClockRail() {
             className="clock-chapter"
             href={`#${e.id}`}
             data-chapter={e.id}
+            data-t={e.t}
             aria-label={`${hh}:00, ${t(`ore.voci.${e.id}`)}`}
             style={{ top: `calc(var(--rail-top) + var(--rail-span) * ${e.t / 60} / 24 - 12px)` }}
           >

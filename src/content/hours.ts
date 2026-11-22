@@ -75,20 +75,25 @@ export function sectionAttrs(id: SectionId) {
 }
 
 export interface IndexEntry {
-  id: "a-chi" | "servizi" | "assistenza-24-7" | "perche" | "come-funziona" | "aree" | "tariffe" | "faq" | "lavora-con-noi" | "contatti"
+  id: Exclude<SectionId, "inizio">
   /** Minuti dalle 22:00 della voce sul binario. */
   t: number
 }
 
-/** Le 10 voci dell'indice (binario desktop e foglio telefono). */
+/** Le 15 voci dell'indice (binario desktop e foglio telefono): una per ora-capitolo, servizi del giorno compresi. */
 export const INDEX_ENTRIES: readonly IndexEntry[] = [
   { id: "a-chi", t: 0 },
   { id: "servizi", t: 180 },
   { id: "assistenza-24-7", t: 240 },
+  { id: "cambio-turno", t: 480 },
+  { id: "operatori-oss", t: 540 },
+  { id: "accompagnamento", t: 720 },
+  { id: "multidisciplinare", t: 780 },
   { id: "perche", t: 840 },
   { id: "come-funziona", t: 960 },
   { id: "aree", t: 1140 },
   { id: "tariffe", t: 1200 },
+  { id: "sera", t: 1260 },
   { id: "faq", t: 1320 },
   { id: "lavora-con-noi", t: 1380 },
   { id: "contatti", t: 1440 },

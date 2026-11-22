@@ -3,7 +3,7 @@ import { INDEX_ENTRIES, formatHour } from "@/content/hours"
 import { XIcon } from "../icons"
 import { LangSwitch } from "./LangSwitch"
 
-/** Foglio dell'indice (telefono): `popover` nativo, 10 righe da 56 px, selettore di lingua in fondo. */
+/** Foglio dell'indice (telefono): `popover` nativo, 15 righe da 56 px (il foglio scorre, al massimo 85svh), selettore di lingua in fondo. */
 export function HourIndex() {
   const { t } = useTranslation()
   return (

@@ -64,8 +64,12 @@ describe("ore", () => {
     expect(formatHour(1440)).toBe("22:00")
     expect(formatHour(1260)).toBe("19:00")
   })
-  it("le 10 voci dell'indice hanno le ore della specifica", () => {
-    expect(INDEX_ENTRIES.map((e) => formatHour(e.t))).toEqual(["22:00", "01:00", "02:00", "12:00", "14:00", "17:00", "18:00", "20:00", "21:00", "22:00"])
+  it("le 15 voci dell'indice hanno le ore della specifica (voce 6 della critica 1)", () => {
+    expect(INDEX_ENTRIES.map((e) => formatHour(e.t))).toEqual([
+      "22:00", "01:00", "02:00", "06:00", "07:00", "10:00", "11:00", "12:00", "14:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00",
+    ])
+    // Ogni voce cade sull'ora della sua sezione, così il clic porta l'orologio sull'ora scritta.
+    for (const e of INDEX_ENTRIES) expect(SECTIONS[e.id].label).toBe(formatHour(e.t))
   })
 })
 
