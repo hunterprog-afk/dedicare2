@@ -21,6 +21,11 @@ const assets = readdirSync("dist/assets")
 
 // HTML + CSS bloccanti della home.
 const cssFiles = [...html.matchAll(/<link rel="stylesheet"[^>]*href="\/(assets\/[^"]+)"/g)].map((m) => m[1])
+// Un solo foglio di stile: un secondo, caricato da un chunk condiviso, dichiara i @layer in un altro ordine e ribalta la cascata.
+if (cssFiles.length !== 1) {
+  failed = true
+  console.log(`FAIL CSS della home spezzato in ${cssFiles.length} fogli (${cssFiles.join(", ")}): l'ordine dei @layer si rompe`)
+}
 const blocking = gz("dist/index.html") + cssFiles.reduce((s, f) => s + gz(join("dist", f)), 0)
 check("HTML + CSS bloccanti della home", blocking, 40 * KB)
 

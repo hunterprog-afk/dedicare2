@@ -1,6 +1,7 @@
 import { StrictMode } from "react"
 import { createRoot, hydrateRoot } from "react-dom/client"
 import "./styles/index.css"
+import "./components/shell/Footer.css"
 import "./components/legal/LegalPage.css"
 import { App, type LegalComponent } from "./App"
 import { initI18n } from "./i18n/core"
