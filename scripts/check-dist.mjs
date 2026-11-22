@@ -70,10 +70,31 @@ const walk = (dir) =>
 const TEXT_EXT = /\.(html|js|css|json|xml|txt|svg|webmanifest|map)$/
 const files = walk("dist").filter((f) => TEXT_EXT.test(f))
 const m365 = Boolean(process.env.VITE_FORMS_API_BASE?.trim())
+if (!m365) {
+  // Modalità Formspree: i testi legali devono nominare il fornitore dei moduli configurato.
+  const legal = ["dist/privacy/index.html", "dist/informativa-candidati.html"].map((f) =>
+    readFileSync(f, "utf8")
+      .replace(/<meta[^>]*Content-Security-Policy[^>]*>/gi, "")
+      .toLowerCase(),
+  )
+  if (!legal.some((t) => t.includes("formspree"))) {
+    if (process.env.DEDICARE_ANTEPRIMA === "1") {
+      console.warn("check-dist: AVVISO, anteprima fuori produzione: i testi legali non nominano il fornitore dei moduli (Formspree).")
+    } else {
+      fail(
+        "la build di produzione richiede che i testi legali corrispondano al fornitore dei moduli configurato. " +
+          "I moduli usano Formspree ma né la Privacy né l'informativa candidati lo nominano: " +
+          "definire VITE_FORMS_API_BASE con l'endpoint dei moduli oppure aggiornare i testi legali. " +
+          "Per un'anteprima fuori produzione usare `npm run build:anteprima`.",
+      )
+    }
+  }
+}
 const banned = ["googletagmanager", "apify", "testimonials", "Trasparenza"]
-if (m365) banned.push("formspree")
 for (const f of files) {
   const content = readFileSync(f, "utf8")
-  for (const b of banned) if (content.toLowerCase().includes(b.toLowerCase())) fail(`${f} contiene «${b}»`)
+  // Nei bundle JS l'endpoint alternativo resta come ramo non usato: in modalità M365 si controllano pagine e policy, non il codice.
+  const list = m365 && !f.endsWith(".js") ? [...banned, "formspree"] : banned
+  for (const b of list) if (content.toLowerCase().includes(b.toLowerCase())) fail(`${f} contiene «${b}»`)
 }
 console.log(`check-dist: ok (${REQUIRED.length} file richiesti, ${files.length} file di testo controllati)`)

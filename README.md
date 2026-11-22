@@ -13,6 +13,16 @@ npm install
 npm run dev
 ```
 
+## Build e pubblicazione
+
+```bash
+npm run build            # produzione
+npm run build:anteprima  # anteprime fuori produzione (imposta DEDICARE_ANTEPRIMA=1)
+```
+
+I moduli usano l'endpoint indicato da `VITE_FORMS_API_BASE` (variabile del repository, usata dal workflow di pubblicazione); se è vuota si usa Formspree.
+La build di produzione richiede che i testi legali corrispondano al fornitore dei moduli configurato: in caso contrario `scripts/check-dist.mjs` interrompe la build.
+
 ## Sequenza video (hero scroll-scrub)
 
 Il hero usa una **sequenza di fotogrammi JPEG** invece di un `<video>`, come le pagine Apple AirPods. Devi estrarre i frame dal tuo video sorgente.
