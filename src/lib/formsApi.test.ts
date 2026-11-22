@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest"
 import itJson from "@/i18n/locales/it.json"
 import { FORMSPREE_ENDPOINT, POSIZIONI_INVIATE, getFormsMode, isEmailValida, mapCandidaturaErrorKey, mapContattoErrorKey } from "./formsApi"
-import { checkCv, validateValue } from "./validation"
+import { checkCv, hasPdfMagic, validateValue } from "./validation"
 
 describe("getFormsMode", () => {
   it("senza base → Formspree con l'endpoint esatto", () => {
@@ -66,5 +66,13 @@ describe("validazione", () => {
     expect(checkCv(pdf("cv.pdf", 5 * 1024 * 1024 + 1))).toBe("error_filesize")
     expect(checkCv(pdf("cv.png", 10, "image/png"))).toBe("error_filetype")
     expect(checkCv(pdf("cv.png", 10))).toBe("error_filetype")
+    expect(checkCv(pdf("cv.pdf", 10, ""))).toBe("ok")
+    expect(checkCv(pdf("cv.docx", 10, ""))).toBe("error_filetype")
+  })
+  it("hasPdfMagic", async () => {
+    expect(await hasPdfMagic(new File(["%PDF-1.7 resto"], "cv.pdf"))).toBe(true)
+    expect(await hasPdfMagic(new File(["%PDF"], "cv.pdf"))).toBe(false)
+    expect(await hasPdfMagic(new File(["MZ-binario-eseguibile"], "cv.pdf", { type: "application/pdf" }))).toBe(false)
+    expect(await hasPdfMagic(new File([], "cv.pdf"))).toBe(false)
   })
 })

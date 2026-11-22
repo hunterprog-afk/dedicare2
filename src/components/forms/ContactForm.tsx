@@ -3,6 +3,7 @@ import { Trans, useTranslation } from "@/i18n/react"
 import { Button } from "../Button"
 import { Field } from "./Field"
 import { useForm } from "./useForm"
+import { useHydrated } from "./useHydrated"
 import { inviaContatto, LIMITI, PRIVACY_POLICY_URL, getFormsMode, type ContattoErrorKey } from "@/lib/formsApi"
 import { CONTATTO_RULES } from "@/lib/validation"
 import type { Lang } from "@/routes"
@@ -24,6 +25,7 @@ export function ContactForm() {
   const sending = useRef(false)
   const formRef = useRef<HTMLFormElement>(null)
   const mode = getFormsMode()
+  const hydrated = useHydrated()
 
   useEffect(() => {
     const onPrefill = (e: Event) => {
@@ -74,7 +76,7 @@ export function ContactForm() {
   const alertText = invalid ? t("contactform.error_required") : status.phase === "error" ? t(`contactform.${status.key}`) : null
 
   return (
-    <form ref={formRef} className="form" onSubmit={onSubmit} noValidate>
+    <form ref={formRef} className="form" method="post" onSubmit={onSubmit} noValidate>
       <h3 className="form-title">{t("contactform.intro")}</h3>
       <p className="form-legend">{t("form.legenda")}</p>
       <Field name="nome" label={t("contactform.nome")} required max={LIMITI.nome} value={values.nome} error={errors.nome} autoComplete="name" onChange={(v) => setValue("nome", v)} onBlur={() => blur("nome")} />
@@ -94,7 +96,7 @@ export function ContactForm() {
           {alertText}
         </p>
       )}
-      <Button type="submit" className="form-submit" disabled={sendingNow}>
+      <Button type="submit" className="form-submit" disabled={!hydrated || sendingNow}>
         {sendingNow ? t("contactform.submitting") : t("contactform.submit")}
       </Button>
     </form>

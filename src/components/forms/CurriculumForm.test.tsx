@@ -12,7 +12,7 @@ const MODES = [
 const c = itJson.curriculum
 
 function pdf(name = "cv.pdf", size = 1000, type = "application/pdf") {
-  const f = new File(["%PDF"], name, { type })
+  const f = new File(["%PDF-1.4"], name, { type })
   Object.defineProperty(f, "size", { value: size })
   return f
 }
@@ -74,8 +74,26 @@ describe.each(MODES)("CurriculumForm ($name)", (mode) => {
     await user.upload(input, pdf("foto.png", 100, "image/png"))
     expect(screen.getByRole("alert")).toHaveTextContent(c.error_filetype)
     await user.upload(input, pdf("ok.pdf"))
+    expect(await screen.findByText("ok.pdf")).toBeInTheDocument()
     expect(screen.queryByRole("alert")).toBeNull()
-    expect(screen.getByText("ok.pdf")).toBeInTheDocument()
+  })
+
+  it("estensione .pdf ma contenuto che non è un PDF → error_filetype; tipo vuoto con PDF vero → ok", async () => {
+    const user = userEvent.setup({ applyAccept: false })
+    const { container } = renderWithI18n(<CurriculumForm />)
+    const input = container.querySelector<HTMLInputElement>("#cv")!
+    await user.upload(input, new File(["MZ-eseguibile"], "falso.pdf", { type: "application/pdf" }))
+    expect(await screen.findByRole("alert")).toHaveTextContent(c.error_filetype)
+    expect(screen.getByText(c.cv_none)).toBeInTheDocument()
+    await user.upload(input, new File(["%PDF-1.7 contenuto"], "senza-tipo.pdf", { type: "" }))
+    expect(await screen.findByText("senza-tipo.pdf")).toBeInTheDocument()
+    expect(screen.queryByRole("alert")).toBeNull()
+  })
+
+  it("il modulo è method=post e il bottone di invio è abilitato dopo l'idratazione", () => {
+    const { container } = renderWithI18n(<CurriculumForm />)
+    expect(container.querySelector("form")).toHaveAttribute("method", "post")
+    expect(screen.getByRole("button", { name: c.submit })).toBeEnabled()
   })
 
   it("invio valido: FormData completo e successo", async () => {

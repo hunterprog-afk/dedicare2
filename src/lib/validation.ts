@@ -35,9 +35,19 @@ export const CANDIDATURA_RULES = {
 
 export type CvCheck = "ok" | "error_filesize" | "error_filetype"
 
-/** PDF per tipo e per estensione, entro 5 MB. */
+/** PDF per tipo (o tipo vuoto) e per estensione, entro 5 MB. */
 export function checkCv(file: File): CvCheck {
-  if (file.type !== "application/pdf" || !/\.pdf$/i.test(file.name)) return "error_filetype"
+  if ((file.type !== "application/pdf" && file.type !== "") || !/\.pdf$/i.test(file.name)) return "error_filetype"
   if (file.size > LIMITI.cvBytes) return "error_filesize"
   return "ok"
+}
+
+/** I primi byte di un PDF vero sono `%PDF-`. */
+export async function hasPdfMagic(file: Blob): Promise<boolean> {
+  try {
+    const head = new Uint8Array(await file.slice(0, 5).arrayBuffer())
+    return head.length === 5 && String.fromCharCode(...head) === "%PDF-"
+  } catch {
+    return false
+  }
 }

@@ -3,8 +3,9 @@ import { Trans, useTranslation } from "@/i18n/react"
 import { Button } from "../Button"
 import { Field } from "./Field"
 import { useForm } from "./useForm"
+import { useHydrated } from "./useHydrated"
 import { inviaCandidatura, LIMITI, INFORMATIVA_CANDIDATI_URL, POSIZIONI_INVIATE, getFormsMode, type CandidaturaErrorKey } from "@/lib/formsApi"
-import { CANDIDATURA_RULES, checkCv } from "@/lib/validation"
+import { CANDIDATURA_RULES, checkCv, hasPdfMagic } from "@/lib/validation"
 import type { Lang } from "@/routes"
 
 type Status = { phase: "idle" } | { phase: "sending" } | { phase: "success" } | { phase: "error"; key: CandidaturaErrorKey | "error_network" }
@@ -29,19 +30,22 @@ export function CurriculumForm() {
   const cvHintId = `${uid}-cv-hint`
   const cvErrId = `${uid}-cv-err`
   const mode = getFormsMode()
+  const hydrated = useHydrated()
 
-  function onFile(e: ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0] ?? null
+  async function onFile(e: ChangeEvent<HTMLInputElement>) {
+    const input = e.target
+    const file = input.files?.[0] ?? null
     if (!file) {
       setCv(null)
       return
     }
-    const check = checkCv(file)
+    let check = checkCv(file)
+    if (check === "ok" && !(await hasPdfMagic(file))) check = "error_filetype"
     if (check === "ok") {
       setCv(file)
       setCvError(null)
     } else {
-      e.target.value = ""
+      input.value = ""
       setCv(null)
       setCvError(check)
     }
@@ -93,7 +97,7 @@ export function CurriculumForm() {
   const alertText = invalid ? t("curriculum.error_required") : status.phase === "error" ? t(`curriculum.${status.key}`) : null
 
   return (
-    <form ref={formRef} className="form" onSubmit={onSubmit} noValidate>
+    <form ref={formRef} className="form" method="post" onSubmit={onSubmit} noValidate>
       <h3 className="form-title">{t("curriculum.form_title")}</h3>
       <p className="form-legend">{t("form.legenda")}</p>
       <div className="form-row">
@@ -147,7 +151,7 @@ export function CurriculumForm() {
           {alertText}
         </p>
       )}
-      <Button type="submit" className="form-submit" disabled={sendingNow}>
+      <Button type="submit" className="form-submit" disabled={!hydrated || sendingNow}>
         {sendingNow ? t("curriculum.submitting") : t("curriculum.submit")}
       </Button>
     </form>
