@@ -1,0 +1,143 @@
+@layer components {
+  .hero {
+    position: relative;
+    overflow: hidden;
+    min-height: max(640px, 100svh);
+    display: flex;
+    flex-direction: column;
+    padding: 44svh 20px 40px;
+    color: var(--ink);
+  }
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto !important;
+  }
+  .hero-veil-bottom {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 55%;
+    background: linear-gradient(0deg, rgb(35 28 77 / 0.72) 0%, rgb(35 28 77 / 0) 100%);
+  }
+  .hero-veil-right {
+    display: none;
+  }
+  .hero-text {
+    position: relative;
+  }
+  .hero-eyebrow {
+    color: #ffd98a;
+    margin-bottom: 0;
+  }
+  .hero-h1 {
+    margin: 12px 0 0;
+    color: #fff4ef;
+  }
+  .hero-sub {
+    margin: 16px 0 0;
+    max-width: 34ch;
+    color: #fff4ef;
+  }
+  .hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .hero-actions .btn-secondary {
+    justify-content: center;
+  }
+  .hero-services {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 24px;
+    font-size: 16px;
+    color: #fff4ef;
+  }
+  .hero-service {
+    display: block;
+  }
+  .hero-service .link-text {
+    display: inline-block;
+    padding-block: 10px;
+  }
+  .hero-sep {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .hero {
+      display: block;
+      height: 100vh;
+      min-height: 640px;
+      padding: 0;
+    }
+    .hero-veil-right {
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgb(35 28 77 / 0) 38%, rgb(35 28 77 / 0.62) 62%);
+    }
+    .hero-text {
+      position: absolute;
+      left: 51vw;
+      top: 30vh;
+      width: min(640px, 44vw);
+    }
+    .hero-h1 {
+      margin-top: 16px;
+    }
+    .hero-sub {
+      margin-top: 24px;
+    }
+    .hero-actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: max-content;
+      max-width: calc(100vw - 51vw - 24px);
+      margin-top: 40px;
+      gap: 16px;
+    }
+    .hero-actions .btn {
+      white-space: nowrap;
+    }
+    .hero-actions .btn {
+      width: auto;
+    }
+    .hero-services {
+      position: absolute;
+      left: var(--wrap-l);
+      bottom: 12vh;
+      flex-direction: row;
+      margin-top: 0;
+    }
+    .hero-service {
+      display: inline;
+    }
+    .hero-service .link-text {
+      padding-block: 0;
+    }
+    .hero-sep {
+      display: inline;
+    }
+  }
+
+  /* Fra 1024 e 1279 px il blocco parte prima, così l'H1 non scende a quattro righe. */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .hero-text {
+      left: 44vw;
+      width: calc(100vw - 44vw - 40px);
+    }
+    .hero-actions {
+      max-width: calc(100vw - 44vw - 24px);
+    }
+  }
+}
