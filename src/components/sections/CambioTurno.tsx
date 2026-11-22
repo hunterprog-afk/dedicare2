@@ -17,7 +17,6 @@ export function CambioTurno() {
           flat
           className="stage-photo cambio-photo"
         />
-        <div className="stage-veil" aria-hidden="true" />
         <div className="stage-text">
           <HourLabel time={SECTIONS["cambio-turno"].label} size="s" />
           <h2 className="t-h2">{t("cambio.title")}</h2>

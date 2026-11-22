@@ -17,7 +17,6 @@ export function Sera() {
           flat
           className="stage-photo sera-photo"
         />
-        <div className="stage-veil" aria-hidden="true" />
         <div className="stage-text">
           <HourLabel time={SECTIONS.sera.label} size="s" />
           <h2 className="t-h2">{t("sera.title")}</h2>

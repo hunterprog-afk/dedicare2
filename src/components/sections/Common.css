@@ -144,7 +144,7 @@
   /* Etichetta d'ora piccola in Mono (sulle foto e sopra le foto). */
   .photo-tag {
     font-family: var(--font-mono);
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1;
     letter-spacing: 0.04em;
     color: var(--hour);
@@ -203,18 +203,26 @@
     aspect-ratio: auto !important;
     transform-origin: 50% 50%;
   }
-  .stage-veil {
-    position: absolute;
-    inset: auto 0 0 0;
-    height: 55%;
-    background: linear-gradient(0deg, rgb(35 28 77 / 0.72) 0%, rgb(35 28 77 / 0) 100%);
-  }
   .stage-text {
+    --stage-b: calc(96px + env(safe-area-inset-bottom));
     position: absolute;
     left: 20px;
     right: 20px;
-    bottom: calc(96px + env(safe-area-inset-bottom));
+    bottom: var(--stage-b);
     color: #fff4ef;
+    isolation: isolate;
+  }
+  /* Velatura indaco dietro il testo, qualunque sia la foto: al 74% resta sopra 4,5:1 anche sul pixel più chiaro (bianco puro, 6,2:1). */
+  .stage-text::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    top: -160px;
+    bottom: calc(-1 * var(--stage-b));
+    left: -100vw;
+    right: -100vw;
+    background: linear-gradient(180deg, rgb(35 28 77 / 0) 0, rgb(35 28 77 / 0.74) 160px);
   }
   .stage-text .hour-label {
     color: #fff4ef;
@@ -228,9 +236,10 @@
   }
   @media (min-width: 1024px) {
     .stage-text {
+      --stage-b: 14vh;
       left: 7vw;
       right: auto;
-      bottom: 14vh;
+      bottom: var(--stage-b);
       width: min(720px, 50vw);
     }
   }
