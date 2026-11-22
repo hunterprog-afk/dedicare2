@@ -1,4 +1,4 @@
-// Favicon, icone PNG e immagine social provvisoria, tutte dal simbolo «La soglia» (geometria condivisa col logo).
+// Favicon, icone PNG e immagine social, tutte dal simbolo «La soglia» (geometria condivisa col logo).
 import { readFileSync, writeFileSync, statSync } from "node:fs"
 import sharp from "sharp"
 
@@ -58,15 +58,25 @@ for (const side of [180, 192, 512]) {
     .toFile(`public/favicon-${side}.png`)
 }
 
-// og-image 1200 × 630, provvisoria: fondo indaco, simbolo Notte alto 400 px, una riga di testo a sinistra.
+// og-image 1200 × 630: a sinistra la foto della finestra accesa (da public/img, quindi riproducibile), a destra il simbolo Notte
+// e una riga di testo in Literata su fondo indaco. Il bordo della foto sfuma nel fondo.
 {
-  const sym = await render(symbolSvg(NOTTE, { size: 384 }), 400)
+  const PHOTO_W = 640
+  const photo = await sharp("public/img/notte-finestra-orizz-1536.webp")
+    .resize({ height: 630 })
+    .extract({ left: 0, top: 0, width: PHOTO_W, height: 630 })
+    .png()
+    .toBuffer()
+  const fade = Buffer.from(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${PHOTO_W}" height="630"><defs><linearGradient id="f" x1="0" x2="1" y1="0" y2="0"><stop offset="0.72" stop-color="#231C4D" stop-opacity="0"/><stop offset="1" stop-color="#231C4D" stop-opacity="1"/></linearGradient></defs><rect width="${PHOTO_W}" height="630" fill="url(#f)"/></svg>`,
+  )
+  const sym = await render(symbolSvg(NOTTE, { size: 384 }), 200)
   const text = await sharp({
     text: {
       text: '<span foreground="#FFF4EF">Dedicare · Assistenza domiciliare a Milano</span>',
       fontfile: "scripts/assets/Literata-opsz-wght.ttf",
-      font: "Literata 56",
-      width: 600,
+      font: "Literata 46",
+      width: 470,
       rgba: true,
       wrap: "word",
     },
@@ -76,11 +86,14 @@ for (const side of [180, 192, 512]) {
   const meta = await sharp(text).metadata()
   await sharp({ create: { width: 1200, height: 630, channels: 4, background: "#231C4D" } })
     .composite([
-      { input: sym, left: 740, top: 115 },
-      { input: text, left: 80, top: Math.round((630 - (meta.height ?? 0)) / 2) },
+      { input: photo, left: 0, top: 0 },
+      { input: fade, left: 0, top: 0 },
+      { input: sym, left: 690, top: 120 },
+      { input: text, left: 690, top: 360 },
     ])
-    .png({ compressionLevel: 9, palette: false })
+    .png({ compressionLevel: 9, palette: true, quality: 85 })
     .toFile("public/og-image.png")
+  console.log(`og-image: testo ${meta.width} x ${meta.height}`)
 }
 
 for (const f of ["favicon.svg", "favicon-32.png", "favicon-180.png", "favicon-192.png", "favicon-512.png", "og-image.png"]) {

@@ -35,8 +35,14 @@ for (let i = 0; i < args.length; i++) {
 }
 if (!srcDirs.length) srcDirs.push(...DEFAULT_SRC)
 
-// Budget: foto dell'hero. Se superati, per quelle due sole si scende a AVIF qualità 42.
-const BUDGET = { "notte-finestra-orizz-1440.avif": 180 * 1024, "notte-finestra-vert-640.avif": 70 * 1024 }
+// Foto dell'hero: cielo e facciata sono sfumature scure e a qualità 50 vanno a bande, quindi per quelle due sole si sale a 66.
+// Budget (KB): desktop 1440 ≤ 220, telefono ≤ 120 alla larghezza servita a 390 px con DPR 3 (1024) e ≤ 70 a 640. Se superati, per quelle sole si scende a 42.
+const HERO_Q = new Set(["notte-finestra-orizz", "notte-finestra-vert"])
+const BUDGET = {
+  "notte-finestra-orizz-1440.avif": 220 * 1024,
+  "notte-finestra-vert-1024.avif": 120 * 1024,
+  "notte-finestra-vert-640.avif": 70 * 1024,
+}
 
 mkdirSync("public/img", { recursive: true })
 const manifest = {}
@@ -61,7 +67,7 @@ for (const name of NAMES) {
       return p.resize({ width, withoutEnlargement: true, kernel: "lanczos3" })
     }
     const avifPath = `public/img/${name}-${width}.avif`
-    let q = 50
+    let q = HERO_Q.has(name) ? 66 : 50
     const key = `${name}-${width}.avif`
     await pipeline().avif({ quality: q, effort: 6 }).toFile(avifPath)
     if (BUDGET[key] && statSync(avifPath).size > BUDGET[key]) {

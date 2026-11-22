@@ -61,12 +61,23 @@ check("font, peso totale", fonts.reduce((s, f) => s + statSync(join("dist/assets
 
 // Foto dell'hero, se già ottimizzate.
 for (const [f, max] of [
-  ["notte-finestra-orizz-1440.avif", 180 * KB],
+  ["notte-finestra-orizz-1440.avif", 220 * KB],
+  ["notte-finestra-vert-1024.avif", 120 * KB],
   ["notte-finestra-vert-640.avif", 70 * KB],
 ]) {
   const p = join("dist/img", f)
   if (existsSync(p)) check(f, statSync(p).size, max)
   else console.log(`skip ${f}: foto non ancora presente`)
+}
+
+// Peso complessivo delle foto in dist/img (il browser ne scarica una sola variante per foto: qui si somma tutto ciò che si pubblica).
+if (existsSync("dist/img")) {
+  const imgs = readdirSync("dist/img")
+  const sum = (ext) => imgs.filter((f) => f.endsWith(ext)).reduce((s, f) => s + statSync(join("dist/img", f)).size, 0)
+  check("foto AVIF, peso totale", sum(".avif"), 2200 * KB)
+  check("foto WebP, peso totale", sum(".webp"), 3200 * KB)
+  const biggest = imgs.filter((f) => f.endsWith(".avif")).map((f) => [f, statSync(join("dist/img", f)).size]).sort((x, y) => y[1] - x[1])[0]
+  if (biggest) check(`foto AVIF più pesante (${biggest[0]})`, biggest[1], 260 * KB)
 }
 
 // Colori nel CSS compilato: solo i 7 della palette (esadecimali e rgb(… / a)).
