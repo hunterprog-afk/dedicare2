@@ -5,6 +5,7 @@ import { Picture } from "../Picture"
 import { Sheet } from "../Sheet"
 import { WhatsAppIcon } from "../icons"
 import { ContactForm } from "../forms/ContactForm"
+import { DWindowLine } from "../shell/DWindow"
 import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF, whatsappHref } from "@/content/contacts"
 import { SECTIONS, sectionAttrs } from "@/content/hours"
 import "./Common.css"
@@ -17,14 +18,17 @@ export function Contatti() {
     <section {...sectionAttrs("contatti")} className="section">
       <div className="wrap grid12 items-start">
         <div className="col-span-full lg:col-[1/5]">
-          <div className="d-window" data-reveal="fade">
-            <Picture
-              name="notte-finestra-orizz"
-              mobileName="notte-finestra-vert"
-              sizes="(min-width:1024px) 660px, 190px"
-              flat
-              objectPosition="17% 50%"
-            />
+          <div className="d-window-box" data-reveal="fade">
+            <div className="d-window">
+              <Picture
+                name="notte-finestra-orizz"
+                mobileName="notte-finestra-vert"
+                sizes="(min-width:1024px) 660px, 240px"
+                flat
+                objectPosition="17% 50%"
+              />
+            </div>
+            <DWindowLine />
           </div>
         </div>
         <div className="col-span-full lg:col-[6/13]">

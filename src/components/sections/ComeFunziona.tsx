@@ -38,7 +38,7 @@ export function ComeFunziona() {
         </div>
         <div className="passi-foto col-span-full lg:col-[6/13]">
           <HourLabel time="16:00" size="s" />
-          <div className="bleed-photo">
+          <div className="bleed-photo bleed-photo-gioco">
             <Picture name="giorno-gioco" sizes="(min-width:1024px) 62vw, 100vw" light="day" />
           </div>
         </div>

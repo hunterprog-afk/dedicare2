@@ -1,7 +1,6 @@
 import { useTranslation } from "@/i18n/react"
-import { HourLabel } from "../HourLabel"
 import { Picture } from "../Picture"
-import { SECTIONS, sectionAttrs } from "@/content/hours"
+import { sectionAttrs } from "@/content/hours"
 import { TwoLines } from "./parts"
 import "./Night.css"
 
@@ -18,7 +17,6 @@ export function AChi() {
     <section {...sectionAttrs("a-chi")} className="section">
       <div className="wrap grid12 items-start">
         <div className="col-span-full lg:col-[1/7] lg:row-start-1">
-          <HourLabel time={SECTIONS["a-chi"].label} size="s" />
           <p className="t-eyebrow">{t("assistiti.eyebrow")}</p>
           <h2 className="t-h2">
             <TwoLines a={t("assistiti.title_a")} b={t("assistiti.title_b")} />

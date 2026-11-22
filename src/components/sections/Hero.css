@@ -8,6 +8,10 @@
     padding: 37svh 20px 40px;
     color: var(--ink);
   }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+  }
   .hero-photo {
     position: absolute;
     inset: 0;
@@ -77,6 +81,10 @@
   .hero-actions .btn-secondary {
     justify-content: center;
   }
+  /* Al passaggio il bottone oro si riempie di pesca: nessun anello, che su indaco diventava un grigio-malva fuori palette. */
+  .hero-actions .btn-gold:hover {
+    box-shadow: none;
+  }
   .hero-services {
     position: relative;
     display: grid;
@@ -95,8 +103,13 @@
     padding-block: 10px;
     margin-block: 0;
   }
-  .hero-sep {
-    display: none;
+  /* Schermi stretti: l'etichetta del bottone sta su una riga. */
+  @media (max-width: 419px) {
+    .hero-actions .btn {
+      white-space: nowrap;
+      font-size: 16px;
+      padding-inline: 20px 16px;
+    }
   }
 
   @media (min-width: 1024px) {
@@ -115,7 +128,8 @@
     .hero-text {
       position: absolute;
       left: 51vw;
-      top: 30vh;
+      /* 30 vh come da specifica; su schermi bassi il blocco sale, così la riga dei servizi non esce dall'hero. */
+      top: max(88px, min(30vh, calc(100vh - 560px)));
       width: min(640px, 44vw);
     }
     .hero-hour {
@@ -142,13 +156,13 @@
     .hero-actions .btn {
       width: auto;
     }
+    /* La riga dei servizi sta nella colonna del testo, sotto i bottoni, con lo stesso bordo sinistro del titolo. */
     .hero-services {
-      position: absolute;
-      left: var(--wrap-l);
-      bottom: 12vh;
       display: flex;
-      flex-direction: row;
-      margin-top: 0;
+      flex-wrap: wrap;
+      gap: 0 24px;
+      margin-top: 28px;
+      max-width: calc(100vw - 51vw - 24px);
     }
     .hero-service {
       display: inline;
@@ -156,19 +170,32 @@
     .hero-service .link-text {
       padding-block: 0;
     }
-    .hero-sep {
-      display: inline;
+    /* L'immagine dell'hero sfuma nel cielo fisso, che prosegue sotto: senza fondo proprio la sezione non ha un bordo dritto. */
+    .hero[data-band] {
+      background: none;
+    }
+    .hero-bg {
+      -webkit-mask-image: linear-gradient(180deg, #000 calc(100% - 160px), transparent);
+      mask-image: linear-gradient(180deg, #000 calc(100% - 160px), transparent);
     }
   }
 
-  /* Fra 1024 e 1279 px il blocco parte prima, così l'H1 non scende a quattro righe. */
-  @media (min-width: 1024px) and (max-width: 1279px) {
+  /* Fra 1024 e 1439 px il blocco parte prima, così l'H1 non scende a tre righe. */
+  @media (min-width: 1024px) and (max-width: 1439px) {
     .hero-text {
       left: 44vw;
-      width: calc(100vw - 44vw - 40px);
+      width: min(660px, calc(100vw - 44vw - 40px));
     }
-    .hero-actions {
+    .hero-actions,
+    .hero-services {
       max-width: calc(100vw - 44vw - 24px);
+    }
+  }
+
+  /* Fra 1024 e 1279 px i due bottoni vanno su due righe: il blocco sale di altri 60 px. */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .hero-text {
+      top: max(88px, min(30vh, calc(100vh - 620px)));
     }
   }
 }

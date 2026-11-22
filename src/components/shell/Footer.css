@@ -21,10 +21,15 @@
   .site-footer :focus-visible {
     outline-color: #ffb59a;
   }
+  /* Telefono: la colonna dei contatti prende la larghezza dell'indirizzo email, quella legale il resto; il selettore di lingua
+     passa su una riga sua, allineato a sinistra col bordo del testo. */
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: max-content minmax(0, 1fr);
     gap: 24px 16px;
+  }
+  .footer-contacts a[href^="mailto"] {
+    overflow-wrap: anywhere;
   }
   .footer-brand,
   .footer-copyright {
@@ -59,13 +64,16 @@
     width: fit-content;
   }
   .footer-legal {
-    display: grid;
-    gap: 8px;
-    align-content: start;
+    display: contents;
   }
-  /* Il selettore di lingua parte dallo stesso filo dei link sopra: il bersaglio resta da 48 px, il testo si allinea a sinistra. */
-  .site-footer .lang-switch a:first-child {
-    justify-items: start;
+  .footer-legal .lang-switch {
+    grid-column: 1 / -1;
+    gap: 4px;
+    margin-left: -6px;
+  }
+  .site-footer .lang-switch a {
+    min-width: 0;
+    padding-inline: 6px;
   }
   .footer-copyright {
     margin: 0;
@@ -74,6 +82,9 @@
     color: #fff4ef;
     max-width: 90ch;
     overflow-wrap: anywhere;
+    /* Cifre in Literata, senza lo zero barrato (Via Roma 80, 20054, 1.000,00). */
+    font-family: "Literata Figures", var(--font-sans);
+    font-variant-numeric: lining-nums;
   }
   @media (min-width: 1024px) {
     .site-footer {
@@ -91,13 +102,15 @@
       grid-column: 7 / span 3;
     }
     .footer-legal {
+      display: grid;
+      gap: 8px;
+      align-content: start;
       grid-column: 10 / span 3;
     }
-    /* Il selettore di lingua parte dallo stesso filo dei link sopra: il bersaglio resta da 48 px, il testo si allinea a sinistra. */
-  .site-footer .lang-switch a:first-child {
-    justify-items: start;
-  }
-  .footer-copyright {
+    .footer-legal .lang-switch {
+      grid-column: auto;
+    }
+    .footer-copyright {
       grid-column: 1 / -1;
     }
   }

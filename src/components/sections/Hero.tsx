@@ -18,17 +18,19 @@ export function Hero() {
   const { t } = useTranslation()
   return (
     <section {...sectionAttrs("inizio")} className="hero">
-      <Picture
-        name="notte-finestra-orizz"
-        mobileName="notte-finestra-vert"
-        sizes="100vw"
-        priority
-        flat
-        className="hero-photo"
-        objectPosition="0% 30%"
-      />
-      <div className="hero-veil-bottom" aria-hidden="true" />
-      <div className="hero-veil-right" aria-hidden="true" />
+      <div className="hero-bg">
+        <Picture
+          name="notte-finestra-orizz"
+          mobileName="notte-finestra-vert"
+          sizes="100vw"
+          priority
+          flat
+          className="hero-photo"
+          objectPosition="0% 30%"
+        />
+        <div className="hero-veil-bottom" aria-hidden="true" />
+        <div className="hero-veil-right" aria-hidden="true" />
+      </div>
       <div className="hero-text">
         <p className="hero-hour" aria-hidden="true">
           22:00
@@ -57,21 +59,16 @@ export function Hero() {
             {t("hero.cta_whatsapp")}
           </Button>
         </div>
+        <nav className="hero-services" aria-label={t("nav.servizi")}>
+          {SERVICE_LINKS.map((s) => (
+            <span key={s.href} className="hero-service">
+              <a className="link-text" href={s.href}>
+                {t(`servizi.items.${s.key}.title`)}
+              </a>
+            </span>
+          ))}
+        </nav>
       </div>
-      <nav className="hero-services" aria-label={t("nav.servizi")}>
-        {SERVICE_LINKS.map((s, i) => (
-          <span key={s.href} className="hero-service">
-            {i > 0 && (
-              <span className="hero-sep" aria-hidden="true">
-                {" · "}
-              </span>
-            )}
-            <a className="link-text" href={s.href}>
-              {t(`servizi.items.${s.key}.title`)}
-            </a>
-          </span>
-        ))}
-      </nav>
     </section>
   )
 }

@@ -41,7 +41,8 @@ export function Tariffe() {
           </div>
           <div className="tariffe-cta">
             <Button href="#contatti" onClick={onCta}>
-              {t("tariffario.cta")}
+              <span className="max-sm:hidden">{t("tariffario.cta")}</span>
+              <span className="sm:hidden">{t("tariffario.cta_short")}</span>
             </Button>
           </div>
         </Sheet>

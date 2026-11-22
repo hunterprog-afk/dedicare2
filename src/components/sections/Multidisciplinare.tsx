@@ -14,7 +14,7 @@ export function Multidisciplinare() {
     <section {...sectionAttrs("multidisciplinare")} className="section">
       <div className="wrap grid12">
         <div className="pic-h233 col-span-full lg:col-[2/12] xl:col-[3/11] lg:row-start-1">
-          <Picture name="giorno-piano" sizes="(min-width:1024px) 696px, 100vw" light="day" />
+          <Picture name="giorno-piano" sizes="(min-width:1024px) 696px, 100vw" light="day" objectPosition="50% 60%" />
         </div>
         <Sheet className="multi-sheet col-span-full lg:col-[3/11] lg:row-start-2" data-reveal>
           <HourLabel time={SECTIONS.multidisciplinare.label} size="s" />

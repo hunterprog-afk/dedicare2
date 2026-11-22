@@ -41,10 +41,10 @@
     }
   },
   "hero": {
-    "eyebrow": "Assistenza domiciliare · Milano e hinterland",
+    "eyebrow": "Assistenza domiciliare · Milano e hinterland",
     "h1_a": "Assistenza a casa,",
-    "h1_b": "di giorno e di notte.",
-    "sub": "Operatori OSS e infermieri per anziani, adulti dopo un ricovero, bambini e persone con disabilità. Anche 24 ore su 24.",
+    "h1_b": "di giorno e di notte.",
+    "sub": "Operatori OSS e infermieri per anziani, adulti dopo un ricovero, bambini e persone con disabilità. Anche 24 ore su 24.",
     "cta_call": "Chiama per la consulenza gratuita",
     "cta_call_short": "Chiama: consulenza gratuita",
     "cta_whatsapp": "Scrivici su WhatsApp"
@@ -73,8 +73,8 @@
         "title": "Assistenza 24/7",
         "body": "Turni a domicilio di giorno, di notte e nei festivi, fino alla presenza continua 24 ore su 24.",
         "emergenza": "Per un'emergenza sanitaria: 112.",
-        "longDescription": "Organizziamo la presenza in casa sulle ore che servono davvero: notti, fine settimana, festivi, fino alla copertura completa 24 ore su 24 con più operatrici che si alternano. Cerchiamo di mantenere le stesse operatrici, perché la persona ritrovi volti conosciuti; se un'operatrice manca, la sostituta la cerchiamo noi. Questo servizio non sostituisce i soccorsi: in caso di emergenza sanitaria chiama subito il 112.",
-        "bullets": ["Notti, fine settimana e festivi", "Presenza continua 24 ore su 24", "Le stesse operatrici, per quanto possibile", "Se un'operatrice manca, la sostituta la cerchiamo noi"]
+        "longDescription": "Organizziamo la presenza in casa sulle ore che servono davvero: notti, fine settimana, festivi, fino alla copertura completa 24 ore su 24 con più operatrici che si alternano. Cerchiamo di mantenere le stesse operatrici, perché la persona ritrovi volti conosciuti. Questo servizio non sostituisce i soccorsi: in caso di emergenza sanitaria chiama subito il 112.",
+        "bullets": ["Notti, fine settimana e festivi", "Presenza continua 24 ore su 24", "Le stesse operatrici, per quanto possibile"]
       },
       "oss": {
         "title": "Operatori OSS",
@@ -120,7 +120,7 @@
       { "title": "Primo contatto", "body": "Consulenza gratuita telefonica o WhatsApp per comprendere le esigenze del paziente e della famiglia. Senza impegno." },
       { "title": "Valutazione", "body": "Valutazione delle esigenze insieme alla famiglia, per definire un piano di assistenza personalizzato." },
       { "title": "Attivazione", "body": "Assegnazione dell'operatore più adatto alla persona e avvio dell'assistenza nei tempi concordati con la famiglia." },
-      { "title": "Follow-up", "body": "Aggiornamenti costanti alla famiglia, revisione del piano quando le esigenze cambiano e, se un'operatrice manca, la sostituta la cerchiamo noi." }
+      { "title": "Follow-up", "body": "Aggiornamenti costanti alla famiglia, revisione del piano quando le esigenze cambiano." }
     ]
   },
   "aree": {
@@ -136,6 +136,7 @@
     "title": "Tariffe e modalità",
     "intro": "Ogni piano è personalizzato e il preventivo è gratuito. La tariffa è oraria e dipende dalle ore di assistenza, dai festivi e dalle eventuali trasferte.",
     "cta": "Richiedi un preventivo gratuito",
+    "cta_short": "Preventivo gratuito",
     "prefill": "Vorrei un preventivo",
     "factors": [
       { "title": "Tipologia di assistenza", "body": "OSS, infermieri e supporto specialistico o multidisciplinare: ogni profilo ha tariffe e tempi diversi." },

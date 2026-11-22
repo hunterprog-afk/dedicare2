@@ -24,6 +24,19 @@
   [data-tone] {
     color: var(--ink);
   }
+  /* A capo: titoli bilanciati (mai una parola sola sull'ultima riga), paragrafi e voci d'elenco rifiniti. */
+  .t-h1,
+  .t-h2,
+  .t-h3,
+  .t-display,
+  .t-phone {
+    text-wrap: balance;
+  }
+  p,
+  li,
+  summary {
+    text-wrap: pretty;
+  }
   /* Altezza dell'header (60 / 72 px) e, sul telefono, della barra contatti: né le ancore né il fuoco finiscono sotto. */
   html {
     scroll-padding-top: 60px;

@@ -41,9 +41,9 @@
     }
   },
   "hero": {
-    "eyebrow": "Home care · Milan and surrounding area",
+    "eyebrow": "Home care · Milan and surrounding area",
     "h1_a": "Home care,",
-    "h1_b": "by day and by night.",
+    "h1_b": "by day and by night.",
     "sub": "OSS healthcare assistants and nurses for seniors, adults after a hospital stay, children and people with disabilities. Even 24 hours a day.",
     "cta_call": "Call for a free consultation",
     "cta_call_short": "Call for a free consultation",
@@ -73,11 +73,11 @@
         "title": "24/7 care",
         "body": "Home shifts by day, by night and on holidays, up to round-the-clock presence.",
         "emergenza": "In a medical emergency: 112.",
-        "longDescription": "We arrange care at home for the hours you actually need: nights, weekends, holidays, up to full 24-hour coverage with several carers taking turns. We try to keep the same carers, so the person sees familiar faces; if a carer is absent, we find the replacement. This service does not replace emergency services: in a medical emergency, call 112 immediately.",
-        "bullets": ["Nights, weekends and holidays", "Round-the-clock presence", "The same carers, as far as possible", "If a carer is absent, we find the replacement"]
+        "longDescription": "We arrange care at home for the hours you actually need: nights, weekends, holidays, up to full 24-hour coverage with several carers taking turns. We try to keep the same carers, so the person sees familiar faces. This service does not replace emergency services: in a medical emergency, call 112 immediately.",
+        "bullets": ["Nights, weekends and holidays", "Round-the-clock presence", "The same carers, as far as possible"]
       },
       "oss": {
-        "title": "Healthcare assistants (OSS)",
+        "title": "Healthcare assistants (OSS)",
         "body": "Our healthcare assistants provide qualified, compassionate support for daily care, preserving dignity, autonomy and well-being.",
         "longDescription": "Dedicare's healthcare assistants are selected for both technical skill and human empathy. They support the patient with daily activities discreetly and respectfully, ease the family's caregiving load and become a steady, familiar presence in the home — capable of restoring rhythm, calm and connection.",
         "bullets": ["Personal hygiene and mobility", "Mealtime assistance", "Emotional support and companionship", "Cognitive stimulation", "Coordination with family members"]
@@ -97,7 +97,7 @@
     }
   },
   "cambio": {
-    "title": "At 06:00 the night shift hands over to the day shift.",
+    "title": "At six, the night shift hands over to the day shift.",
     "body": "We try to keep the same carers, so the person sees familiar faces; if a carer is absent, we find the replacement."
   },
   "perche": {
@@ -120,7 +120,7 @@
       { "title": "First contact", "body": "Free phone or WhatsApp consultation to understand the patient's and family's needs. No commitment." },
       { "title": "Assessment", "body": "Assessment of needs together with the family, to define a personalised assistance plan." },
       { "title": "Activation", "body": "We assign the carer best suited to the person and start the service on the dates agreed with the family." },
-      { "title": "Follow-up", "body": "Constant family updates, plan reviews when needs change and, if a carer is absent, we find the replacement." }
+      { "title": "Follow-up", "body": "Constant family updates, plan reviews when needs change." }
     ]
   },
   "aree": {
@@ -136,6 +136,7 @@
     "title": "Fees and terms",
     "intro": "Every plan is personalised and the quote is free. The rate is hourly and depends on the hours of care, holidays and any travel.",
     "cta": "Request a free quote",
+    "cta_short": "Request a free quote",
     "prefill": "I would like a quote",
     "factors": [
       { "title": "Type of assistance", "body": "OSS, nurses and specialist or multidisciplinary support: each profile has different rates and timing." },
@@ -144,7 +145,7 @@
       { "title": "Additional services", "body": "Accompaniment to visits and therapies, support during hospital stays and when travelling." }
     ]
   },
-  "sera": { "title": "In the evening and at night, the shifts go on." },
+  "sera": { "title": "In the evening and at night, the shifts go on." },
   "faq": {
     "eyebrow": "FAQ",
     "title": "Frequently asked questions.",

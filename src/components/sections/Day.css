@@ -27,7 +27,16 @@
     margin: 12px 0 0;
     text-align: right;
   }
-  @media (min-width: 1024px) {
+  /* Sotto 1280 px le due foto e il testo si impilano: a 1024 px la colonna del testo sarebbe di 210 px. */
+  @media (max-width: 1279px) {
+    .oss-a .pic,
+    .oss-b .pic,
+    .oss-main,
+    .oss-details {
+      max-width: 560px;
+    }
+  }
+  @media (min-width: 1280px) {
     .oss-text {
       display: block;
       margin-top: 120px;
@@ -54,7 +63,12 @@
   .accomp-text {
     margin-top: 32px;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .accomp-text {
+      max-width: 560px;
+    }
+  }
+  @media (min-width: 1280px) {
     .accomp-text {
       margin-top: 0;
     }
@@ -185,18 +199,29 @@
   }
 
   /* ---- Aree ---- */
+  /* Sul telefono una colonna sola: ogni comune sta su una riga. Da 640 px due colonne. */
   .comuni {
-    columns: 2;
-    column-gap: 24px;
     margin-bottom: 0;
     padding: 0;
     list-style: none;
     font-size: 18px;
-    line-height: 36px;
+    line-height: 1.6;
   }
   .comuni li {
     break-inside: avoid;
     transition: font-weight 160ms;
+  }
+  @media (max-width: 639px) {
+    .comuni li {
+      white-space: nowrap;
+    }
+  }
+  @media (min-width: 640px) {
+    .comuni {
+      columns: 2;
+      column-gap: 24px;
+      line-height: 36px;
+    }
   }
   .comuni li.is-active {
     font-weight: 700;

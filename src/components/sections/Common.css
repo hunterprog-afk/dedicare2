@@ -171,11 +171,13 @@
     color: var(--hour);
   }
 
-  /* Foto al vivo a destra (sul telefono: a tutta larghezza, 280 px). */
+  /* Foto al vivo a destra (sul telefono: a tutta larghezza, 390 x 280 l'accompagnamento e 390 x 260 il gioco). */
   .bleed-photo .pic {
     border-radius: 0;
-    aspect-ratio: auto !important;
-    height: 220px;
+    aspect-ratio: 39 / 28 !important;
+  }
+  .bleed-photo-gioco .pic {
+    aspect-ratio: 3 / 2 !important;
   }
   .bleed-photo {
     margin-inline: calc(-1 * var(--wrap-l));
@@ -185,27 +187,28 @@
       margin-left: 0;
       margin-right: calc(-1 * (100vw - var(--wrap-l) - var(--wrap-w)));
     }
-    .bleed-photo .pic {
+    .bleed-photo .pic,
+    .bleed-photo-gioco .pic {
       border-radius: 28px 0 0 28px;
       aspect-ratio: 3 / 2 !important;
-      height: auto;
+    }
+  }
+  /* Fra 1024 e 1279 px il testo dell'accompagnamento sta sotto la foto: la foto si abbassa per non occupare lo schermo. */
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .bleed-photo-accomp .pic {
+      aspect-ratio: 2 / 1 !important;
     }
   }
 
-  /* Fotografie con altezza fissa sul telefono. */
-  .pic-h260 .pic {
-    aspect-ratio: auto !important;
-    height: 200px;
-  }
+  /* Foto inserite sul telefono: 4:3 (350 x 262 a 390 px), il taglio sta nell'object-position di ogni foto. */
+  .pic-h260 .pic,
   .pic-h233 .pic {
-    aspect-ratio: auto !important;
-    height: 180px;
+    aspect-ratio: 4 / 3 !important;
   }
   @media (min-width: 1024px) {
     .pic-h260 .pic,
     .pic-h233 .pic {
       aspect-ratio: 3 / 2 !important;
-      height: auto;
     }
   }
 
@@ -217,20 +220,15 @@
     min-height: 520px;
     overflow: hidden;
   }
-  /* Velatura indaco: è un elemento della scena, presente anche senza foto, sopra foto e segnaposto e sotto il testo.
-     Con il pixel più chiaro possibile (bianco) dietro il testo il contrasto resta sopra 7:1. */
+  /* Velatura cinematografica leggera, uguale per tutte le scene: solo l'ultimo tratto verso il fondo. La leggibilità
+     del testo la dà il velo del blocco di testo (.stage-text::before), che copre soltanto l'ingombro del testo. */
   .stage-full::before {
     content: "";
     position: absolute;
     inset: 0;
     z-index: 1;
     pointer-events: none;
-    background: linear-gradient(
-      to top,
-      rgb(35 28 77 / 0.88) 0%,
-      rgb(35 28 77 / 0.8) 42%,
-      rgb(35 28 77 / 0) 78%
-    );
+    background: linear-gradient(to bottom, rgb(35 28 77 / 0) 45%, rgb(35 28 77 / 0.35) 100%);
   }
   .stage-full .stage-photo {
     position: absolute;
@@ -242,12 +240,28 @@
   }
   .stage-text {
     --stage-b: calc(96px + env(safe-area-inset-bottom));
+    --stage-l: 20px;
     position: absolute;
-    left: 20px;
+    left: var(--stage-l);
     right: 20px;
     bottom: var(--stage-b);
     z-index: 2;
     color: #fff4ef;
+  }
+  /* Velo del testo: segue l'ingombro del blocco (altezza variabile) (più 24 px sopra la prima riga) e sfuma nei 112 px sopra. Sul telefono arriva ai
+     due bordi dello schermo; da 1024 px finisce con una sfumatura a destra del blocco, così non resta una fascia a tutta larghezza. */
+  .stage-text::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+    inset: -136px -20px calc(-1 * var(--stage-b)) calc(-1 * var(--stage-l));
+    background: linear-gradient(
+      0deg,
+      rgb(35 28 77 / 0.8) 0%,
+      rgb(35 28 77 / 0.8) calc(100% - 112px),
+      rgb(35 28 77 / 0) 100%
+    );
   }
   /* Dentro le scene il numerale scende a 64 px: il blocco resta nella parte bassa dello schermo. */
   .stage-text .hour-label {
@@ -262,33 +276,46 @@
   .stage-text .stage-body {
     margin-top: 12px;
   }
-  /* Sul telefono il blocco di testo è più alto e di altezza variabile (schermi stretti, testo che va a capo di più):
-     oltre alla velatura di fondo, una seconda segue l'ingombro del testo e sfuma 112 px sopra di lui. */
+  /* La sera sul telefono: il testo sta nel cielo, in alto (numerale a 30 svh, ultima riga entro il 56%); la velatura scende
+     dall'alto e si spegne al 70%, così tetti, gerani e ringhiera restano scoperti. */
   @media (max-width: 1023px) {
-    .stage-full::before {
-      background: linear-gradient(to top, rgb(35 28 77 / 0.9) 0%, rgb(35 28 77 / 0.82) 60%, rgb(35 28 77 / 0) 94%);
+    .stage-run-sera .stage-text {
+      top: 30svh;
+      bottom: auto;
     }
-    .stage-text::before {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      pointer-events: none;
-      inset: -112px -20px calc(-1 * var(--stage-b)) -20px;
+    .stage-run-sera .stage-text::before {
+      display: none;
+    }
+    .stage-run-sera .stage-full::before {
       background: linear-gradient(
-        to top,
-        rgb(35 28 77 / 0.86) 0%,
-        rgb(35 28 77 / 0.84) calc(100% - 112px),
-        rgb(35 28 77 / 0) 100%
+        to bottom,
+        rgb(35 28 77 / 0.74) 0%,
+        rgb(35 28 77 / 0.72) 56%,
+        rgb(35 28 77 / 0) 70%
       );
     }
   }
   @media (min-width: 1024px) {
     .stage-text {
       --stage-b: 12vh;
-      left: var(--wrap-l);
+      --stage-l: var(--wrap-l);
+      left: var(--stage-l);
       right: auto;
       bottom: var(--stage-b);
       width: min(920px, calc(80vw - var(--wrap-l)));
+    }
+    .stage-text::before {
+      right: -240px;
+      /* Anche in basso il velo sfuma: sotto il testo la foto torna scoperta. */
+      background: linear-gradient(
+        0deg,
+        rgb(35 28 77 / 0) 0%,
+        rgb(35 28 77 / 0.8) calc(var(--stage-b) * 0.55),
+        rgb(35 28 77 / 0.8) calc(100% - 112px),
+        rgb(35 28 77 / 0) 100%
+      );
+      -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 240px), transparent);
+      mask-image: linear-gradient(to right, #000 calc(100% - 240px), transparent);
     }
     .stage-text .t-h2 {
       font-size: clamp(34px, calc(27.31px + 1.7143vw), 46px);

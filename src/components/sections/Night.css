@@ -135,8 +135,7 @@
     gap: 12px;
   }
   .a247-photo .pic {
-    aspect-ratio: auto !important;
-    height: 200px;
+    aspect-ratio: 4 / 3 !important;
   }
   .a247-hour {
     color: #ffd98a;
@@ -148,6 +147,7 @@
       margin-top: 0;
     }
     .a247-photo .pic {
+      aspect-ratio: auto !important;
       height: 320px;
     }
   }
@@ -363,12 +363,32 @@
   }
 
   /* ---- Contatti ---- */
-  .d-window {
+  /* La D è 240 x 290 sul telefono e 360 x 440 da 1024 px: la foto è ritagliata nella sua controforma e il contorno
+     dello stesso tracciato, con la luce del logo, ne tiene la sagoma anche dove la foto è buia. */
+  .d-window-box {
     position: relative;
-    width: 150px;
-    height: 232px;
+    width: 240px;
+    height: 290px;
     margin: 0 auto 24px;
+  }
+  .d-window {
+    position: absolute;
+    inset: 0;
     clip-path: url(#d-window);
+  }
+  .d-window-line {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .d-window-line path {
+    fill: none;
+    stroke: url(#d-line);
+    stroke-width: 2px;
+    vector-effect: non-scaling-stroke;
   }
   .d-window .pic {
     position: absolute;
@@ -396,8 +416,8 @@
     font-size: var(--text-body);
   }
   @media (min-width: 1024px) {
-    .d-window {
-      width: 284px;
+    .d-window-box {
+      width: 360px;
       height: 440px;
       margin: 0;
     }

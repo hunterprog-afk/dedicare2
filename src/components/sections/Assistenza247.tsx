@@ -38,7 +38,7 @@ export function Assistenza247() {
   return (
     <section {...sectionAttrs("assistenza-24-7")} className="a247">
       <div ref={stageRef} className="a247-stage wrap grid12">
-        <div ref={textRef} className="a247-text col-span-full lg:col-[1/6]">
+        <div ref={textRef} className="a247-text col-span-full lg:col-[1/7] lg:pr-4">
           <HourLabel time={SECTIONS["assistenza-24-7"].label} size="l" className="a247-hour" />
           <h2 className="t-h2">{t(`${k}.title`)}</h2>
           <p className="sec-body">{t(`${k}.body`)}</p>

@@ -12,17 +12,16 @@ export function Accompagnamento() {
   return (
     <section {...sectionAttrs("accompagnamento")} className="section sec-clip">
       <div className="wrap grid12 items-start">
-        <div className="col-span-full lg:row-start-1">
+        <div className="col-span-full xl:row-start-1">
           <HourLabel time={SECTIONS.accompagnamento.label} size="s" />
-          <p className="t-eyebrow">{t("servizi.eyebrow")}</p>
           <h2 className="t-h2" data-reveal>
             {t(`${k}.title`)}
           </h2>
         </div>
-        <div className="bleed-photo col-span-full mt-8 lg:col-[7/13] xl:col-[6/13] lg:row-start-2 lg:mt-12">
+        <div className="bleed-photo bleed-photo-accomp col-span-full mt-8 lg:mt-12 xl:col-[8/13] xl:row-start-2">
           <Picture name="mattino-accompagnamento" sizes="(min-width:1024px) 62vw, 100vw" light="day" />
         </div>
-        <div className="accomp-text col-span-full lg:col-[1/6] xl:col-[1/5] lg:row-start-2">
+        <div className="accomp-text col-span-full xl:col-[1/7] xl:row-start-2">
           <p className="sec-body">{t(`${k}.body`)}</p>
           <Bullets items={t(`${k}.bullets`, { returnObjects: true }) as string[]} />
           <ServiceDetails text={t(`${k}.longDescription`)} />
