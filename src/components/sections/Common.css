@@ -213,7 +213,7 @@
   .stage-full {
     position: relative;
     isolation: isolate;
-    height: 72svh;
+    height: 100svh;
     min-height: 520px;
     overflow: hidden;
   }
@@ -262,10 +262,24 @@
   .stage-text .stage-body {
     margin-top: 12px;
   }
-  /* Sul telefono il blocco di testo è più alto: la velatura sale con lui. */
+  /* Sul telefono il blocco di testo è più alto e di altezza variabile (schermi stretti, testo che va a capo di più):
+     oltre alla velatura di fondo, una seconda segue l'ingombro del testo e sfuma 112 px sopra di lui. */
   @media (max-width: 1023px) {
     .stage-full::before {
       background: linear-gradient(to top, rgb(35 28 77 / 0.9) 0%, rgb(35 28 77 / 0.82) 60%, rgb(35 28 77 / 0) 94%);
+    }
+    .stage-text::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      pointer-events: none;
+      inset: -112px -20px calc(-1 * var(--stage-b)) -20px;
+      background: linear-gradient(
+        to top,
+        rgb(35 28 77 / 0.86) 0%,
+        rgb(35 28 77 / 0.84) calc(100% - 112px),
+        rgb(35 28 77 / 0) 100%
+      );
     }
   }
   @media (min-width: 1024px) {

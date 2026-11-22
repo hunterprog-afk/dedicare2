@@ -7,8 +7,8 @@ import { Bullets, ServiceDetails } from "./parts"
 import "./Night.css"
 
 const PHOTOS = [
-  { name: "notte-lampada", time: "02:00", cls: "photo-a" },
-  { name: "notte-cucina", time: "04:00", cls: "photo-b" },
+  { name: "notte-lampada", time: "02:00", cls: "photo-a", pos: "30% 50%" },
+  { name: "notte-cucina", time: "04:00", cls: "photo-b", pos: "50% 50%" },
 ] as const
 
 /** 02:00, assistenza 24/7. Con movimento e schermo alto il palco resta fermo e la foto delle 04:00 si sovrappone a quella delle 02:00. */
@@ -50,7 +50,7 @@ export function Assistenza247() {
           {PHOTOS.map((p) => (
             <figure key={p.name} className={`a247-photo ${p.cls}`}>
               <span className="a247-tag photo-tag">{p.time}</span>
-              <Picture name={p.name} sizes="(min-width:1024px) 840px, 100vw" />
+              <Picture name={p.name} sizes="(min-width:1024px) 840px, 100vw" objectPosition={p.pos} />
             </figure>
           ))}
         </div>

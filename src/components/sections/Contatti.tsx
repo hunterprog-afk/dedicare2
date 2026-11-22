@@ -20,9 +20,10 @@ export function Contatti() {
           <div className="d-window" data-reveal="fade">
             <Picture
               name="notte-finestra-orizz"
-              sizes="(min-width:1024px) 660px, 100vw"
+              mobileName="notte-finestra-vert"
+              sizes="(min-width:1024px) 660px, 190px"
               flat
-              objectPosition="30% 32%"
+              objectPosition="17% 50%"
             />
           </div>
         </div>

@@ -38,7 +38,7 @@ export function AChi() {
             name="ingresso-turno"
             sizes="(min-width:1024px) 426px, 100vw"
             light="night"
-            objectPosition="50% 60%"
+            objectPosition="50% 66%"
           />
         </div>
       </div>

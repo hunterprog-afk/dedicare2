@@ -25,7 +25,7 @@ export function Hero() {
         priority
         flat
         className="hero-photo"
-        objectPosition="50% 50%"
+        objectPosition="0% 30%"
       />
       <div className="hero-veil-bottom" aria-hidden="true" />
       <div className="hero-veil-right" aria-hidden="true" />

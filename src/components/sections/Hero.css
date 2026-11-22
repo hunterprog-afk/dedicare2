@@ -15,6 +15,17 @@
     height: 100%;
     aspect-ratio: auto !important;
   }
+  /* Telefono: la foto copre lo schermo e non l'intera altezza del blocco, così la finestra accesa
+     resta sopra il testo anche quando questo va a capo di più; sotto resta il fondo della facciata. */
+  @media (max-width: 1023px) {
+    .hero {
+      background-color: #231c4d;
+    }
+    .hero-photo {
+      inset: 0 0 auto 0;
+      height: max(100svh, 640px);
+    }
+  }
   .hero-veil-bottom {
     position: absolute;
     inset: auto 0 0 0;
