@@ -51,8 +51,8 @@ export interface Seam {
   resize(cssW: number, cssH: number): void
   /** Carica un fotogramma nella texture `unit` (0 = esce, 1 = entra). */
   upload(unit: 0 | 1, src: Source): void
-  /** Disegna con progresso 0..1 (0,5 = cucitura). */
-  draw(progress: number): void
+  /** Disegna con progresso 0..1 (0,5 = cucitura); zoomA/zoomB = spinta in avanti della scena che esce e di quella che entra. */
+  draw(progress: number, zoomA?: number, zoomB?: number): void
   setLite(lite: boolean): void
   /** Compila e prova entrambi gli shader a pagina ferma, così la prima cucitura non fa scattare nulla. */
   warm(): void
@@ -171,24 +171,25 @@ export function createSeam(host: HTMLElement, opts: { mobile: boolean; lite: boo
       gl.viewport(0, 0, w, h)
       gl.finish()
     },
-    draw(progress) {
+    draw(progress, zoomA = 1, zoomB = 1) {
       const p = lite ? over : bloom
       gl.useProgram(p.prog)
       gl.uniform1i(p.loc.from, 0)
       gl.uniform1i(p.loc.to, 1)
       gl.uniform1f(p.loc.progress, progress)
       gl.uniform1f(p.loc.ratio, w / h)
-      // Inquadratura «cover», centro in orizzontale e al 42% in verticale: la stessa di .scene-poster.
-      const map = (d: [number, number]) => {
-        const s = Math.max(w / d[0], h / d[1])
+      // Inquadratura «cover», centro in orizzontale e al 42% in verticale: la stessa di .scene-poster,
+      // ingrandita come .scene-media (spinta in avanti, transform-origin 50% 42%).
+      const map = (d: [number, number], z: number) => {
+        const s = Math.max(w / d[0], h / d[1]) * z
         const iw = d[0] * s
         const ih = d[1] * s
         const ox = (w - iw) * 0.5
         const oy = (h - ih) * 0.42
         return [w / iw, h / ih, -ox / iw, -oy / ih] as const
       }
-      const a = map(dims[0])
-      const b = map(dims[1])
+      const a = map(dims[0], zoomA)
+      const b = map(dims[1], zoomB)
       gl.uniform4f(p.loc.mapA, a[0], a[1], a[2], a[3])
       gl.uniform4f(p.loc.mapB, b[0], b[1], b[2], b[3])
       // Dispersione cromatica: solo attorno al picco (progress 0,5), mai sul telefono lento.

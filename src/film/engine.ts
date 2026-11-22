@@ -48,7 +48,16 @@ interface Scene {
   on: boolean
   posterLoaded: boolean
   warm: boolean
+  /** Contenitore di poster e video: riceve la spinta in avanti della camera. */
+  media: HTMLElement | null
+  zoom: number
+  /** Avanzamento ammorbidito della spinta (0..1). */
+  zp: number
 }
+
+/** Spinta in avanti della camera: i clip di Wan muovono poco la camera, quindi la scena si avvicina con lo scroll
+ *  (da 1 a 1 + PUSH lungo la scena). La stessa scala va alla luce in WebGL, così alla cucitura non c'è salto. */
+const PUSH = 0.16
 
 export function mountFilm(root: HTMLElement): () => void {
   const track = root.querySelector<HTMLElement>(".film-track")
@@ -96,8 +105,19 @@ export function mountFilm(root: HTMLElement): () => void {
       on: false,
       posterLoaded: !el.querySelector(".scene-poster[data-src]"),
       warm: false,
+      media: el.querySelector<HTMLElement>(".scene-media"),
+      zoom: 1,
+      zp: 0,
     }
   })
+
+  function push(s: Scene, p: number) {
+    if (!s.media) return
+    const z = 1 + PUSH * clamp(p)
+    if (Math.abs(z - s.zoom) < 0.0004) return
+    s.zoom = z
+    s.media.style.transform = `scale(${z.toFixed(4)})`
+  }
   const N = scenes.length
   root.classList.add("film-live")
 
@@ -257,7 +277,7 @@ export function mountFilm(root: HTMLElement): () => void {
     if (!a || !b) return
     seam.upload(0, a)
     seam.upload(1, b)
-    seam.draw(clamp((y - (scenes[k].start - H)) / (2 * H)))
+    seam.draw(clamp((y - (scenes[k].start - H)) / (2 * H)), scenes[k - 1].zoom, scenes[k].zoom)
     if (!seamShown) {
       seamShown = true
       seam.canvas.classList.add("on")
@@ -369,6 +389,13 @@ export function mountFilm(root: HTMLElement): () => void {
     const eps = isMobile() ? 0.02 : 0.008
     let again = false
     for (const s of scenes) {
+      // La spinta della camera segue lo scroll con la stessa morbidezza del video, ma non aspetta il decoder.
+      if (s.visible || Math.abs(s.zp - s.target) > 0.002) {
+        s.zp += (s.target - s.zp) * 0.2
+        if (Math.abs(s.target - s.zp) < 0.0006) s.zp = s.target
+        else again = true
+        push(s, s.zp)
+      }
       const v = s.video
       if (!v || !s.ready) continue
       if (!s.visible && Math.abs(s.cur - s.target) < 0.002) continue
@@ -457,6 +484,7 @@ export function mountFilm(root: HTMLElement): () => void {
       s.title?.classList.remove("is-split")
       s.el.removeAttribute("style")
       s.copy.removeAttribute("style")
+      s.media?.removeAttribute("style")
     }
     seam?.destroy()
     urls.forEach((u) => URL.revokeObjectURL(u))

@@ -15,6 +15,13 @@
     position: absolute;
     inset: 0;
     background: #17123a;
+    /* Spinta in avanti della camera (scale dal motore): stesso centro della luce in WebGL. */
+    transform-origin: 50% 42%;
+    will-change: transform;
+  }
+  :is(html:not(.js), html.film-static) .scene-media {
+    transform: none !important;
+    will-change: auto;
   }
   .scene-media picture {
     display: contents;
@@ -76,6 +83,12 @@
     letter-spacing: 0.005em;
     text-transform: uppercase;
     color: #fff4ef;
+  }
+  /* Le maschere di SplitText tagliavano gli accenti delle maiuscole (È, Ù) sopra l'altezza delle capitali:
+     la maschera si allarga verso l'alto e il margine negativo lascia l'impaginazione com'era. */
+  .scene-title.is-split > div {
+    padding-top: 0.24em;
+    margin-top: -0.24em;
   }
   .scene-body {
     max-width: 38ch;

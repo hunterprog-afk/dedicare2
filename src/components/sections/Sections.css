@@ -29,7 +29,8 @@ html.lenis body {
     font-family: var(--font-title);
     font-weight: 800;
     font-size: var(--t-title-sec);
-    line-height: 0.88;
+    /* 0.94: con 0.88 gli accenti delle maiuscole (PERCHÉ, CITTÀ) toccano la riga sopra */
+    line-height: 0.94;
     letter-spacing: 0.005em;
     text-transform: uppercase;
   }
