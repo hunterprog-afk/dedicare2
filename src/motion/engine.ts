@@ -52,6 +52,7 @@ async function start() {
   const layerO = layers.map((el) => setter(el, "opacity"))
   const lastO = layers.map(() => -1)
   const lastZ = layers.map(() => -1)
+  const disc = $("#disc")
   const moon = $(".disc-moon")
   const sun = $(".disc-sun")
   const indicator = $(".clock-indicator")
@@ -69,6 +70,11 @@ async function start() {
   const sceneEls = $$("[data-phase-switch]", main)
   const photoB = $("#assistenza-24-7 .photo-b")
   const tagA = $("#assistenza-24-7 .photo-a .a247-tag")
+  // Numerale grande del palco 24/7: passa dalle 02:00 alle 04:00 con la stessa dissolvenza della foto.
+  const a247Hour = $("#assistenza-24-7 .a247-hour")
+  const a247Time = a247Hour && $("time", a247Hour)
+  const hourA = a247Time?.textContent ?? ""
+  const hourB = $("#assistenza-24-7 .photo-b .a247-tag")?.textContent?.trim() ?? hourA
   const cambio = $(".cambio-photo")
   const sera = $(".sera-photo")
 
@@ -80,6 +86,7 @@ async function start() {
   const setNowY = now && setter(now, "y", "px")
   const setBO = photoB && setter(photoB, "opacity")
   const setTagA = tagA && setter(tagA, "opacity")
+  const setHourO = a247Hour && setter(a247Hour, "opacity")
   const setCambio = cambio && setter(cambio, "scale")
   const setSera = sera && setter(sera, "scale")
 
@@ -93,7 +100,16 @@ async function start() {
       img.style.willChange = "transform"
       return [{ pic, v0: pic.dataset.light === "day" ? 0.55 : 0.3, setVeil: setter(veil, "opacity"), setScale: setter(img, "scale"), last: -1 }]
     })
-  for (const el of [cambio, sera, moon, sun, indicator, now]) if (el) el.style.willChange = "transform"
+  for (const el of [moon, sun, indicator, now]) if (el) el.style.willChange = "transform"
+  const sky = $("#sky")
+
+  let a247Shown = hourA
+  function showA247Hour(text: string) {
+    if (!a247Time || text === a247Shown) return
+    a247Time.textContent = text
+    a247Time.setAttribute("datetime", text)
+    a247Shown = text
+  }
 
   // ---- Misure (mai durante lo scroll). ----
   let keys: Key[] = [{ y: 0, t: 0 }]
@@ -108,6 +124,8 @@ async function start() {
   let nowH = 17
   let scenes: { top: number; h: number }[] = []
   let inScene = false
+  let discHidden = false
+  let skyHidden = false
   /** y di arrivo per le sezioni con l'ora al centro (cambio turno, sera): lì l'orologio segna l'ora scritta. */
   const centerAt = new Map<string, number>()
   let dirty = true
@@ -144,7 +162,8 @@ async function start() {
     scenes = sceneEls.map((el) => ({ top: Math.floor(el.getBoundingClientRect().top + y0), h: el.offsetHeight }))
     keys = buildKeys(anchors, { H, vh, maxScroll })
     if (moon && sun) gsap.set([moon, sun], { x: innerWidth * 0.89 - 56 })
-    if (!pinOn && photoB) gsap.set([photoB, tagA ?? []], { clearProps: "opacity" })
+    if (!pinOn && photoB) gsap.set([photoB, tagA ?? [], a247Hour ?? []], { clearProps: "opacity" })
+    if (!pinOn) showA247Hour(hourA)
     dirty = true
   }
 
@@ -158,7 +177,7 @@ async function start() {
   let intro: { t: number } | null = null
   let introTween: ReturnType<typeof gsap.to> | null = null
   let booted = false
-  const clock = createClock($$(".clock-time"), fmt(scrollY === 0 ? -10 : 0))
+  const clock = createClock($$(".clock-time"), fmt(scrollY === 0 ? -10 : 0), (el) => mqDesk.matches === !!el.closest(".clock-rail"))
   let shownQ = scrollY === 0 ? -10 : 0
 
   function showClock(next: number, animate: boolean) {
@@ -172,9 +191,13 @@ async function start() {
   // Foto «si accende la luce»: solo quelle vicine allo schermo; all'uscita si scrive lo stato finale.
   const active = new Set<Photo>()
   const leaving = new Set<Photo>()
+  // Letture e scritture separate: nel fotogramma le posizioni si leggono prima di qualsiasi scrittura,
+  // così il calcolo degli stili non viene forzato una seconda volta a metà del lavoro.
+  const readTops = (list: Iterable<Photo>) => [...list].map((ph) => [ph, ph.pic.getBoundingClientRect().top] as const)
   function lightPhotos(list: Iterable<Photo>) {
-    const tops: [Photo, number][] = []
-    for (const ph of list) tops.push([ph, ph.pic.getBoundingClientRect().top])
+    writePhotos(readTops(list))
+  }
+  function writePhotos(tops: readonly (readonly [Photo, number])[]) {
     for (const [ph, top] of tops) {
       const s = clamp(((vh - top) / vh - 0.1) / 0.4)
       if (s === ph.last) continue
@@ -186,6 +209,7 @@ async function start() {
 
   function apply(y: number) {
     const t = timeAt(keys, y)
+    const photoTops = active.size || leaving.size ? readTops([...active, ...leaving]) : null
 
     // Cielo.
     const { o, z } = layerValues(t)
@@ -197,10 +221,21 @@ async function start() {
     // Disco (solo desktop: sotto 1024 è nascosto).
     if (mqDesk.matches && setMoonY && setMoonO && setSunY && setSunO) {
       const [my, mo, sy, so] = discState(t)
-      setMoonY(discCenter(my, vh) - 56)
+      const mc = discCenter(my, vh)
+      const suc = discCenter(sy, vh)
+      setMoonY(mc - 56)
       setMoonO(mo)
-      setSunY(discCenter(sy, vh) - 56)
+      setSunY(suc - 56)
       setSunO(so)
+      // Una scena a tutto schermo che arriva a meno di 12vh dal disco visibile lo spegne (200 ms, in CSS).
+      const m = 56 + 0.12 * vh
+      let hide = false
+      for (const s of scenes) {
+        const a = s.top - y
+        const b = a + s.h
+        if ((mo > 0 && a < mc + m && b > mc - m) || (so > 0 && a < suc + m && b > suc - m)) hide = true
+      }
+      if (hide !== discHidden) disc?.classList.toggle("is-hidden", (discHidden = hide))
     }
 
     // Indicatore sul binario (durante l'intro segue la sua interpolazione).
@@ -215,16 +250,24 @@ async function start() {
       if (near !== m.near) m.el.classList.toggle("is-near", (m.near = near))
     }
     let sc = false
-    for (const s of scenes) if (s.top - y < rail.top + rail.h && s.top + s.h - y > rail.top) sc = true
+    let covered = false
+    for (const s of scenes) {
+      if (s.top - y < rail.top + rail.h && s.top + s.h - y > rail.top) sc = true
+      // Il palco (fermo o no) copre tutto lo schermo: il cielo dietro non si vede e non va composto.
+      if (s.top - y <= 0 && s.top + s.h - y >= vh) covered = true
+    }
+    if (covered !== skyHidden) sky?.classList.toggle("is-covered", (skyHidden = covered))
     if (sc !== inScene) {
       inScene = sc
       railEl.toggleAttribute("data-scene", sc)
     }
 
-    // Fasi: dark/light nei due soli punti, D a quattro fasi.
-    const ph = uiPhase(t)
+    // Fasi: dark/light nei due soli punti, D a quattro fasi. Senza palco fermo (telefono, schermi bassi) una scena
+    // a tutto schermo sotto l'header tiene l'interfaccia scura finché il suo fondo non è passato sotto l'header.
+    let ph: string = uiPhase(t)
+    let dp: string = dPhase(t)
+    if (!pinOn) for (const s of scenes) if (s.top - y < H && s.top + s.h - y > H) [ph, dp] = ["dark", "notte"]
     if (ph !== phase) root.dataset.phase = phase = ph
-    const dp = dPhase(t)
     if (dp !== dphase) root.dataset.dphase = dphase = dp
 
     // Orologio a passi di 10 minuti; la D respira a ogni ora-capitolo attraversata.
@@ -244,6 +287,9 @@ async function start() {
       const b = clamp((clamp((y - pin.s) / (pin.e - pin.s)) - 0.4) / 0.2)
       setBO(b)
       setTagA?.(1 - b)
+      // Il numerale si spegne nella prima metà della dissolvenza e si riaccende con l'ora della seconda foto.
+      setHourO?.(b < 0.5 ? 1 - 2 * b : 2 * b - 1)
+      showA247Hour(b < 0.5 ? hourA : hourB)
     }
     if (setCambio) {
       const p = pinOn ? (y - cambioM.top) / (cambioM.h - vh || 1) : (y - cambioM.top + vh) / (cambioM.h + vh)
@@ -252,8 +298,8 @@ async function start() {
     if (setSera) setSera(1.06 - 0.06 * clamp((y - seraM.top + vh) / (seraM.h + vh)))
 
     // Foto.
-    if (active.size || leaving.size) {
-      lightPhotos([...active, ...leaving])
+    if (photoTops) {
+      writePhotos(photoTops)
       leaving.clear()
     }
 
@@ -312,6 +358,32 @@ async function start() {
     { rootMargin: "25% 0px 25% 0px" },
   )
   for (const ph of photos) io.observe(ph.pic)
+
+  // Scene a tutto schermo: a uno schermo di distanza la foto si decodifica (una volta) e riceve il suo strato;
+  // all'uscita lo strato si toglie, così fuori campo non resta una superficie da 1440 × 900 in memoria.
+  const stagePhotos = new Map<Element, HTMLElement>()
+  for (const ph of [cambio, sera]) {
+    const sec = ph?.closest("section")
+    if (ph && sec) stagePhotos.set(sec, ph)
+  }
+  const decoded = new WeakSet<HTMLImageElement>()
+  const near = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        const ph = stagePhotos.get(e.target)
+        if (!ph) continue
+        ph.style.willChange = e.isIntersecting ? "transform" : ""
+        const img = $<HTMLImageElement>("img", ph)
+        if (e.isIntersecting && img && !decoded.has(img)) {
+          decoded.add(img)
+          img.loading = "eager"
+          void img.decode?.().catch(() => {})
+        }
+      }
+    },
+    { rootMargin: "100% 0px 100% 0px" },
+  )
+  for (const sec of stagePhotos.keys()) near.observe(sec)
 
   // Ingressi: chi è già sopra il 75% dello schermo è subito «dentro».
   const reveal = new IntersectionObserver(
@@ -412,6 +484,15 @@ async function start() {
       // Se il fuoco è già dentro la sezione (per esempio sul campo Nome dopo «Richiedi un preventivo») non si sposta.
       if (!target.contains(document.activeElement) || document.activeElement === document.body) target.focus({ preventScroll: true })
     })
+  })
+
+  // Navigazione nello stesso documento verso #cambio-turno o #sera (hash scritto a mano, location.hash): il salto nativo
+  // porta la cima sotto l'header, ma lì l'ora è al centro della sezione.
+  addEventListener("hashchange", () => {
+    const id = safeDecode(location.hash.slice(1))
+    const at = centerAt.get(id)
+    const el = at === undefined ? null : document.getElementById(id)
+    if (el && Math.abs(el.getBoundingClientRect().top - H) < 4) scrollTo(0, at!)
   })
 
   // ---- Quando rimisurare. ----

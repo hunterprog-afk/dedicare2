@@ -5,10 +5,16 @@ import italicUrl from "@fonts/literata/files/literata-latin-opsz-italic.woff2?ur
 
 const root = document.documentElement
 
-// Il corsivo di Literata pesa 113 KB e serve solo a testi sotto la prima schermata: si scarica quando uno sta per entrare in vista.
+// Il corsivo di Literata pesa 113 KB e serve solo a testi sotto la prima schermata: si scarica quando uno sta per entrare in vista
+// oppure, prima, appena la pagina è ferma dopo il caricamento. Arrivato a metà scroll costringeva a rifare l'impaginazione
+// dell'intero documento in un solo fotogramma (76 ms con la CPU a 4×); a pagina ferma lo stesso lavoro non si vede.
+// Con «risparmio dati» attivo resta solo il caricamento su richiesta.
 const italicTargets = document.querySelectorAll(".hour-label, .passi-chiusura, .form-title, .footer-slogan")
 if (italicTargets.length && "FontFace" in window) {
+  let asked = false
   const loadItalic = () => {
+    if (asked) return
+    asked = true
     const face = new FontFace("Literata", `url(${italicUrl}) format("woff2")`, {
       style: "italic",
       weight: "200 900",
@@ -30,6 +36,12 @@ if (italicTargets.length && "FontFace" in window) {
     italicTargets.forEach((el) => io.observe(el))
   } else {
     loadItalic()
+  }
+  const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+  if (!saveData) {
+    const idle = () => ("requestIdleCallback" in window ? requestIdleCallback(loadItalic, { timeout: 4000 }) : setTimeout(loadItalic, 1500))
+    if (document.readyState === "complete") idle()
+    else addEventListener("load", idle, { once: true })
   }
 }
 const header = document.querySelector<HTMLElement>(".site-header")
@@ -63,6 +75,8 @@ sheet?.addEventListener("click", (e) => {
 })
 
 // Senza movimento: l'ora è quella stampata sulla sezione la cui cima ha passato metà schermo, l'indicatore salta.
+// La fase dell'interfaccia (header, binario, barra) segue invece la sezione che sta sotto l'header: una scena scura
+// a tutto schermo tiene l'header scuro finché il suo fondo non è passato sotto l'header.
 const rail = document.querySelector(".clock-rail")
 if (rail && matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
   root.classList.add("rm")
@@ -85,9 +99,6 @@ if (rail && matchMedia("(prefers-reduced-motion: reduce)").matches && "Intersect
     const label = s.dataset.labelHour ?? "22:00"
     const [h, m] = label.split(":").map(Number)
     const t = s.dataset.hour === "1440" ? 1440 : (h * 60 + m + 120) % 1440
-    const tone = s.dataset.tone
-    root.dataset.phase = tone === "dark" ? "dark" : "light"
-    root.dataset.dphase = tone === "dark" ? "notte" : tone === "light" ? "mattino" : "tramonto"
     times.forEach((el) => (el.textContent = label))
     pill?.setAttribute("aria-label", aria.replace(/\d\d:\d\d/, label))
     const track = rail.querySelector(".clock-line")?.getBoundingClientRect()
@@ -103,12 +114,37 @@ if (rail && matchMedia("(prefers-reduced-motion: reduce)").matches && "Intersect
   }
   // La linea è una fascia di 1 px a metà schermo; si ricrea quando cambia la finestra.
   // Le scene a tutto schermo spengono i capitoli finché toccano la fascia del binario.
+  const under = new Set<Element>()
+  let head = 72
+  const tone = () => {
+    let s: HTMLElement | undefined
+    for (const x of secs) if (under.has(x) && x.getBoundingClientRect().top <= head + 0.5) s = x
+    if (!s) return
+    const t = s.dataset.tone
+    root.dataset.phase = t === "dark" ? "dark" : "light"
+    root.dataset.dphase = t === "dark" ? "notte" : t === "light" ? "mattino" : "tramonto"
+  }
   let io: IntersectionObserver | undefined
   let so: IntersectionObserver | undefined
+  let ho: IntersectionObserver | undefined
   const watch = () => {
     io?.disconnect()
     so?.disconnect()
+    ho?.disconnect()
     seen.clear()
+    under.clear()
+    head = innerWidth >= 1024 ? 72 : 60
+    ho = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) under.add(e.target)
+          else under.delete(e.target)
+        }
+        tone()
+      },
+      { rootMargin: `-${head}px 0px -${Math.max(0, innerHeight - head - 1)}px 0px` },
+    )
+    secs.forEach((s) => ho!.observe(s))
     line = Math.round(innerHeight / 2)
     const band = rail.querySelector(".clock-line")?.getBoundingClientRect()
     if (band && band.height) {

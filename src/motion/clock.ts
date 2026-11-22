@@ -42,7 +42,9 @@ export interface Clock {
   set(text: string, animate: boolean): void
 }
 
-export function createClock(targets: readonly HTMLElement[], initial: string): Clock {
+/** `shown(el)`: falso per l'orologio nascosto a quella larghezza (pillola su desktop, binario sul telefono):
+ *  lì le cifre cambiano senza rotolare, così nessuna animazione gira su un elemento che non si vede. */
+export function createClock(targets: readonly HTMLElement[], initial: string, shown: (el: HTMLElement) => boolean = () => true): Clock {
   let current = initial
   const groups: Win[][] = targets.map((el) => {
     el.textContent = ""
@@ -58,16 +60,17 @@ export function createClock(targets: readonly HTMLElement[], initial: string): C
   return {
     set(text, animate) {
       if (text === current) return
-      for (const wins of groups) {
+      groups.forEach((wins, g) => {
+        const rolls = animate && shown(targets[g])
         for (let i = 0; i < wins.length; i++) {
           if (text[i] === current[i]) continue
-          if (animate) roll(wins[i], text[i])
+          if (rolls) roll(wins[i], text[i])
           else {
             settle(wins[i])
             wins[i].el.firstElementChild!.textContent = text[i]
           }
         }
-      }
+      })
       current = text
     },
   }
