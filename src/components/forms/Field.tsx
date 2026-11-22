@@ -1,5 +1,5 @@
 import { useId, type ReactNode } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import type { FieldError } from "@/lib/validation"
 import "./forms.css"
 

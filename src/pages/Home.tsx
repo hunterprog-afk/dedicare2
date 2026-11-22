@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import { Sky } from "@/components/shell/Sky"
 import { Disc } from "@/components/shell/Disc"
 import { Header } from "@/components/shell/Header"

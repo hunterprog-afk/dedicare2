@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import { INDEX_ENTRIES, formatHour } from "@/content/hours"
 import { XIcon } from "../icons"
 import { LangSwitch } from "./LangSwitch"

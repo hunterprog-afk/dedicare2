@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import { HourLabel } from "../HourLabel"
 import { SECTIONS, sectionAttrs } from "@/content/hours"
 import { cn } from "@/lib/cn"

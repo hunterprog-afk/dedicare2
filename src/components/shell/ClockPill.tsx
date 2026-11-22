@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import { MoonIcon, SunIcon } from "../icons"
 
 /** Pillola dell'orologio (telefono): apre il foglio dell'indice con il `popover` nativo. */

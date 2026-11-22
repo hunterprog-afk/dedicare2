@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import { cn } from "@/lib/cn"
 
 /** Centri delle 11 finestrelle, nello stesso ordine di `aree.comuni` (proiezione semplificata, 18 px per km). */

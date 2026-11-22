@@ -1,7 +1,10 @@
+import { createElement } from "react"
+import { render } from "@testing-library/react"
 import { describe, expect, it } from "vitest"
 import itJson from "./locales/it.json"
 import enJson from "./locales/en.json"
 import { createI18n } from "./index"
+import { I18nextProvider, Trans } from "./react"
 
 type Json = string | number | boolean | null | Json[] | { [k: string]: Json }
 
@@ -45,5 +48,33 @@ describe("testi IT/EN", () => {
     expect(createI18n("it").t("hero.h1_a")).toBe("Assistenza a casa,")
     expect(createI18n("en").t("hero.h1_a")).toBe("Home care,")
     expect(createI18n("en").t("servizi.items", { returnObjects: true })).toHaveProperty("oss")
+  })
+
+  it("sostituisce {{variabile}} e conserva i testi senza variabili", () => {
+    const { t } = createI18n("it")
+    expect(t("form.field_too_long", { max: 100 })).toBe("Il testo è troppo lungo: al massimo 100 caratteri.")
+    expect(t("hero.h1_a", { max: 1 })).toBe("Assistenza a casa,")
+  })
+
+  it("una chiave mancante fa fallire, nei test e nel pre-render", () => {
+    expect(() => createI18n("it").t("non.esiste")).toThrow(/non\.esiste/)
+  })
+
+  it("Trans mette l'elemento al posto del tag, in entrambe le lingue", () => {
+    for (const [lang, text] of [
+      ["it", "informativa privacy"],
+      ["en", "Privacy Policy"],
+    ] as const) {
+      const { container } = render(
+        createElement(I18nextProvider, {
+          i18n: createI18n(lang),
+          children: createElement(Trans, { i18nKey: "contactform.informativa", components: { privacyLink: createElement("a", { href: "/privacy/" }) } }),
+        }),
+      )
+      const link = container.querySelector("a")
+      expect(link).toHaveAttribute("href", "/privacy/")
+      expect(link?.textContent).toBe(text)
+      expect(container.textContent).not.toMatch(/[<>]/)
+    }
   })
 })

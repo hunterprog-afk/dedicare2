@@ -1,9 +1,8 @@
 import { Fragment, type ReactNode } from "react"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import { Header } from "../shell/Header"
 import { Footer } from "../shell/Footer"
 import { cookiePolicy, noteLegali, privacyPolicy } from "@/content/legal"
-import "./LegalPage.css"
 
 export type LegalKind = "privacy" | "cookie" | "note-legali"
 

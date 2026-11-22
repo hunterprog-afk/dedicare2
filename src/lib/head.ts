@@ -1,4 +1,4 @@
-import type { TFunction } from "i18next"
+import type { TFunction } from "@/i18n/react"
 import generated from "@/content/images.generated.json"
 import { SITE_URL } from "@/content/contacts"
 import { getRoute, isHome, type RouteId } from "@/routes"

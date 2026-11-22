@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 
 /** Selettore IT/EN: due link testuali, la lingua corrente è `aria-current="page"`. Niente bandiere. */
 export function LangSwitch({ className }: { className?: string }) {

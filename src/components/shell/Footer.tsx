@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import { Logo } from "../brand/Logo"
 import { LangSwitch } from "./LangSwitch"
 import { EMAIL, EMAIL_HREF, PHONE_DISPLAY, PHONE_HREF, whatsappHref } from "@/content/contacts"

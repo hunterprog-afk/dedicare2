@@ -1,5 +1,5 @@
 import type { ReactElement } from "react"
-import { I18nextProvider } from "react-i18next"
+import { I18nextProvider } from "@/i18n/react"
 import { render } from "@testing-library/react"
 import { createI18n } from "@/i18n"
 import type { Lang } from "@/routes"

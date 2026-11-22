@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "@/i18n/react"
 import geo from "../brand/soglia-geometria.json"
 import { INDEX_ENTRIES, formatHour } from "@/content/hours"
 

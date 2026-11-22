@@ -1,14 +1,19 @@
-import { I18nextProvider } from "react-i18next"
-import type { i18n } from "i18next"
+import type { ComponentType } from "react"
+import { I18nextProvider, type I18n } from "@/i18n/react"
 import { isHome, type RouteId } from "@/routes"
 import { Home } from "@/pages/Home"
-import { LegalPage } from "@/components/legal/LegalPage"
+import type { LegalKind } from "@/components/legal/LegalPage"
 
-/** L'istanza i18n arriva da fuori: il server e i test usano entrambe le lingue, il client solo la sua. */
-export function App({ route, i18n }: { route: RouteId; i18n: i18n }) {
+export type LegalComponent = ComponentType<{ kind: LegalKind }>
+
+/**
+ * L'istanza i18n arriva da fuori: il server e i test usano entrambe le lingue, il client solo la sua.
+ * Le pagine legali arrivano da fuori per la stessa ragione: il client le scarica solo sulle loro rotte.
+ */
+export function App({ route, i18n, Legal }: { route: RouteId; i18n: I18n; Legal?: LegalComponent }) {
   return (
     <I18nextProvider i18n={i18n}>
-      {isHome(route) ? <Home /> : <LegalPage kind={route as "privacy" | "cookie" | "note-legali"} />}
+      {isHome(route) || !Legal ? <Home /> : <Legal kind={route as LegalKind} />}
     </I18nextProvider>
   )
 }

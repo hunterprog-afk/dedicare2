@@ -1,5 +1,5 @@
 import { useId, useRef, useState, type ChangeEvent, type FormEvent } from "react"
-import { Trans, useTranslation } from "react-i18next"
+import { Trans, useTranslation } from "@/i18n/react"
 import { Button } from "../Button"
 import { Field } from "./Field"
 import { useForm } from "./useForm"
