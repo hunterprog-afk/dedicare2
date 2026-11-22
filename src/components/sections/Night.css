@@ -2,7 +2,7 @@
   /* ---- A chi ---- */
   .achi-photo .pic {
     aspect-ratio: auto !important;
-    height: 420px;
+    height: 220px;
   }
   .achi-photo {
     order: -1;
@@ -10,7 +10,7 @@
   }
   .achi-row {
     position: relative;
-    padding: 24px 0;
+    padding: 20px 0;
     border-top: 1px solid var(--line);
   }
   .achi-row::before {
@@ -62,8 +62,23 @@
       padding-top: 96px;
     }
   }
+  /* Le ore sono una giornata tipo, non gli orari dei servizi: lo dice la riga sopra l'elenco. */
+  .orario-note {
+    margin: 40px 0 8px;
+    max-width: 64ch;
+    font-size: 19px;
+    line-height: 1.5;
+    color: #a99bf0;
+    text-wrap: pretty;
+  }
+  @media (min-width: 1024px) {
+    .orario-note {
+      margin-top: 56px;
+    }
+  }
   .orario {
     list-style: none;
+    margin-top: 0;
     margin-bottom: 0;
     padding: 0;
   }
@@ -106,7 +121,7 @@
 
   /* ---- Assistenza 24/7 ---- */
   .a247 {
-    padding-block: clamp(96px, calc(72.23px + 6.0952vw), 160px);
+    padding-block: var(--section-pad);
   }
   .a247-photos {
     display: grid;
@@ -121,7 +136,7 @@
   }
   .a247-photo .pic {
     aspect-ratio: auto !important;
-    height: 260px;
+    height: 200px;
   }
   .a247-hour {
     color: #ffd98a;
@@ -139,12 +154,12 @@
   /* Palco fermo: solo con il motore di movimento, schermo largo e alto almeno 700 px. */
   @media (min-width: 1024px) and (min-height: 700px) {
     html.sky-on .a247 {
-      height: 300vh;
+      height: 235vh;
       padding-block: 0;
     }
     html.sky-on .a247-stage {
       position: sticky;
-      top: 0;
+      top: min(0px, calc(100vh - var(--a247-h, 0px) - 24px));
       min-height: 100vh;
       align-items: center;
       padding-top: 112px;
@@ -203,8 +218,8 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 24px;
-    padding: 20px 0;
-    min-height: 64px;
+    padding: 14px 0;
+    min-height: 60px;
   }
   .faq-q {
     font-size: var(--text-faq-q);
@@ -254,9 +269,25 @@
   .lavora-photo {
     margin-bottom: 40px;
   }
+  @media (min-width: 1024px) {
+    .lavora-reasons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 32px;
+    }
+    .lavora-reasons li:last-child {
+      border-bottom: 0;
+    }
+    .lavora-reasons li:nth-last-child(2) {
+      border-bottom: 1px solid var(--line);
+    }
+    .lavora-reasons li:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+  }
   .lavora-photo .pic {
     aspect-ratio: auto !important;
-    height: 280px;
+    height: 160px;
   }
   .lavora-reasons {
     margin: 0;
@@ -264,7 +295,7 @@
     list-style: none;
   }
   .lavora-reasons li {
-    padding: 20px 0;
+    padding: 16px 0;
     border-top: 1px solid var(--line);
   }
   .lavora-reasons li:last-child {
@@ -279,6 +310,41 @@
     max-width: 64ch;
     font-size: var(--text-body);
     line-height: 1.6;
+  }
+  /* Candidatura: sul telefono è un `<details>` chiuso; da 1024 px il bottone sparisce e il foglio è sempre aperto. */
+  .cv-details > summary {
+    list-style: none;
+  }
+  .cv-details > summary::-webkit-details-marker {
+    display: none;
+  }
+  .btn.cv-summary {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .cv-summary svg {
+    transition: transform 200ms var(--ease-out);
+  }
+  .cv-details[open] > .cv-summary svg,
+  .cv-details[open] > .cv-summary:hover svg {
+    transform: rotate(45deg);
+  }
+  .cv-details > .sheet {
+    margin-top: 16px;
+  }
+  .cv-details .form-title {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .cv-details > summary {
+      display: none;
+    }
+    .cv-details > .sheet {
+      margin-top: 0;
+    }
+    .cv-details .form-title {
+      display: block;
+    }
   }
   @media (min-width: 1024px) {
     .lavora-photo {
@@ -295,9 +361,9 @@
   /* ---- Contatti ---- */
   .d-window {
     position: relative;
-    width: 187px;
-    height: 290px;
-    margin: 0 auto 40px;
+    width: 150px;
+    height: 232px;
+    margin: 0 auto 24px;
     clip-path: url(#d-window);
   }
   .d-window .pic {

@@ -1,7 +1,9 @@
+import { useEffect, useRef } from "react"
 import { useTranslation } from "@/i18n/react"
 import { HourLabel } from "../HourLabel"
 import { Picture } from "../Picture"
 import { Sheet } from "../Sheet"
+import { PlusIcon } from "../icons"
 import { CurriculumForm } from "../forms/CurriculumForm"
 import { SECTIONS, sectionAttrs } from "@/content/hours"
 import "./Common.css"
@@ -16,6 +18,22 @@ interface Reason {
 export function LavoraConNoi() {
   const { t } = useTranslation()
   const reasons = t("curriculum.reasons", { returnObjects: true }) as Reason[]
+  const detailsRef = useRef<HTMLDetailsElement>(null)
+
+  // Sul telefono il modulo sta chiuso dietro «Candidati ora» (i quattro motivi restano in vista); da 1024 px è sempre aperto.
+  // Il pre-render lo lascia aperto: senza JavaScript il modulo è comunque raggiungibile.
+  useEffect(() => {
+    const el = detailsRef.current
+    if (!el || typeof window.matchMedia !== "function") return
+    const mq = window.matchMedia("(min-width: 1024px)")
+    el.open = mq.matches
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) el.open = true
+    }
+    mq.addEventListener("change", onChange)
+    return () => mq.removeEventListener("change", onChange)
+  }, [])
+
   return (
     <section {...sectionAttrs("lavora-con-noi")} className="section">
       <div className="wrap grid12 items-start">
@@ -36,9 +54,15 @@ export function LavoraConNoi() {
               </li>
             ))}
           </ul>
-          <Sheet className="sec-head-gap">
-            <CurriculumForm />
-          </Sheet>
+          <details ref={detailsRef} className="cv-details sec-head-gap" open>
+            <summary className="btn cv-summary">
+              <span>{t("curriculum.form_title")}</span>
+              <PlusIcon />
+            </summary>
+            <Sheet>
+              <CurriculumForm />
+            </Sheet>
+          </details>
         </div>
       </div>
     </section>

@@ -16,7 +16,7 @@ export function ComeFunziona() {
   return (
     <section {...sectionAttrs("come-funziona")} className="section sec-clip">
       <span id="processo" aria-hidden="true" />
-      <div className="wrap grid12 items-end">
+      <div className="wrap grid12 items-end lg:items-stretch">
         <div className="col-span-full lg:col-[1/13]">
           <HourLabel time={SECTIONS["come-funziona"].label} size="s" />
           <p className="t-eyebrow">{t("processo.eyebrow")}</p>
@@ -33,7 +33,9 @@ export function ComeFunziona() {
             </li>
           ))}
         </ol>
-        <p className="passi-chiusura t-h3 col-span-full lg:col-[1/6]">{t("processo.chiusura")}</p>
+        <div className="passi-chiusura-col col-span-full lg:col-[1/6]">
+          <p className="passi-chiusura">{t("processo.chiusura")}</p>
+        </div>
         <div className="passi-foto col-span-full lg:col-[6/13]">
           <HourLabel time="16:00" size="s" />
           <div className="bleed-photo">

@@ -3,27 +3,48 @@
   .sec-clip {
     overflow-x: clip;
   }
-  .t-h2,
   .t-h3,
   .t-display {
     overflow-wrap: break-word;
   }
+  /* I titoli di sezione non spezzano mai una parola a metà: le parole lunghe hanno il loro punto di sillabazione (&shy;). */
+  .t-h2 {
+    overflow-wrap: normal;
+    hyphens: manual;
+  }
+  /* Dentro i fogli il titolo è più piccolo: sta in due righe anche con una parola lunga. */
+  @media (min-width: 1024px) {
+    .sheet .t-h2 {
+      font-size: clamp(40px, 3.1vw, 48px);
+      hyphens: none;
+    }
+  }
+  .sec-intro,
+  .sec-body {
+    text-wrap: pretty;
+  }
   .sec-intro {
-    margin-top: 24px;
+    margin-top: 16px;
     max-width: 64ch;
   }
   .sec-body {
-    margin-top: 24px;
+    margin-top: 16px;
     max-width: 64ch;
     font-size: var(--text-body);
     line-height: 1.6;
   }
   .sec-head-gap {
-    margin-top: 40px;
+    margin-top: 28px;
+  }
+  @media (min-width: 1024px) {
+    .sec-intro,
+    .sec-body {
+      margin-top: 24px;
+    }
   }
   @media (min-width: 1024px) {
     .sec-head-gap {
-      margin-top: 64px;
+      margin-top: 48px;
     }
   }
 
@@ -154,7 +175,7 @@
   .bleed-photo .pic {
     border-radius: 0;
     aspect-ratio: auto !important;
-    height: 280px;
+    height: 220px;
   }
   .bleed-photo {
     margin-inline: calc(-1 * var(--wrap-l));
@@ -174,11 +195,11 @@
   /* Fotografie con altezza fissa sul telefono. */
   .pic-h260 .pic {
     aspect-ratio: auto !important;
-    height: 260px;
+    height: 200px;
   }
   .pic-h233 .pic {
     aspect-ratio: auto !important;
-    height: 233px;
+    height: 180px;
   }
   @media (min-width: 1024px) {
     .pic-h260 .pic,
@@ -191,9 +212,25 @@
   /* Palco a tutto schermo (cambio turno e sera): foto, velo basso e testo in basso a sinistra. */
   .stage-full {
     position: relative;
-    height: 100svh;
-    min-height: 560px;
+    isolation: isolate;
+    height: 72svh;
+    min-height: 520px;
     overflow: hidden;
+  }
+  /* Velatura indaco: è un elemento della scena, presente anche senza foto, sopra foto e segnaposto e sotto il testo.
+     Con il pixel più chiaro possibile (bianco) dietro il testo il contrasto resta sopra 7:1. */
+  .stage-full::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to top,
+      rgb(35 28 77 / 0.88) 0%,
+      rgb(35 28 77 / 0.8) 42%,
+      rgb(35 28 77 / 0) 78%
+    );
   }
   .stage-full .stage-photo {
     position: absolute;
@@ -209,22 +246,13 @@
     left: 20px;
     right: 20px;
     bottom: var(--stage-b);
+    z-index: 2;
     color: #fff4ef;
-    isolation: isolate;
   }
-  /* Velatura indaco dietro il testo, qualunque sia la foto: al 74% resta sopra 4,5:1 anche sul pixel più chiaro (bianco puro, 6,2:1). */
-  .stage-text::before {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    pointer-events: none;
-    top: -160px;
-    bottom: calc(-1 * var(--stage-b));
-    left: -100vw;
-    right: -100vw;
-    background: linear-gradient(180deg, rgb(35 28 77 / 0) 0, rgb(35 28 77 / 0.74) 160px);
-  }
+  /* Dentro le scene il numerale scende a 64 px: il blocco resta nella parte bassa dello schermo. */
   .stage-text .hour-label {
+    margin-bottom: 8px;
+    font-size: 64px;
     color: #fff4ef;
   }
   .stage-text h2,
@@ -232,26 +260,35 @@
     color: #fff4ef;
   }
   .stage-text .stage-body {
-    margin-top: 24px;
+    margin-top: 12px;
+  }
+  /* Sul telefono il blocco di testo è più alto: la velatura sale con lui. */
+  @media (max-width: 1023px) {
+    .stage-full::before {
+      background: linear-gradient(to top, rgb(35 28 77 / 0.9) 0%, rgb(35 28 77 / 0.82) 60%, rgb(35 28 77 / 0) 94%);
+    }
   }
   @media (min-width: 1024px) {
     .stage-text {
-      --stage-b: 14vh;
-      left: 7vw;
+      --stage-b: 12vh;
+      left: var(--wrap-l);
       right: auto;
       bottom: var(--stage-b);
-      width: min(720px, 50vw);
+      width: min(920px, calc(80vw - var(--wrap-l)));
+    }
+    .stage-text .t-h2 {
+      font-size: clamp(34px, calc(27.31px + 1.7143vw), 46px);
     }
   }
   /* Con il motore di movimento e uno schermo abbastanza alto, il palco resta fermo per la corsa della sezione. */
   @media (min-width: 1024px) and (min-height: 700px) {
     html.sky-on .stage-run {
-      height: 200vh;
+      height: 150vh;
       min-height: 0;
       overflow: visible;
     }
     html.sky-on .stage-run.stage-run-sera {
-      height: 120vh;
+      height: 110vh;
     }
     html.sky-on .stage-run .stage-full {
       position: sticky;

@@ -23,7 +23,12 @@
   }
   .footer-grid {
     display: grid;
-    gap: 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+  .footer-brand,
+  .footer-copyright {
+    grid-column: 1 / -1;
   }
   .footer-brand {
     display: grid;
@@ -58,6 +63,10 @@
     gap: 8px;
     align-content: start;
   }
+  /* Il selettore di lingua parte dallo stesso filo dei link sopra: il bersaglio resta da 48 px, il testo si allinea a sinistra. */
+  .site-footer .lang-switch a:first-child {
+    justify-items: start;
+  }
   .footer-copyright {
     margin: 0;
     padding-top: 24px;
@@ -84,7 +93,11 @@
     .footer-legal {
       grid-column: 10 / span 3;
     }
-    .footer-copyright {
+    /* Il selettore di lingua parte dallo stesso filo dei link sopra: il bersaglio resta da 48 px, il testo si allinea a sinistra. */
+  .site-footer .lang-switch a:first-child {
+    justify-items: start;
+  }
+  .footer-copyright {
       grid-column: 1 / -1;
     }
   }

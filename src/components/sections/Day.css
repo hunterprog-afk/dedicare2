@@ -68,6 +68,7 @@
   }
   @media (min-width: 1024px) {
     .multi-sheet {
+      width: min(600px, 100%);
       margin-top: -139px;
     }
   }
@@ -82,11 +83,11 @@
   .perche-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 28px;
   }
   .perche-item {
     position: relative;
-    padding-top: 24px;
+    padding-top: 20px;
   }
   .perche-item::before {
     content: "";
@@ -131,7 +132,7 @@
   .passi li {
     display: grid;
     grid-template-columns: 56px 1fr;
-    padding: 32px 0;
+    padding: 24px 0;
     border-top: 1px solid var(--line);
   }
   @media (min-width: 640px) {
@@ -152,20 +153,34 @@
     color: #231c4d;
     padding-top: 6px;
   }
+  .passi-chiusura-col {
+    margin-top: 64px;
+  }
   .passi-chiusura {
-    margin: 64px 0 0;
+    margin: 0;
+    font-family: var(--font-serif);
     font-style: italic;
+    font-weight: 440;
+    font-size: var(--text-h3);
+    line-height: 1.2;
     color: #231c4d;
+    text-wrap: balance;
   }
   .passi-foto {
     margin-top: 24px;
   }
   @media (min-width: 1024px) {
-    .passi-chiusura {
-      margin-top: 96px;
-    }
+    .passi-chiusura-col,
     .passi-foto {
-      margin-top: 96px;
+      margin-top: 80px;
+    }
+    /* La frase accompagna la foto per tutta la sua altezza: ferma a metà schermo mentre la foto scorre. */
+    .passi-chiusura {
+      position: sticky;
+      top: 45vh;
+      max-width: 14em;
+      font-size: 40px;
+      line-height: 1.15;
     }
   }
 
@@ -194,35 +209,66 @@
   .mappa-box {
     margin-top: 48px;
   }
+  .mappa-wrap {
+    position: relative;
+    width: min(350px, 100%);
+    margin-inline: auto;
+  }
   .mappa {
     display: block;
-    width: min(350px, 100%);
+    width: 100%;
     height: auto;
-    margin-inline: auto;
   }
   @media (min-width: 1024px) {
     .mappa-box {
       margin-top: 0;
     }
-    .mappa {
+    .mappa-wrap {
       width: min(560px, 100%);
       margin-inline: 0;
     }
   }
+  /* Ogni comune è una finestra: bordo fisso da 1,5 px, accesa (oro) quando la mappa entra nello schermo. */
   .map-window {
     fill: #ffd98a;
     stroke: #231c4d;
-    stroke-width: 1;
+    stroke-width: 1.5;
     transform-box: fill-box;
     transform-origin: center;
     transition: transform 200ms var(--ease-out);
   }
   .map-window.is-active {
-    transform: scale(1.6);
+    transform: scale(1.5);
   }
   html.motion .map-window {
     fill: #5a5482;
-    stroke: none;
+  }
+  .map-label {
+    position: absolute;
+    font: 400 13px/1.2 var(--font-sans);
+    white-space: nowrap;
+    color: #231c4d;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms var(--ease-out);
+  }
+  .map-label.is-shown {
+    opacity: 1;
+  }
+  .map-label.is-sede {
+    font-weight: 700;
+  }
+  .map-label-r {
+    transform: translate(11px, -50%);
+  }
+  .map-label-l {
+    transform: translate(calc(-100% - 11px), -50%);
+  }
+  .map-label-t {
+    transform: translate(-50%, calc(-100% - 10px));
+  }
+  .map-label-b {
+    transform: translate(-50%, 10px);
   }
   html.motion .mappa.is-lit .map-window {
     fill: #ffd98a;
@@ -239,8 +285,8 @@
   .tariffe-factors {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
-    margin-top: 40px;
+    gap: 20px;
+    margin-top: 28px;
   }
   .tariffe-factors h3 {
     margin: 0;
@@ -251,7 +297,7 @@
     line-height: 1.6;
   }
   .tariffe-cta {
-    margin-top: 40px;
+    margin-top: 28px;
   }
   @media (min-width: 1024px) {
     .tariffe-sheet {

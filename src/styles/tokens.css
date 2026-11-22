@@ -100,6 +100,8 @@
     --ease-phase: cubic-bezier(0.4, 0, 0.2, 1);
     --header-h: 60px;
     --wrap-l: 20px;
+    /* Respiro verticale delle sezioni: 56 px a 390, 96 px da 1440 in su. */
+    --section-pad: clamp(56px, calc(41.7px + 3.8095vw), 96px);
   }
   @media (min-width: 640px) {
     :root {
@@ -109,7 +111,7 @@
   @media (min-width: 1024px) {
     :root {
       --header-h: 72px;
-      --wrap-l: max(112px, calc((80vw - 1200px) / 2 + 48px));
+      --wrap-l: max(120px, calc((80vw - 1200px) / 2 + 56px));
       --wrap-w: min(1200px, calc(80vw - var(--wrap-l)));
     }
   }
@@ -160,7 +162,7 @@
      di fase ricalcola gli stili di quei pezzi e non dell'intero documento. */
   html[data-phase="dark"] :is(.site-header, .clock-rail, .mobile-bar) {
     --ui-ink: #fff4ef;
-    --ui-bg: rgb(35 28 77 / 0.94);
+    --ui-bg: rgb(35 28 77 / 1);
     --ui-line: rgb(255 244 239 / 0.35);
     --ui-btn-bg: #ffd98a;
     --ui-btn-ink: #231c4d;
@@ -169,7 +171,7 @@
   }
   html[data-phase="light"] :is(.site-header, .clock-rail, .mobile-bar) {
     --ui-ink: #231c4d;
-    --ui-bg: rgb(255 244 239 / 0.94);
+    --ui-bg: rgb(255 244 239 / 1);
     --ui-line: rgb(35 28 77 / 0.35);
     --ui-btn-bg: #231c4d;
     --ui-btn-ink: #fff4ef;
@@ -242,7 +244,7 @@
   }
 
   .section {
-    padding-block: clamp(96px, calc(72.23px + 6.0952vw), 160px);
+    padding-block: var(--section-pad);
   }
 
   /* Ruoli tipografici. */
