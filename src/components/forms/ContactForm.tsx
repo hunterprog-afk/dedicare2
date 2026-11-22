@@ -76,7 +76,7 @@ export function ContactForm() {
   const alertText = invalid ? t("contactform.error_required") : status.phase === "error" ? t(`contactform.${status.key}`) : null
 
   return (
-    <form ref={formRef} className="form" method="post" onSubmit={onSubmit} noValidate>
+    <form ref={formRef} id="modulo-contatti" className="form" method="post" onSubmit={onSubmit} noValidate>
       <h3 className="form-title">{t("contactform.intro")}</h3>
       <p className="form-legend">{t("form.legenda")}</p>
       <Field name="nome" label={t("contactform.nome")} required max={LIMITI.nome} value={values.nome} error={errors.nome} autoComplete="name" onChange={(v) => setValue("nome", v)} onBlur={() => blur("nome")} />

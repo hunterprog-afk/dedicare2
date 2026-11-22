@@ -15,7 +15,8 @@ export function Tariffe() {
   const { t } = useTranslation()
   const factors = t("tariffario.factors", { returnObjects: true }) as Factor[]
 
-  // Il modulo dei contatti ascolta `dedicare:prefill` e riempie il messaggio solo se è vuoto; poi il fuoco va sul campo Nome.
+  // Il bottone porta direttamente al modulo (non alla cima dei contatti), così il campo Nome è in vista quando riceve il fuoco.
+  // Il modulo ascolta `dedicare:prefill` e riempie il messaggio solo se è vuoto.
   const onCta = () => {
     window.dispatchEvent(new CustomEvent("dedicare:prefill", { detail: { message: t("tariffario.prefill") } }))
     window.setTimeout(() => {
@@ -40,7 +41,7 @@ export function Tariffe() {
             ))}
           </div>
           <div className="tariffe-cta">
-            <Button href="#contatti" onClick={onCta}>
+            <Button href="#modulo-contatti" onClick={onCta}>
               <span className="max-sm:hidden">{t("tariffario.cta")}</span>
               <span className="sm:hidden">{t("tariffario.cta_short")}</span>
             </Button>
