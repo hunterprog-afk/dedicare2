@@ -20,6 +20,8 @@ const POINTS: ReadonlyArray<{ x: number; y: number; side: Side; always?: boolean
 ]
 const SEDE = 10
 const VIEW = 560
+/** Oltre questa ascissa, sotto i 1024 px, l'etichetta va a sinistra della finestrella per non uscire dallo schermo. */
+const FAR_X = 380
 
 interface Props {
   active: number | null
@@ -79,7 +81,7 @@ export function MappaMilano({ active, onActive }: Props) {
           <span
             key={i}
             aria-hidden="true"
-            className={cn("map-label", `map-label-${p.side}`, (p.always || active === i) && "is-shown", i === SEDE && "is-sede")}
+            className={cn("map-label", `map-label-${p.side}`, p.x > FAR_X && "is-far", (p.always || active === i) && "is-shown", i === SEDE && "is-sede")}
             style={{ left: `${(p.x / VIEW) * 100}%`, top: `${(p.y / VIEW) * 100}%` }}
           >
             {label}

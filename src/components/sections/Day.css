@@ -270,6 +270,11 @@
   .map-label-b {
     transform: translate(-50%, 10px);
   }
+  @media (max-width: 1023px) {
+    .map-label.is-far {
+      transform: translate(calc(-100% - 11px), -50%);
+    }
+  }
   html.motion .mappa.is-lit .map-window {
     fill: #ffd98a;
     transition:
