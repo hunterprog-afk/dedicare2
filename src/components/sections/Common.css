@@ -314,8 +314,8 @@
         rgb(35 28 77 / 0.8) calc(100% - 112px),
         rgb(35 28 77 / 0) 100%
       );
-      -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 240px), transparent);
-      mask-image: linear-gradient(to right, #000 calc(100% - 240px), transparent);
+      -webkit-mask-image: linear-gradient(to right, #231c4d calc(100% - 240px), transparent);
+      mask-image: linear-gradient(to right, #231c4d calc(100% - 240px), transparent);
     }
     .stage-text .t-h2 {
       font-size: clamp(34px, calc(27.31px + 1.7143vw), 46px);
