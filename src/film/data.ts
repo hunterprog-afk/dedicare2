@@ -10,3 +10,6 @@ export const PANELS: Record<number, "assistenza247" | "oss" | "accompagnamento" 
 }
 export const TOTAL = SCENE_SCROLL.reduce((a, b) => a + b, 0)
 
+
+/** Umore della scena: colora il piccolo orologio (notte, alba, mattino, sera). */
+export const MOODS = ["night", "night", "dawn", "morning", "morning", "morning", "evening"] as const

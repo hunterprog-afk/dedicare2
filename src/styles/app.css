@@ -140,10 +140,16 @@
       justify-self: end;
       padding-right: 10px;
     }
+    html.js:not(.film-static):not(.film-past) .pill-hour-wrap {
+      padding-right: 48px;
+    }
   }
   @media (min-width: 1024px) {
     .pill-call {
       display: inline-flex;
+    }
+    .pill {
+      width: min(calc(100% - 2 * 120px), 1120px);
     }
   }
   .site-header-legal .pill-call {

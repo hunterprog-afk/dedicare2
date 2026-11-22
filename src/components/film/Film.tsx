@@ -3,7 +3,7 @@ import { useTranslation } from "@/i18n/react"
 import { Button } from "../Button"
 import { WhatsAppIcon, XIcon } from "../icons"
 import { PHONE_HREF, whatsappHref } from "@/content/contacts"
-import { LINGER, PANELS, SCENE_SCROLL, TOTAL } from "@/film/data"
+import { LINGER, MOODS, PANELS, SCENE_SCROLL, TOTAL } from "@/film/data"
 import "./Film.css"
 
 interface SceneText {
@@ -21,22 +21,6 @@ interface ServiceText {
   longDescription: string
   bullets: string[]
   emergenza?: string
-}
-
-/** Titolo a parole in una maschera: ogni parola entra dal basso (il ritardo per riga lo calcola il motore). */
-function Words({ text }: { text: string }) {
-  return (
-    <>
-      {text.split(" ").map((w, i, arr) => (
-        <span key={i}>
-          <span className="w" style={{ "--d": `${i * 45}ms` } as React.CSSProperties}>
-            <span className="wi">{w}</span>
-          </span>
-          {i < arr.length - 1 ? " " : ""}
-        </span>
-      ))}
-    </>
-  )
 }
 
 /** Il turno di 24 ore: sette scene a tutto schermo guidate dallo scroll. Tutto il testo sta qui, nell'HTML; il motore lo anima e basta. */
@@ -80,6 +64,7 @@ export function Film() {
                 data-hour={s.hour}
                 data-weight={SCENE_SCROLL[i]}
                 data-linger={LINGER[i]}
+                data-mood={MOODS[i]}
                 data-clip={`/film/s${n}.mp4`}
                 data-clip-m={`/film/s${n}-m.mp4`}
               >
@@ -104,7 +89,7 @@ export function Film() {
                     <span className="scene-label">{s.kicker}</span>
                   </p>
                   <Heading className="scene-title">
-                    <Words text={s.title} />
+                    {s.title}
                   </Heading>
                   <p className="scene-body rv" style={{ "--rd": "380ms" } as React.CSSProperties}>
                     {s.body}
@@ -166,16 +151,33 @@ export function Film() {
           <div className="film-grain" aria-hidden="true" />
         </div>
       </div>
-      <nav className="film-rail" aria-label={t("film.rail_aria")}>
-        {scenes.map((s, i) => (
-          <button key={s.hour + i} type="button" className="rail-item" data-go={i} aria-label={`${s.hour}, ${s.rail}`}>
-            <span className="rail-hour" aria-hidden="true">
-              {s.hour}
-            </span>
-            <i aria-hidden="true" />
-          </button>
-        ))}
-      </nav>
+      <div className="film-clock" data-mood="night" style={{ "--hand": "330deg" } as React.CSSProperties}>
+        <button type="button" className="clock-btn" popoverTarget="capitoli" aria-label={t("film.rail_aria")}>
+          <svg viewBox="0 0 80 80" aria-hidden="true" focusable="false">
+            <circle className="clock-face" cx="40" cy="40" r="38" />
+            {Array.from({ length: 24 }, (_, h) => (
+              <line key={h} className="clock-tick" x1="40" x2="40" y1={h % 6 === 0 ? 7 : 5.5} y2={h % 6 === 0 ? 13 : 9.5} transform={`rotate(${h * 15} 40 40)`} />
+            ))}
+            <g className="clock-hand">
+              <line x1="40" y1="40" x2="40" y2="17" />
+              <circle cx="40" cy="17" r="3.2" />
+            </g>
+            <circle className="clock-pin" cx="40" cy="40" r="3" />
+          </svg>
+        </button>
+        <nav id="capitoli" className="chapters" popover="auto" aria-label={t("film.rail_aria")}>
+          <ul>
+            {scenes.map((s, i) => (
+              <li key={s.hour + i}>
+                <button type="button" data-go={i}>
+                  <span className="chapter-hour">{s.hour}</span>
+                  <span>{s.rail}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
       <p className="film-note">{t("film.note")}</p>
     </section>
   )
