@@ -5,7 +5,7 @@ import "lenis/dist/lenis.css"
 import type { gsap as Gsap } from "gsap"
 
 export interface Smooth {
-  scrollTo(el: HTMLElement, onDone: () => void): void
+  scrollTo(target: HTMLElement | number, onDone: () => void): void
   destroy(): void
 }
 
@@ -16,8 +16,8 @@ export function createSmooth(gsap: typeof Gsap): Smooth {
   gsap.ticker.add(raf, false, true)
   gsap.ticker.lagSmoothing(0)
   return {
-    // Lenis sottrae già lo scroll-margin-top della sezione (72 px): nessun offset in più.
-    scrollTo: (el, onDone) => lenis.scrollTo(el, { duration: 1.2, onComplete: onDone }),
+    // Lenis sottrae già lo scroll-margin-top della sezione (72 px): nessun offset in più. Un numero è una y assoluta.
+    scrollTo: (target, onDone) => lenis.scrollTo(target, { duration: 1.2, onComplete: onDone }),
     destroy() {
       gsap.ticker.remove(raf)
       lenis.destroy()

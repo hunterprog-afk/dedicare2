@@ -62,7 +62,7 @@ sheet?.addEventListener("click", (e) => {
   if ((e.target as Element).closest("a[href^='#']")) (sheet as HTMLElement).hidePopover?.()
 })
 
-// Senza movimento: l'ora è quella stampata sulla sezione che passa sotto l'header, l'indicatore salta.
+// Senza movimento: l'ora è quella stampata sulla sezione la cui cima ha passato metà schermo, l'indicatore salta.
 const rail = document.querySelector(".clock-rail")
 if (rail && matchMedia("(prefers-reduced-motion: reduce)").matches && "IntersectionObserver" in window) {
   root.classList.add("rm")
@@ -71,6 +71,7 @@ if (rail && matchMedia("(prefers-reduced-motion: reduce)").matches && "Intersect
   const chapters = new Set(marks.map((m) => m.dataset.chapter))
   const times = document.querySelectorAll(".clock-time")
   const moving = [...rail.querySelectorAll<HTMLElement>(".clock-indicator, .clock-now")]
+  const ticks = [...rail.querySelectorAll<HTMLElement>(".clock-chapter[data-t]")]
   const pill = document.querySelector(".clock-pill")
   const aria = pill?.getAttribute("aria-label") ?? ""
   const seen = new Set<Element>()
@@ -90,17 +91,40 @@ if (rail && matchMedia("(prefers-reduced-motion: reduce)").matches && "Intersect
     times.forEach((el) => (el.textContent = label))
     pill?.setAttribute("aria-label", aria.replace(/\d\d:\d\d/, label))
     const track = rail.querySelector(".clock-line")?.getBoundingClientRect()
-    if (track) moving.forEach((el, k) => (el.style.transform = `translateY(${track.top + (track.height * t) / 1440 - (k ? 11 : 7)}px)`))
+    if (track) {
+      const at = (m: number) => track.top + (track.height * m) / 1440
+      moving.forEach((el, k) => (el.style.transform = `translateY(${at(t) - (k ? el.offsetHeight / 2 : 7)}px)`))
+      // Il capitolo sotto l'ora si spegne (centro entro 20 px dall'indicatore).
+      ticks.forEach((el) => el.classList.toggle("is-near", Math.abs(at(Number(el.dataset.t)) - at(t)) < 21))
+    }
     let c = i
     while (c > 0 && !chapters.has(secs[c].id)) c--
     marks.forEach((el) => (el.dataset.chapter === secs[c].id ? el.setAttribute("aria-current", "location") : el.removeAttribute("aria-current")))
   }
-  // La linea è una fascia di 1 px sotto l'header; si ricrea quando cambia la finestra.
+  // La linea è una fascia di 1 px a metà schermo; si ricrea quando cambia la finestra.
+  // Le scene a tutto schermo spengono i capitoli finché toccano la fascia del binario.
   let io: IntersectionObserver | undefined
+  let so: IntersectionObserver | undefined
   const watch = () => {
     io?.disconnect()
+    so?.disconnect()
     seen.clear()
-    line = innerWidth >= 1024 ? 72 : 60
+    line = Math.round(innerHeight / 2)
+    const band = rail.querySelector(".clock-line")?.getBoundingClientRect()
+    if (band && band.height) {
+      const hit = new Set<Element>()
+      so = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) hit.add(e.target)
+            else hit.delete(e.target)
+          }
+          rail.toggleAttribute("data-scene", hit.size > 0)
+        },
+        { rootMargin: `-${Math.floor(band.top)}px 0px -${Math.max(0, Math.floor(innerHeight - band.bottom))}px 0px` },
+      )
+      document.querySelectorAll("main [data-phase-switch]").forEach((s) => so!.observe(s))
+    }
     io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {

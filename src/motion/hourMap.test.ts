@@ -6,6 +6,7 @@ import {
   crossesChapter,
   cubicBezier,
   dPhase,
+  discCenter,
   discState,
   fmt,
   layerValues,
@@ -135,6 +136,18 @@ describe("disco", () => {
     expect(discState(1260)[2]).toBeCloseTo(0.88)
     expect(discState(1440)[0]).toBeCloseTo(0.12)
     expect(discState(1440)[3]).toBe(0)
+  })
+  it("il centro non sale mai sopra max(18vh, 152px) e tocca ancora l'orizzonte (voce 18)", () => {
+    for (const vh of [700, 844, 900, 1080]) {
+      const lo = Math.max(0.18 * vh, 152)
+      for (let t = 0; t <= 1440; t += 5) {
+        const [my, , sy] = discState(t)
+        expect(discCenter(my, vh)).toBeGreaterThanOrEqual(lo - 1e-9)
+        expect(discCenter(sy, vh)).toBeGreaterThanOrEqual(lo - 1e-9)
+      }
+      expect(discCenter(0.88, vh)).toBeCloseTo(0.88 * vh)
+      expect(discCenter(0.1, vh)).toBeCloseTo(lo)
+    }
   })
 })
 

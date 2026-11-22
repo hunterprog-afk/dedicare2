@@ -9,9 +9,11 @@ import {
   crossesChapter,
   cubicBezier,
   dPhase,
+  discCenter,
   discState,
   fmt,
   layerValues,
+  NEAR,
   quantize,
   timeAt,
   uiPhase,
@@ -60,6 +62,10 @@ async function start() {
   const sections = $$("[data-hour-at]", main)
   const chapterEls = $$("[data-chapter]")
   const chapterIds = new Set(chapterEls.map((el) => el.dataset.chapter))
+  const railEl = $(".clock-rail")!
+  // Capitoli del binario: ora (minuti) e stato «spento» perché sotto l'indicatore.
+  const marks = $$(".clock-chapter[data-t]", railEl).map((el) => ({ el, t: Number(el.dataset.t), near: false }))
+  const sceneEls = $$("[data-phase-switch]", main)
   const photoB = $("#assistenza-24-7 .photo-b")
   const tagA = $("#assistenza-24-7 .photo-a .a247-tag")
   const cambio = $(".cambio-photo")
@@ -98,6 +104,11 @@ async function start() {
   let cambioM = { top: 0, h: 1 }
   let seraM = { top: 0, h: 1 }
   let chapterAt: { id: string; y: number }[] = []
+  let nowH = 17
+  let scenes: { top: number; h: number }[] = []
+  let inScene = false
+  /** y di arrivo per le sezioni con l'ora al centro (cambio turno, sera): lì l'orologio segna l'ora scritta. */
+  const centerAt = new Map<string, number>()
   let dirty = true
 
   function measure() {
@@ -106,6 +117,7 @@ async function start() {
     const rl = railLine?.getBoundingClientRect()
     if (rl) rail = { top: rl.top, h: rl.height }
     pinOn = mqPin.matches
+    if (now) nowH = now.offsetHeight || nowH
     const y0 = scrollY
     const maxScroll = root.scrollHeight - vh
     const anchors: Anchor[] = []
@@ -126,7 +138,9 @@ async function start() {
       if (el === cambio?.closest("section")) cambioM = { top, h: height }
       if (el === sera?.closest("section")) seraM = { top, h: height }
       if (chapterIds.has(el.id)) chapterAt.push({ id: el.id, y: top - H - 2 })
+      if (el.dataset.hourAt === "center") centerAt.set(el.id, Math.ceil(top + height / 2 - vh / 2))
     }
+    scenes = sceneEls.map((el) => ({ top: Math.floor(el.getBoundingClientRect().top + y0), h: el.offsetHeight }))
     keys = buildKeys(anchors, { H, vh, maxScroll })
     if (moon && sun) gsap.set([moon, sun], { x: innerWidth * 0.89 - 56 })
     if (!pinOn && photoB) gsap.set([photoB, tagA ?? []], { clearProps: "opacity" })
@@ -182,9 +196,9 @@ async function start() {
     // Disco (solo desktop: sotto 1024 è nascosto).
     if (mqDesk.matches && setMoonY && setMoonO && setSunY && setSunO) {
       const [my, mo, sy, so] = discState(t)
-      setMoonY(my * vh - 56)
+      setMoonY(discCenter(my, vh) - 56)
       setMoonO(mo)
-      setSunY(sy * vh - 56)
+      setSunY(discCenter(sy, vh) - 56)
       setSunO(so)
     }
 
@@ -192,7 +206,19 @@ async function start() {
     const ti = intro ? intro.t : t
     const iy = rail.top + (rail.h * ti) / 1440 - 7
     setIndY?.(iy)
-    setNowY?.(iy - 4)
+    const ic = iy + 7
+    setNowY?.(ic - nowH / 2)
+    // Capitoli: spento quello che l'ora sta coprendo; tutti spenti sopra le scene a tutto schermo.
+    for (const m of marks) {
+      const near = Math.abs(rail.top + (rail.h * m.t) / 1440 - ic) < NEAR
+      if (near !== m.near) m.el.classList.toggle("is-near", (m.near = near))
+    }
+    let sc = false
+    for (const s of scenes) if (s.top - y < rail.top + rail.h && s.top + s.h - y > rail.top) sc = true
+    if (sc !== inScene) {
+      inScene = sc
+      railEl.toggleAttribute("data-scene", sc)
+    }
 
     // Fasi: dark/light nei due soli punti, D a quattro fasi.
     const ph = uiPhase(t)
@@ -261,6 +287,10 @@ async function start() {
   const after = pivot?.getBoundingClientRect().top ?? 0
   if (pivot && scrollY > 0 && Math.abs(after - before) > 1) scrollTo(0, scrollY + after - before)
   measure()
+  // Arrivo con #cambio-turno o #sera: il salto nativo porta la cima sotto l'header, ma lì l'ora è al centro.
+  const hashId = decodeURIComponent(location.hash.slice(1))
+  const hashEl = hashId && centerAt.has(hashId) ? document.getElementById(hashId) : null
+  if (hashEl && Math.abs(hashEl.getBoundingClientRect().top - H) < 4) scrollTo(0, centerAt.get(hashId)!)
   lastY = scrollY
   apply(lastY)
   booted = true
@@ -293,10 +323,23 @@ async function start() {
     },
     { rootMargin: "0px 0px -25% 0px", threshold: 0 },
   )
+  // I passi di «come funziona» entrano prima, al 92% dello schermo: altrimenti l'ultimo quinto resta vuoto.
+  const revealLate = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue
+        e.target.classList.add("is-in")
+        revealLate.unobserve(e.target)
+      }
+    },
+    { rootMargin: "0px 0px -8% 0px", threshold: 0 },
+  )
+  const early = new Set($$("#come-funziona [data-reveal]", main))
   const pending = $$(REVEAL).map((el) => [el, el.getBoundingClientRect().top] as const)
   for (const [el, top] of pending) {
-    if (top < vh * 0.75) el.classList.add("is-in")
-    else reveal.observe(el)
+    const e = early.has(el)
+    if (top < vh * (e ? 0.92 : 0.75)) el.classList.add("is-in")
+    else (e ? revealLate : reveal).observe(el)
   }
   root.classList.add("motion")
 
@@ -345,14 +388,21 @@ async function start() {
   }
   void syncSmooth()
   document.addEventListener("click", (e) => {
-    if (!smooth || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
     const a = (e.target as Element | null)?.closest?.<HTMLAnchorElement>("a[href^='#']")
     const id = a ? decodeURIComponent(a.hash.slice(1)) : ""
     const target = id ? document.getElementById(id) : null
     if (!target) return
+    const at = centerAt.get(id)
+    // Senza scorrimento morbido il salto resta nativo, salvo le sezioni con l'ora al centro.
+    if (!smooth && at === undefined) return
     e.preventDefault()
     history.pushState(null, "", `#${id}`)
-    smooth.scrollTo(target, () => {
+    if (!smooth) {
+      scrollTo(0, at!)
+      return
+    }
+    smooth.scrollTo(at ?? target, () => {
       // Come la navigazione nativa: il prossimo Tab parte dalla sezione raggiunta.
       if (!target.hasAttribute("tabindex")) {
         target.setAttribute("tabindex", "-1")

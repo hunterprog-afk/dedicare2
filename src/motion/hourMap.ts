@@ -153,6 +153,17 @@ export function discState(t: number): [number, number, number, number] {
   return [my, mo, sy, so]
 }
 
+/** Centro verticale del disco in px: la corsa [0.10, 0.88] di `discState` scende a [max(18vh, 152), 0.88vh],
+ *  così la luna delle 22:00 non finisce sotto l'header (72 px + mezzo disco 56 + 24 d'aria). */
+export function discCenter(f: number, vh: number): number {
+  const lo = Math.max(0.18 * vh, 152)
+  const hi = 0.88 * vh
+  return lo + ((f - 0.1) / 0.78) * (hi - lo)
+}
+
+/** Distanza (px) fra centro dell'indicatore e centro di un capitolo sotto la quale il capitolo si spegne. */
+export const NEAR = 21
+
 export type UiPhase = "dark" | "light"
 export type DPhase = "notte" | "alba" | "mattino" | "tramonto"
 
