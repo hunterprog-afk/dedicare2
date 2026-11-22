@@ -43,7 +43,7 @@ export function Hero() {
         </h1>
         <p className="t-lead hero-sub">{t("hero.sub")}</p>
         <div className="hero-actions">
-          <Button href={PHONE_HREF} gold aria-label={t("nav.chiama_aria")}>
+          <Button href={PHONE_HREF} gold>
             <span className="max-lg:hidden">{t("hero.cta_call")}</span>
             <span className="lg:hidden">{t("hero.cta_call_short")}</span>
           </Button>

@@ -6,7 +6,7 @@
   #sky {
     position: fixed;
     inset: 0;
-    z-index: -2;
+    z-index: 0;
     pointer-events: none;
   }
   .sky-layer {
@@ -32,21 +32,36 @@
   html[data-phase="light"] .sky-grain { opacity: 0.04; }
   html:not(.sky-on) #sky { display: none; }
 
-  /* Senza cielo la pagina è un libro a bande: ogni sezione col gradiente della sua ora. */
-  html:not(.sky-on) [data-band="S1"] { background: var(--band-s1); }
-  html:not(.sky-on) [data-band="S2"] { background: var(--band-s2); }
-  html:not(.sky-on) [data-band="S3"] { background: var(--band-s3); }
-  html:not(.sky-on) [data-band="S4"] { background: var(--band-s4); }
-  html:not(.sky-on) [data-band="S5"] { background: var(--band-s5); }
-  html:not(.sky-on) [data-band="S6"] { background: var(--band-s6); }
-  html:not(.sky-on) [data-band="S7"] { background: var(--band-s7); }
-  html.sky-on [data-band] { background: transparent; }
+  /* Le bande stanno sempre sotto: senza cielo (motore non ancora caricato, stampa, colori forzati) la pagina è un
+     libro a bande con il gradiente della sua ora; col cielo, che le copre, restano il fondo vero di ogni sezione. */
+  [data-band="S1"] { background: var(--band-s1); }
+  [data-band="S2"] { background: var(--band-s2); }
+  [data-band="S3"] { background: var(--band-s3); }
+  [data-band="S4"] { background: var(--band-s4); }
+  [data-band="S5"] { background: var(--band-s5); }
+  [data-band="S6"] { background: var(--band-s6); }
+  [data-band="S7"] { background: var(--band-s7); }
+  /* Il cielo (z 0) sta sopra le bande e sotto i contenuti: i figli diretti di sezione e il piè di pagina salgono a z 1.
+     Peso zero: qualsiasi regola di componente che li posiziona in altro modo vince. */
+  :where([data-band] > *, .site-footer) {
+    position: relative;
+    z-index: 1;
+  }
+  @media (forced-colors: active) {
+    #sky,
+    #disc {
+      display: none;
+    }
+    [data-band] {
+      background: Canvas;
+    }
+  }
 
   /* ---- Disco: solo desktop e solo con il cielo attivo. ---- */
   #disc {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
     display: none;
   }
