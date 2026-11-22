@@ -22,7 +22,8 @@ export function ServiziOrario() {
           <h2 className="t-h2">{t("servizi.title")}</h2>
         </div>
         <p className="t-lead sec-intro col-span-full lg:col-[1/8]">{t("servizi.intro")}</p>
-        <ol className="orario sec-head-gap col-span-full lg:col-[1/9]">
+        <p className="orario-note col-span-full lg:col-[1/9]">{t("servizi.orario_nota")}</p>
+        <ol className="orario col-span-full lg:col-[1/9]">
           {ROWS.map((r) => (
             <li key={r.key}>
               <a href={r.href}>

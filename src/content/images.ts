@@ -36,7 +36,8 @@ export const PHOTOS: readonly PhotoDef[] = [
 export const PLACEHOLDER_BG: Record<PhotoPhase, string> = {
   night: "linear-gradient(180deg,#17123A,#231C4D)",
   dawn: "linear-gradient(180deg,#5A5482,#A99BF0 50%,#FFB59A)",
-  day: "linear-gradient(180deg,#FFF4EF,#FFD98A)",
+  // Trasparente in alto: non copre il bagliore del sole che sta sul fondo della sezione.
+  day: "linear-gradient(180deg,rgb(255 217 138 / 0),rgb(255 217 138 / 0.6))",
   dusk: "linear-gradient(180deg,#FFB59A,#A99BF0)",
 }
 

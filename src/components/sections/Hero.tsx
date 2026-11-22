@@ -30,6 +30,9 @@ export function Hero() {
       <div className="hero-veil-bottom" aria-hidden="true" />
       <div className="hero-veil-right" aria-hidden="true" />
       <div className="hero-text">
+        <p className="hero-hour" aria-hidden="true">
+          22:00
+        </p>
         <p className="t-eyebrow hero-eyebrow">{t("hero.eyebrow")}</p>
         <h1 className="t-h1 hero-h1">
           {t("hero.h1_a")}{" "}
@@ -41,7 +44,8 @@ export function Hero() {
         <p className="t-lead hero-sub">{t("hero.sub")}</p>
         <div className="hero-actions">
           <Button href={PHONE_HREF} gold aria-label={t("nav.chiama_aria")}>
-            {t("hero.cta_call")}
+            <span className="max-lg:hidden">{t("hero.cta_call")}</span>
+            <span className="lg:hidden">{t("hero.cta_call_short")}</span>
           </Button>
           <Button
             variant="secondary"

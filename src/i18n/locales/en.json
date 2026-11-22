@@ -41,6 +41,7 @@
     "h1_b": "by day and by night.",
     "sub": "OSS healthcare assistants and nurses for seniors, adults after a hospital stay, children and people with disabilities. Even 24 hours a day.",
     "cta_call": "Call for a free consultation",
+    "cta_call_short": "Call for a free consultation",
     "cta_whatsapp": "Message us on WhatsApp"
   },
   "assistiti": {
@@ -57,10 +58,11 @@
   },
   "servizi": {
     "eyebrow": "Our services",
-    "title": "Everything you need, under one trusted care.",
+    "title": "Four services, one point of contact.",
     "intro": "Qualified professionals at home, in hospital and during every transfer. Each service is tailored to the person, not the diagnosis.",
     "scopri": "Discover more",
-    "torna_orario": "Back to the services timetable",
+    "torna_orario": "Back to the services",
+    "orario_nota": "The hours tell a typical day; they are not service hours.",
     "items": {
       "assistenza247": {
         "title": "24/7 care",
@@ -82,7 +84,7 @@
         "bullets": ["Visits, tests and therapies", "Support during hospital stays", "On request, assistance when travelling", "A nurse at your request or on a doctor's advice"]
       },
       "multidisciplinare": {
-        "title": "Multidisciplinary approach",
+        "title": "Multi­disciplinary approach",
         "body": "Nurses and OSS work on the same plan; if other professionals are needed, we help you find them and coordinate with them.",
         "longDescription": "Nurses and healthcare assistants (OSS) work on the same care plan and share information and goals. If other professionals are needed, for example a physiotherapist, we help you find them and coordinate with them. This way the care adapts when needs change and the family has a single point of reference.",
         "bullets": ["Coordinated nurses and OSS", "Personalised care plan", "Constant updates to the family", "Other professionals: we help you find them"]
@@ -95,11 +97,11 @@
   },
   "perche": {
     "eyebrow": "Why choose us",
-    "title_a": "Not just assistance.",
-    "title_b": "A presence.",
-    "intro": "Every detail of our service is designed to bring relief to the family and dignity to the person being cared for.",
+    "title_a": "Who comes into your home,",
+    "title_b": "and how.",
+    "intro": "Before we start, we tell you the qualifications of whoever will come into your home.",
     "items": [
-      { "title": "Clear qualifications", "body": "We work with healthcare assistants holding the OSS qualification and nurses registered with the Order (OPI). Before the start we tell you the qualification of whoever will come into your home." },
+      { "title": "Clear qualifications", "body": "We work with healthcare assistants holding the OSS qualification and nurses registered with the Order (OPI)." },
       { "title": "Even 24 hours a day", "body": "Shifts by day, by night and on holidays, up to continuous presence with several carers taking turns." },
       { "title": "Free first consultation", "body": "A no-obligation phone or WhatsApp call to understand your needs and propose the best solution." },
       { "title": "Milan and surroundings", "body": "We work in Milan and nearby towns. Availability depends on the carers in your area: we check it together with you." }
@@ -107,7 +109,7 @@
   },
   "processo": {
     "eyebrow": "How we work",
-    "title": "Simple, transparent, human.",
+    "title": "From the first call to the first shift.",
     "chiusura": "Then the day finds its rhythm again.",
     "items": [
       { "title": "First contact", "body": "Free phone or WhatsApp consultation to understand the patient's and family's needs. No commitment." },
@@ -205,7 +207,7 @@
   },
   "contatti": {
     "eyebrow": "Let's start together",
-    "title": "Ready to take care.",
+    "title": "Let's talk. The first consultation is free.",
     "subline": "A free call. A tailored plan. The care your family deserves.",
     "email_label": "Email",
     "emergenza": "In a medical emergency call 112: our phone, WhatsApp and contact form are not an emergency service."
@@ -216,9 +218,6 @@
     "telefono": "Phone",
     "email": "Email",
     "messaggio": "Message",
-    "placeholder_nome": "John Smith",
-    "placeholder_telefono": "+39 333 000 0000",
-    "placeholder_email": "john@example.com",
     "placeholder_messaggio": "What kind of care do you need, and in which area?",
     "hint_salute": "To protect your privacy, please do not include health information about yourself or a family member here: we can discuss it by phone.",
     "informativa": "By sending this message you confirm that you have read the <privacyLink>Privacy Policy</privacyLink> (in Italian). Your details are used only to reply to your request.",

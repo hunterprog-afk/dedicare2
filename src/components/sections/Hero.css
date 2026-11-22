@@ -5,7 +5,7 @@
     min-height: max(640px, 100svh);
     display: flex;
     flex-direction: column;
-    padding: 44svh 20px 40px;
+    padding: 37svh 20px 40px;
     color: var(--ink);
   }
   .hero-photo {
@@ -27,6 +27,18 @@
   .hero-text {
     position: relative;
   }
+  /* Numerale dell'ora: da subito la grammatica del turno. Statico, non è l'LCP. */
+  .hero-hour {
+    margin: 0 0 12px;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-feature-settings: "tnum";
+    color: #a99bf0;
+  }
   .hero-eyebrow {
     color: #ffd98a;
     margin-bottom: 0;
@@ -38,6 +50,7 @@
   .hero-sub {
     margin: 16px 0 0;
     max-width: 34ch;
+    text-wrap: pretty;
     color: #fff4ef;
   }
   .hero-actions {
@@ -55,9 +68,10 @@
   }
   .hero-services {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 16px;
+    gap: 0 16px;
     margin-top: 24px;
     font-size: 16px;
     color: #fff4ef;
@@ -93,6 +107,10 @@
       top: 30vh;
       width: min(640px, 44vw);
     }
+    .hero-hour {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
     .hero-h1 {
       margin-top: 16px;
     }
@@ -117,6 +135,7 @@
       position: absolute;
       left: var(--wrap-l);
       bottom: 12vh;
+      display: flex;
       flex-direction: row;
       margin-top: 0;
     }

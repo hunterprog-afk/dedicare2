@@ -77,10 +77,10 @@ export function ContactForm() {
     <form ref={formRef} className="form" onSubmit={onSubmit} noValidate>
       <h3 className="form-title">{t("contactform.intro")}</h3>
       <p className="form-legend">{t("form.legenda")}</p>
-      <Field name="nome" label={t("contactform.nome")} required max={LIMITI.nome} value={values.nome} error={errors.nome} placeholder={t("contactform.placeholder_nome")} autoComplete="name" onChange={(v) => setValue("nome", v)} onBlur={() => blur("nome")} />
+      <Field name="nome" label={t("contactform.nome")} required max={LIMITI.nome} value={values.nome} error={errors.nome} autoComplete="name" onChange={(v) => setValue("nome", v)} onBlur={() => blur("nome")} />
       <div className="form-row">
-        <Field name="telefono" type="tel" label={t("contactform.telefono")} max={LIMITI.telefono} value={values.telefono} error={errors.telefono} placeholder={t("contactform.placeholder_telefono")} autoComplete="tel" onChange={(v) => setValue("telefono", v)} onBlur={() => blur("telefono")} />
-        <Field name="email" type="email" label={t("contactform.email")} required max={LIMITI.email} value={values.email} error={errors.email} placeholder={t("contactform.placeholder_email")} autoComplete="email" onChange={(v) => setValue("email", v)} onBlur={() => blur("email")} />
+        <Field name="telefono" type="tel" label={t("contactform.telefono")} max={LIMITI.telefono} value={values.telefono} error={errors.telefono} autoComplete="tel" onChange={(v) => setValue("telefono", v)} onBlur={() => blur("telefono")} />
+        <Field name="email" type="email" label={t("contactform.email")} required max={LIMITI.email} value={values.email} error={errors.email} autoComplete="email" onChange={(v) => setValue("email", v)} onBlur={() => blur("email")} />
       </div>
       <Field as="textarea" name="messaggio" label={t("contactform.messaggio")} required max={LIMITI.messaggio} value={values.messaggio} error={errors.messaggio} placeholder={t("contactform.placeholder_messaggio")} hint={t("contactform.hint_salute")} onChange={(v) => setValue("messaggio", v)} onBlur={() => blur("messaggio")} />
       <p className="form-consent">

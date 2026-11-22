@@ -41,6 +41,7 @@
     "h1_b": "di giorno e di notte.",
     "sub": "Operatori OSS e infermieri per anziani, adulti dopo un ricovero, bambini e persone con disabilità. Anche 24 ore su 24.",
     "cta_call": "Chiama per la consulenza gratuita",
+    "cta_call_short": "Chiama: consulenza gratuita",
     "cta_whatsapp": "Scrivici su WhatsApp"
   },
   "assistiti": {
@@ -57,16 +58,17 @@
   },
   "servizi": {
     "eyebrow": "I nostri servizi",
-    "title": "Tutto ciò di cui hai bisogno, sotto un'unica cura.",
+    "title": "Quattro servizi, un unico riferimento.",
     "intro": "Professionisti qualificati a domicilio, in ospedale e in ogni spostamento. Ogni servizio è calibrato sulla persona, non sulla diagnosi.",
     "scopri": "Scopri di più",
-    "torna_orario": "Torna all'orario dei servizi",
+    "torna_orario": "Torna ai servizi",
+    "orario_nota": "Le ore raccontano una giornata tipo, non gli orari dei servizi.",
     "items": {
       "assistenza247": {
         "title": "Assistenza 24/7",
         "body": "Turni a domicilio di giorno, di notte e nei festivi, fino alla presenza continua 24 ore su 24.",
         "emergenza": "Per un'emergenza sanitaria: 112.",
-        "longDescription": "Organizziamo la presenza in casa sulle ore che servono davvero: notti, fine settimana, festivi, fino alla copertura completa 24 ore su 24 con più operatrici che si alternano. Cerchiamo di mantenere le stesse operatrici, perché la persona ritrovi volti conosciuti; se un'operatrice manca, la sostituta la cerchiamo noi. Questo servizio non sostituisce i soccorsi: in caso di emergenza sanitaria chiamate subito il 112.",
+        "longDescription": "Organizziamo la presenza in casa sulle ore che servono davvero: notti, fine settimana, festivi, fino alla copertura completa 24 ore su 24 con più operatrici che si alternano. Cerchiamo di mantenere le stesse operatrici, perché la persona ritrovi volti conosciuti; se un'operatrice manca, la sostituta la cerchiamo noi. Questo servizio non sostituisce i soccorsi: in caso di emergenza sanitaria chiama subito il 112.",
         "bullets": ["Notti, fine settimana e festivi", "Presenza continua 24 ore su 24", "Le stesse operatrici, per quanto possibile", "Se un'operatrice manca, la sostituta la cerchiamo noi"]
       },
       "oss": {
@@ -78,14 +80,14 @@
       "accompagnamento": {
         "title": "Accompagnamento",
         "body": "Un nostro operatore accompagna la persona a visite, esami e terapie, e la assiste anche durante i viaggi.",
-        "longDescription": "Accompagniamo la persona ad ambulatori, day hospital, cliniche e visite specialistiche con un nostro operatore, e con un infermiere su vostra richiesta o su indicazione del medico. Su richiesta, possiamo seguire l'assistito anche in viaggio. Organizziamo con voi orari, documenti e logistica, dall'uscita al rientro a casa.",
+        "longDescription": "Accompagniamo la persona ad ambulatori, day hospital, cliniche e visite specialistiche con un nostro operatore, e con un infermiere su tua richiesta o su indicazione del medico. Su richiesta, possiamo seguire l'assistito anche in viaggio. Organizziamo con te orari, documenti e logistica, dall'uscita al rientro a casa.",
         "bullets": ["Visite, esami e terapie", "Assistenza durante i ricoveri", "Su richiesta, assistenza anche in viaggio", "Infermiere su richiesta o su indicazione del medico"]
       },
       "multidisciplinare": {
-        "title": "Approccio multidisciplinare",
-        "body": "Infermieri e OSS lavorano sullo stesso piano; se servono altri professionisti, vi aiutiamo a trovarli e ci coordiniamo con loro.",
-        "longDescription": "Infermieri e OSS lavorano sullo stesso piano di assistenza e condividono informazioni e obiettivi. Se servono altri professionisti, per esempio un fisioterapista, vi aiutiamo a trovarli e ci coordiniamo con loro. Così l'assistenza si adatta quando le esigenze cambiano e la famiglia ha un unico riferimento.",
-        "bullets": ["Infermieri e OSS coordinati", "Piano di assistenza personalizzato", "Aggiornamenti costanti alla famiglia", "Altri professionisti: vi aiutiamo a trovarli"]
+        "title": "Approccio multi­disciplinare",
+        "body": "Infermieri e OSS lavorano sullo stesso piano; se servono altri professionisti, ti aiutiamo a trovarli e ci coordiniamo con loro.",
+        "longDescription": "Infermieri e OSS lavorano sullo stesso piano di assistenza e condividono informazioni e obiettivi. Se servono altri professionisti, per esempio un fisioterapista, ti aiutiamo a trovarli e ci coordiniamo con loro. Così l'assistenza si adatta quando le esigenze cambiano e la famiglia ha un unico riferimento.",
+        "bullets": ["Infermieri e OSS coordinati", "Piano di assistenza personalizzato", "Aggiornamenti costanti alla famiglia", "Altri professionisti: ti aiutiamo a trovarli"]
       }
     }
   },
@@ -95,19 +97,19 @@
   },
   "perche": {
     "eyebrow": "Perché sceglierci",
-    "title_a": "Non solo assistenza.",
-    "title_b": "Una presenza.",
-    "intro": "Ogni dettaglio del nostro servizio è progettato per portare sollievo alla famiglia e dignità alla persona assistita.",
+    "title_a": "Chi entra in casa,",
+    "title_b": "e come.",
+    "intro": "Prima dell'avvio ti diciamo la qualifica di chi entrerà in casa.",
     "items": [
-      { "title": "Qualifiche chiare", "body": "Lavoriamo con OSS con attestato di qualifica e infermieri iscritti all'Ordine (OPI). Prima dell'avvio vi diciamo la qualifica di chi entrerà in casa." },
+      { "title": "Qualifiche chiare", "body": "Lavoriamo con OSS con attestato di qualifica e infermieri iscritti all'Ordine (OPI)." },
       { "title": "Anche 24 ore su 24", "body": "Turni di giorno, di notte e nei festivi, fino alla presenza continua con più operatrici che si alternano." },
-      { "title": "Prima consulenza gratuita", "body": "Un colloquio telefonico o WhatsApp senza impegno per comprendere le vostre esigenze e proporre la soluzione più adatta." },
-      { "title": "Milano e hinterland", "body": "Lavoriamo a Milano e nei comuni vicini. La disponibilità dipende dagli operatori in zona: la verifichiamo insieme a voi." }
+      { "title": "Prima consulenza gratuita", "body": "Un colloquio telefonico o WhatsApp senza impegno per comprendere le tue esigenze e proporre la soluzione più adatta." },
+      { "title": "Milano e hinterland", "body": "Lavoriamo a Milano e nei comuni vicini. La disponibilità dipende dagli operatori in zona: la verifichiamo insieme a te." }
     ]
   },
   "processo": {
     "eyebrow": "Come lavoriamo",
-    "title": "Semplice, trasparente, umano.",
+    "title": "Dalla prima telefonata al primo turno.",
     "chiusura": "Poi la giornata riprende il suo ritmo.",
     "items": [
       { "title": "Primo contatto", "body": "Consulenza gratuita telefonica o WhatsApp per comprendere le esigenze del paziente e della famiglia. Senza impegno." },
@@ -119,7 +121,7 @@
   "aree": {
     "eyebrow": "Copertura territoriale",
     "title": "Milano e hinterland",
-    "intro": "Lavoriamo a Milano città e nei comuni dell'hinterland. La disponibilità dipende dagli operatori in zona: contattateci e la verifichiamo insieme. Per zone fuori dall'area metropolitana valutiamo trasferte su richiesta.",
+    "intro": "Lavoriamo a Milano città e nei comuni dell'hinterland. La disponibilità dipende dagli operatori in zona: contattaci e la verifichiamo insieme. Per zone fuori dall'area metropolitana valutiamo trasferte su richiesta.",
     "map_alt": "Mappa stilizzata di Milano e hinterland",
     "sede": "sede",
     "comuni": ["Milano (tutte le zone)", "Sesto San Giovanni", "Cinisello Balsamo", "Cologno Monzese", "Bresso", "Cusano Milanino", "Monza", "Rho", "San Donato Milanese", "Cernusco sul Naviglio", "Segrate"]
@@ -141,16 +143,16 @@
   "faq": {
     "eyebrow": "FAQ",
     "title": "Domande frequenti.",
-    "intro": "Non trovate la risposta che cercate? Scriveteci o chiamateci.",
+    "intro": "Non trovi la risposta? Scrivici o chiamaci.",
     "cta": "Scrivici",
     "items": [
       { "q": "A chi si rivolge Dedicare Solutions?", "a": "Assistiamo anziani, adulti dopo un ricovero, bambini e persone con disabilità fisiche o cognitive che hanno bisogno di assistenza a domicilio, in ospedale o durante gli spostamenti, a Milano e nell'hinterland." },
-      { "q": "La prima consulenza è davvero gratuita?", "a": "Sì, completamente. Un colloquio telefonico o WhatsApp senza alcun impegno per comprendere le vostre esigenze, rispondere alle domande e proporre la soluzione più adatta. Chiamateci o scriveteci al +39 388 253 6992." },
-      { "q": "Che qualifica ha il personale?", "a": "Lavoriamo con operatori socio-sanitari (OSS) con attestato di qualifica e con infermieri iscritti all'Ordine delle professioni infermieristiche (OPI). Prima dell'avvio vi diciamo la qualifica di chi entrerà in casa." },
-      { "q": "Operate solo a Milano o anche nelle zone limitrofe?", "a": "Lavoriamo a Milano e nei comuni dell'hinterland. La disponibilità dipende dagli operatori presenti nella vostra zona: contattateci e la verifichiamo insieme. Per zone più lontane valutiamo trasferte su richiesta." },
-      { "q": "Come funziona l'assistenza notturna e nei weekend?", "a": "Organizziamo turni di notte, nei fine settimana e nei festivi, fino alla presenza continua 24 ore su 24 con più operatrici che si alternano. Per un'emergenza sanitaria chiamate sempre il 112." },
-      { "q": "Le spese di assistenza domiciliare sono detraibili fiscalmente?", "a": "Alcune spese di assistenza danno diritto a detrazioni IRPEF, nei limiti e alle condizioni previsti dalla legge: dipendono dal tipo di prestazione, dalla condizione della persona assistita e dal reddito di chi paga, e richiedono un pagamento tracciabile. Emettiamo regolare fattura; per sapere se potete detrarre la spesa e con quali documenti, rivolgetevi al CAF o al commercialista." },
-      { "q": "Come si attiva il servizio?", "a": "Chiamateci al +39 388 253 6992 o scriveteci a info@dedicaresolutions.it. Dopo il colloquio gratuito e la valutazione fissiamo insieme l'avvio: se c'è un operatore disponibile nella vostra zona, anche in pochi giorni." }
+      { "q": "La prima consulenza è davvero gratuita?", "a": "Sì, completamente. Un colloquio telefonico o WhatsApp senza alcun impegno per comprendere le tue esigenze, rispondere alle domande e proporre la soluzione più adatta. Chiamaci o scrivici al +39 388 253 6992." },
+      { "q": "Che qualifica ha il personale?", "a": "Lavoriamo con operatori socio-sanitari (OSS) con attestato di qualifica e con infermieri iscritti all'Ordine delle professioni infermieristiche (OPI). Prima dell'avvio ti diciamo la qualifica di chi entrerà in casa." },
+      { "q": "Operate solo a Milano o anche nelle zone limitrofe?", "a": "Lavoriamo a Milano e nei comuni dell'hinterland. La disponibilità dipende dagli operatori presenti nella tua zona: contattaci e la verifichiamo insieme. Per zone più lontane valutiamo trasferte su richiesta." },
+      { "q": "Come funziona l'assistenza notturna e nei weekend?", "a": "Organizziamo turni di notte, nei fine settimana e nei festivi, fino alla presenza continua 24 ore su 24 con più operatrici che si alternano. Per un'emergenza sanitaria chiama sempre il 112." },
+      { "q": "Le spese di assistenza domiciliare sono detraibili fiscalmente?", "a": "Alcune spese di assistenza danno diritto a detrazioni IRPEF, nei limiti e alle condizioni previsti dalla legge: dipendono dal tipo di prestazione, dalla condizione della persona assistita e dal reddito di chi paga, e richiedono un pagamento tracciabile. Emettiamo regolare fattura; per sapere se puoi detrarre la spesa e con quali documenti, rivolgiti al CAF o al commercialista." },
+      { "q": "Come si attiva il servizio?", "a": "Chiamaci al +39 388 253 6992 o scrivici a info@dedicaresolutions.it. Dopo il colloquio gratuito e la valutazione fissiamo insieme l'avvio: se c'è un operatore disponibile nella tua zona, anche in pochi giorni." }
     ]
   },
   "form": {
@@ -205,10 +207,10 @@
   },
   "contatti": {
     "eyebrow": "Iniziamo insieme",
-    "title": "Pronti a prendersi cura.",
-    "subline": "Una chiamata gratuita. Un piano su misura. L'assistenza che la vostra famiglia merita.",
+    "title": "Parliamone. La prima consulenza è gratuita.",
+    "subline": "Una chiamata gratuita. Un piano su misura. L'assistenza che la tua famiglia merita.",
     "email_label": "Email",
-    "emergenza": "Per un'emergenza sanitaria chiamate il 112: telefono, WhatsApp e modulo non sono un servizio di pronto intervento."
+    "emergenza": "Per un'emergenza sanitaria chiama il 112: telefono, WhatsApp e modulo non sono un servizio di pronto intervento."
   },
   "contactform": {
     "intro": "Oppure scrivici direttamente",
@@ -216,10 +218,7 @@
     "telefono": "Telefono",
     "email": "Email",
     "messaggio": "Messaggio",
-    "placeholder_nome": "Mario Rossi",
-    "placeholder_telefono": "+39 333 000 0000",
-    "placeholder_email": "mario@esempio.it",
-    "placeholder_messaggio": "Che tipo di assistenza vi serve e in quale zona?",
+    "placeholder_messaggio": "Che tipo di assistenza ti serve, e in quale zona?",
     "hint_salute": "Per tutelare la riservatezza, non inserire qui informazioni sullo stato di salute tuo o di un familiare: potremo approfondire per telefono.",
     "informativa": "Inviando il messaggio dichiari di aver letto l'<privacyLink>informativa privacy</privacyLink>. I dati servono solo a rispondere alla tua richiesta.",
     "submit": "Invia messaggio",

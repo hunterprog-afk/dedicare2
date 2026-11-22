@@ -51,13 +51,15 @@
     transition: box-shadow 160ms var(--ease-out), background-color 160ms var(--ease-out);
   }
   textarea.field-control {
-    min-height: 160px;
+    min-height: 120px;
     padding: 16px;
     resize: vertical;
   }
+  /* Il segnaposto è solo il suggerimento del messaggio: in corsivo e più tenue, così non sembra un valore già compilato. */
   .field-control::placeholder {
     color: #5a5482;
-    opacity: 1;
+    opacity: 0.8;
+    font-style: italic;
   }
   select.field-control {
     appearance: none;
