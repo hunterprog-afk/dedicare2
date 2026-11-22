@@ -156,8 +156,9 @@
     --hour: #5a5482;
   }
 
-  /* Interfaccia fissa: segue html[data-phase]. */
-  html[data-phase="dark"] {
+  /* Interfaccia fissa: segue html[data-phase]. Le variabili vivono solo sui tre pezzi fissi, così un cambio
+     di fase ricalcola gli stili di quei pezzi e non dell'intero documento. */
+  html[data-phase="dark"] :is(.site-header, .clock-rail, .mobile-bar) {
     --ui-ink: #fff4ef;
     --ui-bg: rgb(35 28 77 / 0.94);
     --ui-line: rgb(255 244 239 / 0.35);
@@ -166,7 +167,7 @@
     --ui-focus: #ffb59a;
     --ui-pill-bg: rgb(255 244 239 / 0.12);
   }
-  html[data-phase="light"] {
+  html[data-phase="light"] :is(.site-header, .clock-rail, .mobile-bar) {
     --ui-ink: #231c4d;
     --ui-bg: rgb(255 244 239 / 0.94);
     --ui-line: rgb(35 28 77 / 0.35);
@@ -177,32 +178,34 @@
   }
 
   /* Fasi della D del logo. */
-  html[data-dphase="notte"] {
+  html[data-dphase="notte"] :is(.site-header, .clock-rail, .mobile-bar) {
     --d-body: #fff4ef;
     --d-in-top: #ffd98a;
     --d-in-bottom: #ffb59a;
     --d-word: #fff4ef;
   }
-  html[data-dphase="alba"] {
+  html[data-dphase="alba"] :is(.site-header, .clock-rail, .mobile-bar) {
     --d-body: #231c4d;
     --d-in-top: #a99bf0;
     --d-in-bottom: #ffb59a;
     --d-word: #231c4d;
   }
-  html[data-dphase="mattino"] {
+  html[data-dphase="mattino"] :is(.site-header, .clock-rail, .mobile-bar) {
     --d-body: #231c4d;
     --d-in-top: #ffd98a;
     --d-in-bottom: #fff4ef;
     --d-word: #231c4d;
   }
-  html[data-dphase="tramonto"] {
+  html[data-dphase="tramonto"] :is(.site-header, .clock-rail, .mobile-bar) {
     --d-body: #231c4d;
     --d-in-top: #ffb59a;
     --d-in-bottom: #a99bf0;
     --d-word: #231c4d;
   }
-  html {
-    transition:
+  /* Il passaggio di 600 ms si applica solo all'interfaccia fissa (shell.css): sul documento intero
+     ricalcolerebbe gli stili di ogni elemento a ogni fotogramma del passaggio. */
+  :root {
+    --phase-tr:
       --ui-ink 600ms var(--ease-phase),
       --ui-bg 600ms var(--ease-phase),
       --d-body 600ms var(--ease-phase),
