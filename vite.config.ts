@@ -27,6 +27,8 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // Il caricatore degli import dinamici serve anche ai chunk differiti: resta in un file già precaricato.
+          if (id.includes('preload-helper')) return 'react'
           if (!id.includes('node_modules')) return
           if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) {
             return 'react'
