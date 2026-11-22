@@ -25,18 +25,22 @@ const blocking = gz("dist/index.html") + cssFiles.reduce((s, f) => s + gz(join("
 check("HTML + CSS bloccanti della home", blocking, 40 * KB)
 
 // JS d'ingresso: lo script del modulo e i modulepreload dichiarati nell'HTML.
+const locales = assets.filter((f) => /^(it|en)-.*.js$/.test(f))
 const entry = new Set(
-  [...html.matchAll(/<(?:script type="module"[^>]*src|link rel="modulepreload"[^>]*href)="\/(assets\/[^"]+\.js)"/g)].map((m) => m[1]),
+  [...html.matchAll(/<(?:script type="module"[^>]*src|link rel="modulepreload"[^>]*href)="\/(assets\/[^"]+\.js)"/g)]
+    .map((m) => m[1])
+    .filter((f) => !locales.includes(f.replace("assets/", ""))),
 )
 // La pagina carica anche il chunk dei testi della sua lingua (il più pesante dei due).
-const locales = assets.filter((f) => /^(it|en)-.*.js$/.test(f))
 const localeGz = Math.max(0, ...locales.map((f) => gz(join("dist/assets", f))))
-check("JS d'ingresso (con i testi di una lingua)", [...entry].reduce((s, f) => s + gz(join("dist", f)), 0) + localeGz, 110 * KB)
+check("JS d'ingresso (con i testi di una lingua)", [...entry].reduce((s, f) => s + gz(join("dist", f)), 0) + localeGz, 87 * KB)
 
 // JS di animazione: i chunk differiti (tutto ciò che non è d'ingresso e non è basic.js).
-const lazy = assets.filter((f) => f.endsWith(".js") && !entry.has(`assets/${f}`) && !f.startsWith("basic-") && !locales.includes(f))
+const lazy = assets.filter((f) => f.endsWith(".js") && !entry.has(`assets/${f}`) && !f.startsWith("basic-") && !f.startsWith("LegalPage-") && !locales.includes(f))
 const anim = lazy.reduce((s, f) => s + gz(join("dist/assets", f)), 0)
 check(`JS di animazione (${lazy.join(", ") || "nessun chunk"})`, anim, 45 * KB)
+const legal = assets.find((f) => f.startsWith("LegalPage-"))
+if (legal) check("pagine legali (solo /privacy/, /cookie/, /note-legali/)", gz(join("dist/assets", legal)), 8 * KB)
 const basic = assets.find((f) => f.startsWith("basic-"))
 if (basic) check("basic.js", gz(join("dist/assets", basic)), 2 * KB)
 

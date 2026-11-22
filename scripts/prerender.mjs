@@ -1,5 +1,5 @@
 // Pre-render: scrive un HTML per ogni rotta partendo da dist/index.html e dal bundle server.
-import { mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 
@@ -14,6 +14,20 @@ const ROUTES = [
   { path: "/note-legali/", file: "note-legali/index.html" },
 ]
 
+// Chunk che l'entry-client scarica prima di idratare (testi della lingua, pagine legali): si precaricano dall'HTML,
+// così partono insieme allo script d'ingresso invece che dopo.
+const assets = readdirSync("dist/assets")
+const chunk = (prefix) => {
+  const f = assets.find((a) => a.startsWith(`${prefix}-`) && a.endsWith(".js"))
+  if (!f) {
+    console.error(`prerender: manca il chunk ${prefix}-*.js in dist/assets`)
+    process.exit(1)
+  }
+  return `<link rel="modulepreload" href="/assets/${f}">`
+}
+
+const preloads = (path, lang) => [chunk(lang), ...(/^\/(privacy|cookie|note-legali)\//.test(path) ? [chunk("LegalPage")] : [])]
+
 const HTML_TAG = '<html lang="it" data-phase="dark" data-dphase="notte">'
 if (!template.includes(HTML_TAG)) {
   console.error("prerender: il tag <html> del template non è quello atteso")
@@ -24,7 +38,7 @@ for (const r of ROUTES) {
   const { html, head, lang, phase } = render(r.path)
   const out = template
     .replace(HTML_TAG, `<html lang="${lang}" data-phase="${phase}" data-dphase="${phase === "dark" ? "notte" : "mattino"}">`)
-    .replace("<!--app-head-->", () => head)
+    .replace("<!--app-head-->", () => [head, ...preloads(r.path, lang)].join("\n    "))
     .replace("<!--app-html-->", () => html)
   if (!out.includes("<h1") || out.includes("<!--app-")) {
     console.error(`prerender: ${r.file} senza <h1 o con segnaposto residui`)
