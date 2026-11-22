@@ -35,11 +35,19 @@
     margin: 0;
     color: #231c4d;
     font-family: var(--font-title);
+    font-weight: 800;
+    font-size: clamp(46px, 7vw, 88px);
+    line-height: 0.9;
+    text-transform: uppercase;
   }
   .legal-section h2 {
-    margin: 48px 0 16px;
+    margin: 56px 0 16px;
     color: #231c4d;
     font-family: var(--font-title);
+    font-weight: 700;
+    font-size: clamp(30px, 3vw, 40px);
+    line-height: 0.95;
+    text-transform: uppercase;
   }
   .legal-body p,
   .legal-body ul {
@@ -68,7 +76,6 @@
   }
   /* Cifre in Literata, senza lo zero barrato. */
   .legal-body {
-    font-family: "Literata Figures", var(--font-sans);
     font-variant-numeric: lining-nums;
   }
   /* In testa alla pagina legale la lingua sta col bottone «Chiama», non accanto al logo. */
