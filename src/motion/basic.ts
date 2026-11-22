@@ -1,7 +1,37 @@
 // Sempre caricato, piccolo: header pieno oltre 80 px, barra contatti del telefono dopo l'hero,
 // chiusura del foglio dell'indice prima dello scroll alle ancore e, senza movimento, l'ora della sezione in vista.
 
+import italicUrl from "@fonts/literata/files/literata-latin-opsz-italic.woff2?url"
+
 const root = document.documentElement
+
+// Il corsivo di Literata pesa 113 KB e serve solo a testi sotto la prima schermata: si scarica quando uno sta per entrare in vista.
+const italicTargets = document.querySelectorAll(".hour-label, .passi-chiusura, .form-title, .footer-slogan")
+if (italicTargets.length && "FontFace" in window) {
+  const loadItalic = () => {
+    const face = new FontFace("Literata", `url(${italicUrl}) format("woff2")`, {
+      style: "italic",
+      weight: "200 900",
+      display: "swap",
+      unicodeRange: "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD",
+    })
+    void face.load().then((f) => document.fonts.add(f), () => {})
+  }
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          io.disconnect()
+          loadItalic()
+        }
+      },
+      { rootMargin: "100px 0px" },
+    )
+    italicTargets.forEach((el) => io.observe(el))
+  } else {
+    loadItalic()
+  }
+}
 const header = document.querySelector<HTMLElement>(".site-header")
 if (header) {
   let solid: boolean | null = null
