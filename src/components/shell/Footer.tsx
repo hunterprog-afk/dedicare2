@@ -17,7 +17,7 @@ export function Footer() {
       <div className="wrap footer-grid">
         <div className="footer-brand">
           <Logo phase="notte" size={48} />
-          <p className="footer-slogan t-h3">{t("footer.slogan")}</p>
+          <p className="footer-slogan">{t("footer.slogan")}</p>
         </div>
         <div className="footer-contacts">
           <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>

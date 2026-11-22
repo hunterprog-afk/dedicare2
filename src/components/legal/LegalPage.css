@@ -34,12 +34,12 @@
   .wrap-legal h1 {
     margin: 0;
     color: #231c4d;
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
   }
   .legal-section h2 {
     margin: 48px 0 16px;
     color: #231c4d;
-    font-family: var(--font-serif);
+    font-family: var(--font-title);
   }
   .legal-body p,
   .legal-body ul {

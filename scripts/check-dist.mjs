@@ -2,6 +2,12 @@
 import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
 import { join } from "node:path"
 
+try {
+  process.loadEnvFile(".env.production")
+} catch {
+  /* nessun file: vale l'ambiente */
+}
+
 const fail = (msg) => {
   console.error(`check-dist: ${msg}`)
   process.exit(1)
@@ -60,7 +66,17 @@ for (const marker of ['hreflang="it"', 'hreflang="en"', 'hreflang="x-default"', 
 }
 const en = readFileSync("dist/en/index.html", "utf8")
 if (!en.includes('<html lang="en"')) fail("dist/en/index.html non ha lang=en")
-if (!/<h1[^>]*>[^<]*Home care,/.test(en)) fail("dist/en/index.html senza l'H1 inglese")
+if (!/<h1[\s>]/.test(en) || !visible(en).includes("When someone is needed at home.")) fail("dist/en/index.html senza l'H1 inglese")
+// Tutto il testo delle sette scene sta nell'HTML pre-renderizzato, in italiano e in inglese (non dentro il video).
+const enJson = JSON.parse(readFileSync("src/i18n/locales/en.json", "utf8"))
+for (const [label, json, html] of [["it", it, text], ["en", enJson, visible(en)]]) {
+  for (const sc of json.film.scenes) {
+    for (const part of [sc.title, sc.body, ...sc.tags]) if (!html.includes(norm(part))) fail(`testo di scena assente dall'HTML ${label}: «${part}»`)
+  }
+}
+for (let n = 1; n <= 7; n++) for (const f of [`s${n}.mp4`, `s${n}-m.mp4`, `s${n}.jpg`, `s${n}-m.jpg`, `s${n}-foto.webp`, `s${n}-foto-m.webp`]) {
+  if (!existsSync(join("dist/film", f))) fail(`manca dist/film/${f}`)
+}
 
 const walk = (dir) =>
   readdirSync(dir).flatMap((n) => {

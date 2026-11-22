@@ -2,7 +2,7 @@ import { useTranslation } from "@/i18n/react"
 import { PhoneIcon, WhatsAppIcon } from "../icons"
 import { PHONE_HREF, whatsappHref } from "@/content/contacts"
 
-/** Barra contatti del telefono: compare quando l'hero è uscito dallo schermo (basic.ts). */
+/** Barra flottante in vetro del telefono: Chiama e WhatsApp, sempre in vista dentro l'area sicura. */
 export function MobileBar() {
   const { t } = useTranslation()
   return (

@@ -1,10 +1,6 @@
 import type { TFunction } from "@/i18n/react"
-import generated from "@/content/images.generated.json"
 import { SITE_URL } from "@/content/contacts"
 import { getRoute, isHome, type RouteId } from "@/routes"
-
-type Manifest = Record<string, { w: number; h: number; widths: number[] }>
-const manifest = generated as Manifest
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
 
@@ -65,13 +61,6 @@ const LOCAL_BUSINESS = {
   },
 }
 
-function preloadImage(name: string, media: string): string {
-  const entry = manifest[name]
-  if (!entry) return ""
-  const srcset = entry.widths.map((w) => `/img/${name}-${w}.avif ${w}w`).join(", ")
-  return `<link rel="preload" as="image" type="image/avif" imagesrcset="${esc(srcset)}" imagesizes="100vw" media="${media}" fetchpriority="high">`
-}
-
 interface HeadOptions {
   route: RouteId
   t: TFunction
@@ -127,10 +116,9 @@ export function buildHead({ route, t, fontUrls }: HeadOptions): string {
     lines.push(`<link rel="preload" as="font" type="font/woff2" href="${esc(url)}" crossorigin>`)
   }
   if (home) {
-    const wide = preloadImage("notte-finestra-orizz", "(min-width: 640px)")
-    const tall = preloadImage("notte-finestra-vert", "(max-width: 639px)")
-    if (wide) lines.push(wide)
-    if (tall) lines.push(tall)
+    // Il primo fotogramma del film è l'elemento principale della pagina: parte subito.
+    lines.push(`<link rel="preload" as="image" href="/film/s1.jpg" media="(min-width: 860px)" fetchpriority="high">`)
+    lines.push(`<link rel="preload" as="image" href="/film/s1-m.jpg" media="(max-width: 859px)" fetchpriority="high">`)
 
     const faq = t("faq.items", { returnObjects: true }) as { q: string; a: string }[]
     lines.push(jsonScript(LOCAL_BUSINESS))

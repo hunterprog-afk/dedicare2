@@ -4,12 +4,13 @@
     "description": "Home care in Milan and the surrounding area: OSS healthcare assistants, shifts even 24 hours a day and at night, accompaniment to visits and therapies. Free first consultation.",
     "og_locale": "en_GB"
   },
-  "a11y": { "skip": "Skip to content" },
+  "a11y": {
+    "skip": "Skip to content"
+  },
   "nav": {
     "chiama": "Call",
     "chiama_aria": "Call Dedicare Solutions on +39 388 253 6992",
-    "logo_aria": "Dedicare Solutions, back to the top",
-    "servizi": "Services"
+    "logo_aria": "Dedicare Solutions, back to the top"
   },
   "language": {
     "label": "Language",
@@ -18,147 +19,171 @@
     "switch_to_en": "Switch to English (EN)",
     "switch_to_it": "Passa all'italiano (IT)"
   },
-  "ore": {
-    "titolo": "The hours of the shift",
-    "pill_aria": "The hours of the shift: open the index. It is {{time}}.",
-    "chiudi": "Close",
-    "voci": {
-      "a-chi": "Who we care for",
-      "servizi": "Our services",
-      "assistenza-24-7": "24/7 care",
-      "cambio-turno": "Shift change",
-      "operatori-oss": "Healthcare assistants (OSS)",
-      "accompagnamento": "Accompaniment",
-      "multidisciplinare": "Multidisciplinary approach",
-      "perche": "Why choose us",
-      "come-funziona": "How we work",
-      "aree": "Milan and Greater Milan",
-      "tariffe": "Fees and terms",
-      "sera": "In the evening",
-      "faq": "Frequently asked questions",
-      "lavora-con-noi": "Work with us",
-      "contatti": "Contact us"
-    }
-  },
-  "hero": {
-    "eyebrow": "Home care · Milan and surrounding area",
-    "h1_a": "Home care,",
-    "h1_b": "by day and by night.",
-    "sub": "OSS healthcare assistants and nurses for seniors, adults after a hospital stay, children and people with disabilities. Even 24 hours a day.",
-    "cta_call": "Call for a free consultation",
-    "cta_call_short": "Call for a free consultation",
-    "cta_whatsapp": "Message us on WhatsApp"
-  },
   "assistiti": {
-    "eyebrow": "Who we care for",
-    "title_a": "At 22:00 the shift begins.",
-    "title_b": "Who is it for?",
-    "intro": "Seniors, adults, children and people with disabilities: every story is different. We build the assistance around the person and their family, not the other way round.",
     "items": [
-      { "title": "Seniors", "body": "Continuous home care, also for people with chronic conditions or dementia, and daily companionship to live at home safely." },
-      { "title": "Adults after a hospital stay", "body": "Care at home after a hospital stay or an operation and support during recovery, to get back to everyday life." },
-      { "title": "Children", "body": "Support for families of children and young people with illnesses or disabilities: we assess each situation together, case by case." },
-      { "title": "People with disabilities", "body": "Support for autonomy and continuous assistance, with nurses and OSS working on the same plan." }
+      {
+        "title": "Seniors",
+        "body": "Continuous home care, also for people with chronic conditions or dementia, and daily companionship to live at home safely."
+      },
+      {
+        "title": "Adults after a hospital stay",
+        "body": "Care at home after a hospital stay or an operation and support during recovery, to get back to everyday life."
+      },
+      {
+        "title": "Children",
+        "body": "Support for families of children and young people with illnesses or disabilities: we assess each situation together, case by case."
+      },
+      {
+        "title": "People with disabilities",
+        "body": "Support for autonomy and continuous assistance, with nurses and OSS working on the same plan."
+      }
     ]
   },
   "servizi": {
-    "eyebrow": "Our services",
-    "title": "Four services, one point of contact.",
-    "intro": "Qualified professionals at home, in hospital and during every transfer. Each service is tailored to the person, not the diagnosis.",
-    "scopri": "Discover more",
-    "torna_orario": "Back to the services",
-    "orario_nota": "The hours tell a typical day; they are not service hours.",
     "items": {
       "assistenza247": {
         "title": "24/7 care",
         "body": "Home shifts by day, by night and on holidays, up to round-the-clock presence.",
         "emergenza": "In a medical emergency: 112.",
         "longDescription": "We arrange care at home for the hours you actually need: nights, weekends, holidays, up to full 24-hour coverage with several carers taking turns. We try to keep the same carers, so the person sees familiar faces. This service does not replace emergency services: in a medical emergency, call 112 immediately.",
-        "bullets": ["Nights, weekends and holidays", "Round-the-clock presence", "The same carers, as far as possible"]
+        "bullets": [
+          "Nights, weekends and holidays",
+          "Round-the-clock presence",
+          "The same carers, as far as possible"
+        ]
       },
       "oss": {
         "title": "Healthcare assistants (OSS)",
         "body": "Our healthcare assistants provide qualified, compassionate support for daily care, preserving dignity, autonomy and well-being.",
         "longDescription": "Dedicare's healthcare assistants are selected for both technical skill and human empathy. They support the patient with daily activities discreetly and respectfully, ease the family's caregiving load and become a steady, familiar presence in the home — capable of restoring rhythm, calm and connection.",
-        "bullets": ["Personal hygiene and mobility", "Mealtime assistance", "Emotional support and companionship", "Cognitive stimulation", "Coordination with family members"]
+        "bullets": [
+          "Personal hygiene and mobility",
+          "Mealtime assistance",
+          "Emotional support and companionship",
+          "Cognitive stimulation",
+          "Coordination with family members"
+        ]
       },
       "accompagnamento": {
         "title": "Accompaniment",
         "body": "One of our carers accompanies the person to visits, tests and therapies, and assists them when travelling too.",
         "longDescription": "We accompany the person to outpatient clinics, day hospitals, clinics and specialist visits with one of our carers, and with a nurse at your request or on a doctor's advice. On request, we can also assist the person while travelling. We plan schedules, paperwork and logistics with you, from leaving home to getting back.",
-        "bullets": ["Visits, tests and therapies", "Support during hospital stays", "On request, assistance when travelling", "A nurse at your request or on a doctor's advice"]
+        "bullets": [
+          "Visits, tests and therapies",
+          "Support during hospital stays",
+          "On request, assistance when travelling",
+          "A nurse at your request or on a doctor's advice"
+        ]
       },
       "multidisciplinare": {
         "title": "Multi­disciplinary approach",
         "body": "Nurses and OSS work on the same plan; if other professionals are needed, we help you find them and coordinate with them.",
         "longDescription": "Nurses and healthcare assistants (OSS) work on the same care plan and share information and goals. If other professionals are needed, for example a physiotherapist, we help you find them and coordinate with them. This way the care adapts when needs change and the family has a single point of reference.",
-        "bullets": ["Coordinated nurses and OSS", "Personalised care plan", "Constant updates to the family", "Other professionals: we help you find them"]
+        "bullets": [
+          "Coordinated nurses and OSS",
+          "Personalised care plan",
+          "Constant updates to the family",
+          "Other professionals: we help you find them"
+        ]
       }
     }
   },
-  "cambio": {
-    "title": "At six, the night shift hands over to the day shift.",
-    "body": "We try to keep the same carers, so the person sees familiar faces; if a carer is absent, we find the replacement."
-  },
-  "perche": {
-    "eyebrow": "Why choose us",
-    "title_a": "Who comes into your home,",
-    "title_b": "and how.",
-    "intro": "Before we start, we tell you the qualifications of whoever will come into your home.",
-    "items": [
-      { "title": "Clear qualifications", "body": "We work with healthcare assistants holding the OSS qualification and nurses registered with the Order (OPI)." },
-      { "title": "Even 24 hours a day", "body": "Shifts by day, by night and on holidays, up to continuous presence with several carers taking turns." },
-      { "title": "Free first consultation", "body": "A no-obligation phone or WhatsApp call to understand your needs and propose the best solution." },
-      { "title": "Milan and surroundings", "body": "We work in Milan and nearby towns. Availability depends on the carers in your area: we check it together with you." }
-    ]
-  },
   "processo": {
-    "eyebrow": "How we work",
     "title": "From the first call to the first shift.",
-    "chiusura": "Then the day finds its rhythm again.",
     "items": [
-      { "title": "First contact", "body": "Free phone or WhatsApp consultation to understand the patient's and family's needs. No commitment." },
-      { "title": "Assessment", "body": "Assessment of needs together with the family, to define a personalised assistance plan." },
-      { "title": "Activation", "body": "We assign the carer best suited to the person and start the service on the dates agreed with the family." },
-      { "title": "Follow-up", "body": "Constant family updates, plan reviews when needs change." }
-    ]
+      {
+        "title": "First contact",
+        "body": "Free phone or WhatsApp consultation to understand the patient's and family's needs. No commitment."
+      },
+      {
+        "title": "Assessment",
+        "body": "Assessment of needs together with the family, to define a personalised assistance plan."
+      },
+      {
+        "title": "Activation",
+        "body": "We assign the carer best suited to the person and start the service on the dates agreed with the family."
+      },
+      {
+        "title": "Follow-up",
+        "body": "Constant family updates, plan reviews when needs change."
+      }
+    ],
+    "heading": "How it works"
   },
   "aree": {
-    "eyebrow": "Coverage",
     "title": "Milan and Greater Milan",
     "intro": "We work in Milan city and in the towns of Greater Milan. Availability depends on the carers in your area: contact us and we will check it together. For locations outside the metropolitan area we evaluate travel on request.",
-    "map_alt": "Stylised map of Milan and Greater Milan",
-    "sede": "office",
-    "comuni": ["Milan (all districts)", "Sesto San Giovanni", "Cinisello Balsamo", "Cologno Monzese", "Bresso", "Cusano Milanino", "Monza", "Rho", "San Donato Milanese", "Cernusco sul Naviglio", "Segrate"]
-  },
-  "tariffario": {
-    "eyebrow": "Quote",
-    "title": "Fees and terms",
-    "intro": "Every plan is personalised and the quote is free. The rate is hourly and depends on the hours of care, holidays and any travel.",
-    "cta": "Request a free quote",
-    "cta_short": "Request a free quote",
-    "prefill": "I would like a quote",
-    "factors": [
-      { "title": "Type of assistance", "body": "OSS, nurses and specialist or multidisciplinary support: each profile has different rates and timing." },
-      { "title": "Duration and frequency", "body": "Single visit, scheduled shifts, nights or round-the-clock presence all affect the financial plan." },
-      { "title": "Patient condition", "body": "Conditions, active therapies, medical devices and dependency levels define the real need." },
-      { "title": "Additional services", "body": "Accompaniment to visits and therapies, support during hospital stays and when travelling." }
+    "comuni": [
+      "Milan (all districts)",
+      "Sesto San Giovanni",
+      "Cinisello Balsamo",
+      "Cologno Monzese",
+      "Bresso",
+      "Cusano Milanino",
+      "Monza",
+      "Rho",
+      "San Donato Milanese",
+      "Cernusco sul Naviglio",
+      "Segrate"
     ]
   },
-  "sera": { "title": "In the evening and at night, the shifts go on." },
+  "tariffario": {
+    "cta": "Ask for a quote",
+    "prefill": "I would like a quote",
+    "factors": [
+      {
+        "title": "Type of assistance",
+        "body": "OSS, nurses and specialist or multidisciplinary support: each profile has different rates and timing."
+      },
+      {
+        "title": "Duration and frequency",
+        "body": "Single visit, scheduled shifts, nights or round-the-clock presence all affect the financial plan."
+      },
+      {
+        "title": "Patient condition",
+        "body": "Conditions, active therapies, medical devices and dependency levels define the real need."
+      },
+      {
+        "title": "Additional services",
+        "body": "Accompaniment to visits and therapies, support during hospital stays and when travelling."
+      }
+    ],
+    "frase": "Every plan is tailor-made: the quote is free.",
+    "heading": "Fees"
+  },
   "faq": {
-    "eyebrow": "FAQ",
     "title": "Frequently asked questions.",
     "intro": "Can't find the answer you're looking for? Write to us or give us a call.",
     "cta": "Write to us",
     "items": [
-      { "q": "Who is Dedicare Solutions for?", "a": "We assist seniors, adults after a hospital stay, children and people with physical or cognitive disabilities who need care at home, in hospital or during transfers, in Milan and the surrounding area." },
-      { "q": "Is the first consultation really free?", "a": "Yes, completely. A no-obligation phone or WhatsApp call to understand your needs, answer your questions and propose the best solution. Call or write to us at +39 388 253 6992." },
-      { "q": "What qualifications do your staff have?", "a": "We work with healthcare assistants (OSS) holding the OSS qualification and with nurses registered with the Order of Nursing Professions (OPI). Before the start we tell you the qualification of whoever will come into your home." },
-      { "q": "Do you operate only in Milan or also in nearby areas?", "a": "We work in Milan and in the towns of Greater Milan. Availability depends on the carers in your area: contact us and we will check it together. For more distant areas we evaluate travel on request." },
-      { "q": "How does night-time and weekend care work?", "a": "We arrange shifts at night, at weekends and on holidays, up to round-the-clock presence with several carers taking turns. In a medical emergency, always call 112." },
-      { "q": "Are home care expenses tax-deductible in Italy?", "a": "Some care expenses give the right to Italian income tax (IRPEF) deductions, within the limits and conditions set by law: they depend on the type of service, the condition of the person cared for and the income of whoever pays, and they require a traceable payment. We issue a regular invoice; to find out whether you can deduct the expense and with which documents, ask a CAF or your accountant." },
-      { "q": "How is the service activated?", "a": "Call us on +39 388 253 6992 or write to info@dedicaresolutions.it. After the free consultation and the assessment, we agree the start date together: if a carer is available in your area, it can be within a few days." }
+      {
+        "q": "Who is Dedicare Solutions for?",
+        "a": "We assist seniors, adults after a hospital stay, children and people with physical or cognitive disabilities who need care at home, in hospital or during transfers, in Milan and the surrounding area."
+      },
+      {
+        "q": "Is the first consultation really free?",
+        "a": "Yes, completely. A no-obligation phone or WhatsApp call to understand your needs, answer your questions and propose the best solution. Call or write to us at +39 388 253 6992."
+      },
+      {
+        "q": "What qualifications do your staff have?",
+        "a": "We work with healthcare assistants (OSS) holding the OSS qualification and with nurses registered with the Order of Nursing Professions (OPI). Before the start we tell you the qualification of whoever will come into your home."
+      },
+      {
+        "q": "Do you operate only in Milan or also in nearby areas?",
+        "a": "We work in Milan and in the towns of Greater Milan. Availability depends on the carers in your area: contact us and we will check it together. For more distant areas we evaluate travel on request."
+      },
+      {
+        "q": "How does night-time and weekend care work?",
+        "a": "We arrange shifts at night, at weekends and on holidays, up to round-the-clock presence with several carers taking turns. In a medical emergency, always call 112."
+      },
+      {
+        "q": "Are home care expenses tax-deductible in Italy?",
+        "a": "Some care expenses give the right to Italian income tax (IRPEF) deductions, within the limits and conditions set by law: they depend on the type of service, the condition of the person cared for and the income of whoever pays, and they require a traceable payment. We issue a regular invoice; to find out whether you can deduct the expense and with which documents, ask a CAF or your accountant."
+      },
+      {
+        "q": "How is the service activated?",
+        "a": "Call us on +39 388 253 6992 or write to info@dedicaresolutions.it. After the free consultation and the assessment, we agree the start date together: if a carer is available in your area, it can be within a few days."
+      }
     ]
   },
   "form": {
@@ -169,15 +194,22 @@
     "field_too_long": "The text is too long: {{max}} characters at most."
   },
   "curriculum": {
-    "eyebrow": "Work with us",
     "title": "Join the Dedicare team",
     "intro": "We're looking for professionals who share our way of caring: clinical expertise, genuine listening and a steady human presence. Send us your CV — we read every application personally.",
-    "reasons_title": "Why work with Dedicare",
+    "reasons_title": "Why work with us",
     "reasons": [
-      { "title": "Continuous training", "body": "Ongoing clinical updates, initial mentoring and clear internal growth paths." },
-      { "title": "Human workplace", "body": "Close clinical coordination, sustainable shifts and real listening to the people who work with us." },
-      { "title": "Proper contracts", "body": "Italian CCNL framework, professional liability coverage and reliable payments." },
-      { "title": "Close to home", "body": "We assign patients in your area of Greater Milan: less commuting and more time devoted to care." }
+      {
+        "title": "Continuous training",
+        "body": "Ongoing clinical updates, initial mentoring and clear internal growth paths."
+      },
+      {
+        "title": "Human workplace",
+        "body": "Close clinical coordination, sustainable shifts and real listening to the people who work with us."
+      },
+      {
+        "title": "Proper contracts",
+        "body": "Italian CCNL framework, professional liability coverage and reliable payments."
+      }
     ],
     "form_title": "Apply now",
     "nome": "First name",
@@ -213,11 +245,12 @@
     "error_filetype": "Unsupported format. Please upload a PDF."
   },
   "contatti": {
-    "eyebrow": "Let's start together",
     "title": "Let's talk. The first consultation is free.",
-    "subline": "A free call. A tailored plan. The care your family deserves.",
     "email_label": "Email",
-    "emergenza": "In a medical emergency call 112: our phone, WhatsApp and contact form are not an emergency service."
+    "emergenza": "In a medical emergency call 112: our phone, WhatsApp and contact form are not an emergency service.",
+    "heading": "Contact",
+    "sede": "Registered office",
+    "sede_valore": "Via Roma 80, 20054 Segrate (MI)"
   },
   "contactform": {
     "intro": "Or write to us directly",
@@ -242,7 +275,11 @@
     "aria": "Message us on WhatsApp",
     "prefill": "Hello, I would like some information about Dedicare Solutions home care services."
   },
-  "mobilebar": { "label": "Quick contacts", "call": "Call", "whatsapp": "WhatsApp" },
+  "mobilebar": {
+    "label": "Quick contacts",
+    "call": "Call",
+    "whatsapp": "WhatsApp"
+  },
   "footer": {
     "slogan": "The care you deserve.",
     "copyright": "© {{year}} Dedicare Solutions S.r.l.s. (simplified limited liability company) · Registered office Via Roma 80, 20054 Segrate (MI), Italy · Tax code, VAT no. and Milano Monza Brianza Lodi Companies Register no. 11600760968 · REA MI-2613682 · Share capital € 1,000.00 subscribed and fully paid · PEC dedicaresolutionssrls@pec.it",
@@ -258,18 +295,101 @@
     "description_cookie": "Cookie Policy del sito dedicaresolutions.it di Dedicare Solutions S.r.l.s.",
     "description_note": "Note legali del sito dedicaresolutions.it di Dedicare Solutions S.r.l.s."
   },
-  "img": {
-    "notte-finestra": "One amber-lit window on a dark indigo Milanese apartment facade.",
-    "notte-lampada": "A hand adjusts a sleeping person's blanket beside an amber bedside lamp.",
-    "notte-cucina": "Steaming chamomile tea in a dim kitchen, with a wall clock showing four.",
-    "alba-naviglio": "Milan's Naviglio Grande at dawn, with pink mist, glowing lamps and houses reflected in water.",
-    "alba-persiane": "A hand opens shutters, casting dawn light onto parquet and a velvet armchair.",
-    "mattino-tazza": "A younger hand supports an older hand around a cup in warm morning light.",
-    "mattino-accompagnamento": "Two people seen from behind, arm in arm, leave a Milanese doorway; a tram, blurred.",
-    "giorno-piano": "Four hands rest beside a notebook, colored schedule, glasses and a cup of tea.",
-    "giorno-gioco": "A child's and an adult's hands build a wooden tower on a sunlit parquet floor.",
-    "sera-balcone": "An open window overlooks geraniums and Milan rooftops at sunset, beside a linen curtain.",
-    "ingresso-turno": "Keys on a console, with a jacket and tote bag beside an apartment's ajar door.",
-    "sera-tram": "A care worker leaves a Milan tram at night, amid amber lights and wet pavement."
+  "film": {
+    "aria": "The 24-hour shift, in seven scenes",
+    "more": "More",
+    "close": "Close",
+    "scroll": "Scroll: we're going in.",
+    "note": "The hours tell a typical day, not the service hours.",
+    "rail_aria": "Film chapters",
+    "hour_aria": "Scene time",
+    "call": "Call: free consultation",
+    "whatsapp": "Message us on WhatsApp",
+    "write": "Write to us",
+    "scenes": [
+      {
+        "hour": "22:00",
+        "rail": "Courtyard",
+        "kicker": "Home care · Milan and surrounding area",
+        "title": "When someone is needed at home.",
+        "body": "OSS healthcare assistants and nurses at your home, day and night.",
+        "tags": [],
+        "alt": "A Milanese courtyard house at night, with a single lit window."
+      },
+      {
+        "hour": "02:00",
+        "rail": "Night",
+        "kicker": "24/7 care",
+        "title": "At night, someone keeps watch.",
+        "body": "Day, night and holiday shifts, up to round-the-clock presence, 24 hours a day.",
+        "tags": [
+          "Nights",
+          "Holidays",
+          "24 hours a day"
+        ],
+        "alt": "A living room with a lamp on: the lady sleeps in her armchair while the carer keeps watch."
+      },
+      {
+        "hour": "06:00",
+        "rail": "Dawn",
+        "kicker": "The shift change",
+        "title": "Handovers pass. People stay.",
+        "body": "We try to keep the same carers: trust needs familiar faces.",
+        "tags": [],
+        "alt": "Dawn on the Naviglio Grande, with the iron bridge in the centre."
+      },
+      {
+        "hour": "08:00",
+        "rail": "Morning",
+        "kicker": "OSS healthcare assistants",
+        "title": "The small things of every day.",
+        "body": "Personal care, meals, mobility and company, with patience and respect.",
+        "tags": [
+          "Personal care",
+          "Nutrition",
+          "Company"
+        ],
+        "alt": "A kitchen in the morning: the carer helps the lady sit down for breakfast."
+      },
+      {
+        "hour": "10:00",
+        "rail": "Arcades",
+        "kicker": "Accompaniment",
+        "title": "Never alone at an appointment.",
+        "body": "Visits, tests and therapies, and by her side during a hospital stay too.",
+        "tags": [
+          "Visits",
+          "Tests",
+          "Hospital stays"
+        ],
+        "alt": "Under the arcades, two people walk arm in arm towards the light; an orange tram in the background."
+      },
+      {
+        "hour": "11:00",
+        "rail": "Team",
+        "kicker": "A team",
+        "title": "One plan, several professionals.",
+        "body": "Nurses and OSS work on the same plan and keep you updated step by step.",
+        "tags": [
+          "Nurses",
+          "OSS",
+          "Family updates"
+        ],
+        "alt": "Around a table, a nurse, a carer, the daughter and the lady look at the care plan."
+      },
+      {
+        "hour": "21:00",
+        "rail": "Evening",
+        "kicker": "Tonight too",
+        "title": "Let's talk. The first consultation is free.",
+        "body": "A phone call to understand together what you need.",
+        "tags": [],
+        "alt": "The same courtyard at dusk, with lit windows and the same window in the centre."
+      }
+    ]
+  },
+  "perchi": {
+    "title": "Who it's for",
+    "intro": "We build the assistance around the person and their family, not the other way round."
   }
 }

@@ -2,7 +2,7 @@
   .site-footer {
     background: #17123a;
     color: #fff4ef;
-    padding: 64px 0 48px;
+    padding: 72px 0 calc(120px + env(safe-area-inset-bottom));
     font-size: var(--text-legal);
     line-height: 1.55;
     position: relative;
@@ -42,9 +42,11 @@
   }
   .footer-slogan {
     margin: 0;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 440;
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 0.9;
     color: #fff4ef;
   }
   .footer-contacts,
@@ -83,12 +85,11 @@
     max-width: 90ch;
     overflow-wrap: anywhere;
     /* Cifre in Literata, senza lo zero barrato (Via Roma 80, 20054, 1.000,00). */
-    font-family: "Literata Figures", var(--font-sans);
     font-variant-numeric: lining-nums;
   }
   @media (min-width: 1024px) {
     .site-footer {
-      padding: 96px 0 64px;
+      padding: 112px 0 64px;
     }
     .footer-grid {
       grid-template-columns: repeat(12, minmax(0, 1fr));

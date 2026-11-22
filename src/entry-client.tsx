@@ -29,14 +29,3 @@ if (root.firstElementChild) {
 } else {
   createRoot(root).render(app)
 }
-
-void import("./motion/basic")
-
-if (isHome(route) && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const start = () => void import("./motion/engine")
-  if ("requestIdleCallback" in window) {
-    requestIdleCallback(start, { timeout: 1500 })
-  } else {
-    addEventListener("load", () => setTimeout(start, 1), { once: true })
-  }
-}

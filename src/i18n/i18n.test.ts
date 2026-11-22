@@ -45,15 +45,15 @@ describe("testi IT/EN", () => {
   })
 
   it("createI18n risolve le chiavi in modo sincrono, senza detector", () => {
-    expect(createI18n("it").t("hero.h1_a")).toBe("Assistenza a casa,")
-    expect(createI18n("en").t("hero.h1_a")).toBe("Home care,")
+    expect(createI18n("it").t("mobilebar.call")).toBe("Chiama")
+    expect(createI18n("en").t("mobilebar.call")).toBe("Call")
     expect(createI18n("en").t("servizi.items", { returnObjects: true })).toHaveProperty("oss")
   })
 
   it("sostituisce {{variabile}} e conserva i testi senza variabili", () => {
     const { t } = createI18n("it")
     expect(t("form.field_too_long", { max: 100 })).toBe("Il testo è troppo lungo: al massimo 100 caratteri.")
-    expect(t("hero.h1_a", { max: 1 })).toBe("Assistenza a casa,")
+    expect(t("mobilebar.call", { max: 1 })).toBe("Chiama")
   })
 
   it("una chiave mancante fa fallire, nei test e nel pre-render", () => {

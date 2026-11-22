@@ -5,8 +5,6 @@ import { ArrowRightIcon } from "./icons"
 interface CommonProps {
   /** `primary` riempie al passaggio; `secondary` è il contorno (WhatsApp). */
   variant?: "primary" | "secondary"
-  /** Variante oro del tono scuro: aggiunge l'anello al passaggio. */
-  gold?: boolean
   /** Icona a sinistra (solo secondario). */
   icon?: ReactNode
   block?: boolean
@@ -18,8 +16,8 @@ type AnchorProps = CommonProps & { href: string } & Omit<AnchorHTMLAttributes<HT
 type NativeButtonProps = CommonProps & { href?: undefined } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">
 
 export function Button(props: AnchorProps | NativeButtonProps) {
-  const { variant = "primary", gold, icon, block, children, className, ...rest } = props
-  const classes = cn("btn", variant === "secondary" && "btn-secondary", gold && variant === "primary" && "btn-gold", block && "btn-block", className)
+  const { variant = "primary", icon, block, children, className, ...rest } = props
+  const classes = cn("btn", variant === "secondary" && "btn-secondary", block && "btn-block", className)
   const inner =
     variant === "secondary" ? (
       <>
@@ -29,7 +27,9 @@ export function Button(props: AnchorProps | NativeButtonProps) {
     ) : (
       <>
         <span>{children}</span>
-        <ArrowRightIcon />
+        <span className="btn-arrow" aria-hidden="true">
+          <ArrowRightIcon />
+        </span>
       </>
     )
 

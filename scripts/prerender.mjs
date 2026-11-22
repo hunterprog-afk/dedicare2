@@ -4,6 +4,13 @@ import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "nod
 import { dirname, resolve } from "node:path"
 import { pathToFileURL } from "node:url"
 
+// Configurazione del ramo (endpoint dei moduli): .env.production, senza sovrascrivere ciò che arriva già dall'ambiente.
+try {
+  process.loadEnvFile(".env.production")
+} catch {
+  /* nessun file: vale l'ambiente */
+}
+
 const { render } = await import(pathToFileURL(resolve("dist-ssr/entry-server.js")).href)
 const template = readFileSync("dist/index.html", "utf8")
 
@@ -29,7 +36,7 @@ const chunk = (prefix) => {
 
 const preloads = (path, lang) => [chunk(lang), ...(/^\/(privacy|cookie|note-legali)\//.test(path) ? [chunk("LegalPage")] : [])]
 
-const HTML_TAG = '<html lang="it" data-phase="dark" data-dphase="notte">'
+const HTML_TAG = '<html lang="it">'
 if (!template.includes(HTML_TAG)) {
   console.error("prerender: il tag <html> del template non è quello atteso")
   process.exit(1)
@@ -53,7 +60,7 @@ const CSP = [
   `connect-src 'self' ${formsOrigin}`,
   "object-src 'none'",
   "frame-src 'none'",
-  "media-src 'none'",
+  "media-src 'self' blob:",
   "worker-src 'none'",
   "manifest-src 'self'",
   "base-uri 'none'",
@@ -66,9 +73,9 @@ if (!template.includes(CHARSET)) {
 }
 
 for (const r of ROUTES) {
-  const { html, head, lang, phase } = render(r.path)
+  const { html, head, lang } = render(r.path)
   const out = template
-    .replace(HTML_TAG, `<html lang="${lang}" data-phase="${phase}" data-dphase="${phase === "dark" ? "notte" : "mattino"}">`)
+    .replace(HTML_TAG, `<html lang="${lang}">`)
     .replace(CHARSET, () => `${CHARSET}
     <meta http-equiv="Content-Security-Policy" content="${CSP}">`)
     .replace("<!--app-head-->", () => [head, ...preloads(r.path, lang)].join("\n    "))

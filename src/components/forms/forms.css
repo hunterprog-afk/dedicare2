@@ -6,11 +6,11 @@
   }
   .form-title {
     margin: 0;
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: var(--text-h3);
-    line-height: 1.2;
-    font-weight: 440;
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    font-size: 32px;
+    line-height: 0.95;
+    font-weight: 700;
   }
   .form-legend {
     margin: 0;
@@ -33,9 +33,9 @@
     align-content: start;
   }
   .field-label {
-    font-size: var(--text-label);
+    font-size: 15px;
     line-height: 1.3;
-    font-weight: 700;
+    font-weight: 600;
     color: #231c4d;
   }
   .field-control {
@@ -149,10 +149,11 @@
   }
   .form-success h3 {
     margin: 0;
-    font-family: var(--font-serif);
-    font-size: var(--text-h3);
-    line-height: 1.2;
-    font-weight: 460;
+    font-family: var(--font-title);
+    text-transform: uppercase;
+    font-size: 36px;
+    line-height: 0.95;
+    font-weight: 700;
   }
   .form-success p {
     margin: 0;

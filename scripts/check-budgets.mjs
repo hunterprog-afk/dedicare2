@@ -59,26 +59,11 @@ if (fonts.length > 4) {
 }
 check("font, peso totale", fonts.reduce((s, f) => s + statSync(join("dist/assets", f)).size, 0), 280 * KB)
 
-// Foto dell'hero, se già ottimizzate.
+// Film: il poster della prima scena è l'elemento principale (LCP), gli altri file si scaricano a richiesta.
 for (const [f, max] of [
-  ["notte-finestra-orizz-1440.avif", 220 * KB],
-  ["notte-finestra-vert-1024.avif", 120 * KB],
-  ["notte-finestra-vert-640.avif", 70 * KB],
-]) {
-  const p = join("dist/img", f)
-  if (existsSync(p)) check(f, statSync(p).size, max)
-  else console.log(`skip ${f}: foto non ancora presente`)
-}
-
-// Peso complessivo delle foto in dist/img (il browser ne scarica una sola variante per foto: qui si somma tutto ciò che si pubblica).
-if (existsSync("dist/img")) {
-  const imgs = readdirSync("dist/img")
-  const sum = (ext) => imgs.filter((f) => f.endsWith(ext)).reduce((s, f) => s + statSync(join("dist/img", f)).size, 0)
-  check("foto AVIF, peso totale", sum(".avif"), 2200 * KB)
-  check("foto WebP, peso totale", sum(".webp"), 3200 * KB)
-  const biggest = imgs.filter((f) => f.endsWith(".avif")).map((f) => [f, statSync(join("dist/img", f)).size]).sort((x, y) => y[1] - x[1])[0]
-  if (biggest) check(`foto AVIF più pesante (${biggest[0]})`, biggest[1], 260 * KB)
-}
+  ["s1.jpg", 200 * KB],
+  ["s1-m.jpg", 160 * KB],
+]) check(`film/${f}`, statSync(join("dist/film", f)).size, max)
 
 // Colori nel CSS compilato: solo i 7 della palette (esadecimali e rgb(… / a)).
 const PALETTE_HEX = new Set(["#17123a", "#231c4d", "#5a5482", "#a99bf0", "#ffb59a", "#ffd98a", "#fff4ef"])

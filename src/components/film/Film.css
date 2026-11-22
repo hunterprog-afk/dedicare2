@@ -1,0 +1,513 @@
+/* Il film. Due layout: «scrub» (html.js senza film-static): una scena fissa a tutto schermo guidata dallo scroll;
+   «fermo» (senza JavaScript, con movimento ridotto o risparmio dati): sette schermate con le foto, testo completo. */
+@layer components {
+  .film {
+    position: relative;
+    background: #17123a;
+    color: #fff4ef;
+  }
+  .film-scene {
+    position: relative;
+    overflow: hidden;
+    background: #17123a;
+  }
+  .scene-media {
+    position: absolute;
+    inset: 0;
+    background: #17123a;
+  }
+  .scene-media picture {
+    display: contents;
+  }
+  .scene-poster,
+  .scene-video,
+  .scene-foto {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 42%;
+  }
+  .scene-video {
+    z-index: 1;
+  }
+  /* Velo scuro dal basso solo quanto serve al contrasto del testo (AA). */
+  .scene-scrim {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      linear-gradient(to top, rgb(23 18 58 / 0.86) 0%, rgb(23 18 58 / 0.62) 30%, rgb(23 18 58 / 0) 64%),
+      linear-gradient(to right, rgb(23 18 58 / 0.5) 0%, rgb(23 18 58 / 0) 60%);
+  }
+
+  .scene-copy {
+    position: relative;
+    z-index: 3;
+    width: min(calc(100% - 2 * var(--pad)), 1040px);
+    margin-left: var(--pad);
+  }
+  .scene-kicker {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin: 0 0 14px;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: var(--t-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff4ef;
+  }
+  .scene-hour {
+    font-size: clamp(22px, 2.6vw, 40px);
+    letter-spacing: 0.02em;
+    color: #ffd98a;
+  }
+  .scene-title {
+    margin: 0;
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: var(--t-title);
+    line-height: 0.92;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+    color: #fff4ef;
+  }
+  .w {
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    padding: 0.14em 0.03em 0.04em;
+    margin: -0.14em -0.03em -0.04em;
+  }
+  .wi {
+    display: inline-block;
+  }
+  .scene-body {
+    max-width: 38ch;
+    margin: 22px 0 0;
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: #fff4ef;
+  }
+  .scene-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 0;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: var(--t-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #ffd98a;
+  }
+  .scene-tags li + li::before {
+    content: "/";
+    margin: 0 12px;
+    color: #a99bf0;
+  }
+  .scene-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 14px;
+    margin-top: 28px;
+  }
+  .scene-more {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 14px;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid rgb(255 217 138 / 0.7);
+    background: none;
+    color: #ffd98a;
+    font: 600 16px/1 var(--font-sans);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 200ms var(--ease-out), border-color 200ms var(--ease-out), letter-spacing 300ms var(--ease-soft);
+  }
+  .scene-actions .scene-more {
+    margin-top: 0;
+    margin-left: 8px;
+  }
+  .scene-more:hover {
+    color: #ffb59a;
+    border-color: #ffb59a;
+    letter-spacing: 0.02em;
+  }
+  .scene-hint {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0 0;
+    font-family: var(--font-mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff4ef;
+  }
+  .scene-hint i {
+    position: relative;
+    display: block;
+    width: 44px;
+    height: 1px;
+    overflow: hidden;
+    background: rgb(255 244 239 / 0.35);
+  }
+  .scene-hint i::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #ffd98a;
+    transform: translateX(-100%);
+    animation: hint-run 2.2s var(--ease-soft) infinite;
+  }
+  @keyframes hint-run {
+    0% {
+      transform: translateX(-100%);
+    }
+    60%,
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  /* Pannello «Di più»: l'elenco completo del servizio. */
+  .panel {
+    position: fixed;
+    inset: 0 0 0 auto;
+    margin: 0;
+    width: min(540px, 100%);
+    height: 100%;
+    max-height: none;
+    padding: 96px 36px 48px;
+    border: 0;
+    overflow: auto;
+    background: #fff4ef;
+    color: #231c4d;
+    visibility: visible;
+  }
+  .panel::backdrop {
+    background: rgb(23 18 58 / 0.55);
+  }
+  .panel:popover-open {
+    animation: panel-in 420ms var(--ease-soft);
+  }
+  @keyframes panel-in {
+    from {
+      transform: translateX(40px);
+      opacity: 0;
+    }
+  }
+  .panel-close {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid #231c4d;
+    border-radius: 50%;
+    background: none;
+    color: #231c4d;
+    cursor: pointer;
+    transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out), transform 300ms var(--ease-soft);
+  }
+  .panel-close:hover {
+    background: #231c4d;
+    color: #fff4ef;
+    transform: rotate(90deg);
+  }
+  .panel-close svg {
+    width: 20px;
+    height: 20px;
+  }
+  .panel-hour {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: #5a5482;
+  }
+  .panel-title {
+    margin: 8px 0 20px;
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: clamp(46px, 6vw, 72px);
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+  .panel-long {
+    margin: 0 0 24px;
+    font-size: 17px;
+    line-height: 1.55;
+  }
+  .panel-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgb(35 28 77 / 0.2);
+  }
+  .panel-list li {
+    padding: 14px 0;
+    border-bottom: 1px solid rgb(35 28 77 / 0.2);
+    font-weight: 600;
+  }
+  .panel-emergency {
+    margin: 24px 0 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 859px) {
+    .panel {
+      inset: auto 0 0 0;
+      width: 100%;
+      height: auto;
+      max-height: 86svh;
+      padding: 80px 24px calc(32px + env(safe-area-inset-bottom));
+      border-radius: 28px 28px 0 0;
+    }
+    .panel:popover-open {
+      animation-name: panel-up;
+    }
+    @keyframes panel-up {
+      from {
+        transform: translateY(40px);
+        opacity: 0;
+      }
+    }
+  }
+
+  .film-note {
+    margin: 0;
+    padding: 20px var(--pad) 28px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: var(--t-label);
+    letter-spacing: 0.06em;
+    color: #a99bf0;
+    background: #17123a;
+  }
+  .film-rail,
+  .film-veil,
+  .film-grain {
+    display: none;
+  }
+
+  /* ---- Layout fermo: foto, testo completo, nessun video ---- */
+  :is(html:not(.js), html.film-static) .film-scene {
+    display: flex;
+    align-items: flex-end;
+    min-height: 100svh;
+  }
+  :is(html:not(.js), html.film-static) .scene-poster,
+  :is(html:not(.js), html.film-static) .scene-video {
+    display: none;
+  }
+  :is(html:not(.js), html.film-static) .scene-copy {
+    padding: 140px 0 120px;
+  }
+  :is(html:not(.js), html.film-static) .pill-hour-wrap {
+    display: none;
+  }
+
+  /* ---- Layout scrub ---- */
+  html.js:not(.film-static) .film-track {
+    height: calc((var(--film-w) + 1) * 100svh);
+  }
+  html.js:not(.film-static) .film-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    contain: layout paint;
+  }
+  html.js:not(.film-static) .film-scene {
+    position: absolute;
+    inset: 0;
+    visibility: hidden;
+    opacity: 0;
+  }
+  html.js:not(.film-static) .film-scene:first-of-type {
+    visibility: visible;
+    opacity: 1;
+  }
+  html.js:not(.film-static) .scene-foto {
+    display: none;
+  }
+  html.js:not(.film-static) .scene-copy {
+    position: absolute;
+    left: var(--pad);
+    bottom: clamp(40px, 8svh, 88px);
+    margin: 0;
+    will-change: opacity, transform;
+  }
+  @media (max-width: 1023px) {
+    html.js:not(.film-static) .scene-copy {
+      bottom: calc(96px + env(safe-area-inset-bottom));
+    }
+  }
+  html.js:not(.film-static) .film-veil,
+  html.js:not(.film-static) .film-grain {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+  }
+  html.js:not(.film-static) .film-veil {
+    inset: 0;
+    z-index: 30;
+    opacity: 0;
+    mix-blend-mode: screen;
+    transform-origin: 50% 46%;
+    will-change: transform, opacity;
+    background: radial-gradient(circle at 50% 46%, rgb(255 217 138) 0%, rgb(255 181 154 / 0.85) 34%, rgb(255 181 154 / 0) 72%);
+  }
+  /* Grana da pellicola: un rumore fine, opacità 0,06, mosso a 12 fotogrammi al secondo. */
+  html.js:not(.film-static) .film-grain {
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    z-index: 31;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1.6 -.3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 240px 240px;
+    animation: grain 1s steps(1, end) infinite;
+  }
+  @keyframes grain {
+    0% { transform: translate(0, 0); }
+    8.33% { transform: translate(-4%, -7%); }
+    16.66% { transform: translate(-9%, 4%); }
+    25% { transform: translate(6%, -11%); }
+    33.33% { transform: translate(-3%, 12%); }
+    41.66% { transform: translate(-11%, 5%); }
+    50% { transform: translate(8%, 0); }
+    58.33% { transform: translate(2%, 10%); }
+    66.66% { transform: translate(-7%, -3%); }
+    75% { transform: translate(12%, 6%); }
+    83.33% { transform: translate(0, -9%); }
+    91.66% { transform: translate(5%, 8%); }
+  }
+  .film-live .film-rail {
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .film-live .film-rail {
+      position: fixed;
+      right: 22px;
+      top: 50%;
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      transform: translateY(-50%);
+      filter: drop-shadow(0 1px 6px rgb(23 18 58 / 0.7));
+      transition: opacity 400ms var(--ease-out);
+    }
+    html.film-past .film-rail {
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+  .rail-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    height: 34px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: #fff4ef;
+    cursor: pointer;
+  }
+  .rail-hour {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
+  }
+  .rail-item i {
+    display: block;
+    width: 14px;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.6;
+    transition: width 320ms var(--ease-soft), opacity 200ms var(--ease-out), background-color 200ms var(--ease-out);
+  }
+  .rail-item:hover .rail-hour,
+  .rail-item.is-active .rail-hour {
+    opacity: 1;
+    transform: none;
+  }
+  .rail-item:hover i {
+    width: 26px;
+    opacity: 1;
+  }
+  .rail-item.is-active i {
+    width: 40px;
+    opacity: 1;
+    background: #ffd98a;
+  }
+
+  /* ---- Ingressi del testo (solo layout scrub) ---- */
+  html.js:not(.film-static) .film-scene .wi {
+    transform: translateY(115%);
+    transition: transform 250ms var(--ease-out);
+  }
+  html.js:not(.film-static) .film-scene.is-on .wi {
+    transform: none;
+    transition: transform 700ms var(--ease-soft) var(--d, 0ms);
+  }
+  html.js:not(.film-static) .film-scene .rv {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out);
+  }
+  html.js:not(.film-static) .film-scene.is-on .rv {
+    opacity: 1;
+    transform: none;
+    transition: opacity 600ms var(--ease-soft) var(--rd, 200ms), transform 600ms var(--ease-soft) var(--rd, 200ms);
+  }
+  /* La prima scena entra da sola al caricamento, senza aspettare il motore. */
+  html.js:not(.film-static) .film-scene[data-i="0"] .wi {
+    transform: none;
+    transition: none;
+    animation: wi-in 800ms var(--ease-soft) both;
+    animation-delay: calc(120ms + var(--d, 0ms));
+  }
+  html.js:not(.film-static) .film-scene[data-i="0"] .rv {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: rv-in 700ms var(--ease-soft) both;
+    animation-delay: calc(300ms + var(--rd, 0ms));
+  }
+  @keyframes wi-in {
+    from {
+      transform: translateY(115%);
+    }
+  }
+  @keyframes rv-in {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
+}
