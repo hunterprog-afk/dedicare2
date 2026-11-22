@@ -24,15 +24,19 @@
   [data-tone] {
     color: var(--ink);
   }
-  section {
-    scroll-margin-top: 60px;
+  /* Altezza dell'header (60 / 72 px) e, sul telefono, della barra contatti: né le ancore né il fuoco finiscono sotto. */
+  html {
+    scroll-padding-top: 60px;
   }
   @media (min-width: 1024px) {
-    section {
-      scroll-margin-top: 72px;
+    html {
+      scroll-padding-top: 72px;
     }
   }
   @media (max-width: 1023px) {
+    html {
+      scroll-padding-bottom: calc(64px + env(safe-area-inset-bottom));
+    }
     body {
       padding-bottom: calc(64px + env(safe-area-inset-bottom));
     }

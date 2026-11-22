@@ -162,6 +162,7 @@
   },
   "form": {
     "legenda": "I campi con * sono obbligatori.",
+    "senza_js": "Per inviare il modulo serve JavaScript. Puoi chiamarci al +39 388 253 6992 o scrivere a info@dedicaresolutions.it.",
     "field_required": "Questo campo è obbligatorio.",
     "field_email": "Scrivi un indirizzo email valido, per esempio nome@esempio.it.",
     "field_too_long": "Il testo è troppo lungo: al massimo {{max}} caratteri."

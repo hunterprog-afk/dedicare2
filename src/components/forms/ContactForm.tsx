@@ -96,6 +96,9 @@ export function ContactForm() {
           {alertText}
         </p>
       )}
+      <noscript>
+        <p className="form-consent">{t("form.senza_js")}</p>
+      </noscript>
       <Button type="submit" className="form-submit" disabled={!hydrated || sendingNow}>
         {sendingNow ? t("contactform.submitting") : t("contactform.submit")}
       </Button>

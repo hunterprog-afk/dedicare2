@@ -21,12 +21,14 @@ export function LavoraConNoi() {
   const detailsRef = useRef<HTMLDetailsElement>(null)
 
   // Sul telefono il modulo sta chiuso dietro «Candidati ora» (i quattro motivi restano in vista); da 1024 px è sempre aperto.
-  // Il pre-render lo lascia aperto: senza JavaScript il modulo è comunque raggiungibile.
+  // Il pre-render lo lascia chiuso, come lo vede il telefono: la lunghezza della pagina non cambia dopo il caricamento
+  // e l'ancora dell'URL (#contatti) resta giusta. Da 1024 px il foglio è visibile per CSS (::details-content);
+  // `open` serve solo ai browser che non lo supportano e senza JavaScript il bottone resta comunque cliccabile.
   useEffect(() => {
     const el = detailsRef.current
     if (!el || typeof window.matchMedia !== "function") return
     const mq = window.matchMedia("(min-width: 1024px)")
-    el.open = mq.matches
+    if (mq.matches) el.open = true
     const onChange = (e: MediaQueryListEvent) => {
       if (e.matches) el.open = true
     }
@@ -54,7 +56,7 @@ export function LavoraConNoi() {
               </li>
             ))}
           </ul>
-          <details ref={detailsRef} className="cv-details sec-head-gap" open>
+          <details ref={detailsRef} className="cv-details sec-head-gap">
             <summary className="btn cv-summary">
               <span>{t("curriculum.form_title")}</span>
               <PlusIcon />

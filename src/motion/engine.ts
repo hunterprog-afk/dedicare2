@@ -409,7 +409,8 @@ async function start() {
         target.setAttribute("tabindex", "-1")
         target.style.outline = "none"
       }
-      target.focus({ preventScroll: true })
+      // Se il fuoco è già dentro la sezione (per esempio sul campo Nome dopo «Richiedi un preventivo») non si sposta.
+      if (!target.contains(document.activeElement) || document.activeElement === document.body) target.focus({ preventScroll: true })
     })
   })
 

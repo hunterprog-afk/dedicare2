@@ -162,6 +162,7 @@
   },
   "form": {
     "legenda": "Fields marked * are required.",
+    "senza_js": "Sending the form requires JavaScript. You can call +39 388 253 6992 or email info@dedicaresolutions.it.",
     "field_required": "This field is required.",
     "field_email": "Enter a valid email address, for example name@example.com.",
     "field_too_long": "The text is too long: {{max}} characters at most."

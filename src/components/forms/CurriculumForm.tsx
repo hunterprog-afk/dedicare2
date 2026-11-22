@@ -151,6 +151,9 @@ export function CurriculumForm() {
           {alertText}
         </p>
       )}
+      <noscript>
+        <p className="form-consent">{t("form.senza_js")}</p>
+      </noscript>
       <Button type="submit" className="form-submit" disabled={!hydrated || sendingNow}>
         {sendingNow ? t("curriculum.submitting") : t("curriculum.submit")}
       </Button>

@@ -345,6 +345,10 @@
     .cv-details .form-title {
       display: block;
     }
+    .cv-details::details-content {
+      content-visibility: visible;
+      display: block;
+    }
   }
   @media (min-width: 1024px) {
     .lavora-photo {
