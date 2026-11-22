@@ -1,0 +1,266 @@
+@layer components {
+  /* ---- Operatori OSS ---- */
+  .oss-a .hour-label {
+    margin-bottom: 16px;
+  }
+  .oss-text {
+    display: contents;
+  }
+  .oss-a {
+    order: 1;
+  }
+  .oss-main {
+    order: 2;
+    grid-column: 1 / -1;
+    margin-top: 32px;
+  }
+  .oss-b {
+    order: 3;
+    grid-column: 1 / -1;
+    margin-top: 32px;
+  }
+  .oss-details {
+    order: 4;
+    grid-column: 1 / -1;
+  }
+  .oss-b-label {
+    margin: 12px 0 0;
+    text-align: right;
+  }
+  @media (min-width: 1024px) {
+    .oss-text {
+      display: block;
+      margin-top: 120px;
+    }
+    .oss-a,
+    .oss-main,
+    .oss-b,
+    .oss-details {
+      order: 0;
+    }
+    .oss-main,
+    .oss-details {
+      grid-column: auto;
+      margin-top: 0;
+    }
+    .oss-b {
+      margin-top: -80px;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  /* ---- Accompagnamento ---- */
+  .accomp-text {
+    margin-top: 32px;
+  }
+  @media (min-width: 1024px) {
+    .accomp-text {
+      margin-top: 0;
+    }
+  }
+
+  /* ---- Multidisciplinare ---- */
+  .multi-sheet {
+    position: relative;
+    z-index: 1;
+    margin-top: 16px;
+  }
+  @media (min-width: 1024px) {
+    .multi-sheet {
+      margin-top: -139px;
+    }
+  }
+
+  @media (min-width: 1024px) and (max-width: 1279px) {
+    .multi-sheet {
+      padding: 32px;
+    }
+  }
+
+  /* ---- Perché ---- */
+  .perche-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .perche-item {
+    position: relative;
+    padding-top: 24px;
+  }
+  .perche-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 1px;
+    background: var(--line);
+    transition:
+      height 200ms var(--ease-out),
+      background-color 200ms var(--ease-out);
+  }
+  .perche-item h3 {
+    margin: 0;
+  }
+  .perche-item p {
+    margin: 8px 0 0;
+    max-width: 64ch;
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+  @media (hover: hover) {
+    .perche-item:hover::before {
+      height: 3px;
+      background: #ffb59a;
+    }
+  }
+  @media (min-width: 1024px) {
+    .perche-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 64px 24px;
+    }
+  }
+
+  /* ---- Come funziona ---- */
+  .passi {
+    list-style: none;
+    margin-bottom: 0;
+    padding: 0;
+  }
+  .passi li {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    padding: 32px 0;
+    border-top: 1px solid var(--line);
+  }
+  @media (min-width: 640px) {
+    .passi li {
+      grid-template-columns: 80px 1fr;
+    }
+  }
+  .passi h3 {
+    margin: 0;
+  }
+  .passi p {
+    margin: 8px 0 0;
+    max-width: 64ch;
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+  .passo-n {
+    color: #231c4d;
+    padding-top: 6px;
+  }
+  .passi-chiusura {
+    margin: 64px 0 0;
+    font-style: italic;
+    color: #231c4d;
+  }
+  .passi-foto {
+    margin-top: 24px;
+  }
+  @media (min-width: 1024px) {
+    .passi-chiusura {
+      margin-top: 96px;
+    }
+    .passi-foto {
+      margin-top: 96px;
+    }
+  }
+
+  /* ---- Aree ---- */
+  .comuni {
+    columns: 2;
+    column-gap: 24px;
+    margin-bottom: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 18px;
+    line-height: 36px;
+  }
+  .comuni li {
+    break-inside: avoid;
+    transition: font-weight 160ms;
+  }
+  .comuni li.is-active {
+    font-weight: 700;
+  }
+  @media (min-width: 1024px) {
+    .comuni {
+      font-size: 19px;
+    }
+  }
+  .mappa-box {
+    margin-top: 48px;
+  }
+  .mappa {
+    display: block;
+    width: min(350px, 100%);
+    height: auto;
+    margin-inline: auto;
+  }
+  @media (min-width: 1024px) {
+    .mappa-box {
+      margin-top: 0;
+    }
+    .mappa {
+      width: min(560px, 100%);
+      margin-inline: 0;
+    }
+  }
+  .map-window {
+    fill: #ffd98a;
+    stroke: #231c4d;
+    stroke-width: 1;
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: transform 200ms var(--ease-out);
+  }
+  .map-window.is-active {
+    transform: scale(1.6);
+  }
+  html.motion .map-window {
+    fill: #5a5482;
+    stroke: none;
+  }
+  html.motion .mappa.is-lit .map-window {
+    fill: #ffd98a;
+    transition:
+      fill 200ms var(--ease-out) calc(var(--i) * 70ms),
+      transform 200ms var(--ease-out);
+  }
+
+  /* ---- Tariffe ---- */
+  .tariffe-sheet {
+    max-width: 880px;
+    margin-inline: calc(-1 * (var(--wrap-l) - 16px));
+  }
+  .tariffe-factors {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .tariffe-factors h3 {
+    margin: 0;
+  }
+  .tariffe-factors p {
+    margin: 8px 0 0;
+    font-size: var(--text-body);
+    line-height: 1.6;
+  }
+  .tariffe-cta {
+    margin-top: 40px;
+  }
+  @media (min-width: 1024px) {
+    .tariffe-sheet {
+      margin-inline: 0;
+    }
+    .tariffe-factors {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 40px;
+      margin-top: 48px;
+    }
+  }
+}
