@@ -41,7 +41,10 @@ export function Footer() {
           </nav>
           <LangSwitch place="footer" />
         </div>
-        <p className="footer-copyright">{t("footer.copyright", { year: __BUILD_YEAR__ })}</p>
+        <p className="footer-copyright">
+          <span className="footer-servizio">{t("footer.servizio")}</span>
+          {t("footer.copyright", { year: __BUILD_YEAR__ })}
+        </p>
       </div>
     </footer>
   )

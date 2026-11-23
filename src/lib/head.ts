@@ -9,9 +9,9 @@ const jsonScript = (data: unknown) =>
   `<script type="application/ld+json">${JSON.stringify(data).replace(/</g, "\\u003c")}</script>`
 
 const LEGAL_TITLES: Record<string, string> = {
-  privacy: "Privacy Policy — Dedicare Solutions",
-  cookie: "Cookie Policy — Dedicare Solutions",
-  "note-legali": "Note Legali — Dedicare Solutions",
+  privacy: "Privacy Policy — LyzCare",
+  cookie: "Cookie Policy — LyzCare",
+  "note-legali": "Note Legali — LyzCare",
 }
 
 const LEGAL_DESC_KEYS: Record<string, string> = {
@@ -24,8 +24,9 @@ const LOCAL_BUSINESS = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": "https://dedicaresolutions.it/#organization",
-  name: "Dedicare Solutions S.r.l.s.",
-  alternateName: "Dedicare Solutions",
+  name: "LyzCare",
+  legalName: "Dedicare Solutions S.r.l.s.",
+  brand: { "@type": "Brand", name: "LyzCare" },
   description: "Assistenza domiciliare a Milano e hinterland: operatori OSS, turni anche 24 ore su 24 e notti, accompagnamento a visite e terapie.",
   url: "https://dedicaresolutions.it/",
   telephone: "+39 388 253 6992",
@@ -105,7 +106,7 @@ export function buildHead({ route, t, fontUrls }: HeadOptions): string {
     lines.push(`<meta property="og:image:height" content="630">`)
     lines.push(`<meta property="og:locale" content="${esc(t("meta.og_locale"))}">`)
     lines.push(`<meta property="og:locale:alternate" content="${otherLocale}">`)
-    lines.push(`<meta property="og:site_name" content="Dedicare Solutions S.r.l.s.">`)
+    lines.push(`<meta property="og:site_name" content="LyzCare">`)
     lines.push(`<meta name="twitter:card" content="summary_large_image">`)
     lines.push(`<meta name="twitter:title" content="${esc(title)}">`)
     lines.push(`<meta name="twitter:description" content="${esc(description)}">`)

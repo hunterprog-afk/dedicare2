@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Dedicare Solutions — Assistenza domiciliare a Milano",
+    "title": "LyzCare — Assistenza domiciliare a Milano",
     "description": "Assistenza domiciliare a Milano e hinterland: operatori OSS, turni anche 24 ore su 24 e notti, accompagnamento a visite e terapie. Prima consulenza gratuita.",
     "og_locale": "it_IT"
   },
@@ -9,8 +9,8 @@
   },
   "nav": {
     "chiama": "Chiama",
-    "chiama_aria": "Chiama Dedicare Solutions al +39 388 253 6992",
-    "logo_aria": "Dedicare Solutions, torna all'inizio"
+    "chiama_aria": "Chiama LyzCare al +39 388 253 6992",
+    "logo_aria": "LyzCare, torna all'inizio"
   },
   "language": {
     "label": "Lingua",
@@ -55,7 +55,7 @@
       "oss": {
         "title": "Operatori OSS",
         "body": "I nostri OSS offrono supporto qualificato e premuroso per la cura quotidiana, preservando dignità, autonomia e benessere.",
-        "longDescription": "Gli Operatori Socio-Sanitari di Dedicare sono selezionati per competenza tecnica ed empatia. Affiancano l'assistito nelle attività quotidiane con discrezione e rispetto, sostengono la famiglia nei momenti più impegnativi e diventano un punto di riferimento costante nella casa, capace di restituire ritmo, serenità e relazione.",
+        "longDescription": "Gli Operatori Socio-Sanitari di LyzCare sono selezionati per competenza tecnica ed empatia. Affiancano l'assistito nelle attività quotidiane con discrezione e rispetto, sostengono la famiglia nei momenti più impegnativi e diventano un punto di riferimento costante nella casa, capace di restituire ritmo, serenità e relazione.",
         "bullets": [
           "Igiene personale e mobilizzazione",
           "Assistenza nell'alimentazione",
@@ -157,7 +157,7 @@
     "cta": "Scrivici",
     "items": [
       {
-        "q": "A chi si rivolge Dedicare Solutions?",
+        "q": "A chi si rivolge LyzCare?",
         "a": "Assistiamo anziani, adulti dopo un ricovero, bambini e persone con disabilità fisiche o cognitive che hanno bisogno di assistenza a domicilio, in ospedale o durante gli spostamenti, a Milano e nell'hinterland."
       },
       {
@@ -194,7 +194,7 @@
     "field_too_long": "Il testo è troppo lungo: al massimo {{max}} caratteri."
   },
   "curriculum": {
-    "title": "Unisciti al team Dedicare",
+    "title": "Unisciti al team LyzCare",
     "intro": "Cerchiamo professionisti che condividano il nostro modo di intendere la cura: competenza clinica, ascolto autentico e una presenza umana costante. Mandaci il tuo CV: lo leggiamo personalmente.",
     "reasons_title": "Perché lavorare con noi",
     "reasons": [
@@ -273,7 +273,7 @@
   },
   "whatsapp": {
     "aria": "Scrivici su WhatsApp",
-    "prefill": "Buongiorno, vorrei informazioni sui servizi di assistenza domiciliare di Dedicare Solutions."
+    "prefill": "Buongiorno, vorrei informazioni sui servizi di assistenza domiciliare di LyzCare."
   },
   "mobilebar": {
     "label": "Contatti rapidi",
@@ -282,6 +282,7 @@
   },
   "footer": {
     "slogan": "La cura che meriti.",
+    "servizio": "LyzCare è un servizio di Dedicare Solutions S.r.l.s.",
     "copyright": "© {{year}} Dedicare Solutions S.r.l.s. (società a responsabilità limitata semplificata) · Sede legale Via Roma 80, 20054 Segrate (MI) · C.F., P.IVA e n. iscrizione al Registro Imprese di Milano Monza Brianza Lodi 11600760968 · REA MI-2613682 · Capitale sociale € 1.000,00 sottoscritto e interamente versato · PEC dedicaresolutionssrls@pec.it",
     "legal_nav": "Note legali e contatti",
     "privacy": "Privacy Policy",

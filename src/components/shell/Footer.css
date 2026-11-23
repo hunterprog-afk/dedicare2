@@ -77,6 +77,11 @@
     min-width: 0;
     padding-inline: 6px;
   }
+  .footer-servizio {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
   .footer-copyright {
     margin: 0;
     padding-top: 24px;

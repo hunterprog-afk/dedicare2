@@ -16,43 +16,35 @@
     outline-color: #231c4d;
   }
 
-  /* ---- Logo ---- */
+  /* ---- Logo (provvisorio: scritta «LyzCare») ---- */
   .logo {
     --logo-h: var(--logo-h-sm);
-    --d-body: #fff4ef;
-    --d-in-top: #ffd98a;
-    --d-in-bottom: #ffb59a;
     --d-word: #fff4ef;
+    --d-accent: #ffd98a;
     display: inline-flex;
     align-items: center;
-    gap: calc(var(--logo-h) * 0.28);
   }
   @media (min-width: 1024px) {
     .logo {
       --logo-h: var(--logo-h-lg);
     }
   }
-  .logo > svg {
-    flex: none;
-  }
   .logo-word {
     font-family: var(--font-title);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: calc(var(--logo-h) * 0.78);
+    font-weight: 800;
+    font-size: var(--logo-h);
     line-height: 1;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.01em;
     color: var(--d-word);
+    white-space: nowrap;
+  }
+  .logo-word-accent {
+    font-weight: 500;
+    color: var(--d-accent);
   }
   .logo[data-phase="mattino"] {
-    --d-body: #231c4d;
-    --d-in-top: #ffd98a;
-    --d-in-bottom: #fff4ef;
     --d-word: #231c4d;
-  }
-  .logo-inner {
-    transform-box: view-box;
-    transform-origin: 90.2px 192px;
+    --d-accent: #5a5482;
   }
 
   /* ---- Pillola in alto (vetro) ---- */

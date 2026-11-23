@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Dedicare Solutions — Home care in Milan",
+    "title": "LyzCare — Home care in Milan",
     "description": "Home care in Milan and the surrounding area: OSS healthcare assistants, shifts even 24 hours a day and at night, accompaniment to visits and therapies. Free first consultation.",
     "og_locale": "en_GB"
   },
@@ -9,8 +9,8 @@
   },
   "nav": {
     "chiama": "Call",
-    "chiama_aria": "Call Dedicare Solutions on +39 388 253 6992",
-    "logo_aria": "Dedicare Solutions, back to the top"
+    "chiama_aria": "Call LyzCare on +39 388 253 6992",
+    "logo_aria": "LyzCare, back to the top"
   },
   "language": {
     "label": "Language",
@@ -55,7 +55,7 @@
       "oss": {
         "title": "Healthcare assistants (OSS)",
         "body": "Our healthcare assistants provide qualified, compassionate support for daily care, preserving dignity, autonomy and well-being.",
-        "longDescription": "Dedicare's healthcare assistants are selected for both technical skill and human empathy. They support the patient with daily activities discreetly and respectfully, ease the family's caregiving load and become a steady, familiar presence in the home — capable of restoring rhythm, calm and connection.",
+        "longDescription": "LyzCare's healthcare assistants are selected for both technical skill and human empathy. They support the patient with daily activities discreetly and respectfully, ease the family's caregiving load and become a steady, familiar presence in the home — capable of restoring rhythm, calm and connection.",
         "bullets": [
           "Personal hygiene and mobility",
           "Mealtime assistance",
@@ -157,7 +157,7 @@
     "cta": "Write to us",
     "items": [
       {
-        "q": "Who is Dedicare Solutions for?",
+        "q": "Who is LyzCare for?",
         "a": "We assist seniors, adults after a hospital stay, children and people with physical or cognitive disabilities who need care at home, in hospital or during transfers, in Milan and the surrounding area."
       },
       {
@@ -194,7 +194,7 @@
     "field_too_long": "The text is too long: {{max}} characters at most."
   },
   "curriculum": {
-    "title": "Join the Dedicare team",
+    "title": "Join the LyzCare team",
     "intro": "We're looking for professionals who share our way of caring: clinical expertise, genuine listening and a steady human presence. Send us your CV — we read every application personally.",
     "reasons_title": "Why work with us",
     "reasons": [
@@ -273,7 +273,7 @@
   },
   "whatsapp": {
     "aria": "Message us on WhatsApp",
-    "prefill": "Hello, I would like some information about Dedicare Solutions home care services."
+    "prefill": "Hello, I would like some information about LyzCare home care services."
   },
   "mobilebar": {
     "label": "Quick contacts",
@@ -282,6 +282,7 @@
   },
   "footer": {
     "slogan": "The care you deserve.",
+    "servizio": "LyzCare is a service of Dedicare Solutions S.r.l.s.",
     "copyright": "© {{year}} Dedicare Solutions S.r.l.s. (simplified limited liability company) · Registered office Via Roma 80, 20054 Segrate (MI), Italy · Tax code, VAT no. and Milano Monza Brianza Lodi Companies Register no. 11600760968 · REA MI-2613682 · Share capital € 1,000.00 subscribed and fully paid · PEC dedicaresolutionssrls@pec.it",
     "legal_nav": "Legal notices and contacts",
     "privacy": "Privacy Policy",

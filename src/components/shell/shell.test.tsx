@@ -8,7 +8,7 @@ import { setHour } from "@/film/hourRoll"
 describe("guscio fisso", () => {
   it("l'intestazione ha logo, ora della scena, selettore e Chiama; la lingua corrente è aria-current", () => {
     const { container } = renderWithI18n(<Header />)
-    expect(screen.getByRole("link", { name: "Chiama Dedicare Solutions al +39 388 253 6992" })).toHaveAttribute("href", "tel:+393882536992")
+    expect(screen.getByRole("link", { name: "Chiama LyzCare al +39 388 253 6992" })).toHaveAttribute("href", "tel:+393882536992")
     expect(container.querySelector(".pill")).not.toBeNull()
     expect(container.querySelector("[data-film-hour]")).toHaveTextContent("22:00")
     expect(container.querySelector('.lang-switch a[lang="it"]')).toHaveAttribute("aria-current", "page")
@@ -37,7 +37,7 @@ describe("guscio fisso", () => {
     const wa = screen.getByRole("link", { name: /WhatsApp/ })
     expect(wa.getAttribute("href")).toBe(
       "https://wa.me/393882536992?text=" +
-        encodeURIComponent("Buongiorno, vorrei informazioni sui servizi di assistenza domiciliare di Dedicare Solutions."),
+        encodeURIComponent("Buongiorno, vorrei informazioni sui servizi di assistenza domiciliare di LyzCare."),
     )
     expect(wa).toHaveAttribute("rel", "noopener noreferrer")
   })
