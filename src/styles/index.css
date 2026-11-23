@@ -1,0 +1,56 @@
+@import "tailwindcss";
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./app.css";
+
+@layer base {
+  html {
+    background: #17123a;
+    color-scheme: dark light;
+    scroll-padding-top: 88px;
+  }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: #fff4ef;
+    background: #17123a;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  :focus-visible {
+    outline: 3px solid #ffb59a;
+    outline-offset: 3px;
+  }
+  p,
+  li,
+  summary {
+    text-wrap: pretty;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0s !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .pill,
+  .mobile-bar,
+  .film-rail,
+  .film-grain,
+  .film-veil {
+    display: none !important;
+  }
+}

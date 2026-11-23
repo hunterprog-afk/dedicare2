@@ -1,84 +1,51 @@
-# Dedicare Solutions — Sito v2
+# Dedicare Solutions — sito
 
-Cinematic landing page per **Dedicare Solutions** — assistenza sanitaria professionale a Segrate (MI).
+Sito di Dedicare Solutions (assistenza domiciliare a Milano e hinterland), in italiano e in inglese.
+È un sito statico pre-renderizzato: ogni pagina è un HTML già completo, che il browser poi «idrata».
 
-Vite + React 18 + TypeScript · Tailwind CSS v4 · Framer Motion · shadcn/ui
+Stack: React 19, Vite, TypeScript, Tailwind CSS v4. Il movimento usa GSAP e Lenis (scorrimento morbido solo da 1024 px con puntatore fine).
 
----
-
-## Avvio rapido
+## Comandi
 
 ```bash
 npm install
-npm run dev
+npm run dev               # server di sviluppo
+npm test                  # test (Vitest)
+npm run build             # build di produzione: tipi, bundle, pre-render e controlli sul risultato
+npm run build:anteprima   # build per anteprime fuori produzione (imposta DEDICARE_ANTEPRIMA=1)
+npm run images            # ottimizza le foto (AVIF + WebP) in public/img e aggiorna src/content/images.generated.json
 ```
 
-## Sequenza video (hero scroll-scrub)
-
-Il hero usa una **sequenza di fotogrammi JPEG** invece di un `<video>`, come le pagine Apple AirPods. Devi estrarre i frame dal tuo video sorgente.
-
-### Requisiti
-
-- `ffmpeg` installato localmente
-- Un video sorgente (5-15 secondi ideale)
-
-### Estrazione frame
-
-```bash
-mkdir -p input public/frames
-cp /path/to/il-tuo-video.mp4 input/source.mp4
-
-ffmpeg -i input/source.mp4 \
-  -vf "fps=30,scale='min(1920,iw)':'-2':flags=lanczos" \
-  -q:v 3 \
-  public/frames/frame_%04d.jpg
-
-# Conta i frame e aggiorna FRAME_COUNT in src/lib/constants.ts
-ls public/frames | wc -l
-```
-
-### Conversione WebP (opzionale, -40% dimensione)
-
-```bash
-for f in public/frames/*.jpg; do
-  cwebp -q 82 "$f" -o "${f%.jpg}.webp" && rm "$f"
-done
-# poi cambia FRAME_EXT = "webp" in src/lib/constants.ts
-```
-
-**Attenzione Vercel Hobby:** se il totale dei frame supera 20 MB, avvicini al limite da 25 MB. Usa WebP o riduci l'FPS a 24.
-
----
+Altri comandi: `npm run lint`, `npm run budgets`, `npm run icons`, `npm run grain`.
 
 ## Struttura
 
 ```
 src/
-  App.tsx
-  main.tsx
-  index.css
   components/
-    ScrubSequence.tsx
-    BlurText.tsx
-    Navbar.tsx
-    Hero.tsx
-    ServicesBento.tsx
-    Pourquoi.tsx
-    Process.tsx
-    Stats.tsx
-    Testimonials.tsx
-    Faq.tsx
-    CtaFooter.tsx
-    ui/
-      button.tsx
-      accordion.tsx
-  lib/
-    utils.ts
-    constants.ts
-public/
-  frames/
-  images/logo/
-  logo.svg
+    sections/   le sezioni della pagina, una per ora del giorno
+    shell/      header, footer, barra contatti sul telefono
+    forms/      modulo contatti e modulo candidatura
+    brand/      logo
+    legal/      pagine legali
+  content/      contatti, ore del giorno, immagini, testi legali
+  i18n/locales/ testi del sito (it.json, en.json)
+  motion/       motore di scroll, orologio, scorrimento morbido
+  styles/       stile globale
+scripts/        pre-render, controlli sulla build, immagini, icone
+public/         file serviti così come sono
 ```
 
-© 2025 Dedicare Solutions S.R.L.S. — P.IVA IT11600760968
+## Testi
+
+- Testi del sito: `src/i18n/locales/it.json` e `src/i18n/locales/en.json`. Le chiavi devono essere le stesse in entrambi.
+- Testi legali: `src/content/legal.ts`.
+
+## Moduli
+
+I moduli usano l'endpoint indicato da `VITE_FORMS_API_BASE` (variabile del repository, usata dal workflow di pubblicazione); se è vuota si usa Formspree.
+La build di produzione richiede che i testi legali corrispondano al fornitore dei moduli configurato: in caso contrario `scripts/check-dist.mjs` interrompe la build.
+
+## Logo
+
+Il logo attuale è provvisorio. Si sostituisce in `src/components/brand/Logo.tsx`.

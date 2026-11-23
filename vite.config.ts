@@ -5,17 +5,17 @@ import path from 'path'
 
 export default defineConfig({
   base: '/',
-  plugins: [
-    tailwindcss(),
-    react(),
-  ],
+  plugins: [tailwindcss(), react()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
+  define: {
+    __BUILD_YEAR__: JSON.stringify(new Date().getFullYear()),
+  },
   build: {
-    sourcemap: true,
+    sourcemap: false,
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -26,15 +26,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks(id) {
+          // Il caricatore degli import dinamici serve anche ai chunk differiti: resta in un file già precaricato.
+          if (id.includes('preload-helper')) return 'react'
           if (!id.includes('node_modules')) return
           if (id.includes('/react/') || id.includes('/react-dom/') || id.includes('/scheduler/')) {
             return 'react'
-          }
-          if (id.includes('/framer-motion/') || id.includes('/motion/') || id.includes('/motion-dom/') || id.includes('/motion-utils/')) {
-            return 'motion'
-          }
-          if (id.includes('/three/')) {
-            return 'three'
           }
         },
       },

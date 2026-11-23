@@ -6,7 +6,7 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'dist-ssr']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -20,11 +20,14 @@ export default defineConfig([
     },
   },
   {
-    // File di supporto ai test (helper/setup): non passano mai per Fast
-    // Refresh del dev server (non sono raggiungibili dall'app in
-    // esecuzione), quindi la regola su "solo componenti esportati" non si
-    // applica — test-utils.tsx esporta volutamente anche `render` custom e
-    // il re-export di @testing-library/react.
+    files: ['scripts/**/*.mjs'],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  {
+    // Helper e setup dei test: non passano dal Fast Refresh del dev server.
     files: ['src/test/**/*.{ts,tsx}'],
     rules: {
       'react-refresh/only-export-components': 'off',

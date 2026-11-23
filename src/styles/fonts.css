@@ -1,0 +1,39 @@
+/* Tre famiglie, tutte OFL (licenze in src/assets/fonts), solo latino e accenti italiani. Big Shoulders per i titoli, Host Grotesk per il testo, Martian Mono per ore ed etichette. */
+@font-face {
+  font-family: "Big Shoulders";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500 800;
+  src: url("../assets/fonts/big-shoulders-titoli.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Host Grotesk";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 600;
+  src: url("../assets/fonts/host-grotesk-testo.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Martian Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 500;
+  src: url("../assets/fonts/martian-mono-ore.woff2") format("woff2");
+}
+/* Fallback dimensionati: il testo non salta quando arrivano i font. */
+@font-face {
+  font-family: "Big Shoulders Fallback";
+  src: local("Arial Narrow"), local("Arial");
+  size-adjust: 84%;
+  ascent-override: 98%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Host Grotesk Fallback";
+  src: local("Arial");
+  size-adjust: 101%;
+  ascent-override: 96%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}

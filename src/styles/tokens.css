@@ -1,0 +1,49 @@
+/* Token: palette «Alba sui Navigli» (7 valori), tre famiglie di font, scala tipografica. */
+@theme static {
+  --color-*: initial;
+  --color-notte-fonda: #17123a;
+  --color-indaco: #231c4d;
+  --color-fumo: #5a5482;
+  --color-lavanda: #a99bf0;
+  --color-pesca: #ffb59a;
+  --color-oro: #ffd98a;
+  --color-nebbia: #fff4ef;
+
+  --font-title: "Big Shoulders", "Big Shoulders Fallback", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Host Grotesk", "Host Grotesk Fallback", Arial, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "Cascadia Mono", Menlo, monospace;
+}
+
+@layer base {
+  :root {
+    --ease-out: cubic-bezier(0.2, 0, 0, 1);
+    --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+    /* Titoli: clamp(46px, 8vw, 128px), limitati anche dall'altezza dello schermo. */
+    --t-title: clamp(46px, min(8vw, 14.5svh), 128px);
+    --t-title-sec: clamp(46px, 7vw, 112px);
+    --t-body: 17px;
+    --t-label: 12px;
+    --pad: 20px;
+    --section-pad: clamp(72px, 9vw, 144px);
+    --pill-h: 52px;
+  }
+  @media (min-width: 640px) {
+    :root {
+      --pad: 40px;
+      --t-body: 18px;
+      --t-label: 13px;
+    }
+  }
+  @media (min-width: 1024px) {
+    :root {
+      --pad: 64px;
+      --t-body: 19px;
+      --pill-h: 56px;
+    }
+  }
+  @media (min-width: 1440px) {
+    :root {
+      --pad: 96px;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+@layer components {
+  .legal-bg {
+    --ink: #231c4d;
+    --ink-2: #5a5482;
+    --focus: #231c4d;
+    background: #fff4ef;
+    color: #231c4d;
+  }
+  .wrap-legal {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 136px 20px 96px;
+  }
+  @media (min-width: 1024px) {
+    .wrap-legal {
+      padding-top: 168px;
+    }
+  }
+  .legal-back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    margin-bottom: 32px;
+    font-size: 16px;
+    color: #231c4d;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    transition: text-decoration-thickness 160ms var(--ease-out);
+  }
+  .legal-back:hover {
+    text-decoration-thickness: 2px;
+  }
+  .wrap-legal h1 {
+    margin: 0;
+    color: #231c4d;
+    font-family: var(--font-title);
+    font-weight: 800;
+    font-size: clamp(46px, 7vw, 88px);
+    line-height: 0.9;
+    text-transform: uppercase;
+  }
+  .legal-section h2 {
+    margin: 56px 0 16px;
+    color: #231c4d;
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: clamp(30px, 3vw, 40px);
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .legal-body p,
+  .legal-body ul {
+    margin: 0 0 1em;
+    max-width: 64ch;
+    overflow-wrap: anywhere;
+  }
+  /* Elenchi: la lineetta 12 x 1 px della home, rientro 28 px. */
+  .legal-body ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .legal-body li {
+    position: relative;
+    margin-bottom: 0.5em;
+    padding-left: 28px;
+  }
+  .legal-body li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.85em;
+    width: 12px;
+    height: 1px;
+    background: #5a5482;
+  }
+  /* Cifre in Literata, senza lo zero barrato. */
+  .legal-body {
+    font-variant-numeric: lining-nums;
+  }
+  /* In testa alla pagina legale la lingua sta col bottone «Chiama», non accanto al logo. */
+  .site-header-legal .site-header-end {
+    gap: 8px;
+  }
+}

@@ -1,38 +1,10 @@
-import i18n from "i18next"
-import { initReactI18next } from "react-i18next"
-import LanguageDetector from "i18next-browser-languagedetector"
 import it from "./locales/it.json"
 import en from "./locales/en.json"
+import { initI18n } from "./core"
+import type { I18n } from "./react"
+import type { Lang } from "@/routes"
 
-void i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .init({
-    resources: {
-      it: { common: it },
-      en: { common: en },
-    },
-    fallbackLng: "it",
-    supportedLngs: ["it", "en"],
-    defaultNS: "common",
-    ns: ["common"],
-    interpolation: { escapeValue: false },
-    detection: {
-      order: ["localStorage", "navigator", "htmlTag"],
-      caches: ["localStorage"],
-      lookupLocalStorage: "dedicare-lang",
-    },
-    returnObjects: true,
-  })
-
-i18n.on("languageChanged", (lng) => {
-  if (typeof document !== "undefined") {
-    document.documentElement.lang = lng
-  }
-})
-
-if (typeof document !== "undefined") {
-  document.documentElement.lang = i18n.language || "it"
+/** Entrambe le lingue: per il pre-render e per i test. Il client carica solo la lingua della pagina (entry-client). */
+export function createI18n(lang: Lang): I18n {
+  return initI18n(lang, { it: { translation: it }, en: { translation: en } })
 }
-
-export default i18n

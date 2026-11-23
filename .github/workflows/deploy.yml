@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/cinematic-landing-page-XfW4V
 
 permissions:
   contents: read
@@ -34,8 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          # Il secret repo è chiamato `APIFY`; lo script legge process.env.APIFY_API_KEY
-          APIFY_API_KEY: ${{ secrets.APIFY }}
+          VITE_FORMS_API_BASE: ${{ vars.VITE_FORMS_API_BASE }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
